@@ -30,3 +30,6 @@ dist-ssr
 .devenv
 .direnv
 !.envrc
+
+# Opencode
+.opencode
