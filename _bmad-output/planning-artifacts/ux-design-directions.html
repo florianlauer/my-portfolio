@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>my-portfolio — Design Directions</title>
+  <style>
+    :root {
+      --bg: #FFFBF5;
+      --bg-alt: #FEF3C7;
+      --text: #292524;
+      --text-muted: #57534E;
+      --accent: #D97706;
+      --accent-hover: #F59E0B;
+      --secondary: #78716C;
+      --border: #A8A29E;
+      --space: 8px;
+      --font: system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.5; }
+    .nav-bar { padding: calc(var(--space) * 3) calc(var(--space) * 4); display: flex; gap: calc(var(--space) * 4); background: var(--bg); border-bottom: 1px solid var(--border); }
+    .nav-bar a { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+    .nav-bar a:hover { color: var(--accent); }
+    .direction { padding: calc(var(--space) * 8) calc(var(--space) * 4); max-width: 900px; margin: 0 auto; }
+    .direction h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--secondary); margin-bottom: calc(var(--space) * 4); }
+    .direction-block { margin-bottom: calc(var(--space) * 8); padding: calc(var(--space) * 4); background: #fff; border-radius: 8px; border: 1px solid var(--border); }
+
+    /* Direction 1: Hero centré */
+    .d1-hero { text-align: center; padding: calc(var(--space) * 8) calc(var(--space) * 4); }
+    .d1-hero h1 { font-size: 2rem; margin: 0 0 calc(var(--space) * 2); }
+    .d1-hero .tagline { color: var(--text-muted); margin-bottom: calc(var(--space) * 4); }
+    .d1-hero .stack { font-size: 0.95rem; color: var(--secondary); margin-bottom: calc(var(--space) * 4); }
+    .d1-hero .cta { display: inline-block; padding: calc(var(--space) * 2) calc(var(--space) * 4); background: var(--accent); color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; }
+    .d1-hero .cta:hover { background: var(--accent-hover); }
+
+    /* Direction 2: Hero asymétrique stack + CTA */
+    .d2-hero { display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--space) * 6); align-items: center; padding: calc(var(--space) * 6) calc(var(--space) * 4); }
+    .d2-hero-left h1 { font-size: 1.75rem; margin: 0 0 calc(var(--space) * 2); }
+    .d2-hero-left .tagline { color: var(--text-muted); margin-bottom: calc(var(--space) * 4); }
+    .d2-hero-right .stack { font-size: 0.9rem; color: var(--secondary); margin-bottom: calc(var(--space) * 3); }
+    .d2-hero-right .cta { display: inline-block; padding: calc(var(--space) * 2) calc(var(--space) * 4); background: var(--accent); color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; }
+    @media (max-width: 600px) { .d2-hero { grid-template-columns: 1fr; } }
+
+    /* Direction 3: Hero compact, stack + CTA en premier plan */
+    .d3-hero { padding: calc(var(--space) * 4) calc(var(--space) * 4); }
+    .d3-hero .stack-cta { display: flex; flex-wrap: wrap; gap: calc(var(--space) * 3); align-items: center; margin-bottom: calc(var(--space) * 4); padding-bottom: calc(var(--space) * 4); border-bottom: 1px solid var(--border); }
+    .d3-hero .stack { font-size: 0.9rem; color: var(--secondary); margin: 0; }
+    .d3-hero .cta { padding: calc(var(--space) * 1.5) calc(var(--space) * 3); background: var(--accent); color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px; }
+    .d3-hero h1 { font-size: 1.5rem; margin: 0 0 calc(var(--space) * 1); }
+    .d3-hero .tagline { color: var(--text-muted); font-size: 0.9rem; }
+
+    .section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--secondary); margin: calc(var(--space) * 6) 0 calc(var(--space) * 2); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: calc(var(--space) * 3); }
+    .card { padding: calc(var(--space) * 3); border: 1px solid var(--border); border-radius: 6px; }
+    .card h4 { margin: 0 0 calc(var(--space) * 1); font-size: 1rem; }
+    .card p { margin: 0; font-size: 13px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <nav class="nav-bar">
+    <a href="#d1">Direction 1 — Hero centré</a>
+    <a href="#d2">Direction 2 — Hero asymétrique</a>
+    <a href="#d3">Direction 3 — Stack + CTA premier plan</a>
+  </nav>
+
+  <section class="direction" id="d1">
+    <h2>Direction 1 — Hero centré</h2>
+    <p>Stack et CTA au centre, hiérarchie classique. Très lisible, rassurant.</p>
+    <div class="direction-block">
+      <div class="d1-hero">
+        <h1>Florian</h1>
+        <p class="tagline">Développeur full-stack · 9+ ans</p>
+        <p class="stack">TypeScript · React · Node · Vite · Tailwind</p>
+        <a href="#" class="cta">On gravit la suite ensemble ? → LinkedIn</a>
+      </div>
+      <div class="section-label">Parcours (extrait)</div>
+      <div class="cards">
+        <div class="card"><h4>Départ</h4><p>France · Compétences fondatrices</p></div>
+        <div class="card"><h4>Expansion</h4><p>Angleterre · Élargissement stack</p></div>
+        <div class="card"><h4>Aujourd'hui</h4><p>Full-stack · Arsenal structuré</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="direction" id="d2">
+    <h2>Direction 2 — Hero asymétrique (stack + CTA côte à côte)</h2>
+    <p>Bloc gauche : nom + tagline. Bloc droit : stack + CTA. Équilibre visuel.</p>
+    <div class="direction-block">
+      <div class="d2-hero">
+        <div class="d2-hero-left">
+          <h1>Florian</h1>
+          <p class="tagline">Développeur full-stack · 9+ ans d'expérience. Parcours France → Angleterre → Aujourd'hui.</p>
+        </div>
+        <div class="d2-hero-right">
+          <p class="stack">TypeScript · React · Node · Vite · Tailwind</p>
+          <a href="#" class="cta">On gravit la suite ensemble ? → LinkedIn</a>
+        </div>
+      </div>
+      <div class="section-label">Parcours (extrait)</div>
+      <div class="cards">
+        <div class="card"><h4>Départ</h4><p>France</p></div>
+        <div class="card"><h4>Expansion</h4><p>Angleterre</p></div>
+        <div class="card"><h4>Aujourd'hui</h4><p>Arsenal structuré</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="direction" id="d3">
+    <h2>Direction 3 — Stack + CTA en premier plan (compact)</h2>
+    <p>Ligne stack + CTA tout en haut (≤10s garanti), puis nom et tagline. Priorité absolue à l'info critique.</p>
+    <div class="direction-block">
+      <div class="d3-hero">
+        <div class="stack-cta">
+          <span class="stack">TypeScript · React · Node · Vite · Tailwind</span>
+          <a href="#" class="cta">LinkedIn — On gravit la suite ensemble ?</a>
+        </div>
+        <h1>Florian</h1>
+        <p class="tagline">Développeur full-stack · 9+ ans · Parcours France → Angleterre → Aujourd'hui.</p>
+      </div>
+      <div class="section-label">Parcours (extrait)</div>
+      <div class="cards">
+        <div class="card"><h4>Départ</h4><p>France</p></div>
+        <div class="card"><h4>Expansion</h4><p>Angleterre</p></div>
+        <div class="card"><h4>Aujourd'hui</h4><p>Arsenal</p></div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
