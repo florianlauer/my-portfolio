@@ -27,7 +27,7 @@ Ce projet Next.js est prêt pour un déploiement sur **Vercel** (recommandé) ou
    - **Install Command :** `npm install` (défaut)
 
 3. **Variables d’environnement**
-   - Aucune variable requise pour ce portfolio (contenu en dur dans `src/content/*`).
+   - **Recommandé en production :** `NEXT_PUBLIC_SITE_URL` = l'URL publique du site (ex. `https://ton-domaine.vercel.app`) pour les meta OG, Twitter, sitemap et robots. Sans cette variable, Vercel utilise `https://<projet>.vercel.app`.
    - En cas d’évolution (ex. API, analytics), les ajouter dans **Settings → Environment Variables**.
 
 4. **Déployer**
