@@ -1,6 +1,6 @@
-import type { ArsenalGroup } from "@/types/arsenal";
+import type { StackGroup } from "@/types/stack";
 
-export const arsenalGroups: ArsenalGroup[] = [
+export const stackGroups: StackGroup[] = [
   {
     family: "frontend",
     title: "Frontend",
@@ -30,7 +30,7 @@ export const arsenalGroups: ArsenalGroup[] = [
   },
 ];
 
-export const arsenalTags: string[] = [
+export const stackTags: string[] = [
   "TypeScript",
   "Accessibility",
   "Performance",

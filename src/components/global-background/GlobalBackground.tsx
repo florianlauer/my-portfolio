@@ -7,7 +7,25 @@ import { useScrollY } from "@/hooks/useScrollY";
 /** Décalage max en part de la hauteur du viewport (évite la bande blanche en haut) */
 const MAX_OFFSET_VH = 0.28;
 
-export function GlobalBackground(): React.JSX.Element {
+const DEFAULT_IMAGE = "/asset-lencois-raw.jpeg";
+
+export const BACKGROUND_TONE = {
+  LIGHT: "light",
+  DARK: "dark",
+} as const;
+
+export type BackgroundTone = (typeof BACKGROUND_TONE)[keyof typeof BACKGROUND_TONE];
+
+type GlobalBackgroundProps = {
+  imageSrc?: string;
+  /** "dark" = image sombre, overlays assombris et page en mode dark (texte clair). "light" = défaut. */
+  tone?: BackgroundTone;
+};
+
+export function GlobalBackground({
+  imageSrc = DEFAULT_IMAGE,
+  tone = BACKGROUND_TONE.LIGHT,
+}: GlobalBackgroundProps): React.JSX.Element {
   const scrollY = useScrollY();
   const [layout, setLayout] = useState({ maxOffsetPx: 0, maxScroll: 1 });
 
@@ -40,7 +58,7 @@ export function GlobalBackground(): React.JSX.Element {
         }}
       >
         <Image
-          src="/asset-lencois-raw.jpeg"
+          src={imageSrc}
           alt=""
           fill
           sizes="100vw"
@@ -49,11 +67,23 @@ export function GlobalBackground(): React.JSX.Element {
         />
       </div>
       {/* Overlay pour contraste et lisibilité du contenu */}
-      <div className="absolute inset-0 bg-background/30" aria-hidden />
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/40"
-        aria-hidden
-      />
+      {tone === BACKGROUND_TONE.DARK ? (
+        <>
+          <div className="absolute inset-0 bg-black/50" aria-hidden />
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/25 to-black/60"
+            aria-hidden
+          />
+        </>
+      ) : (
+        <>
+          <div className="absolute inset-0 bg-background/30" aria-hidden />
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/40"
+            aria-hidden
+          />
+        </>
+      )}
     </div>
   );
 }

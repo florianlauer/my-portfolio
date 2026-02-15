@@ -1,4 +1,8 @@
 import Link from "next/link";
+import {
+  BACKGROUND_TONE,
+  GlobalBackground,
+} from "@/components/global-background/GlobalBackground";
 import { aProposContent } from "@/content/passions";
 
 export const metadata = {
@@ -11,16 +15,20 @@ export default function AProposPage(): React.JSX.Element {
   return (
     <main
       id="contenu"
-      className="min-h-screen overflow-x-hidden bg-background text-foreground"
+      className="dark relative min-h-screen overflow-x-hidden text-foreground"
       tabIndex={-1}
     >
+      <GlobalBackground
+        imageSrc="/asset-laponie.jpeg"
+        tone={BACKGROUND_TONE.DARK}
+      />
       <a
         href="#contenu"
         className="fixed left-4 top-4 z-[100] -translate-y-20 rounded-md bg-primary px-4 py-2 text-primary-foreground shadow-md transition-transform focus-visible:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         Aller au contenu
       </a>
-      <div className="mx-auto w-full max-w-3xl min-w-0 box-border px-6 py-16 md:py-24">
+      <div className="relative z-10 mx-auto w-full max-w-3xl min-w-0 box-border px-6 py-16 md:py-24">
         <nav className="mb-8" aria-label="Fil d&apos;Ariane">
           <Link
             href="/"

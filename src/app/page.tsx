@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { GlobalBackground } from "@/components/global-background/GlobalBackground";
 import { ScrollReveal } from "@/components/scroll-reveal/ScrollReveal";
-import { ArsenalSection } from "@/components/home-sections/ArsenalSection";
+import { StackSection } from "@/components/home-sections/StackSection";
 import { ContactSection } from "@/components/home-sections/ContactSection";
 import { HeroSection } from "@/components/home-sections/HeroSection";
 import { JourneySection } from "@/components/home-sections/JourneySection";
 import { PassionsSection } from "@/components/home-sections/PassionsSection";
-import { arsenalGroups, arsenalTags } from "@/content/arsenal";
+import { stackGroups, stackTags } from "@/content/stack";
 import { journeyChapters } from "@/content/journey";
 import { passionsSectionContent } from "@/content/passions";
 import { heroStack, siteContent } from "@/content/site";
@@ -41,9 +41,9 @@ export default function HomePage(): React.JSX.Element {
           </a>
           <a
             className="shrink-0 rounded-full px-3 py-1 text-sm text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            href="#arsenal"
+            href="#stack"
           >
-            Arsenal
+            Stack
           </a>
           <a
             className="shrink-0 rounded-full px-3 py-1 text-sm text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -81,9 +81,9 @@ export default function HomePage(): React.JSX.Element {
           <JourneySection journeyChapters={journeyChapters} />
         </ScrollReveal>
         <ScrollReveal>
-          <ArsenalSection
-            arsenalGroups={arsenalGroups}
-            arsenalTags={arsenalTags}
+          <StackSection
+            stackGroups={stackGroups}
+            stackTags={stackTags}
           />
         </ScrollReveal>
 

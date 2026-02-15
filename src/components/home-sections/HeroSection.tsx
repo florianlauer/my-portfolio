@@ -76,7 +76,7 @@ export const HeroSection = ({
             </a>
           </Button>
           <Button variant="outline" asChild>
-            <a href="#arsenal" aria-label="Aller à la section Arsenal">
+            <a href="#stack" aria-label="Aller à la section Stack">
               Voir la stack
             </a>
           </Button>
