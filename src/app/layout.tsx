@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "my-portfolio",
-  description: "Portfolio de Florian",
+  title: {
+    default: "Florian Lauer | Portfolio",
+    template: "%s | Florian Lauer",
+  },
+  description:
+    "Portfolio de Florian Lauer, Senior Fullstack Engineer: parcours, stack et contact.",
 };
 
 type RootLayoutProps = Readonly<{

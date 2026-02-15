@@ -1,17 +1,40 @@
-import { Button } from "@/components/ui/button";
+import { ArsenalSection } from "@/components/home-sections/ArsenalSection";
+import { ContactSection } from "@/components/home-sections/ContactSection";
+import { HeroSection } from "@/components/home-sections/HeroSection";
+import { JourneySection } from "@/components/home-sections/JourneySection";
+import { arsenalGroups, arsenalTags } from "@/content/arsenal";
+import { journeyChapters } from "@/content/journey";
+import { heroStack, siteContent } from "@/content/site";
+import { primaryContactLink, socialLinks } from "@/content/socialLinks";
 
 export default function HomePage(): React.JSX.Element {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <section className="mx-auto max-w-5xl px-6 py-24">
-        <h1 className="text-4xl font-semibold tracking-tight">my-portfolio</h1>
-        <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-300">
-          Base Next.js + Tailwind initialisee. Story 1.1 en cours.
-        </p>
-        <div className="mt-8">
-          <Button>shadcn ready</Button>
-        </div>
-      </section>
+      <div className="mx-auto grid max-w-5xl gap-8 px-6 py-16 md:py-24">
+        <nav
+          aria-label="Navigation des sections"
+          className="sticky top-4 z-10 flex items-center gap-2 rounded-full border border-border bg-background/95 p-2 backdrop-blur supports-backdrop-filter:bg-background/80"
+        >
+          <a className="rounded-full px-3 py-1 text-sm text-foreground hover:bg-secondary" href="#parcours">
+            Parcours
+          </a>
+          <a className="rounded-full px-3 py-1 text-sm text-foreground hover:bg-secondary" href="#arsenal">
+            Arsenal
+          </a>
+          <a className="rounded-full px-3 py-1 text-sm text-foreground hover:bg-secondary" href="#contact">
+            Contact
+          </a>
+        </nav>
+
+        <HeroSection
+          heroStack={heroStack}
+          siteContent={siteContent}
+          primaryContactLink={primaryContactLink}
+        />
+        <JourneySection journeyChapters={journeyChapters} />
+        <ArsenalSection arsenalGroups={arsenalGroups} arsenalTags={arsenalTags} />
+        <ContactSection primaryContactLink={primaryContactLink} socialLinks={socialLinks} />
+      </div>
     </main>
   );
 }

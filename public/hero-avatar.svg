@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Portrait illustre de Florian Lauer">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="320" rx="36" fill="url(#bg)" />
+  <circle cx="160" cy="118" r="58" fill="#e2e8f0" />
+  <path d="M62 286c7-54 45-90 98-90s91 36 98 90" fill="#e2e8f0" />
+</svg>
