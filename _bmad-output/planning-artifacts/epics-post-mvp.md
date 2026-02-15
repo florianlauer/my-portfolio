@@ -9,13 +9,13 @@
 
 ## Vue d’ensemble
 
-| Epic   | Thème              | Objectif principal                          |
-|--------|--------------------|---------------------------------------------|
-| Epic 8 | SEO avancé        | Open Graph, Twitter, sitemap, robots, JSON-LD |
-| Epic 9 | CI / qualité      | GitHub Actions (lint + build) sur push/PR   |
-| Epic 10| A11y post-audit   | Corriger les points soulevés par l’audit   |
-| Epic 11| Contact (Growth)  | Formulaire de contact basique + anti-spam  |
-| Epic 12| Motion & contenu  | Affinage motion, sections supplémentaires  |
+| Epic    | Thème            | Objectif principal                            |
+| ------- | ---------------- | --------------------------------------------- |
+| Epic 8  | SEO avancé       | Open Graph, Twitter, sitemap, robots, JSON-LD |
+| Epic 9  | CI / qualité     | GitHub Actions (lint + build) sur push/PR     |
+| Epic 10 | A11y post-audit  | Corriger les points soulevés par l’audit      |
+| Epic 11 | Contact (Growth) | Formulaire de contact basique + anti-spam     |
+| Epic 12 | Motion & contenu | Affinage motion, sections supplémentaires     |
 
 ---
 
@@ -25,9 +25,7 @@ Améliorer l’indexation et le partage social : meta Open Graph / Twitter, site
 
 ### Story 8.1: Meta Open Graph et Twitter Card
 
-En tant que **visiteur ou partageur** (réseaux sociaux, messagerie),
-je veux que le lien du portfolio affiche un titre, une description et une image cohérents,
-afin que le partage soit lisible et professionnel.
+En tant que **visiteur ou partageur** (réseaux sociaux, messagerie), je veux que le lien du portfolio affiche un titre, une description et une image cohérents, afin que le partage soit lisible et professionnel.
 
 **Acceptance Criteria:**
 
@@ -37,9 +35,7 @@ afin que le partage soit lisible et professionnel.
 
 ### Story 8.2: Sitemap et robots.txt
 
-En tant que **moteur de recherche**,
-je veux découvrir les URLs du site et savoir quelles parties indexer,
-afin d’améliorer l’indexation (SEO).
+En tant que **moteur de recherche**, je veux découvrir les URLs du site et savoir quelles parties indexer, afin d’améliorer l’indexation (SEO).
 
 **Acceptance Criteria:**
 
@@ -48,9 +44,7 @@ afin d’améliorer l’indexation (SEO).
 
 ### Story 8.3: Données structurées JSON-LD (Person / WebSite)
 
-En tant que **moteur de recherche**,
-je veux recevoir des données structurées sur la personne et le site,
-afin d’enrichir les résultats (ex. knowledge panel, rich results).
+En tant que **moteur de recherche**, je veux recevoir des données structurées sur la personne et le site, afin d’enrichir les résultats (ex. knowledge panel, rich results).
 
 **Acceptance Criteria:**
 
@@ -65,9 +59,7 @@ Automatiser la vérification du code à chaque push/PR : lint et build. **Réfé
 
 ### Story 9.1: GitHub Actions (lint + build)
 
-En tant que **développeur** (Florian),
-je veux que chaque push et chaque PR déclenche un job qui exécute lint et build,
-afin de détecter les régressions avant merge ou déploiement.
+En tant que **développeur** (Florian), je veux que chaque push et chaque PR déclenche un job qui exécute lint et build, afin de détecter les régressions avant merge ou déploiement.
 
 **Acceptance Criteria:**
 
@@ -83,9 +75,7 @@ Intégrer les correctifs identifiés par un audit a11y (Lighthouse Accessibility
 
 ### Story 10.1: Appliquer les correctifs issus de l’audit a11y
 
-En tant que **visiteur** (notamment utilisateur de technologies d’assistance),
-je veux que les problèmes d’accessibilité remontés par l’audit soient corrigés,
-afin de consolider le niveau « bon » (contraste, focus, structure, alternatives).
+En tant que **visiteur** (notamment utilisateur de technologies d’assistance), je veux que les problèmes d’accessibilité remontés par l’audit soient corrigés, afin de consolider le niveau « bon » (contraste, focus, structure, alternatives).
 
 **Acceptance Criteria:**
 
@@ -97,15 +87,13 @@ afin de consolider le niveau « bon » (contraste, focus, structure, alternative
 
 ---
 
-## Epic 11: Contact – formulaire (Growth)
+## Epic 11: Contact – formulaire (Growth) — annulé
 
-Proposer un formulaire de contact basique en plus du lien LinkedIn. **Référence :** PRD Growth Features, Technical Success (« Plus tard : formulaire de contact basique avec protections anti-spam »).
+Contact via email uniquement (pas de formulaire). Le lien LinkedIn et les réseaux en section Contact suffisent ; un lien mailto: ou email peut être ajouté dans le contenu si besoin.
 
 ### Story 11.1: Formulaire de contact basique avec anti-spam
 
-En tant que **visiteur**,
-je veux pouvoir envoyer un message court depuis le site (sans obligatoirement passer par LinkedIn),
-afin d’avoir une alternative de contact directe.
+En tant que **visiteur**, je veux pouvoir envoyer un message court depuis le site (sans obligatoirement passer par LinkedIn), afin d’avoir une alternative de contact directe.
 
 **Acceptance Criteria:**
 
@@ -119,13 +107,21 @@ afin d’avoir une alternative de contact directe.
 
 ## Epic 12: Motion et contenu (Growth)
 
-Affiner les animations et ajouter des sections pour renforcer personnalité et passions. **Référence :** PRD Growth (« Affinage motion/animations », « Pages/sections supplémentaires »).
+Affiner les animations et ajouter des sections pour renforcer personnalité et passions. **Référence :** PRD Growth (« Affinage motion/animations », « Pages/sections supplémentaires »). La touche perso (assets + palette) est planifiée en 12.0 pour ne pas oublier de demander les visuels et couleurs avant les sections/motion.
+
+### Story 12.0: Assets et palette (touche perso)
+
+En tant que **Florian**, je veux fournir mes assets (photos voyages, visuels) et définir la palette de couleurs à appliquer, afin que le site reflète ma touche perso (fonds, accents) avant d’enchaîner sur motion et nouvelles sections.
+
+**Acceptance Criteria:**
+
+- **Given** le site actuel (noir et blanc), **when** on démarre la phase « touche perso » d’Epic 12, **then** le dev demande au producteur : (1) assets (ex. photos voyages pour backgrounds, hero/OG à jour, visuels pour sections passions) ; (2) palette ou direction couleur (accents, fonds).
+- Les assets reçus sont intégrés (dossiers, références dans le contenu) et la palette est appliquée dans le thème (ex. `globals.css`, variables Shadcn) avant ou en parallèle des stories 12.1 et 12.2.
+- **Note :** Cette story est surtout un **rappel et un point de synchronisation** : pas d’implémentation lourde sans les assets et la direction palette.
 
 ### Story 12.1: Affinage motion et animations
 
-En tant que **visiteur**,
-je veux des transitions et animations sobres qui renforcent la lecture (parcours, arsenal),
-sans retarder l’accès à la stack et au contact (≤ 10s).
+En tant que **visiteur**, je veux des transitions et animations sobres qui renforcent la lecture (parcours, arsenal), sans retarder l’accès à la stack et au contact (≤ 10s).
 
 **Acceptance Criteria:**
 
@@ -135,9 +131,7 @@ sans retarder l’accès à la stack et au contact (≤ 10s).
 
 ### Story 12.2: Pages ou sections supplémentaires (passions, personnalité)
 
-En tant que **visiteur**,
-je veux découvrir davantage de contenu sur les passions et la personnalité (ex. section dédiée ou page « À propos »),
-afin de renforcer le signal « j’en ai appris plus sur lui ».
+En tant que **visiteur**, je veux découvrir davantage de contenu sur les passions et la personnalité (ex. section dédiée ou page « À propos »), afin de renforcer le signal « j’en ai appris plus sur lui ».
 
 **Acceptance Criteria:**
 

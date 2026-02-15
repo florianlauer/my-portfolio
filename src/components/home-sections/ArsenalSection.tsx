@@ -21,7 +21,10 @@ export const ArsenalSection = ({
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {arsenalGroups.map((group) => (
-          <article key={group.family} className="rounded-xl border border-border/70 p-4">
+          <article
+            key={group.family}
+            className="rounded-xl border border-border/70 p-4"
+          >
             <h3 className="text-lg font-medium">{group.title}</h3>
             <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
               {group.items.map((item) => (
@@ -32,9 +35,15 @@ export const ArsenalSection = ({
         ))}
       </div>
 
-      <ul className="mt-6 flex flex-wrap gap-2" aria-label="Tags de competences">
+      <ul
+        className="mt-6 flex flex-wrap gap-2"
+        aria-label="Tags de compétences"
+      >
         {arsenalTags.map((tag) => (
-          <li key={tag} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+          <li
+            key={tag}
+            className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+          >
             {tag}
           </li>
         ))}

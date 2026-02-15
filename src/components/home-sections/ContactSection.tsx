@@ -3,11 +3,13 @@ import type { SocialLink } from "@/types/socialLinks";
 type ContactSectionProps = {
   socialLinks: SocialLink[];
   primaryContactLink: SocialLink | undefined;
+  contactEmail?: string;
 };
 
 export const ContactSection = ({
   socialLinks,
   primaryContactLink,
+  contactEmail,
 }: ContactSectionProps): React.JSX.Element => {
   return (
     <section
@@ -27,6 +29,7 @@ export const ContactSection = ({
             href={primaryContactLink.href}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${primaryContactLink.label} (ouvre dans un nouvel onglet)`}
           >
             {primaryContactLink.label}
           </a>
@@ -37,7 +40,20 @@ export const ContactSection = ({
         </p>
       )}
 
-      <ul className="mt-6 flex flex-wrap gap-3" aria-label="Reseaux sociaux">
+      {contactEmail ? (
+        <p className="mt-2 text-sm text-muted-foreground">
+          Email:{" "}
+          <a
+            className="font-medium text-foreground underline underline-offset-4"
+            href={`mailto:${contactEmail}`}
+            aria-label={`Envoyer un email à ${contactEmail}`}
+          >
+            {contactEmail}
+          </a>
+        </p>
+      ) : null}
+
+      <ul className="mt-6 flex flex-wrap gap-3" aria-label="Réseaux sociaux">
         {socialLinks.map((link) => (
           <li key={link.id}>
             <a

@@ -126,3 +126,13 @@
     outline-style: solid;
   }
 }
+
+.scroll-reveal-hidden {
+  opacity: 0;
+  transform: translateY(0.75rem);
+}
+
+.scroll-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -89,15 +89,16 @@ development_status:
   9-1-github-actions-lint-build: done
   epic-9-retrospective: optional
 
-  epic-10: backlog
-  10-1-corrections-post-audit-a11y: backlog
+  epic-10: done
+  10-1-corrections-post-audit-a11y: done
   epic-10-retrospective: optional
 
-  epic-11: backlog
-  11-1-formulaire-contact-anti-spam: backlog
+  epic-11: cancelled
+  11-1-formulaire-contact-anti-spam: cancelled
   epic-11-retrospective: optional
 
-  epic-12: backlog
-  12-1-motion-animations: backlog
+  epic-12: in-progress
+  12-0-assets-et-palette-touche-perso: backlog
+  12-1-motion-animations: done
   12-2-pages-sections-supplementaires: backlog
   epic-12-retrospective: optional

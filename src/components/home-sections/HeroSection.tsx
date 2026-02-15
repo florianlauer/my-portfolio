@@ -15,11 +15,16 @@ export const HeroSection = ({
   primaryContactLink,
 }: HeroSectionProps): React.JSX.Element => {
   const stackLine: string = heroStack.map((tech) => tech.label).join(" · ");
-  const ctaLabel: string = primaryContactLink?.label ?? siteContent.primaryCta.label;
-  const ctaHref: string = primaryContactLink?.href ?? siteContent.primaryCta.href;
+  const ctaLabel: string =
+    primaryContactLink?.label ?? siteContent.primaryCta.label;
+  const ctaHref: string =
+    primaryContactLink?.href ?? siteContent.primaryCta.href;
 
   return (
-    <section aria-labelledby="hero-title" className="rounded-2xl border border-border p-6 md:p-8">
+    <section
+      aria-labelledby="hero-title"
+      className="rounded-2xl border border-border p-6 md:p-8"
+    >
       <div className="grid items-center gap-6 md:grid-cols-[140px_1fr]">
         <div className="relative h-28 w-28 overflow-hidden rounded-2xl border border-border md:h-36 md:w-36">
           <Image
@@ -33,8 +38,13 @@ export const HeroSection = ({
         </div>
 
         <div>
-          <p className="text-sm font-medium text-muted-foreground">{siteContent.ownerName}</p>
-          <h1 id="hero-title" className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
+          <p className="text-sm font-medium text-muted-foreground">
+            {siteContent.ownerName}
+          </p>
+          <h1
+            id="hero-title"
+            className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl"
+          >
             {siteContent.heroTitle}
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
@@ -43,19 +53,29 @@ export const HeroSection = ({
         </div>
       </div>
 
-      <p className="mt-6 text-sm text-muted-foreground" aria-label="Stack principale">
+      <p
+        className="mt-6 text-sm text-muted-foreground"
+        aria-label="Stack principale"
+      >
         {stackLine}
       </p>
 
       <div className="mt-8">
         <div className="flex flex-wrap gap-3">
           <Button asChild>
-            <a href={ctaHref} target="_blank" rel="noopener noreferrer">
+            <a
+              href={ctaHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${ctaLabel} (ouvre dans un nouvel onglet)`}
+            >
               {ctaLabel}
             </a>
           </Button>
           <Button variant="outline" asChild>
-            <a href="#arsenal">Voir la stack</a>
+            <a href="#arsenal" aria-label="Aller à la section Arsenal">
+              Voir la stack
+            </a>
           </Button>
         </div>
       </div>

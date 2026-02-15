@@ -14,6 +14,8 @@ export type SiteContent = {
   heroSubtitle: string;
   heroImage: HeroImage;
   primaryCta: PrimaryCta;
+  /** Email de contact (lien mailto:) ; optionnel. */
+  contactEmail?: string;
 };
 
 export type HeroTech = {

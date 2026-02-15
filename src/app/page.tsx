@@ -1,3 +1,4 @@
+import { ScrollReveal } from "@/components/scroll-reveal/ScrollReveal";
 import { ArsenalSection } from "@/components/home-sections/ArsenalSection";
 import { ContactSection } from "@/components/home-sections/ContactSection";
 import { HeroSection } from "@/components/home-sections/HeroSection";
@@ -46,9 +47,17 @@ export default function HomePage(): React.JSX.Element {
           siteContent={siteContent}
           primaryContactLink={primaryContactLink}
         />
-        <JourneySection journeyChapters={journeyChapters} />
-        <ArsenalSection arsenalGroups={arsenalGroups} arsenalTags={arsenalTags} />
-        <ContactSection primaryContactLink={primaryContactLink} socialLinks={socialLinks} />
+        <ScrollReveal>
+          <JourneySection journeyChapters={journeyChapters} />
+        </ScrollReveal>
+        <ScrollReveal>
+          <ArsenalSection arsenalGroups={arsenalGroups} arsenalTags={arsenalTags} />
+        </ScrollReveal>
+        <ContactSection
+          primaryContactLink={primaryContactLink}
+          socialLinks={socialLinks}
+          contactEmail={siteContent.contactEmail}
+        />
       </div>
     </main>
   );

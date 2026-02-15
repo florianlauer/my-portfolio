@@ -76,7 +76,7 @@ export const JourneySection = ({
               </p>
               <ul
                 className="mt-4 flex flex-wrap gap-2"
-                aria-label={`Competences - ${chapter.title}`}
+                aria-label={`Compétences - ${chapter.title}`}
               >
                 {chapter.skills.map((skill) => (
                   <li
