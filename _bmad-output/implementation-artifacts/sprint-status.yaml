@@ -77,3 +77,27 @@ development_status:
   7-1-navigation-clavier-et-focus-visible: done
   7-2-contrastes-et-structure-semantique-landmarks-titres: done
   epic-7-retrospective: optional
+
+  # Post-MVP (futures améliorations) — voir epics-post-mvp.md
+  epic-8: done
+  8-1-meta-open-graph-et-twitter-card: done
+  8-2-sitemap-et-robots-txt: done
+  8-3-json-ld-person-website: done
+  epic-8-retrospective: optional
+
+  epic-9: done
+  9-1-github-actions-lint-build: done
+  epic-9-retrospective: optional
+
+  epic-10: backlog
+  10-1-corrections-post-audit-a11y: backlog
+  epic-10-retrospective: optional
+
+  epic-11: backlog
+  11-1-formulaire-contact-anti-spam: backlog
+  epic-11-retrospective: optional
+
+  epic-12: backlog
+  12-1-motion-animations: backlog
+  12-2-pages-sections-supplementaires: backlog
+  epic-12-retrospective: optional

@@ -76,10 +76,26 @@ Toutes les epics et toutes les stories du périmètre planifié ont été implé
 
 ---
 
-## Suite prévue (hors ce sprint)
+## Suite prévue – backlog post-MVP
 
-- **Audit a11y :** instructions dans `README.md` (Lighthouse, axe DevTools) ; à lancer sur la page en dev ou en production.
-- **Éventuelles évolutions (PRD) :** FR20 MPA (plusieurs routes) non priorisé. README ajouté (dev, scripts, déploiement, audit).
+Les **futures améliorations** sont planifiées comme pour le MVP (epics + stories) :
+
+- **Planification :** `_bmad-output/planning-artifacts/epics-post-mvp.md`
+- **Suivi :** `sprint-status.yaml` (epic-8 à epic-12 en backlog)
+
+**Epics post-MVP :**
+
+| Epic  | Thème              | Stories principales                                      |
+|-------|--------------------|----------------------------------------------------------|
+| 8     | SEO avancé         | 8.1 Open Graph / Twitter · 8.2 Sitemap & robots · 8.3 JSON-LD |
+| 9     | CI                 | 9.1 GitHub Actions (lint + build)                       |
+| 10    | A11y post-audit   | 10.1 Correctifs issus de l’audit a11y                   |
+| 11    | Contact (Growth)  | 11.1 Formulaire contact + anti-spam                     |
+| 12    | Motion & contenu  | 12.1 Motion · 12.2 Pages/sections supplémentaires      |
+
+**Priorisation suggérée pour enchaîner :** Epic 8 (SEO) → Epic 9 (CI) → Epic 10 (après audit a11y) → 11/12 selon priorité.
+
+- **Audit a11y :** instructions dans `README.md` ; à lancer avant ou pendant Epic 10.
 
 ---
 
