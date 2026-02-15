@@ -91,16 +91,16 @@ export function GalleryClient({
 
   const openLightbox = (index: number): void => setLightboxIndex(index);
   const closeLightbox = (): void => setLightboxIndex(null);
-  const goPrev = (): void => {
+  const goPrev = useCallback((): void => {
     setLightboxIndex((i) =>
       i === null ? null : i === 0 ? displayedItems.length - 1 : i - 1
     );
-  };
-  const goNext = (): void => {
+  }, [displayedItems.length]);
+  const goNext = useCallback((): void => {
     setLightboxIndex((i) =>
       i === null ? null : i === displayedItems.length - 1 ? 0 : i + 1
     );
-  };
+  }, [displayedItems.length]);
 
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const containerWidthRef = useRef(1000);
@@ -203,7 +203,7 @@ export function GalleryClient({
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [lightboxIndex]);
+  }, [lightboxIndex, goPrev, goNext]);
 
   const currentItem =
     lightboxIndex !== null ? displayedItems[lightboxIndex] : null;
@@ -287,6 +287,7 @@ export function GalleryClient({
                     className="relative block w-full overflow-hidden rounded-xl border border-border bg-muted transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     aria-label={`Voir ${item.caption} en grand`}
                   >
+                    {/* eslint-disable-next-line @next/next/no-img-element -- masonry needs native img for layout */}
                     <img
                       src={item.src}
                       alt={item.alt}

@@ -26,12 +26,12 @@ export function HomeNav(): React.JSX.Element {
     prevProgressRef.current = progress;
 
     if (progress >= AT_MIN_THRESHOLD && prev < AT_MIN_THRESHOLD) {
-      setBounceType("min");
+      queueMicrotask(() => setBounceType("min"));
       const t = setTimeout(() => setBounceType(null), BOUNCE_DURATION_MS);
       return () => clearTimeout(t);
     }
     if (progress <= AT_MAX_THRESHOLD && prev > AT_MAX_THRESHOLD) {
-      setBounceType("max");
+      queueMicrotask(() => setBounceType("max"));
       const t = setTimeout(() => setBounceType(null), BOUNCE_DURATION_MS);
       return () => clearTimeout(t);
     }
