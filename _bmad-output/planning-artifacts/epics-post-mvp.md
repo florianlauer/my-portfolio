@@ -139,6 +139,30 @@ En tant que **visiteur**, je veux découvrir davantage de contenu sur les passio
 - La navigation (menu, ancrages) est mise à jour pour inclure les nouveaux blocs ou pages.
 - Le contenu reste modifiable via `src/content/*` ou équivalent, sans refonte technique majeure.
 
+**Spec validée (2026-02-14)** — Voir `_bmad-output/implementation-artifacts/12-2-passions-a-propos-spec.md` : option C (section Passions sur la home + page `/a-propos`), thèmes voyage / side projects / passions, nav #passions + lien À propos, ton pro sur home et perso sur la page.
+
+---
+
+## Backlog / idées à prioriser
+
+### Page 404 fun type GeoGuessr
+
+**Contexte :** Prévu dans le product brief et le PRD en post-MVP (easter egg, mémorabilité). Aucune page 404 personnalisée n’existe pour l’instant (Next affichera la 404 par défaut si une route est introuvable).
+
+**Idée :** Une page 404 ludique façon mini GeoGuessr avec **tes propres photos de voyage** : une photo s’affiche, le visiteur devine le lieu (choix multiple ou carte), avec un lien discret depuis l’accueil pour les curieux. Réutilise le même réservoir de photos que pour les backgrounds (ex. Lençóis, Rio, etc.) et d’autres destinations (~20 pays évoqués dans le brief).
+
+**À préciser quand tu voudras l’implémenter :** jeu par question unique ou plusieurs rounds, choix multiple vs carte cliquable, lien « Retour accueil » visible, et où placer l’easter egg (footer, lien caché, etc.).
+
+---
+
+### Section galerie photos
+
+**Contexte :** Nouvelle idée (pas dans le PRD actuel). Les photos de voyage sont déjà utilisées en hero, en background global et (en v1) en bandeau/section ; une galerie dédiée permettrait de les mettre en avant de façon explicite.
+
+**Idée :** Une section ou une page **galerie** (ex. section sur la home entre Arsenal et Contact, ou route `/galerie`) avec une grille ou un masonry de tes photos de voyage, éventuellement avec lieu / pays en légende. Cohérent avec la touche « voyage » et la 404 GeoGuessr (même source de photos).
+
+**À préciser :** emplacement (section vs page dédiée), nombre d’images, tri (pays, date, thème), lightbox ou non.
+
 ---
 
 ## Priorisation suggérée pour enchaîner

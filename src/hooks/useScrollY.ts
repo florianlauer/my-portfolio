@@ -20,8 +20,8 @@ export function useScrollY(): number {
       });
     };
 
-    setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => {
       window.removeEventListener("scroll", handleScroll);
       if (rafId !== null) cancelAnimationFrame(rafId);

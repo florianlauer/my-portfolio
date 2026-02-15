@@ -1,20 +1,22 @@
+import Link from "next/link";
 import { GlobalBackground } from "@/components/global-background/GlobalBackground";
-import { AssetPlaceholder } from "@/components/asset-placeholder/AssetPlaceholder";
 import { ScrollReveal } from "@/components/scroll-reveal/ScrollReveal";
 import { ArsenalSection } from "@/components/home-sections/ArsenalSection";
 import { ContactSection } from "@/components/home-sections/ContactSection";
 import { HeroSection } from "@/components/home-sections/HeroSection";
 import { JourneySection } from "@/components/home-sections/JourneySection";
+import { PassionsSection } from "@/components/home-sections/PassionsSection";
 import { arsenalGroups, arsenalTags } from "@/content/arsenal";
 import { journeyChapters } from "@/content/journey";
-import { heroStack, showAssetPlaceholders, siteContent } from "@/content/site";
+import { passionsSectionContent } from "@/content/passions";
+import { heroStack, siteContent } from "@/content/site";
 import { primaryContactLink, socialLinks } from "@/content/socialLinks";
 
 export default function HomePage(): React.JSX.Element {
   return (
     <main
       id="contenu"
-      className="relative min-h-screen text-foreground"
+      className="relative min-h-screen overflow-x-hidden text-foreground"
       tabIndex={-1}
     >
       <GlobalBackground />
@@ -24,30 +26,50 @@ export default function HomePage(): React.JSX.Element {
       >
         Aller au contenu
       </a>
-      <div className="relative z-10 mx-auto grid max-w-5xl gap-8 px-6 py-16 md:py-24">
-        <nav
-          aria-label="Navigation des sections"
-          className="sticky top-4 z-10 flex items-center gap-2 rounded-full border border-border bg-background/95 p-2 backdrop-blur supports-backdrop-filter:bg-background/80"
-        >
-          <a
-            className="rounded-full px-3 py-1 text-sm text-foreground outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      <div className="relative z-10 mx-auto grid w-full max-w-5xl gap-8 px-6 pt-28 pb-16 md:pt-32 md:pb-24 min-w-0 box-border">
+        <div className="fixed left-0 right-0 top-8 z-30 px-4">
+          <div className="relative mx-auto max-w-5xl">
+            <nav
+              aria-label="Navigation des sections"
+              className="flex flex-nowrap items-center gap-2 overflow-x-auto overflow-y-hidden rounded-full border border-border bg-background/95 p-2 backdrop-blur supports-backdrop-filter:bg-background/80 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch]"
+            >
+              <a
+            className="shrink-0 rounded-full px-3 py-1 text-sm text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             href="#parcours"
           >
             Parcours
           </a>
           <a
-            className="rounded-full px-3 py-1 text-sm text-foreground outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="shrink-0 rounded-full px-3 py-1 text-sm text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             href="#arsenal"
           >
             Arsenal
           </a>
           <a
-            className="rounded-full px-3 py-1 text-sm text-foreground outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="shrink-0 rounded-full px-3 py-1 text-sm text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            href="#passions"
+          >
+            Passions
+          </a>
+          <Link
+            href="/a-propos"
+            className="shrink-0 rounded-full px-3 py-1 text-sm text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            À propos
+          </Link>
+          <a
+            className="shrink-0 rounded-full px-3 py-1 text-sm text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             href="#contact"
           >
             Contact
           </a>
-        </nav>
+            </nav>
+            <div
+              className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-background/98 to-transparent rounded-r-full"
+              aria-hidden
+            />
+          </div>
+        </div>
 
         <HeroSection
           heroStack={heroStack}
@@ -65,15 +87,9 @@ export default function HomePage(): React.JSX.Element {
           />
         </ScrollReveal>
 
-        {showAssetPlaceholders ? (
-          <AssetPlaceholder
-            id="4"
-            title="Image section Passions / À propos (future section)"
-            description="Pour la story 12.2 : section dédiée passions ou page À propos. Tu pourras ajouter une ou plusieurs images ici."
-            dimensions="1200×630 px ou 800×600 px"
-            className="w-full"
-          />
-        ) : null}
+        <ScrollReveal>
+          <PassionsSection content={passionsSectionContent} />
+        </ScrollReveal>
 
         <ContactSection
           primaryContactLink={primaryContactLink}
