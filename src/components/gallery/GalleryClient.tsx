@@ -2,11 +2,15 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useMemo, useState } from "react";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { shuffle } from "@/utils/shuffle";
 import type { GalleryItem } from "@/types/gallery";
 
 const INITIAL_COUNT = 20;
 const LOAD_MORE_COUNT = 6;
+
+const MASONRY_BREAKPOINTS = { 0: 1, 640: 2, 1024: 3 };
+const MASONRY_GUTTER_BREAKPOINTS = { 0: "1rem", 640: "1rem", 1024: "1rem" };
 
 type GalleryClientProps = {
   items: GalleryItem[];
@@ -15,19 +19,25 @@ type GalleryClientProps = {
 export function GalleryClient({
   items,
 }: GalleryClientProps): React.JSX.Element {
-  // Ordre identique au premier rendu (SSR + hydratation) pour éviter l'erreur d'hydratation.
-  // Le mélange se fait côté client uniquement après le montage (useEffect).
+  // Premier rendu (SSR + hydratation) : même liste que le serveur (items, ordre stable).
+  // Après montage client uniquement : mélange et affichage du pool mélangé.
   const [shuffledPool, setShuffledPool] = useState<GalleryItem[]>(() => items);
+  const [hasMounted, setHasMounted] = useState(false);
   const [displayedCount, setDisplayedCount] = useState(() =>
     Math.min(INITIAL_COUNT, items.length)
   );
+
+  const listToShow = hasMounted ? shuffledPool : items;
   const displayedItems = useMemo(
-    () => shuffledPool.slice(0, displayedCount),
-    [shuffledPool, displayedCount]
+    () => listToShow.slice(0, displayedCount),
+    [listToShow, displayedCount]
   );
 
   useEffect(() => {
-    setShuffledPool(shuffle(items));
+    queueMicrotask(() => {
+      setShuffledPool(shuffle(items));
+      setHasMounted(true);
+    });
   }, [items]);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -37,7 +47,7 @@ export function GalleryClient({
 
   useEffect(() => {
     if (displayedItems.length === 0) {
-      setIsInitialLoad(false);
+      queueMicrotask(() => setIsInitialLoad(false));
       return;
     }
     if (!isInitialLoad) return;
@@ -59,14 +69,14 @@ export function GalleryClient({
 
   const loadMore = useCallback(() => {
     setDisplayedCount((prev) =>
-      Math.min(prev + LOAD_MORE_COUNT, shuffledPool.length)
+      Math.min(prev + LOAD_MORE_COUNT, listToShow.length)
     );
-  }, [shuffledPool.length]);
+  }, [listToShow.length]);
 
-  const hasMore = displayedCount < shuffledPool.length;
+  const hasMore = displayedCount < listToShow.length;
 
   useEffect(() => {
-    if (isInitialLoad || !hasMore || shuffledPool.length === 0) return;
+    if (isInitialLoad || !hasMore || listToShow.length === 0) return;
     const sentinel = sentinelRef.current;
     if (!sentinel) return;
     const observer = new IntersectionObserver(
@@ -77,7 +87,7 @@ export function GalleryClient({
     );
     observer.observe(sentinel);
     return () => observer.disconnect();
-  }, [isInitialLoad, loadMore, hasMore, shuffledPool.length]);
+  }, [isInitialLoad, loadMore, hasMore, listToShow.length]);
 
   const openLightbox = (index: number): void => setLightboxIndex(index);
   const closeLightbox = (): void => setLightboxIndex(null);
@@ -106,63 +116,112 @@ export function GalleryClient({
   const currentItem =
     lightboxIndex !== null ? displayedItems[lightboxIndex] : null;
 
+  // Placeholder identique serveur + premier rendu client pour éviter l’erreur d’hydratation.
+  // ResponsiveMasonry/Masonry ne sont rendus qu’après montage (DOM différent selon viewport).
+  if (!hasMounted) {
+    return (
+      <>
+        <div
+          className="flex min-h-[200px] items-center justify-center py-16"
+          role="status"
+          aria-label="Chargement de la galerie"
+        >
+          <span className="text-base font-medium text-foreground">
+            Chargement…
+          </span>
+        </div>
+        <div
+          role="list"
+          aria-label="Galerie de photos"
+          className="min-h-[200px]"
+          aria-hidden
+        />
+      </>
+    );
+  }
+
   return (
     <>
       {isInitialLoad && (
         <div
-          className="flex min-h-[200px] items-center justify-center py-16 text-muted-foreground"
+          className="flex min-h-[200px] items-center justify-center py-16"
           role="status"
           aria-label="Chargement de la galerie"
         >
-          <span className="text-sm">Chargement…</span>
+          <span className="text-base font-medium text-foreground">
+            Chargement…
+          </span>
         </div>
       )}
 
       <div
-        className={`columns-2 gap-4 md:columns-3 ${
+        className={
           isInitialLoad
             ? "absolute left-[-9999px] opacity-0 pointer-events-none"
             : ""
-        }`}
+        }
         role="list"
         aria-label="Galerie de photos"
         aria-hidden={isInitialLoad}
       >
-        {displayedItems.map((item, index) => (
-          <figure
-            key={`${item.id}-${index}`}
-            className="break-inside-avoid mb-4 [page-break-inside:avoid]"
-            role="listitem"
-          >
-            <button
-              type="button"
-              onClick={() => openLightbox(index)}
-              className="relative block w-full overflow-hidden rounded-xl border border-border bg-muted transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              aria-label={`Voir ${item.caption} en grand`}
-            >
-              <img
-                src={item.src}
-                alt={item.alt}
-                loading={index < INITIAL_COUNT ? "eager" : "lazy"}
-                decoding="async"
-                className="h-auto w-full object-cover"
-                onLoad={handleImageLoad}
-              />
-            </button>
-            <figcaption className="mt-2 text-sm text-muted-foreground">
-              {item.caption}
-            </figcaption>
-          </figure>
-        ))}
+        <ResponsiveMasonry
+          columnsCountBreakPoints={MASONRY_BREAKPOINTS}
+          gutterBreakPoints={MASONRY_GUTTER_BREAKPOINTS}
+        >
+          <Masonry>
+            {displayedItems.map((item, index) => {
+              const startNewBatch = displayedCount - LOAD_MORE_COUNT;
+              const isNewFromLoadMore =
+                displayedCount > INITIAL_COUNT && index >= startNewBatch;
+              const indexInBatch = index - startNewBatch;
+              const rowIndex = Math.floor(indexInBatch / 3);
+              const delayMs = isNewFromLoadMore ? rowIndex * 120 : 0;
+              return (
+                <figure
+                  key={`${item.id}-${index}`}
+                  className={
+                    isNewFromLoadMore ? "gallery-item-new opacity-0" : ""
+                  }
+                  style={
+                    isNewFromLoadMore
+                      ? { animationDelay: `${delayMs}ms` }
+                      : undefined
+                  }
+                  role="listitem"
+                >
+                  <button
+                    type="button"
+                    onClick={() => openLightbox(index)}
+                    className="relative block w-full overflow-hidden rounded-xl border border-border bg-muted transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    aria-label={`Voir ${item.caption} en grand`}
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      loading={index < INITIAL_COUNT ? "eager" : "lazy"}
+                      decoding="async"
+                      className="h-auto w-full object-cover"
+                      style={{ display: "block" }}
+                      onLoad={handleImageLoad}
+                    />
+                  </button>
+                  <figcaption className="mt-2 text-sm text-muted-foreground">
+                    {item.caption}
+                  </figcaption>
+                </figure>
+              );
+            })}
+          </Masonry>
+        </ResponsiveMasonry>
       </div>
 
       {!isInitialLoad && hasMore && (
         <div ref={sentinelRef} className="h-4 w-full" aria-hidden />
       )}
-      {!isInitialLoad && !hasMore && shuffledPool.length > 0 && (
+      {!isInitialLoad && !hasMore && listToShow.length > 0 && (
         <p className="mt-8 text-center text-sm text-muted-foreground">
-          Fin de la galerie — {shuffledPool.length} photo
-          {shuffledPool.length > 1 ? "s" : ""}.
+          Fin de la galerie — {listToShow.length} photo
+          {listToShow.length > 1 ? "s" : ""}.
         </p>
       )}
 
