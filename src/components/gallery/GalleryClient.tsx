@@ -102,6 +102,98 @@ export function GalleryClient({
     );
   };
 
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const containerWidthRef = useRef(1000);
+  const rafIdRef = useRef<number | null>(null);
+  const latestDragRef = useRef(0);
+  const pendingDirectionRef = useRef<"prev" | "next" | null>(null);
+
+  const [dragDelta, setDragDelta] = useState(0);
+  const [isDragAnimating, setIsDragAnimating] = useState(false);
+
+  const SWIPE_THRESHOLD_PX = 50;
+
+  useEffect(() => {
+    const updateWidth = (): void => {
+      containerWidthRef.current = window.innerWidth;
+    };
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
+  const handleLightboxTouchStart = useCallback((e: React.TouchEvent) => {
+    const t = e.touches[0];
+    if (t) touchStartRef.current = { x: t.clientX, y: t.clientY };
+    latestDragRef.current = 0;
+    setIsDragAnimating(false);
+  }, []);
+
+  const handleLightboxTouchMove = useCallback((e: React.TouchEvent) => {
+    const start = touchStartRef.current;
+    if (!start) return;
+    const t = e.touches[0];
+    if (!t) return;
+    const deltaX = t.clientX - start.x;
+    const deltaY = t.clientY - start.y;
+    if (Math.abs(deltaY) >= Math.abs(deltaX)) return;
+    e.preventDefault();
+    const max = containerWidthRef.current;
+    const clamped = Math.max(-max, Math.min(max, deltaX));
+    latestDragRef.current = clamped;
+    if (rafIdRef.current === null) {
+      rafIdRef.current = requestAnimationFrame(() => {
+        rafIdRef.current = null;
+        setDragDelta(latestDragRef.current);
+      });
+    }
+  }, []);
+
+  const handleLightboxTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const start = touchStartRef.current;
+      touchStartRef.current = null;
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+      if (!start) return;
+      const t = e.changedTouches[0];
+      if (!t) return;
+      const deltaX = t.clientX - start.x;
+      const width = containerWidthRef.current;
+      const threshold = Math.min(SWIPE_THRESHOLD_PX, width * 0.2);
+
+      if (deltaX > threshold) {
+        pendingDirectionRef.current = "prev";
+        setIsDragAnimating(true);
+        setDragDelta(width);
+      } else if (deltaX < -threshold) {
+        pendingDirectionRef.current = "next";
+        setIsDragAnimating(true);
+        setDragDelta(-width);
+      } else {
+        pendingDirectionRef.current = null;
+        setIsDragAnimating(true);
+        setDragDelta(0);
+      }
+    },
+    []
+  );
+
+  const handleLightboxTransitionEnd = useCallback(
+    (e: React.TransitionEvent) => {
+      if (e.propertyName !== "transform") return;
+      const pending = pendingDirectionRef.current;
+      pendingDirectionRef.current = null;
+      setIsDragAnimating(false);
+      setDragDelta(0);
+      if (pending === "prev") goPrev();
+      if (pending === "next") goNext();
+    },
+    [goPrev, goNext]
+  );
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent): void => {
       if (lightboxIndex === null) return;
@@ -225,60 +317,93 @@ export function GalleryClient({
         </p>
       )}
 
-      {currentItem && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`Image ${lightboxIndex! + 1} sur ${
-            displayedItems.length
-          } : ${currentItem.caption}`}
-          onClick={(e) => e.target === e.currentTarget && closeLightbox()}
-        >
-          <button
-            type="button"
-            onClick={closeLightbox}
-            className="absolute right-4 top-4 z-10 rounded-md bg-white/10 px-3 py-1 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
-            aria-label="Fermer"
-          >
-            Fermer
-          </button>
-          <button
-            type="button"
-            onClick={goPrev}
-            className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
-            aria-label="Image précédente"
-          >
-            ←
-          </button>
-          <button
-            type="button"
-            onClick={goNext}
-            className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
-            aria-label="Image suivante"
-          >
-            →
-          </button>
+      {currentItem && (() => {
+        const n = displayedItems.length;
+        const prevIndex =
+          lightboxIndex! === 0 ? n - 1 : lightboxIndex! - 1;
+        const nextIndex =
+          lightboxIndex! === n - 1 ? 0 : lightboxIndex! + 1;
+        const indices = [prevIndex, lightboxIndex!, nextIndex] as const;
+
+        return (
           <div
-            className="relative z-0 max-h-[85vh] max-w-full"
-            onClick={(e) => e.stopPropagation()}
-            role="presentation"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 touch-none"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Image ${lightboxIndex! + 1} sur ${n} : ${currentItem.caption}`}
+            onClick={(e) => e.target === e.currentTarget && closeLightbox()}
+            onTouchStart={handleLightboxTouchStart}
+            onTouchMove={handleLightboxTouchMove}
+            onTouchEnd={handleLightboxTouchEnd}
           >
-            <Image
-              src={currentItem.src}
-              alt={currentItem.alt}
-              width={1200}
-              height={800}
-              className="max-h-[85vh] w-auto object-contain"
-              priority
-            />
-            <p className="mt-2 text-center text-sm text-white/90">
-              {currentItem.caption} — {lightboxIndex! + 1} /{" "}
-              {displayedItems.length}
-            </p>
+            <button
+              type="button"
+              onClick={closeLightbox}
+              className="absolute right-4 top-4 z-10 rounded-md bg-white/10 px-3 py-1 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Fermer"
+            >
+              Fermer
+            </button>
+            <button
+              type="button"
+              onClick={goPrev}
+              className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Image précédente"
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              onClick={goNext}
+              className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
+              aria-label="Image suivante"
+            >
+              →
+            </button>
+            <div
+              className="relative z-0 h-full w-full overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+              role="presentation"
+            >
+              <div
+                className="flex h-full w-full"
+                style={{
+                  width: "300vw",
+                  transform: `translateX(calc(-100vw + ${dragDelta}px))`,
+                  transition: isDragAnimating
+                    ? "transform 0.3s ease-out"
+                    : "none",
+                }}
+                onTransitionEnd={handleLightboxTransitionEnd}
+              >
+                {indices.map((idx) => {
+                  const item = displayedItems[idx];
+                  return (
+                    <div
+                      key={`${item.id}-${idx}`}
+                      className="flex h-full w-screen shrink-0 items-center justify-center p-4"
+                    >
+                      <div className="flex max-h-[85vh] w-full flex-col items-center justify-center">
+                        <Image
+                          src={item.src}
+                          alt={item.alt}
+                          width={1200}
+                          height={800}
+                          className="max-h-[85vh] w-auto object-contain"
+                          priority={idx === lightboxIndex}
+                        />
+                        <p className="mt-2 text-center text-sm text-white/90">
+                          {item.caption} — {idx + 1} / {n}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </>
   );
 }

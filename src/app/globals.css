@@ -161,3 +161,48 @@
 .gallery-item-new {
   animation: gallery-row-in 0.65s ease-out forwards;
 }
+
+/* Menu homepage : bounce à la taille min / max */
+@keyframes home-nav-bounce-min {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(0.97);
+  }
+  60% {
+    transform: scale(1.02);
+  }
+  85% {
+    transform: scale(0.995);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes home-nav-bounce-max {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.03);
+  }
+
+  70% {
+    transform: scale(0.99);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.home-nav-bounce-min {
+  animation: home-nav-bounce-min 0.7s ease-out;
+}
+
+.home-nav-bounce-max {
+  animation: home-nav-bounce-max 0.4s ease-out;
+}
