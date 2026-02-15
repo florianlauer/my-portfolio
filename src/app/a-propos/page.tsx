@@ -60,6 +60,16 @@ export default function AProposPage(): React.JSX.Element {
                 {section.title}
               </h2>
               <p className="mt-3 text-muted-foreground">{section.content}</p>
+              {section.id === "voyage" && (
+                <p className="mt-3">
+                  <Link
+                    href="/galerie"
+                    className="text-sm font-medium text-primary underline underline-offset-4 hover:text-primary/90"
+                  >
+                    Voir plus de photos →
+                  </Link>
+                </p>
+              )}
             </section>
           ))}
         </div>

@@ -34,7 +34,7 @@ export const JourneySection = ({
     <section
       id="parcours"
       aria-labelledby="journey-title"
-      className="rounded-2xl border border-border bg-background/92 p-6 md:p-8 backdrop-blur-sm"
+      className="scroll-mt-24 rounded-2xl border border-border bg-background/92 p-6 md:p-8 backdrop-blur-sm"
     >
       <h2 id="journey-title" className="text-2xl font-semibold tracking-tight">
         Parcours

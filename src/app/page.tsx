@@ -57,6 +57,12 @@ export default function HomePage(): React.JSX.Element {
           >
             À propos
           </Link>
+          <Link
+            href="/galerie"
+            className="shrink-0 rounded-full px-3 py-1 text-sm text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          >
+            Galerie
+          </Link>
           <a
             className="shrink-0 rounded-full px-3 py-1 text-sm text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             href="#contact"

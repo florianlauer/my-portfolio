@@ -16,6 +16,7 @@
 | Epic 10 | A11y post-audit  | Corriger les points soulevés par l’audit      |
 | Epic 11 | Contact (Growth) | Formulaire de contact basique + anti-spam     |
 | Epic 12 | Motion & contenu | Affinage motion, sections supplémentaires     |
+| Epic 13 | Stack vue stylée | Vue stack avec relations entre technos (graph/liens) |
 
 ---
 
@@ -141,36 +142,73 @@ En tant que **visiteur**, je veux découvrir davantage de contenu sur les passio
 
 **Spec validée (2026-02-14)** — Voir `_bmad-output/implementation-artifacts/12-2-passions-a-propos-spec.md` : option C (section Passions sur la home + page `/a-propos`), thèmes voyage / side projects / passions, nav #passions + lien À propos, ton pro sur home et perso sur la page.
 
+### Story 12.3: Page 404 type GeoGuessr
+
+En tant que **visiteur** (ou curieux), je veux une page 404 personnalisée et ludique (mini GeoGuessr avec tes photos de voyage), afin que l'erreur 404 soit mémorable et renforce la personnalité du site.
+
+**Acceptance Criteria:**
+
+- **Given** une route inexistante, **when** le visiteur y accède, **then** une page 404 personnalisée s'affiche (pas la 404 par défaut Next.js).
+- La page propose une expérience type « devine le lieu » : une photo de voyage s'affiche, le visiteur peut deviner (choix multiple ou carte selon spec détaillée).
+- Les photos viennent du même réservoir que les backgrounds (ex. Lençóis, Laponie, etc.) ; pas de contenu dupliqué.
+- Un lien « Retour accueil » (ou équivalent) est visible et accessible.
+- L'easter egg peut être atteignable de façon discrète depuis l'accueil (footer, lien caché, etc.) — à préciser en implémentation.
+
+**Note :** À préciser en spec détaillée : question unique ou plusieurs rounds, choix multiple vs carte cliquable, emplacement du lien easter egg. Référence : product brief, PRD Growth, ux-design-specification (404 GeoGuessr post-MVP).
+
+### Story 12.4: Section ou page galerie photos
+
+En tant que **visiteur**, je veux découvrir une galerie de photos de voyage (section sur la home ou page dédiée), afin de renforcer la touche « voyage » et la personnalité du site.
+
+**Acceptance Criteria:**
+
+- **Given** le site actuel, **when** on valide le besoin, **then** une section galerie sur la home **ou** une route dédiée (ex. `/galerie`) est ajoutée.
+- La galerie affiche une grille ou un masonry de photos de voyage, avec lieu / pays en légende si pertinent.
+- Les images réutilisent la même source que les backgrounds et assets existants (pas de doublon non géré).
+- La navigation (menu ou ancrages) est mise à jour pour inclure l'accès à la galerie.
+- Accessibilité et performance (images optimisées, alt) sont respectées.
+
+**Spec validée (2026-02-15)** — Voir `_bmad-output/implementation-artifacts/12-4-section-galerie-photos-spec.md` : page dédiée `/galerie` (pas de section home), Masonry, 20 images + infinite scroll, lightbox v1, légendes lieu+pays, lien depuis menu et depuis À propos (Voyages).
+
+---
+
+## Epic 13: Stack vue stylée (Arsenal visuel)
+
+Vue stack avec relations visuelles entre technos (liens langage↔framework, code couleur, hiérarchie graphique). **Référence :** ux-design-specification (relations entre langages et frameworks), architecture (Arsenal interactive visualization graph/zoom/click).
+
+### Story 13.1: Vue stack avec relations entre technos
+
+En tant que **visiteur** (recruteur ou dev), je veux voir une vue « stylée » de la stack avec des relations visuelles entre technos et frameworks (ex. React ↔ TypeScript), afin de comprendre rapidement les liens entre compétences (impossible sur LinkedIn/CV).
+
+**Acceptance Criteria:**
+
+- **Given** la section Stack actuelle (familles Frontend/Backend/DevOps + tags), **when** on valide le besoin, **then** une évolution visuelle est proposée : relations visuelles entre langages et frameworks (code couleur, hiérarchie graphique, ou liens explicites entre items).
+- **Option A (MVP de la story)** : Enrichir la vue actuelle avec code couleur, regroupement graphique ou lignes/liens entre technos liées (ex. React–TypeScript), sans changer la structure des données tant que possible.
+- **Option B (post-MVP de la story)** : Vue interactive/graphique (graph de relations, carte mentale, constellation) avec toggle « vue statique / vue graphique » et progressive disclosure (clic/zoom = plus d'infos). Référence : ux-design-specification (Musicmap, progressive disclosure).
+- Les données restent dans `src/content/stack.ts` (et types `src/types/stack.ts`) ; on peut ajouter des champs optionnels (ex. `relatedIds`, `category`) pour piloter les relations.
+- La vue reste accessible (clavier, contraste) et ne dégrade pas le time-to-stack (NFR-P3).
+
+**Note :** Spec UX détaille « relations visuelles entre langages et frameworks (code couleur, hiérarchie graphique) » en MVP Arsenal, et « vue interactive/graphique (graph de relations, carte mentale, constellation) avec toggle » en post-MVP. Cette story couvre les deux niveaux selon priorisation.
+
 ---
 
 ## Backlog / idées à prioriser
 
-### Page 404 fun type GeoGuessr
+Les stories **12.3** (404 GeoGuessr), **12.4** (Galerie photos) et **13.1** (Stack vue stylée) sont ci-dessus. Les idées suivantes restent à prioriser ou à détailler en spec avant implémentation :
 
-**Contexte :** Prévu dans le product brief et le PRD en post-MVP (easter egg, mémorabilité). Aucune page 404 personnalisée n’existe pour l’instant (Next affichera la 404 par défaut si une route est introuvable).
+- **Carte projets (planisphère)** — PRD / product brief : carte projets style jeu, lien compétences↔projets. À découper en epic/story si priorisée.
+- Autres améliorations motion (scroll-spy, menu actif) mentionnées en architecture post-MVP.
 
-**Idée :** Une page 404 ludique façon mini GeoGuessr avec **tes propres photos de voyage** : une photo s’affiche, le visiteur devine le lieu (choix multiple ou carte), avec un lien discret depuis l’accueil pour les curieux. Réutilise le même réservoir de photos que pour les backgrounds (ex. Lençóis, Rio, etc.) et d’autres destinations (~20 pays évoqués dans le brief).
+**Détails 404 / Galerie :** Voir Story 12.3 et 12.4 ci-dessus.
 
-**À préciser quand tu voudras l’implémenter :** jeu par question unique ou plusieurs rounds, choix multiple vs carte cliquable, lien « Retour accueil » visible, et où placer l’easter egg (footer, lien caché, etc.).
-
----
-
-### Section galerie photos
-
-**Contexte :** Nouvelle idée (pas dans le PRD actuel). Les photos de voyage sont déjà utilisées en hero, en background global et (en v1) en bandeau/section ; une galerie dédiée permettrait de les mettre en avant de façon explicite.
-
-**Idée :** Une section ou une page **galerie** (ex. section sur la home entre Arsenal et Contact, ou route `/galerie`) avec une grille ou un masonry de tes photos de voyage, éventuellement avec lieu / pays en légende. Cohérent avec la touche « voyage » et la 404 GeoGuessr (même source de photos).
-
-**À préciser :** emplacement (section vs page dédiée), nombre d’images, tri (pays, date, thème), lightbox ou non.
-
----
 
 ## Priorisation suggérée pour enchaîner
 
 1. **Epic 8 (SEO avancé)** — 8.1 → 8.2 → 8.3 : impact direct sur partage et indexation.
 2. **Epic 9 (CI)** — 9.1 : rapide, sécurise les prochains changements.
 3. **Epic 10 (A11y post-audit)** — 10.1 : après avoir réalisé l’audit (Lighthouse/axe).
-4. **Epic 11 et 12** : selon priorité produit (formulaire vs motion/contenu).
+4. **Epic 12** — 12.0 → 12.1 → 12.2 (en cours) ; puis **12.4 (Galerie photos)** en priorité, **12.3 (404 GeoGuessr)** en dernière priorité.
+5. **Epic 13 (Stack vue stylée)** — 13.1 : vue stack avec relations entre technos (code couleur, liens, option graph interactive).
 
 ---
 

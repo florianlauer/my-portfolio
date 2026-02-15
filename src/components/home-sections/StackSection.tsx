@@ -13,7 +13,7 @@ export const StackSection = ({
     <section
       id="stack"
       aria-labelledby="stack-title"
-      className="rounded-2xl border border-border bg-background/92 p-6 md:p-8 backdrop-blur-sm"
+      className="scroll-mt-24 rounded-2xl border border-border bg-background/92 p-6 md:p-8 backdrop-blur-sm"
     >
       <h2 id="stack-title" className="text-2xl font-semibold tracking-tight">
         Stack

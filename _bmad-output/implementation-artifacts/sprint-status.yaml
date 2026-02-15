@@ -101,4 +101,10 @@ development_status:
   12-0-assets-et-palette-touche-perso: done
   12-1-motion-animations: done
   12-2-pages-sections-supplementaires: review
+  12-3-page-404-geoguessr: backlog
+  12-4-section-galerie-photos: ready-for-dev
   epic-12-retrospective: optional
+
+  epic-13: backlog
+  13-1-vue-stack-relations-entre-technos: backlog
+  epic-13-retrospective: optional
