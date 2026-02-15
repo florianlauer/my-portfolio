@@ -43,7 +43,13 @@ export function GlobalBackground({
     };
     update();
     window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    // Recalculer quand la hauteur du document change (ex. galerie qui charge le contenu après montage)
+    const resizeObserver = new ResizeObserver(update);
+    resizeObserver.observe(document.body);
+    return () => {
+      window.removeEventListener("resize", update);
+      resizeObserver.disconnect();
+    };
   }, []);
 
   const progress = layout.maxScroll > 0 ? Math.min(1, scrollY / layout.maxScroll) : 0;

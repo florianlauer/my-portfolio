@@ -238,7 +238,7 @@ export function GalleryClient({
           <button
             type="button"
             onClick={closeLightbox}
-            className="absolute right-4 top-4 rounded-md bg-white/10 px-3 py-1 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
+            className="absolute right-4 top-4 z-10 rounded-md bg-white/10 px-3 py-1 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
             aria-label="Fermer"
           >
             Fermer
@@ -246,7 +246,7 @@ export function GalleryClient({
           <button
             type="button"
             onClick={goPrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
+            className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
             aria-label="Image précédente"
           >
             ←
@@ -254,13 +254,13 @@ export function GalleryClient({
           <button
             type="button"
             onClick={goNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
+            className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
             aria-label="Image suivante"
           >
             →
           </button>
           <div
-            className="relative max-h-[85vh] max-w-full"
+            className="relative z-0 max-h-[85vh] max-w-full"
             onClick={(e) => e.stopPropagation()}
             role="presentation"
           >
