@@ -4,10 +4,10 @@ export const journeyChapters: JourneyChapter[] = [
   {
     id: "depart",
     title: "Depart",
-    location: "France",
+    location: "Nancy",
     description:
       "Premieres experiences produit et dev, avec un focus sur la lisibilite et la fiabilite.",
-    visualKey: "france-pin",
+    visualKey: "lorraine-flag",
     skills: ["Product discovery", "TypeScript", "UX writing"],
   },
   {
@@ -22,10 +22,10 @@ export const journeyChapters: JourneyChapter[] = [
   {
     id: "aujourdhui",
     title: "Aujourd'hui",
-    location: "Europe",
+    location: "Lille",
     description:
       "Construction de produits web durables: performance, accessibilite et delivery continue.",
-    visualKey: "eu-pin",
+    visualKey: "flanders-flag",
     skills: ["Architecture", "CI/CD", "DX", "Mentoring"],
   },
 ];

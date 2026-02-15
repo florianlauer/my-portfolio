@@ -22,7 +22,12 @@ export const ContactSection = ({
       {primaryContactLink ? (
         <p className="mt-4 text-sm text-muted-foreground">
           Canal principal:{" "}
-          <a className="font-medium text-foreground underline underline-offset-4" href={primaryContactLink.href}>
+          <a
+            className="font-medium text-foreground underline underline-offset-4"
+            href={primaryContactLink.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {primaryContactLink.label}
           </a>
         </p>
@@ -35,7 +40,12 @@ export const ContactSection = ({
       <ul className="mt-6 flex flex-wrap gap-3" aria-label="Reseaux sociaux">
         {socialLinks.map((link) => (
           <li key={link.id}>
-            <a className="text-sm text-foreground underline underline-offset-4" href={link.href}>
+            <a
+              className="text-sm text-foreground underline underline-offset-4"
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {link.label}
             </a>
           </li>

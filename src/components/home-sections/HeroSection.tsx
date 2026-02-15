@@ -48,9 +48,16 @@ export const HeroSection = ({
       </p>
 
       <div className="mt-8">
-        <Button asChild>
-          <a href={ctaHref}>{ctaLabel}</a>
-        </Button>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild>
+            <a href={ctaHref} target="_blank" rel="noopener noreferrer">
+              {ctaLabel}
+            </a>
+          </Button>
+          <Button variant="outline" asChild>
+            <a href="#arsenal">Voir la stack</a>
+          </Button>
+        </div>
       </div>
     </section>
   );

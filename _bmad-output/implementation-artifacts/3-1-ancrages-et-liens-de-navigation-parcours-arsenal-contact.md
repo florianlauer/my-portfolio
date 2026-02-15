@@ -1,6 +1,6 @@
 # Story 3.1: Ancrages et liens de navigation (Parcours, Arsenal, Contact)
 
-Status: review
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -82,3 +82,10 @@ gpt-5.3-codex
 ## Change Log
 
 - 2026-02-14: Story 3.1 creee et implementee, statut passe a `review`.
+- 2026-02-14: Code review effectuee, aucun finding bloquant, statut passe a `done`.
+
+## Senior Developer Review (AI)
+
+- Date: 2026-02-14
+- Outcome: **Approve**
+- Findings: aucun finding critique, majeur ou mineur sur le scope 3.1.

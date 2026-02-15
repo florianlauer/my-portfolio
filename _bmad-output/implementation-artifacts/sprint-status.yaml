@@ -53,27 +53,27 @@ development_status:
   2-3-cta-contact-linkedin-visible-10s: done
   epic-2-retrospective: optional
 
-  epic-3: in-progress
-  3-1-ancrages-et-liens-de-navigation-parcours-arsenal-contact: review
-  3-2-acces-direct-au-bloc-arsenal-recuperation-edge-case: backlog
+  epic-3: done
+  3-1-ancrages-et-liens-de-navigation-parcours-arsenal-contact: done
+  3-2-acces-direct-au-bloc-arsenal-recuperation-edge-case: done
   epic-3-retrospective: optional
 
-  epic-4: backlog
-  4-1-section-parcours-avec-3-chapitres: backlog
-  4-2-visuels-icones-par-lieu-et-competences-par-chapitre: backlog
+  epic-4: done
+  4-1-section-parcours-avec-3-chapitres: done
+  4-2-visuels-icones-par-lieu-et-competences-par-chapitre: done
   epic-4-retrospective: optional
 
-  epic-5: backlog
-  5-1-bloc-arsenal-structure-frontend-backend-devops: backlog
-  5-2-tags-skills-dans-l-arsenal: backlog
+  epic-5: done
+  5-1-bloc-arsenal-structure-frontend-backend-devops: done
+  5-2-tags-skills-dans-l-arsenal: done
   epic-5-retrospective: optional
 
-  epic-6: backlog
-  6-1-cta-linkedin-cliquable-et-zone-contact: backlog
-  6-2-liens-vers-autres-reseaux-rel-noopener-noreferrer: backlog
+  epic-6: done
+  6-1-cta-linkedin-cliquable-et-zone-contact: done
+  6-2-liens-vers-autres-reseaux-rel-noopener-noreferrer: done
   epic-6-retrospective: optional
 
-  epic-7: backlog
-  7-1-navigation-clavier-et-focus-visible: backlog
-  7-2-contrastes-et-structure-semantique-landmarks-titres: backlog
+  epic-7: done
+  7-1-navigation-clavier-et-focus-visible: done
+  7-2-contrastes-et-structure-semantique-landmarks-titres: done
   epic-7-retrospective: optional
