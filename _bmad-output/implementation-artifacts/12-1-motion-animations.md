@@ -16,15 +16,21 @@ sans retarder l'accès à la stack et au contact (≤ 10s).
 
 ## Implémentation
 
-- **ScrollReveal** (`src/components/scroll-reveal/ScrollReveal.tsx`) : composant client avec Intersection Observer ; quand la section entre dans le viewport (rootMargin -40px), ajout d'une classe pour opacity 1 + translateY(0). État initial : opacity 0, translateY(0.75rem). Transition CSS 500ms ease-out.
-- **globals.css** : classes `.scroll-reveal-hidden` et `.scroll-reveal-visible` pour l'animation.
-- **page.tsx** : Parcours et Arsenal wrappés dans `<ScrollReveal>`. Hero et Contact non animés (contenu prioritaire visible immédiatement).
+- **ScrollReveal** : Intersection Observer ; apparition plus marquée : translateY(1.5rem) + scale(0.98) → 0 + scale(1), durée 700ms ease-out.
+- **Parallax hero** : `HeroImageParallax` (motion/react useScroll + useTransform) applique un décalage vertical sobre à l’image hero au scroll (0–400px scroll → -48px translateY), style Apple.
+- **Hover** (specs UX) : nav (transition-colors 200ms) ; cartes Parcours et Arsenal (hover:-translate-y-1, hover:shadow-md, hover:scale-[1.02] sur desktop) ; tags Arsenal (hover:scale-105).
+- **globals.css** : `.scroll-reveal-hidden` / `.scroll-reveal-visible` avec scale.
+- **page.tsx** : Parcours et Arsenal dans `<ScrollReveal>` ; nav avec transition-colors.
 
-Contenu toujours présent dans le DOM ; sans JS les sections s'affichent sans animation (dégradable).
+Contenu toujours visible sans JS (dégradable) ; motion ne bloque pas l’accès à la stack/contact.
 
 ## Fichiers
 
 - `src/components/scroll-reveal/ScrollReveal.tsx`
+- `src/components/hero/HeroImageParallax.tsx`
+- `src/components/home-sections/HeroSection.tsx`
+- `src/components/home-sections/JourneySection.tsx`
+- `src/components/home-sections/ArsenalSection.tsx`
 - `src/app/globals.css`
 - `src/app/page.tsx`
 

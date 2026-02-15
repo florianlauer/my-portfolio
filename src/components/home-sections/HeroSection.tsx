@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { HeroImageParallax } from "@/components/hero/HeroImageParallax";
 import type { HeroTech, SiteContent } from "@/types/site";
 import type { SocialLink } from "@/types/socialLinks";
 
@@ -23,19 +24,21 @@ export const HeroSection = ({
   return (
     <section
       aria-labelledby="hero-title"
-      className="rounded-2xl border border-border p-6 md:p-8"
+      className="rounded-2xl border border-border bg-background/92 p-6 md:p-8 backdrop-blur-sm"
     >
       <div className="grid items-center gap-6 md:grid-cols-[140px_1fr]">
-        <div className="relative h-28 w-28 overflow-hidden rounded-2xl border border-border md:h-36 md:w-36">
-          <Image
-            src={siteContent.heroImage.src}
-            alt={siteContent.heroImage.alt}
-            fill
-            priority
-            sizes="(min-width: 768px) 144px, 112px"
-            className="object-cover"
-          />
-        </div>
+        <HeroImageParallax>
+          <div className="relative h-28 w-28 overflow-hidden rounded-2xl border border-border md:h-36 md:w-36">
+            <Image
+              src={siteContent.heroImage.src}
+              alt={siteContent.heroImage.alt}
+              fill
+              priority
+              sizes="(min-width: 768px) 144px, 112px"
+              className="object-cover"
+            />
+          </div>
+        </HeroImageParallax>
 
         <div>
           <p className="text-sm font-medium text-muted-foreground">

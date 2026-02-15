@@ -32,7 +32,7 @@ export function ScrollReveal({
     <div
       ref={ref}
       className={cn(
-        "scroll-reveal transition-[opacity,transform] duration-2000 ease-out",
+        "scroll-reveal transition-[opacity,transform] duration-700 ease-out",
         isVisible ? "scroll-reveal-visible" : "scroll-reveal-hidden",
         className
       )}

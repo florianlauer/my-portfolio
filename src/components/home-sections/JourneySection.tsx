@@ -34,11 +34,12 @@ export const JourneySection = ({
     <section
       id="parcours"
       aria-labelledby="journey-title"
-      className="rounded-2xl border border-border p-6 md:p-8"
+      className="rounded-2xl border border-border bg-background/92 p-6 md:p-8 backdrop-blur-sm"
     >
       <h2 id="journey-title" className="text-2xl font-semibold tracking-tight">
         Parcours
       </h2>
+
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {journeyChapters.map((chapter) => {
           const chapterVisual: JourneyVisual | undefined =
@@ -47,7 +48,7 @@ export const JourneySection = ({
           return (
             <article
               key={chapter.id}
-              className="rounded-xl border border-border/70 p-4"
+              className="rounded-xl border border-border/70 p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-border md:hover:scale-[1.02]"
             >
               {chapterVisual?.imageSrc ? (
                 <Image
