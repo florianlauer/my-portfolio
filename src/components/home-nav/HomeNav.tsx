@@ -4,8 +4,11 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useScrollY } from "@/hooks/useScrollY";
 
-/** Scroll en px au-delà duquel le menu a sa taille "actuelle" (réduite). */
-const SCROLL_END_PX = 400;
+/** Scroll en px au-delà duquel le menu a sa taille "actuelle" (desktop). */
+const SCROLL_END_PX = 280;
+/** Idem en mobile : transition plus rapide (moins de scroll). */
+const SCROLL_END_PX_MOBILE = 140;
+const MOBILE_BREAKPOINT_PX = 640;
 
 /** Seuils pour déclencher le bounce (progress). */
 const AT_MIN_THRESHOLD = 0.98;
@@ -17,7 +20,22 @@ const linkBaseClass =
 
 export function HomeNav(): React.JSX.Element {
   const scrollY = useScrollY();
-  const progress = Math.min(1, scrollY / SCROLL_END_PX);
+  const [scrollEndPx, setScrollEndPx] = useState(SCROLL_END_PX);
+
+  useEffect(() => {
+    const update = (): void => {
+      setScrollEndPx(
+        window.innerWidth < MOBILE_BREAKPOINT_PX
+          ? SCROLL_END_PX_MOBILE
+          : SCROLL_END_PX
+      );
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const progress = Math.min(1, scrollY / scrollEndPx);
   const prevProgressRef = useRef(progress);
   const [bounceType, setBounceType] = useState<"min" | "max" | null>(null);
 
