@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 /** Scroll en px au-delà duquel le menu a sa taille "actuelle" (desktop). */
 const SCROLL_END_PX = 280;
@@ -17,10 +19,57 @@ const BOUNCE_DURATION_MS = 750;
 const linkBaseClass =
   "shrink-0 rounded-full text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
+const SECTION_IDS = ["parcours", "stack", "passions", "contact"] as const;
+
+const ANCHOR_TO_SECTION: Record<string, string> = {
+  "#parcours": "parcours",
+  "#stack": "stack",
+  "#passions": "passions",
+  "#contact": "contact",
+};
+
 export function HomeNav(): React.JSX.Element {
   const navRef = useRef<HTMLElement>(null);
   const linkRefsRef = useRef<(HTMLAnchorElement | null)[]>([]);
   const [bounceType, setBounceType] = useState<"min" | "max" | null>(null);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const pathname = usePathname();
+
+  // Détection section active au scroll
+  useEffect(() => {
+    const visibilityMap = new Map<string, boolean>(
+      SECTION_IDS.map((id) => [id, false])
+    );
+
+    const updateActive = (): void => {
+      const active = SECTION_IDS.find((id) => visibilityMap.get(id));
+      setActiveSection(active ?? null);
+    };
+
+    const observers = SECTION_IDS.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          visibilityMap.set(id, !!entry?.isIntersecting);
+          updateActive();
+        },
+        { rootMargin: "-30% 0px -65% 0px", threshold: 0 }
+      );
+      observer.observe(el);
+      return observer;
+    });
+
+    return () => {
+      observers.forEach((o) => o?.disconnect());
+    };
+  }, []);
+
+  const isActive = (href: string): boolean => {
+    const sectionId = ANCHOR_TO_SECTION[href];
+    if (sectionId) return activeSection === sectionId;
+    return pathname === href;
+  };
 
   useEffect(() => {
     let scrollEndPx =
@@ -106,27 +155,27 @@ export function HomeNav(): React.JSX.Element {
           aria-label="Navigation des sections"
           className={`flex flex-nowrap items-center overflow-x-auto overflow-y-hidden rounded-full border border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch] ${bounceType === "min" ? "home-nav-bounce-min" : ""} ${bounceType === "max" ? "home-nav-bounce-max" : ""}`}
         >
-          <a href="#parcours" ref={setLinkRef(0)} className={linkBaseClass}>
+          <a href="#parcours" ref={setLinkRef(0)} className={cn(linkBaseClass, isActive("#parcours") && "bg-primary/10 text-primary")}>
             Parcours
           </a>
-          <a href="#stack" ref={setLinkRef(1)} className={linkBaseClass}>
+          <a href="#stack" ref={setLinkRef(1)} className={cn(linkBaseClass, isActive("#stack") && "bg-primary/10 text-primary")}>
             Stack
           </a>
-          <a href="#passions" ref={setLinkRef(2)} className={linkBaseClass}>
+          <a href="#passions" ref={setLinkRef(2)} className={cn(linkBaseClass, isActive("#passions") && "bg-primary/10 text-primary")}>
             Passions
           </a>
-          <Link href="/a-propos" ref={setLinkRef(3)} className={linkBaseClass}>
+          <Link href="/a-propos" ref={setLinkRef(3)} className={cn(linkBaseClass, isActive("/a-propos") && "bg-primary/10 text-primary")}>
             À propos
           </Link>
-          <Link href="/galerie" ref={setLinkRef(4)} className={linkBaseClass}>
+          <Link href="/galerie" ref={setLinkRef(4)} className={cn(linkBaseClass, isActive("/galerie") && "bg-primary/10 text-primary")}>
             Galerie
           </Link>
-          <a href="#contact" ref={setLinkRef(5)} className={linkBaseClass}>
+          <a href="#contact" ref={setLinkRef(5)} className={cn(linkBaseClass, isActive("#contact") && "bg-primary/10 text-primary")}>
             Contact
           </a>
         </nav>
         <div
-          className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-background/98 to-transparent rounded-r-full"
+          className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 bg-linear-to-l from-background/98 to-transparent rounded-r-full"
           aria-hidden
         />
       </div>

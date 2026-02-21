@@ -83,7 +83,7 @@ export function GlobalBackground({
         <>
           <div className="absolute inset-0 bg-black/50" aria-hidden />
           <div
-            className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/25 to-black/60"
+            className="absolute inset-0 bg-linear-to-b from-black/60 via-black/25 to-black/60"
             aria-hidden
           />
         </>
@@ -91,7 +91,7 @@ export function GlobalBackground({
         <>
           <div className="absolute inset-0 bg-background/30" aria-hidden />
           <div
-            className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/40"
+            className="absolute inset-0 bg-linear-to-b from-background/40 via-background/20 to-background/40"
             aria-hidden
           />
         </>

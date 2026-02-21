@@ -1,7 +1,23 @@
 import type { Metadata } from "next";
+import { Fraunces, DM_Sans } from "next/font/google";
 import { siteContent } from "@/content/site";
 import { getBaseUrl } from "@/utils/siteUrl";
 import "./globals.css";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-fraunces",
+  display: "swap",
+  style: ["normal", "italic"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: "variable",
+  variable: "--font-dm-sans",
+  display: "swap",
+});
 
 const baseUrl = getBaseUrl();
 const title = "Florian Lauer | Portfolio";
@@ -64,7 +80,7 @@ type RootLayoutProps = Readonly<{
 
 export default function RootLayout({ children }: RootLayoutProps): React.JSX.Element {
   return (
-    <html lang="fr">
+    <html lang="fr" className={`${fraunces.variable} ${dmSans.variable}`}>
       <body className="antialiased">
         <script
           type="application/ld+json"

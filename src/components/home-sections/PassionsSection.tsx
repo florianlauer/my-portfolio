@@ -14,7 +14,7 @@ export const PassionsSection = ({
       aria-labelledby="passions-title"
       className="scroll-mt-24 rounded-2xl border border-border bg-background/92 p-6 md:p-8 backdrop-blur-sm"
     >
-      <h2 id="passions-title" className="text-2xl font-semibold tracking-tight">
+      <h2 id="passions-title" className="border-l-2 border-primary pl-3 text-2xl font-semibold tracking-tight">
         {content.title}
       </h2>
       <p className="mt-2 text-sm text-muted-foreground">{content.subtitle}</p>
