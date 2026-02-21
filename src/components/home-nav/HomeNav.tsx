@@ -65,6 +65,11 @@ export function HomeNav(): React.JSX.Element {
     };
   }, []);
 
+  const isHome = pathname === "/";
+
+  /** Sur les autres pages, les ancres de section pointent vers la home. */
+  const sectionHref = (hash: string): string => (isHome ? hash : `/${hash}`);
+
   const isActive = (href: string): boolean => {
     const sectionId = ANCHOR_TO_SECTION[href];
     if (sectionId) return activeSection === sectionId;
@@ -155,13 +160,13 @@ export function HomeNav(): React.JSX.Element {
           aria-label="Navigation des sections"
           className={`flex flex-nowrap items-center overflow-x-auto overflow-y-hidden rounded-full border border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch] ${bounceType === "min" ? "home-nav-bounce-min" : ""} ${bounceType === "max" ? "home-nav-bounce-max" : ""}`}
         >
-          <a href="#parcours" ref={setLinkRef(0)} className={cn(linkBaseClass, isActive("#parcours") && "bg-primary/10 text-primary")}>
+          <a href={sectionHref("#parcours")} ref={setLinkRef(0)} className={cn(linkBaseClass, isActive("#parcours") && "bg-primary/10 text-primary")}>
             Parcours
           </a>
-          <a href="#stack" ref={setLinkRef(1)} className={cn(linkBaseClass, isActive("#stack") && "bg-primary/10 text-primary")}>
+          <a href={sectionHref("#stack")} ref={setLinkRef(1)} className={cn(linkBaseClass, isActive("#stack") && "bg-primary/10 text-primary")}>
             Stack
           </a>
-          <a href="#passions" ref={setLinkRef(2)} className={cn(linkBaseClass, isActive("#passions") && "bg-primary/10 text-primary")}>
+          <a href={sectionHref("#passions")} ref={setLinkRef(2)} className={cn(linkBaseClass, isActive("#passions") && "bg-primary/10 text-primary")}>
             Passions
           </a>
           <Link href="/a-propos" ref={setLinkRef(3)} className={cn(linkBaseClass, isActive("/a-propos") && "bg-primary/10 text-primary")}>
@@ -170,7 +175,7 @@ export function HomeNav(): React.JSX.Element {
           <Link href="/galerie" ref={setLinkRef(4)} className={cn(linkBaseClass, isActive("/galerie") && "bg-primary/10 text-primary")}>
             Galerie
           </Link>
-          <a href="#contact" ref={setLinkRef(5)} className={cn(linkBaseClass, isActive("#contact") && "bg-primary/10 text-primary")}>
+          <a href={sectionHref("#contact")} ref={setLinkRef(5)} className={cn(linkBaseClass, isActive("#contact") && "bg-primary/10 text-primary")}>
             Contact
           </a>
         </nav>
