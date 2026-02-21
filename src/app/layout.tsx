@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/hero-1.jpeg"],
+    images: [{ url: "/hero-1.jpeg", alt: siteContent.heroImage.alt }],
   },
 };
 
@@ -73,6 +73,9 @@ export default function RootLayout({ children }: RootLayoutProps): React.JSX.Ele
           }}
         />
         {children}
+        <noscript>
+          <style>{`.scroll-reveal-hidden { opacity: 1 !important; transform: none !important; }`}</style>
+        </noscript>
       </body>
     </html>
   );

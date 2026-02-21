@@ -61,6 +61,7 @@ export const ContactSection = ({
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${link.label} (ouvre dans un nouvel onglet)`}
             >
               {link.label}
             </a>

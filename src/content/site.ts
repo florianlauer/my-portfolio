@@ -1,8 +1,5 @@
 import type { HeroTech, SiteContent } from "@/types/site";
 
-/** Mettre à false une fois tes assets (images, palette) en place pour masquer les zones placeholder. */
-export const showAssetPlaceholders = true;
-
 export const siteContent: SiteContent = {
   ownerName: "Florian Lauer",
   heroTitle: "Senior Fullstack Engineer",

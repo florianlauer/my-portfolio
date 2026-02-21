@@ -21,13 +21,14 @@ export default function HomePage(): React.JSX.Element {
     >
       <GlobalBackground />
       <a
-        href="#contenu"
+        href="#content-start"
         className="fixed left-4 top-4 z-[100] -translate-y-20 rounded-md bg-primary px-4 py-2 text-primary-foreground shadow-md transition-transform focus-visible:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
         Aller au contenu
       </a>
       <div className="relative z-10 mx-auto grid w-full max-w-5xl gap-8 px-6 pt-28 pb-16 md:pt-32 md:pb-24 min-w-0 box-border">
         <HomeNav />
+        <div id="content-start" tabIndex={-1} className="sr-only" aria-hidden />
 
         <HeroSection
           heroStack={heroStack}
