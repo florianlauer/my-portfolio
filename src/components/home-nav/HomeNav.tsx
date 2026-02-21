@@ -42,15 +42,12 @@ export function HomeNav(): React.JSX.Element {
       const linkPaddingY = 8 - progress * 4; // 8px -> 4px
       const linkFontSizePx = 16 - progress * 2; // 16px -> 14px
 
-      nav.style.padding = `${navPaddingPx}px`;
-      nav.style.gap = `${navGapPx}px`;
+      nav.style.cssText = `padding: ${navPaddingPx}px; gap: ${navGapPx}px;`;
 
-      const padding = `${linkPaddingY}px ${linkPaddingX}px`;
-      const fontSize = `${linkFontSizePx}px`;
+      const linkCss = `padding: ${linkPaddingY}px ${linkPaddingX}px; font-size: ${linkFontSizePx}px;`;
       for (const link of linkRefsRef.current) {
         if (!link) continue;
-        link.style.padding = padding;
-        link.style.fontSize = fontSize;
+        link.style.cssText = linkCss;
       }
     };
 

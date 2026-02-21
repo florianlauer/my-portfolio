@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { useScrollY } from "@/hooks/useScrollY";
+import { useEffect, useRef } from "react";
 
 /** Décalage max en part de la hauteur du viewport (évite la bande blanche en haut) */
 const MAX_OFFSET_VH = 0.28;
@@ -26,43 +25,50 @@ export function GlobalBackground({
   imageSrc = DEFAULT_IMAGE,
   tone = BACKGROUND_TONE.LIGHT,
 }: GlobalBackgroundProps): React.JSX.Element {
-  const scrollY = useScrollY();
-  const [layout, setLayout] = useState({ maxOffsetPx: 0, maxScroll: 1 });
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const update = (): void => {
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    let maxOffsetPx = 0;
+    let maxScroll = 1;
+    let rafId: number | null = null;
+
+    const updateLayout = (): void => {
       const innerHeight = window.innerHeight;
-      const maxScroll = Math.max(
-        1,
-        document.documentElement.scrollHeight - innerHeight
-      );
-      setLayout({
-        maxOffsetPx: innerHeight * MAX_OFFSET_VH,
-        maxScroll,
+      maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+      maxOffsetPx = innerHeight * MAX_OFFSET_VH;
+    };
+
+    const handleScroll = (): void => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        const progress = Math.min(1, window.scrollY / maxScroll);
+        el.style.transform = `translate3d(0, ${progress * maxOffsetPx}px, 0)`;
       });
     };
-    update();
-    window.addEventListener("resize", update);
-    // Recalculer quand la hauteur du document change (ex. galerie qui charge le contenu après montage)
-    const resizeObserver = new ResizeObserver(update);
+
+    updateLayout();
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", updateLayout, { passive: true });
+    const resizeObserver = new ResizeObserver(updateLayout);
     resizeObserver.observe(document.body);
+
     return () => {
-      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateLayout);
       resizeObserver.disconnect();
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, []);
 
-  const progress = layout.maxScroll > 0 ? Math.min(1, scrollY / layout.maxScroll) : 0;
-  const offsetY = progress * layout.maxOffsetPx;
-
   return (
     <div className="fixed inset-0 z-0 overflow-hidden" aria-hidden>
-      <div
-        className="absolute inset-0"
-        style={{
-          transform: `translate3d(0, ${offsetY}px, 0)`,
-        }}
-      >
+      <div ref={wrapperRef} className="absolute inset-0">
         <Image
           src={imageSrc}
           alt=""

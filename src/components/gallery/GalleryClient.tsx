@@ -194,16 +194,23 @@ export function GalleryClient({
     [goPrev, goNext]
   );
 
+  // Pattern use-latest : refs stables → le listener est enregistré une seule fois.
+  const lightboxCallbacksRef = useRef({ lightboxIndex, goPrev, goNext });
+  useEffect(() => {
+    lightboxCallbacksRef.current = { lightboxIndex, goPrev, goNext };
+  });
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent): void => {
-      if (lightboxIndex === null) return;
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowLeft") goPrev();
-      if (e.key === "ArrowRight") goNext();
+      const { lightboxIndex: idx, goPrev: prev, goNext: next } = lightboxCallbacksRef.current;
+      if (idx === null) return;
+      if (e.key === "Escape") setLightboxIndex(null);
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [lightboxIndex, goPrev, goNext]);
+  }, []); // stable — jamais re-enregistré
 
   const currentItem =
     lightboxIndex !== null ? displayedItems[lightboxIndex] : null;
