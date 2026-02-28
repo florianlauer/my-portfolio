@@ -108,7 +108,7 @@ export function GalleryGrid({
                   <button
                     type="button"
                     onClick={() => onOpenLightbox(index)}
-                    className="relative block w-full overflow-hidden rounded-xl border border-border bg-muted transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    className="relative block w-full cursor-pointer overflow-hidden rounded-xl border border-border bg-muted transition-transform hover:scale-[1.02] focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     aria-label={`Voir ${item.caption} en grand`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element -- masonry needs native img for layout */}

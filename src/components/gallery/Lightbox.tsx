@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useSwipe } from "@/hooks/useSwipe";
 import type { GalleryItem } from "@/types/gallery";
 
@@ -19,7 +20,7 @@ export function Lightbox({
   onClose,
   onPrev,
   onNext,
-}: LightboxProps): React.JSX.Element {
+}: LightboxProps): React.JSX.Element | null {
   const n = items.length;
   const currentItem = items[currentIndex];
 
@@ -52,13 +53,15 @@ export function Lightbox({
   const nextIndex = currentIndex === n - 1 ? 0 : currentIndex + 1;
   const indices = [prevIndex, currentIndex, nextIndex] as const;
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 touch-none"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 touch-none cursor-pointer"
       role="dialog"
       aria-modal="true"
       aria-label={`Image ${currentIndex + 1} sur ${n} : ${currentItem?.caption ?? ""}`}
-      onClick={(e) => e.target === e.currentTarget && onClose()}
+      onClick={onClose}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -66,23 +69,23 @@ export function Lightbox({
       <button
         type="button"
         onClick={onClose}
-        className="absolute right-4 top-4 z-10 rounded-md bg-white/10 px-3 py-1 text-white hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
+        className="absolute right-4 top-4 z-10 cursor-pointer rounded-md bg-white/10 px-3 py-1 text-white hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
         aria-label="Fermer"
       >
         Fermer
       </button>
       <button
         type="button"
-        onClick={onPrev}
-        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
+        onClick={(e) => { e.stopPropagation(); onPrev(); }}
+        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
         aria-label="Image précédente"
       >
         ←
       </button>
       <button
         type="button"
-        onClick={onNext}
-        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
+        onClick={(e) => { e.stopPropagation(); onNext(); }}
+        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-md bg-white/10 px-3 py-2 text-white hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
         aria-label="Image suivante"
       >
         →
@@ -90,7 +93,6 @@ export function Lightbox({
 
       <div
         className="relative z-0 h-full w-full overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
         role="presentation"
       >
         <div
@@ -128,6 +130,7 @@ export function Lightbox({
           })}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
