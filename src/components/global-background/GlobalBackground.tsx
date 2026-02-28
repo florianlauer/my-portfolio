@@ -11,7 +11,7 @@ const SLIDESHOW_IMAGES = [
 ] as const;
 
 /** Durée d'affichage de chaque photo (ms). */
-const INTERVAL_MS = 5_000;
+const INTERVAL_MS = 10_000;
 /** Durée de la transition croisée (ms) — doit correspondre à la CSS. */
 const TRANSITION_MS = 1_000;
 
@@ -41,7 +41,10 @@ export function GlobalBackground(): React.JSX.Element {
 
     const updateLayout = (): void => {
       const innerHeight = window.innerHeight;
-      maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+      maxScroll = Math.max(
+        1,
+        document.documentElement.scrollHeight - innerHeight
+      );
       maxOffsetPx = innerHeight * MAX_OFFSET_VH;
     };
 
