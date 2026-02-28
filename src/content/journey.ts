@@ -3,29 +3,29 @@ import type { JourneyChapter } from "@/types/journey";
 export const journeyChapters: JourneyChapter[] = [
   {
     id: "depart",
-    title: "Depart",
-    location: "Nancy",
+    title: "Départ",
+    location: "Nancy • France",
     description:
-      "Premieres experiences produit et dev, avec un focus sur la lisibilite et la fiabilite.",
+      "Deux ans dans la HealthTech : d'abord en stage sur les chatbots et Angular, puis en poste sur des apps de e-santé full-stack (Angular, Java/Spring, MySQL). Premiers pas en intégration continue et méthode SCRUM.",
     visualKey: "lorraine-flag",
-    skills: ["Product discovery", "TypeScript", "UX writing"],
+    skills: ["Angular", "Java / Spring", "MySQL", "CI/CD", "SCRUM"],
   },
   {
     id: "expansion",
     title: "Expansion",
-    location: "Angleterre",
+    location: "Birmingham • Royaume-Uni",
     description:
-      "Acceleration sur les architectures front et la collaboration avec des equipes pluridisciplinaires.",
+      "Refonte du site de PM Connect — stack HTML/SCSS/JS côté front, PHP/Symfony côté back, dans un contexte Docker + CI. Première expérience en équipe internationale et en livraison continue (Kanban).",
     visualKey: "uk-pin",
-    skills: ["React", "Next.js", "Testing", "Design system"],
+    skills: ["HTML/SCSS", "JavaScript", "PHP / Symfony", "Docker", "Kanban"],
   },
   {
     id: "aujourdhui",
     title: "Aujourd'hui",
-    location: "Lille",
+    location: "Lille • France",
     description:
-      "Construction de produits web durables: performance, accessibilite et delivery continue.",
+      "Six ans chez Sencrop (AgTech) — de la croissance produit aux outils commerciaux B2B, en passant par le design system et le lancement d'une gamme de stations 4G. Stack fullstack TypeScript hybride web + app native (Capacitor iOS/Android), du front React au back NestJS, avec une dimension infra Terraform.",
     visualKey: "flanders-flag",
-    skills: ["Architecture", "CI/CD", "DX", "Mentoring"],
+    skills: ["TypeScript", "React", "NestJS", "GraphQL", "Terraform", "Docker"],
   },
 ];

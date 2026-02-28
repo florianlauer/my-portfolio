@@ -18,6 +18,6 @@ export const siteContent: SiteContent = {
 export const heroStack: HeroTech[] = [
   { id: "typescript", label: "TypeScript" },
   { id: "react", label: "React" },
-  { id: "nextjs", label: "Next.js" },
+  { id: "nestjs", label: "NestJS" },
   { id: "nodejs", label: "Node.js" },
 ];

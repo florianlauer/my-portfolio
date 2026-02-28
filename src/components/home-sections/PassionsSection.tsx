@@ -26,9 +26,12 @@ export const PassionsSection = ({
             className="rounded-xl border border-border/70 p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-border md:hover:scale-[1.02]"
           >
             <h3 className="text-lg font-medium">{block.title}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {block.description}
-            </p>
+            <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+              {block.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <p className="mt-3 text-xs text-muted-foreground/70 italic">{block.closing}</p>
           </article>
         ))}
       </div>

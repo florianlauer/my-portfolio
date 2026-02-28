@@ -11,6 +11,12 @@ type JourneyVisual = {
   imageSrc?: string;
 };
 
+const chapterAccent: Record<string, { badge: string; border: string }> = {
+  depart:     { badge: "bg-amber-100/50 text-amber-600/80 dark:bg-amber-900/20 dark:text-amber-400/70", border: "border-t-amber-500" },
+  expansion:  { badge: "bg-sky-100/50 text-sky-600/80 dark:bg-sky-900/20 dark:text-sky-400/70",         border: "border-t-sky-500"   },
+  aujourdhui: { badge: "bg-primary/10 text-primary",                                            border: "border-t-primary"   },
+};
+
 const visualByKey: Record<string, JourneyVisual> = {
   "france-pin": { icon: "🇫🇷", label: "France" },
   "lorraine-flag": {
@@ -48,7 +54,7 @@ export const JourneySection = ({
           return (
             <article
               key={chapter.id}
-              className="rounded-xl border border-border/70 p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-border md:hover:scale-[1.02]"
+              className={`rounded-xl border border-border/70 border-t-2 p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-border md:hover:scale-[1.02] ${chapterAccent[chapter.id]?.border ?? ""}`}
             >
               {chapterVisual?.imageSrc ? (
                 <Image
@@ -82,7 +88,7 @@ export const JourneySection = ({
                 {chapter.skills.map((skill) => (
                   <li
                     key={`${chapter.id}-${skill}`}
-                    className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                    className={`rounded-full px-3 py-1 text-xs font-medium ${chapterAccent[chapter.id]?.badge ?? "bg-secondary text-secondary-foreground"}`}
                   >
                     {skill}
                   </li>

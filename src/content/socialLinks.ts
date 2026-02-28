@@ -15,12 +15,12 @@ export const socialLinks: SocialLink[] = [
   {
     id: "x",
     label: "X",
-    href: "https://x.com/florianlauer",
+    href: "https://x.com/flauercase",
   },
   {
     id: "instagram",
     label: "Instagram",
-    href: "https://instagram.com/florianlauer",
+    href: "https://www.instagram.com/florian_flauer",
   },
 ];
 

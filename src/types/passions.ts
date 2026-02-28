@@ -2,7 +2,8 @@
 export type PassionsBlock = {
   id: string;
   title: string;
-  description: string;
+  items: string[];
+  closing: string;
 };
 
 /** Contenu de la section Passions sur la home (teaser, ton pro). */

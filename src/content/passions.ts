@@ -7,22 +7,31 @@ export const passionsSectionContent: PassionsSectionContent = {
     "En dehors du code, le voyage, les side projects et le sport occupent une bonne place.",
   blocks: [
     {
-      id: "voyage",
-      title: "Voyage",
-      description:
-        "Photos et récits de destinations (Lençóis, Rio, Europe…) — à découvrir sur la page À propos.",
+      id: "sport",
+      title: "Sport & plein air",
+      items: ["🚴 Cyclisme", "🏃 Running", "🎾 Padel", "🥾 Randonnée"],
+      closing: "Des sports variés mais complémentaires.",
     },
     {
       id: "side-projects",
       title: "Side projects",
-      description:
-        "Projets perso : domotique, outils dev, expérimentations. Détails sur la page À propos.",
+      items: [
+        "🏠 Domotique (Home Assistant)",
+        "🖨️ Impression 3D",
+        "⌨️ Outils dev",
+      ],
+      closing: "Des expérimentations qui s'enchaînent.",
     },
     {
-      id: "sport",
-      title: "Sport",
-      description:
-        "Course à pied, vélo, sports collectifs. Un peu plus sur moi en cliquant ci-dessous.",
+      id: "voyage",
+      title: "Voyage",
+      items: [
+        "🌍 Europe · 15 pays",
+        "🌎 Amériques · 4 pays",
+        "🌏 Asie · 2 pays",
+        "📷 Photographie",
+      ],
+      closing: "Appareil photo toujours dans la poche.",
     },
   ],
   linkToAProposLabel: "En savoir plus",
@@ -40,22 +49,22 @@ export const aProposContent: AProposContent = {
         "Florian, senior fullstack engineer. J’aime concevoir des expériences web robustes et lisibles, et en dehors du bureau je m’investis dans le voyage, les side projects et le sport.",
     },
     {
-      id: "voyage",
-      title: "Voyage",
+      id: "sport",
+      title: "Sport & plein air",
       content:
-        "Lençóis Maranhenses, Rio, et d’autres escapades en Europe et ailleurs. Les photos de voyage nourrissent le hero et les backgrounds du site — et bientôt une 404 façon GeoGuessr.",
+        "Vélo de route, running, randos en montagne, padel — le mouvement occupe une bonne partie de mes semaines. J’aime alterner effort solitaire et sports avec des amis selon l’humeur.",
     },
     {
       id: "side-projects",
-      title: "Side projects",
+      title: "Domotique & impression 3D",
       content:
-        "Domotique, petits outils dev, expérimentations. Des projets que je peux détailler en discussion.",
+        "À la maison, j’automatise ce que je peux (Home Assistant, scripts perso) et je conçois ou répare des pièces en impression 3D. Un terrain d’expérimentation sans contraintes — là où j’apprends souvent le plus vite.",
     },
     {
-      id: "sport",
-      title: "Sport",
+      id: "voyage",
+      title: "Voyage",
       content:
-        "Course à pied, vélo, sports collectifs. L’équilibre entre écran et mouvement compte pour moi.",
+        "Quelques destinations marquantes : Lençóis Maranhenses, Rio, et plusieurs escapades en Europe. Les photos récupèrent souvent une vie sur ce site — dans les fonds, le hero, et peut-être des endroits cachés.",
     },
   ],
 };

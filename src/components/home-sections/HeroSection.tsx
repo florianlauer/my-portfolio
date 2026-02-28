@@ -57,7 +57,7 @@ export const HeroSection = ({
       </div>
 
       <p
-        className="mt-6 text-sm text-muted-foreground"
+        className="mt-6 text-sm font-semibold text-foreground/70 tracking-wide"
         aria-label="Stack principale"
       >
         {stackLine}

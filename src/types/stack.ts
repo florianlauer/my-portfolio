@@ -1,4 +1,4 @@
-export type StackFamilyKey = "frontend" | "backend" | "devops";
+export type StackFamilyKey = "frontend" | "mobile" | "backend" | "data" | "infra" | "integrations";
 
 export type StackItem = {
   id: string;
