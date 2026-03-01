@@ -12,7 +12,7 @@ export const siteContent: SiteContent = {
     label: "Me contacter",
     href: "https://www.linkedin.com/in/florian-lauer/",
   },
-  contactEmail: "florian.lauer@example.com",
+  contactEmail: "contact@flauercase.dev",
 };
 
 export const heroStack: HeroTech[] = [
