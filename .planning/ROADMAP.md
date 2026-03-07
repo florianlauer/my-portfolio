@@ -25,17 +25,17 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Goal**: Graph data model exists and is populated with real content, ready for rendering
 **Depends on**: Nothing (first phase)
 **Requirements**: DATA-01, DATA-02, DATA-03, DATA-04
+**Plans:** 1 plan
 **Success Criteria** (what must be TRUE):
 
 1. TypeScript types for nodes (id, name, icon, category, level, description) and edges (source, target, type) exist and compile without errors
 2. `src/content/stack-graph.ts` exports a complete graph dataset with all current technologies as nodes and meaningful relations as edges
 3. Each node has an experience level (expert, advanced, intermediate) and belongs to a category (Frontend, Backend, DevOps) with an oklch color value
 4. Existing `src/content/stack.ts` imports remain unbroken -- the current Arsenal section still works
-   **Plans**: TBD
 
 Plans:
 
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md — Graph types, content data (31 nodes, ~35 edges, 6 family colors), user validation
 
 ### Phase 2: Page and Graph Rendering
 
@@ -96,7 +96,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase                       | Plans Complete | Status      | Completed |
 | --------------------------- | -------------- | ----------- | --------- |
-| 1. Data Foundation          | 0/?            | Not started | -         |
+| 1. Data Foundation          | 0/1            | Not started | -         |
 | 2. Page and Graph Rendering | 0/?            | Not started | -         |
 | 3. Interactivity            | 0/?            | Not started | -         |
 | 4. Accessibility            | 0/?            | Not started | -         |
