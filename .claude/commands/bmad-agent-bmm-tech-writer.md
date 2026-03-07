@@ -1,6 +1,6 @@
 ---
-name: 'tech-writer'
-description: 'tech-writer agent'
+name: "tech-writer"
+description: "tech-writer agent"
 disable-model-invocation: true
 ---
 

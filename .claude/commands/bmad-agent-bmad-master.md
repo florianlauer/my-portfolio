@@ -1,6 +1,6 @@
 ---
-name: 'bmad-master'
-description: 'bmad-master agent'
+name: "bmad-master"
+description: "bmad-master agent"
 disable-model-invocation: true
 ---
 

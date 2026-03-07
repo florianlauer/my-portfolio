@@ -54,9 +54,7 @@ export function Lightbox({
   // Focus management : focus dialog on open, restore on close
   useEffect(() => {
     previouslyFocusedRef.current = document.activeElement;
-    const closeBtn = dialogRef.current?.querySelector<HTMLButtonElement>(
-      '[aria-label="Fermer"]'
-    );
+    const closeBtn = dialogRef.current?.querySelector<HTMLButtonElement>('[aria-label="Fermer"]');
     closeBtn?.focus();
 
     return () => {
@@ -72,7 +70,7 @@ export function Lightbox({
     const dialog = dialogRef.current;
     if (!dialog) return;
     const focusable = dialog.querySelectorAll<HTMLElement>(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
     if (focusable.length === 0) return;
     const first = focusable[0];
@@ -111,7 +109,9 @@ export function Lightbox({
       aria-modal="true"
       aria-label={`Image ${currentIndex + 1} sur ${n} : ${currentItem?.caption ?? ""}`}
       onClick={onClose}
-      onKeyDown={(e) => { if (e.key === "Escape") onClose(); }}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") onClose();
+      }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -126,7 +126,10 @@ export function Lightbox({
       </button>
       <button
         type="button"
-        onClick={(e) => { e.stopPropagation(); onPrev(); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onPrev();
+        }}
         className="absolute left-4 top-1/2 z-10 -translate-y-1/2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center cursor-pointer rounded-md bg-white/10 px-3 py-2 text-white pointer-hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
         aria-label="Image précédente"
       >
@@ -134,17 +137,17 @@ export function Lightbox({
       </button>
       <button
         type="button"
-        onClick={(e) => { e.stopPropagation(); onNext(); }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onNext();
+        }}
         className="absolute right-4 top-1/2 z-10 -translate-y-1/2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center cursor-pointer rounded-md bg-white/10 px-3 py-2 text-white pointer-hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
         aria-label="Image suivante"
       >
         →
       </button>
 
-      <div
-        className="relative z-0 h-full w-full overflow-hidden"
-        role="presentation"
-      >
+      <div className="relative z-0 h-full w-full overflow-hidden" role="presentation">
         <div
           className="flex h-full"
           style={{
@@ -182,6 +185,6 @@ export function Lightbox({
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 }

@@ -13,12 +13,12 @@ Ouvre [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Commande        | Description              |
-|-----------------|--------------------------|
+| Commande        | Description                |
+| --------------- | -------------------------- |
 | `npm run dev`   | Serveur de dev (Turbopack) |
-| `npm run build` | Build production         |
-| `npm run start` | Serveur production       |
-| `npm run lint`  | ESLint                   |
+| `npm run build` | Build production           |
+| `npm run start` | Serveur production         |
+| `npm run lint`  | ESLint                     |
 
 ## Déploiement
 

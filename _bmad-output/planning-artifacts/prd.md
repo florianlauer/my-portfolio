@@ -1,7 +1,21 @@
 ---
-stepsCompleted: ['step-01-init', 'step-02-discovery', 'step-03-success', 'step-04-journeys', 'step-05-domain', 'step-06-innovation', 'step-07-project-type', 'step-08-scoping', 'step-09-functional', 'step-10-nonfunctional', 'step-11-polish', 'step-12-complete']
-inputDocuments: ['_bmad-output/planning-artifacts/product-brief-my-portfolio-2026-02-01.md']
-workflowType: 'prd'
+stepsCompleted:
+  [
+    "step-01-init",
+    "step-02-discovery",
+    "step-03-success",
+    "step-04-journeys",
+    "step-05-domain",
+    "step-06-innovation",
+    "step-07-project-type",
+    "step-08-scoping",
+    "step-09-functional",
+    "step-10-nonfunctional",
+    "step-11-polish",
+    "step-12-complete",
+  ]
+inputDocuments: ["_bmad-output/planning-artifacts/product-brief-my-portfolio-2026-02-01.md"]
+workflowType: "prd"
 briefCount: 1
 researchCount: 0
 brainstormingCount: 0
@@ -141,7 +155,7 @@ Portfolio **web_app** : site multi-pages (MPA), ciblant les dernières versions 
 
 - **Architecture :** **MPA** (Multi-Page Application) — plusieurs pages/routes (ex. accueil, parcours, projets, contact) plutôt qu'une seule SPA en scroll infini.
 - **Navigateurs :** Dernières versions des navigateurs modernes (Chrome, Firefox, Safari, Edge). Pas de support IE.
-- **SEO :** Indexation Google visée. **SEO basique optimal** : balises meta (description, og:*, etc.), titres de page (title) par route, structure HTML sémantique. Sitemap et balisage adaptés si pertinent pour le déploiement.
+- **SEO :** Indexation Google visée. **SEO basique optimal** : balises meta (description, og:\*, etc.), titres de page (title) par route, structure HTML sémantique. Sitemap et balisage adaptés si pertinent pour le déploiement.
 - **Temps réel :** Non requis pour le MVP (pas de live, pas de WebSockets).
 - **Accessibilité :** Bonnes pratiques simples : navigation au clavier, contrastes, structure sémantique (landmarks, titres), textes alternatifs pour les images. Niveau "bon" sans viser un audit complet pour le MVP.
 
@@ -214,41 +228,50 @@ Portfolio **web_app** : site multi-pages (MPA), ciblant les dernières versions 
 ### Functional Requirements List
 
 **Hero & Présentation**
+
 - FR1 — Le visiteur peut voir une zone Hero (photo + nom + phrase d'accroche).
 - FR2 — Le visiteur peut voir une ligne stack courte (ex. technologies clés) dans la zone Hero ou immédiatement visible en haut de page.
 - FR3 — Le visiteur peut voir un CTA Contact (lien LinkedIn) visible en ≤ 10s depuis l'arrivée.
 
 **Parcours**
+
 - FR4 — Le visiteur peut parcourir une section Parcours en 3 chapitres (Départ, Expansion, Aujourd'hui).
 - FR5 — Le visiteur peut voir, par chapitre, des éléments visuels/icônes caractérisant les lieux (France, Angleterre, 3e lieu).
 - FR6 — Le visiteur peut voir les compétences associées à chaque chapitre (compétences par étape).
 
 **Arsenal & Stack**
+
 - FR7 — Le visiteur peut voir un bloc Arsenal (stack structurée, ex. Frontend/Backend/DevOps).
 - FR8 — Le visiteur peut voir des tags skills (liste de compétences) dans l'Arsenal ou à proximité.
 - FR9 — Le visiteur peut atteindre le bloc Arsenal/Stack via un ancrage ou un lien de navigation (récupération edge case).
 
 **Contact & CTA**
+
 - FR10 — Le visiteur peut cliquer sur un CTA qui mène vers LinkedIn (ou canal maîtrisé).
 - FR11 — Le visiteur peut voir des liens vers d'autres réseaux (optionnels) depuis la zone Contact.
 
 **Navigation & Ancrages**
+
 - FR12 — Le visiteur peut naviguer vers les sections Parcours, Arsenal, Contact (ancrages ou menu).
 - FR13 — Le visiteur peut trouver la stack et le contact en ≤ 10s (critère de succès reflété en FR).
 
 **SEO & Indexation**
+
 - FR14 — Chaque page/route expose un titre (title) et des balises meta adaptés à l'indexation (ex. Google).
 - FR15 — Le contenu principal est structuré de façon sémantique (titres, landmarks) pour le SEO.
 
 **Accessibilité**
+
 - FR16 — Le visiteur peut naviguer au clavier (focus, ordre logique).
 - FR17 — Le visiteur bénéficie de contrastes et d'une structure sémantique conformes aux bonnes pratiques (niveau bon).
 
 **Maintenance**
+
 - FR18 — Florian peut mettre à jour le contenu du Parcours (texte, lieux, compétences par chapitre) sans dégrader l'expérience (stack + contact restent visibles et accessibles).
 - FR19 — Florian peut mettre à jour l'Arsenal (liste stack, tags) sans dégrader l'expérience.
 
 **MPA & Structure**
+
 - FR20 — Le visiteur peut accéder à plusieurs pages/routes (MPA) : accueil, parcours, contact, etc., selon la structure retenue.
 
 ---
@@ -278,4 +301,4 @@ Les exigences non fonctionnelles ci-dessous précisent les contraintes de qualit
 
 - **NFR-R1** — Le site est disponible de façon continue pour la consultation (hébergement standard, pas d'exigence SLA contractuelle pour le MVP).
 
-*Scalabilité et intégration ne sont pas formalisées pour le MVP.*
+_Scalabilité et intégration ne sont pas formalisées pour le MVP._

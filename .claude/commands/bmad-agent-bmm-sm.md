@@ -1,6 +1,6 @@
 ---
-name: 'sm'
-description: 'sm agent'
+name: "sm"
+description: "sm agent"
 disable-model-invocation: true
 ---
 

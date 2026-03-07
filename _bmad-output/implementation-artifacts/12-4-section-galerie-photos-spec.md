@@ -109,16 +109,16 @@
 
 ## 10. Récap des décisions (validé)
 
-| Point | Options | Décision |
-| --- | --- | --- |
-| Section vs page | A / B / C | pas de section homepage, par contre page dédié (et accessible depuis menu et page a propos pour voir + de photos dans la partie voyages) |
-| Emplacement home | Entre Passions et Contact / Après Contact / Pas de section | pas dans la home (voir decision precedente ) |
-| Layout | Grille / Masonry | Masonry |
-| Nombre d’images v1 | (ex. 12) | 20, possibilité de voir + en infinite scroll |
-| Légendes | Lieu+pays uniquement / +date ou thème | lieu+pays |
-| Tri / filtres v1 | Oui / Non | non |
-| Ordre d'affichage | Fixe / Aléatoire | aléatoire à chaque visite de la page |
-| Lightbox v1 | Oui / Non | oui |
-| Libellé nav | Galerie / Photos / Voyages | Galerie |
+| Point              | Options                                                    | Décision                                                                                                                                 |
+| ------------------ | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Section vs page    | A / B / C                                                  | pas de section homepage, par contre page dédié (et accessible depuis menu et page a propos pour voir + de photos dans la partie voyages) |
+| Emplacement home   | Entre Passions et Contact / Après Contact / Pas de section | pas dans la home (voir decision precedente )                                                                                             |
+| Layout             | Grille / Masonry                                           | Masonry                                                                                                                                  |
+| Nombre d’images v1 | (ex. 12)                                                   | 20, possibilité de voir + en infinite scroll                                                                                             |
+| Légendes           | Lieu+pays uniquement / +date ou thème                      | lieu+pays                                                                                                                                |
+| Tri / filtres v1   | Oui / Non                                                  | non                                                                                                                                      |
+| Ordre d'affichage  | Fixe / Aléatoire                                           | aléatoire à chaque visite de la page                                                                                                     |
+| Lightbox v1        | Oui / Non                                                  | oui                                                                                                                                      |
+| Libellé nav        | Galerie / Photos / Voyages                                 | Galerie                                                                                                                                  |
 
 Spec figée — prêt pour implémentation (story 12.4).

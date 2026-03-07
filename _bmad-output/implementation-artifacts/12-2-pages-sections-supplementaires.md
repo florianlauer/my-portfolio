@@ -79,7 +79,7 @@ En tant que **visiteur**, je veux découvrir davantage de contenu sur les passio
 
 - **Date :** 2026-02-14
 - **Story :** 12-2-pages-sections-supplementaires
-- **Fichiers revus :** File List (hors _bmad-output) + écarts git
+- **Fichiers revus :** File List (hors \_bmad-output) + écarts git
 
 ### Verdict
 
@@ -88,7 +88,7 @@ En tant que **visiteur**, je veux découvrir davantage de contenu sur les passio
 ### Git vs File List
 
 - **Fichiers modifiés (git) non listés dans la story :** `_bmad-output/planning-artifacts/epics-post-mvp.md` (référence spec 12.2 ajoutée).
-- **Fichiers listés et modifiés/créés :** cohérents avec git (src/*, story file, sprint-status).
+- **Fichiers listés et modifiés/créés :** cohérents avec git (src/\*, story file, sprint-status).
 
 ### Action Items
 

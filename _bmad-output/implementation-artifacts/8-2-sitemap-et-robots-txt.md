@@ -16,7 +16,7 @@ afin d'améliorer l'indexation (SEO).
 ## Implémentation
 
 - `src/app/sitemap.ts` : export default function sitemap() retourne un `MetadataRoute.Sitemap` avec une entrée (baseUrl, lastModified, changeFrequency monthly, priority 1). Utilise `getBaseUrl()`.
-- `src/app/robots.ts` : export default function robots() retourne `MetadataRoute.Robots` avec rules { userAgent: "*", allow: "/" } et sitemap: `${baseUrl}/sitemap.xml`.
+- `src/app/robots.ts` : export default function robots() retourne `MetadataRoute.Robots` avec rules { userAgent: "\*", allow: "/" } et sitemap: `${baseUrl}/sitemap.xml`.
 
 ## Fichiers
 

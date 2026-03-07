@@ -51,9 +51,7 @@ export function HomeNav(): React.JSX.Element {
 
   // Détection section active au scroll
   useEffect(() => {
-    const visibilityMap = new Map<string, boolean>(
-      SECTION_IDS.map((id) => [id, false])
-    );
+    const visibilityMap = new Map<string, boolean>(SECTION_IDS.map((id) => [id, false]));
 
     const updateActive = (): void => {
       const active = SECTION_IDS.find((id) => visibilityMap.get(id));
@@ -68,7 +66,7 @@ export function HomeNav(): React.JSX.Element {
           visibilityMap.set(id, !!entry?.isIntersecting);
           updateActive();
         },
-        { rootMargin: "-30% 0px -65% 0px", threshold: 0 }
+        { rootMargin: "-30% 0px -65% 0px", threshold: 0 },
       );
       observer.observe(el);
       return observer;
@@ -92,9 +90,7 @@ export function HomeNav(): React.JSX.Element {
 
   useEffect(() => {
     let scrollEndPx =
-      window.innerWidth < MOBILE_BREAKPOINT_PX
-        ? SCROLL_END_PX_MOBILE
-        : SCROLL_END_PX;
+      window.innerWidth < MOBILE_BREAKPOINT_PX ? SCROLL_END_PX_MOBILE : SCROLL_END_PX;
     let prevProgress = 0;
     let rafId: number | null = null;
     let bounceTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -134,10 +130,7 @@ export function HomeNav(): React.JSX.Element {
     };
 
     const handleResize = (): void => {
-      scrollEndPx =
-        window.innerWidth < MOBILE_BREAKPOINT_PX
-          ? SCROLL_END_PX_MOBILE
-          : SCROLL_END_PX;
+      scrollEndPx = window.innerWidth < MOBILE_BREAKPOINT_PX ? SCROLL_END_PX_MOBILE : SCROLL_END_PX;
     };
 
     // Apply initial styles
@@ -162,22 +155,40 @@ export function HomeNav(): React.JSX.Element {
           aria-label="Navigation des sections"
           className={`home-nav flex flex-nowrap items-center overflow-x-auto overflow-y-hidden rounded-full border border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch] ${bounceType === "min" ? "home-nav-bounce-min" : ""} ${bounceType === "max" ? "home-nav-bounce-max" : ""}`}
         >
-          <a href={sectionHref("#parcours")} className={cn(linkBaseClass, isActive("#parcours") && "bg-primary/10 text-primary")}>
+          <a
+            href={sectionHref("#parcours")}
+            className={cn(linkBaseClass, isActive("#parcours") && "bg-primary/10 text-primary")}
+          >
             Parcours
           </a>
-          <a href={sectionHref("#stack")} className={cn(linkBaseClass, isActive("#stack") && "bg-primary/10 text-primary")}>
+          <a
+            href={sectionHref("#stack")}
+            className={cn(linkBaseClass, isActive("#stack") && "bg-primary/10 text-primary")}
+          >
             Stack
           </a>
-          <a href={sectionHref("#passions")} className={cn(linkBaseClass, isActive("#passions") && "bg-primary/10 text-primary")}>
+          <a
+            href={sectionHref("#passions")}
+            className={cn(linkBaseClass, isActive("#passions") && "bg-primary/10 text-primary")}
+          >
             Passions
           </a>
-          <Link href="/a-propos" className={cn(linkBaseClass, isActive("/a-propos") && "bg-primary/10 text-primary")}>
+          <Link
+            href="/a-propos"
+            className={cn(linkBaseClass, isActive("/a-propos") && "bg-primary/10 text-primary")}
+          >
             À propos
           </Link>
-          <Link href="/galerie" className={cn(linkBaseClass, isActive("/galerie") && "bg-primary/10 text-primary")}>
+          <Link
+            href="/galerie"
+            className={cn(linkBaseClass, isActive("/galerie") && "bg-primary/10 text-primary")}
+          >
             Galerie
           </Link>
-          <a href={sectionHref("#contact")} className={cn(linkBaseClass, isActive("#contact") && "bg-primary/10 text-primary")}>
+          <a
+            href={sectionHref("#contact")}
+            className={cn(linkBaseClass, isActive("#contact") && "bg-primary/10 text-primary")}
+          >
             Contact
           </a>
         </nav>

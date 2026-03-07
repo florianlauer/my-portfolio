@@ -1,9 +1,9 @@
 ---
-name: 'step-02-investigate'
-description: 'Map technical constraints and anchor points within the codebase'
+name: "step-02-investigate"
+description: "Map technical constraints and anchor points within the codebase"
 
-nextStepFile: './step-03-generate.md'
-wipFile: '{implementation_artifacts}/tech-spec-wip.md'
+nextStepFile: "./step-03-generate.md"
+wipFile: "{implementation_artifacts}/tech-spec-wip.md"
 ---
 
 # Step 2: Map Technical Constraints & Anchor Points
@@ -62,7 +62,6 @@ For each file/directory provided:
 - Identify standard project utilities or boilerplate that SHOULD be used.
 - Document this as "Confirmed Clean Slate" - establishing that no legacy constraints exist.
 
-
 c) **Document Technical Context**
 
 Capture and confirm with user:
@@ -88,10 +87,10 @@ If `**/project-context.md` exists and wasn't loaded in Step 1:
 ---
 # ... existing frontmatter ...
 stepsCompleted: [1, 2]
-tech_stack: ['{captured_tech_stack}']
-files_to_modify: ['{captured_files}']
-code_patterns: ['{captured_patterns}']
-test_patterns: ['{captured_test_patterns}']
+tech_stack: ["{captured_tech_stack}"]
+files_to_modify: ["{captured_files}"]
+code_patterns: ["{captured_patterns}"]
+test_patterns: ["{captured_test_patterns}"]
 ---
 ```
 

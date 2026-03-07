@@ -1,9 +1,9 @@
 ---
 stepsCompleted: [1, 2, 3, 4]
 inputDocuments:
-  - '_bmad-output/planning-artifacts/prd.md'
-  - '_bmad-output/planning-artifacts/architecture.md'
-  - '_bmad-output/planning-artifacts/ux-design-specification.md'
+  - "_bmad-output/planning-artifacts/prd.md"
+  - "_bmad-output/planning-artifacts/architecture.md"
+  - "_bmad-output/planning-artifacts/ux-design-specification.md"
 ---
 
 # my-portfolio - Epic Breakdown
@@ -52,44 +52,52 @@ NFR-R1: Le site est disponible de façon continue pour la consultation (héberge
 ### Additional Requirements
 
 **Architecture — Starter template (impact Epic 1 Story 1):**
+
 - Initialiser le projet avec `npx create-next-app@latest my-portfolio --tailwind --eslint --app --src-dir --import-alias @/*`
 - Post-init : `npx shadcn@latest init` puis `npm install motion`
 - Stack : Next.js 15 (App Router), Tailwind 4, TypeScript, Vercel
 
 **Architecture — Données et structure:**
+
 - Pas de base de données en MVP ; contenu dans `src/content/*.ts` (site.ts, journey.ts, arsenal.ts, socialLinks.ts)
 - Types partagés dans `src/types/*`
 - Consommation : imports directs depuis composants serveur (SSG)
 - Assets : `public/` ; images via `next/image`
 
 **Architecture — Sécurité et déploiement:**
+
 - Pas d'authentification en MVP
 - Liens externes : `rel="noopener noreferrer"` pour `target="_blank"`
 - Hébergement Vercel ; environnements preview + production
 - CI : lint + typecheck + build sur chaque push/PR (ex. GitHub Actions)
 
 **Architecture — Frontend:**
+
 - SSG par défaut ; metadata par route (App Router)
 - Structure : `src/app`, `src/components`, `src/hooks`, `src/utils`, `src/types`, `src/content`
 - Imports absolus `@/…`
 
 **UX — Responsive et accessibilité:**
+
 - Desktop-first ; mobile doit fonctionner correctement et proprement
 - Responsive : unités relatives (rem, %, vw) ; media queries à 768px et 1024px ; images responsives (srcset/sizes)
 - Pas de largeur fixe en px pour conteneurs principaux
 - Accessibilité : focus visible, ARIA si besoin, structure sémantique (landmarks, titres) pour tous les composants
 
 **UX — Motion et interactions:**
+
 - Motion sobre au scroll : parallax sobre, apparition des sections (Parcours, Arsenal), motion qui guide l'œil sans bloquer l'accès à la stack
 - Desktop : scroll parallax + hover states ; mobile : motion fonctionnel
 - Jamais de motion qui ralentit ou bloque l'accès à la stack et au contact (priorité ≤ 10s)
 
 **UX — Navigation et repères:**
+
 - Ancrages clairs (Arsenal, Parcours, Contact) ; navigation sticky optionnelle pour "edge case recovery"
 - Repères visuels par section ; pas de scroll infini aveugle
 - Indicateurs de progression possibles (menu actif, repères de section)
 
 **UX — Design system:**
+
 - Shadcn UI + Tailwind ; palette douce et chaude ; typographie claire
 - Composants custom : Hero, Parcours (chapitres), Arsenal (vue statique MVP), CTA Contact
 - Arsenal : groupement par familles (Frontend/Backend/DevOps), relations visuelles entre langages et frameworks (code couleur, hiérarchie graphique)
@@ -120,30 +128,37 @@ FR20: Epic 1 — Foundation (MPA, routes)
 ## Epic List
 
 ### Epic 1: Foundation & pipeline de contenu
+
 Projet initialisé (create-next-app, shadcn, motion), structure `src/content` + `src/types`, layout et metadata ; contenu Parcours/Arsenal modifiable sans casser l’UX. Le visiteur peut accéder à une page/routes ; Florian peut mettre à jour le contenu.
 **FRs couverts :** FR14, FR15, FR18, FR19, FR20.
 
 ### Epic 2: Hero, stack & CTA
+
 Zone Hero (photo, nom, phrase d’accroche), ligne stack visible en haut, CTA LinkedIn visible en ≤10s. Le visiteur trouve la stack et le contact immédiatement.
 **FRs couverts :** FR1, FR2, FR3, FR13.
 
 ### Epic 3: Navigation & ancrages
+
 Menu ou ancrages vers Parcours, Arsenal, Contact ; accès direct au bloc Arsenal (récupération edge case). Le visiteur navigue entre sections sans scroll aveugle.
 **FRs couverts :** FR9, FR12.
 
 ### Epic 4: Parcours
+
 Section Parcours en 3 chapitres (Départ, Expansion, Aujourd’hui), visuels/icônes par lieu, compétences par chapitre. Le visiteur comprend le parcours et les compétences par étape.
 **FRs couverts :** FR4, FR5, FR6.
 
 ### Epic 5: Arsenal
+
 Bloc Arsenal (stack par familles Frontend/Backend/DevOps), tags skills. Le visiteur voit la stack structurée et les compétences.
 **FRs couverts :** FR7, FR8.
 
 ### Epic 6: Contact & réseaux
+
 CTA LinkedIn cliquable et liens vers autres réseaux depuis la zone Contact. Le visiteur peut contacter et accéder aux autres réseaux.
 **FRs couverts :** FR10, FR11.
 
 ### Epic 7: Accessibilité & SEO
+
 Navigation au clavier, focus visible, contrastes, structure sémantique (landmarks, titres). Le visiteur bénéficie d’un niveau d’accessibilité « bon ».
 **FRs couverts :** FR16, FR17.
 

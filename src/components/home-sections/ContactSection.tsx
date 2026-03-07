@@ -17,7 +17,10 @@ export const ContactSection = ({
       aria-labelledby="contact-title"
       className="scroll-mt-24 rounded-2xl border border-border bg-background/92 p-6 md:p-8 backdrop-blur-sm"
     >
-      <h2 id="contact-title" className="border-l-2 border-primary pl-3 text-2xl font-semibold tracking-tight">
+      <h2
+        id="contact-title"
+        className="border-l-2 border-primary pl-3 text-2xl font-semibold tracking-tight"
+      >
         Contact
       </h2>
 

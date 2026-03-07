@@ -1,6 +1,6 @@
 ---
 stepsCompleted: [1, 2, 3, 4, 5, 6]
-inputDocuments: ['_bmad-output/brainstorming/brainstorming-session-2026-02-01.md']
+inputDocuments: ["_bmad-output/brainstorming/brainstorming-session-2026-02-01.md"]
 date: 2026-02-01
 author: Florian
 ---

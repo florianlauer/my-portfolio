@@ -18,15 +18,13 @@ export function GalleryClient({ items }: GalleryClientProps): React.JSX.Element 
   // Après montage client uniquement : mélange et affichage du pool mélangé.
   const [shuffledPool, setShuffledPool] = useState<GalleryItem[]>(() => items);
   const [hasMounted, setHasMounted] = useState(false);
-  const [displayedCount, setDisplayedCount] = useState(() =>
-    Math.min(INITIAL_COUNT, items.length)
-  );
+  const [displayedCount, setDisplayedCount] = useState(() => Math.min(INITIAL_COUNT, items.length));
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const listToShow = hasMounted ? shuffledPool : items;
   const displayedItems = useMemo(
     () => listToShow.slice(0, displayedCount),
-    [listToShow, displayedCount]
+    [listToShow, displayedCount],
   );
   const hasMore = displayedCount < listToShow.length;
 
@@ -44,14 +42,10 @@ export function GalleryClient({ items }: GalleryClientProps): React.JSX.Element 
   const openLightbox = useCallback((index: number): void => setLightboxIndex(index), []);
   const closeLightbox = useCallback((): void => setLightboxIndex(null), []);
   const goPrev = useCallback((): void => {
-    setLightboxIndex((i) =>
-      i === null ? null : i === 0 ? displayedItems.length - 1 : i - 1
-    );
+    setLightboxIndex((i) => (i === null ? null : i === 0 ? displayedItems.length - 1 : i - 1));
   }, [displayedItems.length]);
   const goNext = useCallback((): void => {
-    setLightboxIndex((i) =>
-      i === null ? null : i === displayedItems.length - 1 ? 0 : i + 1
-    );
+    setLightboxIndex((i) => (i === null ? null : i === displayedItems.length - 1 ? 0 : i + 1));
   }, [displayedItems.length]);
 
   // Placeholder identique serveur + premier rendu client pour éviter l'erreur d'hydratation.
@@ -66,12 +60,7 @@ export function GalleryClient({ items }: GalleryClientProps): React.JSX.Element 
         >
           <span className="text-base font-medium text-foreground">Chargement…</span>
         </div>
-        <div
-          role="list"
-          aria-label="Galerie de photos"
-          className="min-h-[200px]"
-          aria-hidden
-        />
+        <div role="list" aria-label="Galerie de photos" className="min-h-[200px]" aria-hidden />
       </>
     );
   }

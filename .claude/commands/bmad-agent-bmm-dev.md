@@ -1,6 +1,6 @@
 ---
-name: 'dev'
-description: 'dev agent'
+name: "dev"
+description: "dev agent"
 disable-model-invocation: true
 ---
 

@@ -2,15 +2,13 @@ import dynamic from "next/dynamic";
 import { PageShell } from "@/components/page-shell/PageShell";
 import { galleryItems } from "@/content/gallery";
 
-const GalleryClient = dynamic(
-  () =>
-    import("@/components/gallery/GalleryClient").then((m) => m.GalleryClient)
+const GalleryClient = dynamic(() =>
+  import("@/components/gallery/GalleryClient").then((m) => m.GalleryClient),
 );
 
 export const metadata = {
   title: "Galerie",
-  description:
-    "Photos de voyage : Laponie, Lençóis, Rio et autres escapades. Florian Lauer.",
+  description: "Photos de voyage : Laponie, Lençóis, Rio et autres escapades. Florian Lauer.",
 };
 
 export default function GaleriePage(): React.JSX.Element {

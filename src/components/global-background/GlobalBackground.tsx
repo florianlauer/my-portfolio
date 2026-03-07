@@ -41,10 +41,7 @@ export function GlobalBackground(): React.JSX.Element {
 
     const updateLayout = (): void => {
       const innerHeight = window.innerHeight;
-      maxScroll = Math.max(
-        1,
-        document.documentElement.scrollHeight - innerHeight
-      );
+      maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
       maxOffsetPx = innerHeight * MAX_OFFSET_VH;
     };
 

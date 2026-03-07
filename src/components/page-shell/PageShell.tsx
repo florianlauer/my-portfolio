@@ -12,10 +12,7 @@ type PageShellProps = {
  * Coquille partagée pour les pages secondaires (à propos, galerie).
  * Server Component : GlobalBackground et HomeNav sont des Client Components enfants.
  */
-export function PageShell({
-  children,
-  containerClassName,
-}: PageShellProps): React.JSX.Element {
+export function PageShell({ children, containerClassName }: PageShellProps): React.JSX.Element {
   return (
     <main
       id="contenu"
@@ -32,7 +29,7 @@ export function PageShell({
       <div
         className={cn(
           "relative z-10 mx-auto grid w-full max-w-5xl gap-8 px-6 pt-28 pb-16 md:pt-32 md:pb-24 min-w-0 box-border",
-          containerClassName
+          containerClassName,
         )}
       >
         <HomeNav />

@@ -8,10 +8,7 @@ type ScrollRevealProps = {
   className?: string;
 };
 
-export function ScrollReveal({
-  children,
-  className,
-}: ScrollRevealProps): React.JSX.Element {
+export function ScrollReveal({ children, className }: ScrollRevealProps): React.JSX.Element {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -22,7 +19,7 @@ export function ScrollReveal({
       ([entry]) => {
         if (entry?.isIntersecting) setIsVisible(true);
       },
-      { rootMargin: "0px 0px -40px 0px", threshold: 0.1 }
+      { rootMargin: "0px 0px -40px 0px", threshold: 0.1 },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -33,8 +30,10 @@ export function ScrollReveal({
       ref={ref}
       className={cn(
         "scroll-reveal transition-[opacity,transform] duration-700 ease-out",
-        isVisible ? "scroll-reveal-visible" : "scroll-reveal-hidden will-change-[opacity,transform]",
-        className
+        isVisible
+          ? "scroll-reveal-visible"
+          : "scroll-reveal-hidden will-change-[opacity,transform]",
+        className,
       )}
     >
       {children}

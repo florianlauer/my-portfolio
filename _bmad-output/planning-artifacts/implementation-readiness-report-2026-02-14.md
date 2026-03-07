@@ -1,12 +1,12 @@
 ---
 stepsCompleted: [1, 2, 3, 4, 5, 6]
-status: 'complete'
-completedAt: '2026-02-14'
+status: "complete"
+completedAt: "2026-02-14"
 inputDocuments:
-  - '_bmad-output/planning-artifacts/prd.md'
-  - '_bmad-output/planning-artifacts/architecture.md'
-  - '_bmad-output/planning-artifacts/epics.md'
-  - '_bmad-output/planning-artifacts/ux-design-specification.md'
+  - "_bmad-output/planning-artifacts/prd.md"
+  - "_bmad-output/planning-artifacts/architecture.md"
+  - "_bmad-output/planning-artifacts/epics.md"
+  - "_bmad-output/planning-artifacts/ux-design-specification.md"
 ---
 
 # Implementation Readiness Assessment Report
@@ -21,6 +21,7 @@ inputDocuments:
 ### PRD Files Found
 
 **Whole Documents:**
+
 - `prd.md` (14K, Feb 7 17:15)
 
 **Sharded Documents:** None
@@ -28,6 +29,7 @@ inputDocuments:
 ### Architecture Files Found
 
 **Whole Documents:**
+
 - `architecture.md` (24K, Feb 14 18:39)
 
 **Sharded Documents:** None
@@ -35,6 +37,7 @@ inputDocuments:
 ### Epics & Stories Files Found
 
 **Whole Documents:**
+
 - `epics.md` (21K, Feb 14 18:50)
 
 **Sharded Documents:** None
@@ -42,6 +45,7 @@ inputDocuments:
 ### UX Design Files Found
 
 **Whole Documents:**
+
 - `ux-design-specification.md` (46K, Feb 14 17:57)
 - `ux-design-directions.html` (fichier HTML, non utilisé pour l'analyse)
 
@@ -72,41 +76,50 @@ Les documents suivants seront utilisés pour l'évaluation de readiness :
 ### Functional Requirements
 
 **Hero & Présentation:**
+
 - **FR1** — Le visiteur peut voir une zone Hero (photo + nom + phrase d'accroche).
 - **FR2** — Le visiteur peut voir une ligne stack courte (ex. technologies clés) dans la zone Hero ou immédiatement visible en haut de page.
 - **FR3** — Le visiteur peut voir un CTA Contact (lien LinkedIn) visible en ≤ 10s depuis l'arrivée.
 
 **Parcours:**
+
 - **FR4** — Le visiteur peut parcourir une section Parcours en 3 chapitres (Départ, Expansion, Aujourd'hui).
 - **FR5** — Le visiteur peut voir, par chapitre, des éléments visuels/icônes caractérisant les lieux (France, Angleterre, 3e lieu).
 - **FR6** — Le visiteur peut voir les compétences associées à chaque chapitre (compétences par étape).
 
 **Arsenal & Stack:**
+
 - **FR7** — Le visiteur peut voir un bloc Arsenal (stack structurée, ex. Frontend/Backend/DevOps).
 - **FR8** — Le visiteur peut voir des tags skills (liste de compétences) dans l'Arsenal ou à proximité.
 - **FR9** — Le visiteur peut atteindre le bloc Arsenal/Stack via un ancrage ou un lien de navigation (récupération edge case).
 
 **Contact & CTA:**
+
 - **FR10** — Le visiteur peut cliquer sur un CTA qui mène vers LinkedIn (ou canal maîtrisé).
 - **FR11** — Le visiteur peut voir des liens vers d'autres réseaux (optionnels) depuis la zone Contact.
 
 **Navigation & Ancrages:**
+
 - **FR12** — Le visiteur peut naviguer vers les sections Parcours, Arsenal, Contact (ancrages ou menu).
 - **FR13** — Le visiteur peut trouver la stack et le contact en ≤ 10s (critère de succès reflété en FR).
 
 **SEO & Indexation:**
+
 - **FR14** — Chaque page/route expose un titre (title) et des balises meta adaptés à l'indexation (ex. Google).
 - **FR15** — Le contenu principal est structuré de façon sémantique (titres, landmarks) pour le SEO.
 
 **Accessibilité:**
+
 - **FR16** — Le visiteur peut naviguer au clavier (focus, ordre logique).
 - **FR17** — Le visiteur bénéficie de contrastes et d'une structure sémantique conformes aux bonnes pratiques (niveau bon).
 
 **Maintenance:**
+
 - **FR18** — Florian peut mettre à jour le contenu du Parcours (texte, lieux, compétences par chapitre) sans dégrader l'expérience (stack + contact restent visibles et accessibles).
 - **FR19** — Florian peut mettre à jour l'Arsenal (liste stack, tags) sans dégrader l'expérience.
 
 **MPA & Structure:**
+
 - **FR20** — Le visiteur peut accéder à plusieurs pages/routes (MPA) : accueil, parcours, contact, etc., selon la structure retenue.
 
 **Total FRs:** 20
@@ -114,20 +127,24 @@ Les documents suivants seront utilisés pour l'évaluation de readiness :
 ### Non-Functional Requirements
 
 **Performance:**
+
 - **NFR-P1** — Le contenu nécessaire pour afficher la stack et le CTA contact (Hero ou équivalent) est rendu suffisamment tôt pour que l'utilisateur puisse les voir en ≤ 10 secondes (conditions réseau normales), sur desktop et mobile.
 - **NFR-P2** — Les images du Hero (et autres images above-the-fold) sont optimisées (taille, format) pour ne pas bloquer le premier affichage utile.
 - **NFR-P3** — Les animations au scroll restent légères (pas de blocage du thread principal prolongé) pour ne pas empêcher l'accès à la stack et au contact.
 
 **Accessibilité:**
+
 - **NFR-A1** — Le site est utilisable au clavier (navigation, focus visible, ordre logique).
 - **NFR-A2** — Les contrastes texte/fond respectent les bonnes pratiques (niveau « bon », aligné avec les FR d'accessibilité).
 - **NFR-A3** — Les images porteuses d'information ont un équivalent textuel (alt ou alternative).
 
 **Security:**
+
 - **NFR-S1** — Aucune donnée sensible n'est collectée en MVP (pas de formulaire, pas de stockage de données personnelles). Contact via lien externe (LinkedIn) uniquement.
 - **NFR-S2** — Le site est servi en HTTPS en production.
 
 **Reliability:**
+
 - **NFR-R1** — Le site est disponible de façon continue pour la consultation (hébergement standard, pas d'exigence SLA contractuelle pour le MVP).
 
 **Total NFRs:** 9
@@ -135,23 +152,27 @@ Les documents suivants seront utilisés pour l'évaluation de readiness :
 ### Additional Requirements
 
 **Architecture technique (MPA):**
+
 - Plusieurs pages/routes (accueil, parcours, contact, etc.)
 - Navigateurs modernes (Chrome, Firefox, Safari, Edge) — pas IE
 - SEO basique optimal : meta tags, title par page, structure sémantique
 - Pas de temps réel (MVP)
 
 **Responsive & Performance:**
+
 - Site responsive (mobile, tablette, desktop)
 - Images optimisées (hero, photos voyage)
 - Animations légères au scroll (≤ 10s pour stack + contact)
 
 **Maintenance & contenu:**
+
 - Contenu modifiable sans refonte (Parcours, Arsenal)
 - Composants réutilisables (Hero, Parcours, Arsenal, Contact)
 
 ### PRD Completeness Assessment
 
 ✅ **PRD complet et bien structuré**
+
 - 20 FR couvrant toutes les capability areas (Hero, Parcours, Arsenal, Contact, Navigation, SEO, Accessibilité, Maintenance, MPA)
 - 9 NFR couvrant performance, accessibilité, sécurité, fiabilité
 - User journeys détaillés (recruteurs, clients, maintenance)
@@ -160,33 +181,32 @@ Les documents suivants seront utilisés pour l'évaluation de readiness :
 
 Aucune ambiguïté majeure ; exigences mesurables et testables.
 
-
 ## Epic Coverage Validation
 
 ### Coverage Matrix
 
-| FR Number | PRD Requirement | Epic Coverage | Status |
-|-----------|----------------|---------------|---------|
-| FR1 | Zone Hero (photo + nom + phrase d'accroche) | Epic 2 — Hero, stack & CTA | ✓ Covered |
-| FR2 | Ligne stack courte | Epic 2 — Hero, stack & CTA | ✓ Covered |
-| FR3 | CTA Contact visible ≤10s | Epic 2 — Hero, stack & CTA | ✓ Covered |
-| FR4 | Section Parcours 3 chapitres | Epic 4 — Parcours | ✓ Covered |
-| FR5 | Visuels/icônes par lieu | Epic 4 — Parcours | ✓ Covered |
-| FR6 | Compétences par chapitre | Epic 4 — Parcours | ✓ Covered |
-| FR7 | Bloc Arsenal (stack structurée) | Epic 5 — Arsenal | ✓ Covered |
-| FR8 | Tags skills | Epic 5 — Arsenal | ✓ Covered |
-| FR9 | Accès Arsenal via ancrage | Epic 3 — Navigation & ancrages | ✓ Covered |
-| FR10 | CTA LinkedIn cliquable | Epic 6 — Contact & réseaux | ✓ Covered |
-| FR11 | Liens autres réseaux | Epic 6 — Contact & réseaux | ✓ Covered |
-| FR12 | Navigation sections (ancrages/menu) | Epic 3 — Navigation & ancrages | ✓ Covered |
-| FR13 | Stack + contact trouvables ≤10s | Epic 2 — Hero, stack & CTA | ✓ Covered |
-| FR14 | Title/meta par route | Epic 1 — Foundation | ✓ Covered |
-| FR15 | Structure sémantique | Epic 1 — Foundation | ✓ Covered |
-| FR16 | Navigation clavier | Epic 7 — Accessibilité & SEO | ✓ Covered |
-| FR17 | Contrastes et sémantique | Epic 7 — Accessibilité & SEO | ✓ Covered |
-| FR18 | Mise à jour Parcours sans dégrader | Epic 1 — Foundation | ✓ Covered |
-| FR19 | Mise à jour Arsenal sans dégrader | Epic 1 — Foundation | ✓ Covered |
-| FR20 | MPA (plusieurs routes) | Epic 1 — Foundation | ✓ Covered |
+| FR Number | PRD Requirement                             | Epic Coverage                  | Status    |
+| --------- | ------------------------------------------- | ------------------------------ | --------- |
+| FR1       | Zone Hero (photo + nom + phrase d'accroche) | Epic 2 — Hero, stack & CTA     | ✓ Covered |
+| FR2       | Ligne stack courte                          | Epic 2 — Hero, stack & CTA     | ✓ Covered |
+| FR3       | CTA Contact visible ≤10s                    | Epic 2 — Hero, stack & CTA     | ✓ Covered |
+| FR4       | Section Parcours 3 chapitres                | Epic 4 — Parcours              | ✓ Covered |
+| FR5       | Visuels/icônes par lieu                     | Epic 4 — Parcours              | ✓ Covered |
+| FR6       | Compétences par chapitre                    | Epic 4 — Parcours              | ✓ Covered |
+| FR7       | Bloc Arsenal (stack structurée)             | Epic 5 — Arsenal               | ✓ Covered |
+| FR8       | Tags skills                                 | Epic 5 — Arsenal               | ✓ Covered |
+| FR9       | Accès Arsenal via ancrage                   | Epic 3 — Navigation & ancrages | ✓ Covered |
+| FR10      | CTA LinkedIn cliquable                      | Epic 6 — Contact & réseaux     | ✓ Covered |
+| FR11      | Liens autres réseaux                        | Epic 6 — Contact & réseaux     | ✓ Covered |
+| FR12      | Navigation sections (ancrages/menu)         | Epic 3 — Navigation & ancrages | ✓ Covered |
+| FR13      | Stack + contact trouvables ≤10s             | Epic 2 — Hero, stack & CTA     | ✓ Covered |
+| FR14      | Title/meta par route                        | Epic 1 — Foundation            | ✓ Covered |
+| FR15      | Structure sémantique                        | Epic 1 — Foundation            | ✓ Covered |
+| FR16      | Navigation clavier                          | Epic 7 — Accessibilité & SEO   | ✓ Covered |
+| FR17      | Contrastes et sémantique                    | Epic 7 — Accessibilité & SEO   | ✓ Covered |
+| FR18      | Mise à jour Parcours sans dégrader          | Epic 1 — Foundation            | ✓ Covered |
+| FR19      | Mise à jour Arsenal sans dégrader           | Epic 1 — Foundation            | ✓ Covered |
+| FR20      | MPA (plusieurs routes)                      | Epic 1 — Foundation            | ✓ Covered |
 
 ### Missing Requirements
 
@@ -199,7 +219,6 @@ Tous les FR du PRD (FR1 à FR20) sont couverts dans les epics et stories.
 - **Total PRD FRs:** 20
 - **FRs covered in epics:** 20
 - **Coverage percentage:** 100%
-
 
 ## UX Alignment Assessment
 
@@ -238,7 +257,6 @@ Le document UX est complet et détaillé : executive summary, target users, desi
 **Aucun problème d'alignement.**
 
 Tous les besoins UX sont adressés par le PRD et supportés par l'Architecture. Les epics couvrent 100% des FR, incluant les exigences UX.
-
 
 ## Epic Quality Review
 
@@ -279,6 +297,7 @@ Aucune dépendance "vers l'avant" (Epic N ne nécessite pas Epic N+1).
 ✅ **Toutes les stories sont appropriées et livrables indépendamment**
 
 Exemples validés :
+
 - **Story 1.1** : Init projet (create-next-app, shadcn, motion) — livrable seul, base pour le reste
 - **Story 2.1** : Zone Hero — livrable seul une fois Epic 1 fourni
 - **Story 4.1** : Section Parcours 3 chapitres — livrable seul une fois contenu créé (Epic 1)
@@ -290,6 +309,7 @@ Aucune story "trop large" (ex. "Build authentication system") ou "sans valeur ut
 ✅ **Tous les ACs suivent le format Given/When/Then/And et sont testables**
 
 Exemple Story 1.1 :
+
 - **Given** aucun projet Next.js existant dans le repo
 - **When** j'exécute les commandes d'init (create-next-app, shadcn init, npm install motion)
 - **Then** le projet démarre avec `npm run dev`, Tailwind et l'alias `@/*` fonctionnent
@@ -370,7 +390,6 @@ Pour chaque epic :
 
 **Aucune remédiation nécessaire.** Le document est prêt pour l'implémentation.
 
-
 ## Summary and Recommendations
 
 ### Overall Readiness Status
@@ -382,12 +401,14 @@ Le projet **my-portfolio** est prêt à démarrer la phase d'implémentation. To
 ### Assessment Summary
 
 **Documents validés :**
+
 - ✅ PRD : 20 FR + 9 NFR, bien structuré et mesurable
 - ✅ Architecture : complet, versions vérifiées, patterns définis, structure projet documentée
 - ✅ Epics & Stories : 7 epics, 18 stories, couverture FR 100%, best practices respectées
 - ✅ UX Design : aligné avec PRD et Architecture, design system défini
 
 **Validation des principes critiques :**
+
 - ✅ Couverture des exigences : 20/20 FR couverts (100%)
 - ✅ Valeur utilisateur : tous les epics délivrent de la valeur (pas de milestones techniques)
 - ✅ Indépendance des epics : aucune dépendance circulaire ou "vers l'avant"
@@ -431,4 +452,3 @@ Cette évaluation a analysé **4 documents** (PRD, Architecture, Epics & Stories
 **Rapport généré le :** 2026-02-14  
 **Projet :** my-portfolio  
 **Évaluateur :** Expert PM & Scrum Master (BMAD)
-

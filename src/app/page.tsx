@@ -40,10 +40,7 @@ export default function HomePage(): React.JSX.Element {
           <JourneySection journeyChapters={journeyChapters} />
         </ScrollReveal>
         <ScrollReveal>
-          <StackSection
-            stackGroups={stackGroups}
-            stackTags={stackTags}
-          />
+          <StackSection stackGroups={stackGroups} stackTags={stackTags} />
         </ScrollReveal>
 
         <ScrollReveal>

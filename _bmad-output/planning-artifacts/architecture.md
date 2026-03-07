@@ -25,6 +25,7 @@ _This document builds collaboratively through step-by-step discovery. Sections a
 ### Requirements Overview
 
 **Functional Requirements (FR) — Implications architecturales :**
+
 - **Hero & Présentation (FR1–FR3)** : rendu rapide du Hero + ligne stack + CTA contact visible (≤10s) → priorité au rendu initial, images optimisées, pas de blocage par animation.
 - **Parcours (FR4–FR6)** : contenu structuré en 3 chapitres, avec visuels/icônes + compétences par étape → modèle de contenu clair (chapitres, lieux, compétences).
 - **Arsenal & Stack (FR7–FR9)** : stack par familles (Frontend/Backend/DevOps) + tags skills + ancrage direct → composants réutilisables, structure de données stable (listes/groupes).
@@ -36,12 +37,14 @@ _This document builds collaboratively through step-by-step discovery. Sections a
 - **MPA (FR20)** : plusieurs routes/pages → choix du framework/routing/SSR/SSG en cohérence SEO.
 
 **Non-Functional Requirements (NFR) — Ce qui drive l’architecture :**
+
 - **Performance** : stack + CTA visibles en ≤10s ; images Hero optimisées ; motion légère.
 - **Accessibilité** : navigation clavier, focus, contrastes, alt.
 - **Security** : pas de collecte de données en MVP ; HTTPS.
 - **Reliability** : hébergement standard, disponibilité “portfolio”.
 
 **Scale & Complexity :**
+
 - Primary domain : **web app / site vitrine (MPA)**, contenu majoritairement statique.
 - Complexity level : **low** (greenfield, pas de temps réel, pas d’intégrations, pas de données sensibles).
 - Estimated architectural components : ~6–9
@@ -97,6 +100,7 @@ Versions de référence vérifiées via sources officielles (MCP Exa) :
 ### Selected Starter: Next.js (Option 1)
 
 **Rationale for Selection:**
+
 - SSR/SSG/ISR natifs, SEO fort, très bon fit Vercel.
 - Compatible Tailwind + Shadcn UI + motion.
 - Permet de garantir rapidement “stack + contact ≤10s” (perf + rendu initial).
@@ -129,11 +133,13 @@ npm install motion
 - **Assets (photos/icônes)**: stored under `public/` and rendered via `next/image` (optimize above-the-fold)
 
 **Rationale:**
+
 - Aligns with MVP scope (portfolio, low complexity, content changes via commit + deploy)
 - Strong type-safety + easy refactor as the structure evolves
 - Minimal runtime overhead; good fit for perf + SEO goals
 
 **Deferred (post-MVP):**
+
 - Optional migration to MDX or CMS if editing without redeploy becomes a need
 
 ### Authentication & Security
@@ -145,11 +151,13 @@ npm install motion
 - **Contact**: external link (LinkedIn) only
 
 **Security baseline:**
+
 - **HTTPS**: provided by Vercel
 - **External links**: `rel="noopener noreferrer"` for `target="_blank"`
 - **Headers**: baseline security headers can be added later (CSP, Permissions-Policy) if desired
 
 **Rationale:**
+
 - Aligns with PRD/NFR scope (no sensitive data, minimal surface area)
 - Avoids unnecessary complexity for an MVP portfolio
 
@@ -162,6 +170,7 @@ npm install motion
 - **Routing**: handled by Next.js App Router (MPA-style pages/routes)
 
 **Deferred (post-MVP):**
+
 - Route Handlers (`app/api/*`) if future needs emerge (contact form, analytics proxy, dynamic content)
 
 ### Frontend Architecture
@@ -175,6 +184,7 @@ npm install motion
 - **ISR**: optional later if you want refresh without full redeploy (not required with file-based content)
 
 **Project Structure:**
+
 - **Routes**: `src/app/**` (App Router)
 - **Components**: `src/components/**`
 - **Hooks**: `src/hooks/**`
@@ -183,9 +193,11 @@ npm install motion
 - **Content**: `src/content/**` (file-based TS content)
 
 **SEO & Metadata:**
+
 - Use App Router metadata per route (`metadata` export) for title/description/OG tags.
 
 **Styling & UI:**
+
 - Tailwind CSS + shadcn/ui components, themed via CSS variables + Tailwind tokens.
 
 ### Infrastructure & Deployment
@@ -193,15 +205,18 @@ npm install motion
 **Hosting:** Vercel
 
 **Environments:**
+
 - **Preview deployments**: enabled (per branch/PR) via Vercel
 - **Production**: enabled
 - **Environment variables**: none expected for MVP (add later only if a service requires it)
 
 **Observability (MVP):** Minimal
+
 - Rely on Vercel deployment logs + runtime logs
 - No dedicated error tracking (e.g. Sentry) in MVP unless a real need appears
 
 **CI / Quality Gate (MVP):** Minimal but strict
+
 - Run **lint** + **typecheck** + **build** on every push/PR (e.g. GitHub Actions)
 
 ---
@@ -209,6 +224,7 @@ npm install motion
 ### Decision Priority Analysis
 
 **Critical Decisions (Block Implementation):**
+
 - Starter: Next.js (App Router) + TypeScript + Tailwind + Vercel
 - Data: file-based TS content under `src/content/*` (no DB)
 - Security: no auth, no data collection, HTTPS
@@ -216,12 +232,14 @@ npm install motion
 - Frontend: SSG by default, metadata per route
 
 **Important Decisions (Shape Architecture):**
+
 - UI system: shadcn/ui + Tailwind theming (CSS variables)
 - Motion: Motion (`motion` package) for client-side animations where needed
 - Navigation: anchor-based navigation (+ optional scroll spy later)
 - CI: lint + typecheck + build gate
 
 **Deferred Decisions (Post-MVP):**
+
 - Contact form (and therefore API routes + anti-spam + storage)
 - Analytics (privacy-friendly) and/or error tracking (Sentry)
 - MDX/CMS migration for content editing without redeploy
@@ -230,6 +248,7 @@ npm install motion
 ### Decision Impact Analysis
 
 **Implementation Sequence (high-level):**
+
 1. Initialize repo via `create-next-app` (TS, Tailwind, App Router, src-dir, alias)
 2. Add shadcn/ui (`npx shadcn@latest init`) + install Motion (`npm install motion`)
 3. Create `src/content/*` + `src/types/*` and wire pages/routes (SSG)
@@ -239,6 +258,7 @@ npm install motion
 7. Add CI (lint/typecheck/build) and deploy on Vercel
 
 **Cross-Component Dependencies:**
+
 - Content model (`src/content/*`) drives Parcours/Arsenal/Contact rendering.
 - Visual foundation (Tailwind tokens + shadcn) drives UI consistency.
 - Motion should not block above-the-fold rendering (keep animations lightweight).
@@ -258,6 +278,7 @@ npm install motion
 **API Naming Conventions:** N/A en MVP. Si des Route Handlers sont ajoutés plus tard : REST-style, pluriel pour collections (`/api/…`), paramètres en `kebab-case` pour les query params.
 
 **Code Naming Conventions:**
+
 - **Composants / fichiers de composants :** PascalCase — ex. `UserCard.tsx`, `HeroSection.tsx`.
 - **Dossiers :** lowercase avec tirets — ex. `components/form-wizard`, `content`.
 - **Fichiers utilitaires / hooks :** camelCase — ex. `formValidator.ts`, `useScrollSpy.ts`.
@@ -269,6 +290,7 @@ npm install motion
 ### Structure Patterns
 
 **Project Organization:**
+
 - **Tests :** unitaires à côté du code ou dans `__tests__` (ex. `utils/__tests__/formValidator.test.ts`) ; E2E dans un dossier dédié (ex. `e2e/` ou `tests/e2e/`).
 - **Composants :** par type dans `src/components/` ; sous-dossiers par feature si besoin (ex. `components/hero/`, `components/arsenal/`).
 - **Utilitaires partagés :** `src/utils/`.
@@ -277,6 +299,7 @@ npm install motion
 - **Contenu :** `src/content/*.ts` (ex. `site.ts`, `journey.ts`, `arsenal.ts`, `socialLinks.ts`).
 
 **File Structure:**
+
 - Config racine : `next.config.ts`, `tailwind.config.ts`, `tsconfig.json`.
 - Variables d’environnement : `.env*` à la racine (jamais commit de secrets).
 - Assets statiques : `public/` ; images référencées via `next/image` avec chemins depuis `public/`.
@@ -287,6 +310,7 @@ npm install motion
 **API Response Formats:** N/A en MVP. Si Route Handlers plus tard : réponses JSON en camelCase ; erreurs avec structure cohérente (ex. `{ message: string, code?: string }`).
 
 **Data Exchange Formats (contenu & types):**
+
 - **Contenu (`src/content/*`) :** objets TypeScript typés ; propriétés en **camelCase**.
 - **Dates :** chaînes ISO 8601 si besoin (ex. `"2026-02-01"`).
 - **Listes :** tableaux typés ; pas d’objet pour un seul élément quand une liste est attendue.
@@ -297,6 +321,7 @@ npm install motion
 **Event System Patterns:** Pas de bus d’événements global en MVP. Événements React locaux (onClick, onChange) ; nommage en camelCase (ex. `onSectionChange`).
 
 **State Management Patterns:**
+
 - Mise à jour d’état **immuable** (pas de mutation directe).
 - État local (useState/useReducer) par composant ; pas de store global sauf besoin clair.
 - Nommage des setters / actions : préfixe `set` ou verbe explicite (ex. `setIsOpen`, `handleSubmit`).
@@ -304,12 +329,14 @@ npm install motion
 ### Process Patterns
 
 **Error Handling Patterns:**
+
 - Error boundaries React pour contenir les erreurs de rendu (au moins au niveau page ou layout).
 - Messages utilisateur clairs et non techniques ; logs détaillés côté dev (console ou futur Sentry).
 - Éviter try/catch sauf pour traduire ou gérer l’erreur à ce niveau d’abstraction ; laisser remonter sinon.
 - Gestion des échecs réseau : feedback utilisateur (message + possibilité de réessayer si pertinent).
 
 **Loading State Patterns:**
+
 - Nommage : `isLoading`, `isPending` (requêtes), `hasError` pour état d’erreur.
 - États de chargement locaux par composant/section ; pas de loader global sauf besoin explicite.
 - Skeleton / placeholder pour contenu above-the-fold si chargement perceptible ; pas de blocage de l’accès à l’info critique par une animation.
@@ -317,6 +344,7 @@ npm install motion
 ### Enforcement Guidelines
 
 **Tous les agents IA DOIVENT :**
+
 - Respecter la structure de dossiers `src/{app,components,hooks,utils,types,content}` et les conventions de nommage ci-dessus.
 - Utiliser les imports absolus `@/…` pour tous les modules internes.
 - Typer explicitement les retours de fonctions et les props des composants (TypeScript strict).
@@ -324,6 +352,7 @@ npm install motion
 - Vérifier accessibilité (clavier, focus, contrastes) et SEO (metadata par route) pour les nouvelles pages/composants.
 
 **Vérification des patterns :**
+
 - Lint (ESLint) + typecheck (tsc) + build dans la CI sur chaque push/PR.
 - Revue de code pour cohérence nommage/structure ; violations documentées dans les PRs ou dans un fichier de conventions si besoin.
 - Mise à jour de ce document d’architecture si de nouveaux patterns sont adoptés.
@@ -331,12 +360,14 @@ npm install motion
 ### Pattern Examples
 
 **Bonnes pratiques :**
+
 - Composant : `export function HeroSection({ title, subtitle }: HeroSectionProps) { … }` dans `src/components/hero/HeroSection.tsx`.
 - Contenu : `export const journeyChapters: JourneyChapter[] = [ … ]` dans `src/content/journey.ts` avec types dans `src/types/journey.ts`.
 - Hook : `export function useScrollSpy(ids: string[]): string { … }` dans `src/hooks/useScrollSpy.ts`.
 - Lien externe : `<a href="…" target="_blank" rel="noopener noreferrer">`.
 
 **À éviter :**
+
 - Fichiers composants en kebab-case (`hero-section.tsx`) ou dossiers en PascalCase.
 - Enums TypeScript ; préférer `const STATUS = { … } as const` et types dérivés.
 - try/catch large sans gestion ni log ; mutation directe du state.
@@ -408,6 +439,7 @@ my-portfolio/
 **API Boundaries:** Aucune en MVP. Pas de Route Handlers ; pas de frontière API interne. Si évolution : `src/app/api/*` avec conventions REST et réponses JSON typées.
 
 **Component Boundaries:**
+
 - **Pages (App Router)** : `src/app/**` — layout + page(s) ; importent contenu depuis `src/content/*` et composants depuis `src/components/**`.
 - **Sections** : Hero, Journey, Arsenal, Contact sont des composants de section ; ils reçoivent des props typées (données depuis `content`) et n’accèdent pas directement aux fichiers de contenu.
 - **UI partagée** : `src/components/ui/` (shadcn) ; pas de state global ; état local ou props.
@@ -415,6 +447,7 @@ my-portfolio/
 **Service Boundaries:** Aucun service backend. “Contenu” = modules TS dans `src/content/*` importés par les pages/composants serveur.
 
 **Data Boundaries:**
+
 - **Source de vérité** : `src/content/*.ts` (exports typés).
 - **Types** : `src/types/*.ts` ; utilisés par `content` et par les composants.
 - **Assets** : `public/` ; référencés via chemins publics ou `next/image` ; pas de DB ni cache applicatif en MVP.
@@ -422,23 +455,28 @@ my-portfolio/
 ### Requirements to Structure Mapping
 
 **Hero & Présentation (FR1–FR3):**
+
 - Composants : `src/components/hero/`
 - Contenu : `src/content/site.ts` (titre, sous-titre, CTA)
 - Page : `src/app/page.tsx` (ou layout)
 
 **Parcours (FR4–FR6):**
+
 - Composants : `src/components/journey/`
 - Contenu : `src/content/journey.ts` ; types : `src/types/journey.ts`
 
 **Arsenal & Stack (FR7–FR9):**
+
 - Composants : `src/components/arsenal/`
 - Contenu : `src/content/arsenal.ts` ; types : `src/types/arsenal.ts`
 
 **Contact & CTA (FR10–FR11):**
+
 - Composants : `src/components/contact/`
 - Contenu : `src/content/socialLinks.ts`
 
 **Navigation & Ancrages (FR12–FR13):**
+
 - Composants : `src/components/navigation/`
 - Hook (optionnel) : `src/hooks/useScrollSpy.ts`
 
@@ -507,24 +545,28 @@ my-portfolio/
 ### Architecture Completeness Checklist
 
 **✅ Requirements Analysis**
+
 - [x] Contexte projet analysé
 - [x] Échelle et complexité évaluées
 - [x] Contraintes techniques identifiées
 - [x] Cross-cutting concerns mappés
 
 **✅ Architectural Decisions**
+
 - [x] Décisions critiques documentées avec versions
 - [x] Stack technique spécifié
 - [x] Patterns d’intégration définis
 - [x] Performance prise en compte
 
 **✅ Implementation Patterns**
+
 - [x] Conventions de nommage établies
 - [x] Patterns de structure définis
 - [x] Patterns de communication spécifiés
 - [x] Patterns de processus documentés
 
 **✅ Project Structure**
+
 - [x] Arborescence complète définie
 - [x] Frontières composants établies
 - [x] Points d’intégration mappés
@@ -537,12 +579,14 @@ my-portfolio/
 **Confidence Level:** Élevé — validation cohérence, couverture des exigences et préparation à l’implémentation réalisées.
 
 **Key Strengths:**
+
 - Stack et versions clairement fixés
 - Contenu typé sans DB/API, adapté au MVP
 - Patterns et structure détaillés pour éviter les conflits entre agents
 - Mapping FR → dossiers explicite
 
 **Areas for Future Enhancement:**
+
 - Route Handlers + formulaire de contact si évolution
 - MDX/CMS si édition de contenu sans redéploiement
 - Analytics / error tracking si besoin
@@ -550,13 +594,14 @@ my-portfolio/
 ### Implementation Handoff
 
 **AI Agent Guidelines:**
+
 - Suivre les décisions et patterns du présent document
 - Respecter la structure projet et les boundaries
 - Utiliser les imports `@/…` et les types explicites
 - Consulter ce document pour toute question d’architecture
 
 **First Implementation Priority:**
+
 1. `npx create-next-app@latest my-portfolio --tailwind --eslint --app --src-dir --import-alias @/*`
 2. `npx shadcn@latest init` puis `npm install motion`
 3. Créer `src/content/*`, `src/types/*` et brancher la page unique (SSG) avec sections Hero, Parcours, Arsenal, Contact et navigation par ancres.
-

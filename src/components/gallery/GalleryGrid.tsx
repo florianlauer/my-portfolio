@@ -60,7 +60,7 @@ export function GalleryGrid({
       (entries) => {
         if (entries[0]?.isIntersecting) onLoadMore();
       },
-      { rootMargin: "200px", threshold: 0 }
+      { rootMargin: "200px", threshold: 0 },
     );
     observer.observe(sentinel);
     return () => observer.disconnect();
@@ -79,9 +79,7 @@ export function GalleryGrid({
       )}
 
       <div
-        className={
-          isInitialLoad ? "absolute left-[-9999px] opacity-0 pointer-events-none" : ""
-        }
+        className={isInitialLoad ? "absolute left-[-9999px] opacity-0 pointer-events-none" : ""}
         role="list"
         aria-label="Galerie de photos"
         aria-hidden={isInitialLoad}
@@ -93,8 +91,7 @@ export function GalleryGrid({
           <Masonry>
             {items.map((item, index) => {
               const startNewBatch = items.length - LOAD_MORE_COUNT;
-              const isNewFromLoadMore =
-                items.length > INITIAL_COUNT && index >= startNewBatch;
+              const isNewFromLoadMore = items.length > INITIAL_COUNT && index >= startNewBatch;
               const indexInBatch = index - startNewBatch;
               const rowIndex = Math.floor(indexInBatch / 3);
               const delayMs = isNewFromLoadMore ? rowIndex * 120 : 0;
@@ -132,9 +129,7 @@ export function GalleryGrid({
         </ResponsiveMasonry>
       </div>
 
-      {!isInitialLoad && hasMore && (
-        <div ref={sentinelRef} className="h-4 w-full" aria-hidden />
-      )}
+      {!isInitialLoad && hasMore && <div ref={sentinelRef} className="h-4 w-full" aria-hidden />}
       {!isInitialLoad && !hasMore && items.length > 0 && (
         <p className="mt-8 text-center text-sm text-muted-foreground">
           Fin de la galerie — {totalCount} photo{totalCount > 1 ? "s" : ""}.

@@ -1,9 +1,9 @@
 ---
-name: 'step-03-generate'
-description: 'Build the implementation plan based on the technical mapping of constraints'
+name: "step-03-generate"
+description: "Build the implementation plan based on the technical mapping of constraints"
 
-nextStepFile: './step-04-review.md'
-wipFile: '{implementation_artifacts}/tech-spec-wip.md'
+nextStepFile: "./step-04-review.md"
+wipFile: "{implementation_artifacts}/tech-spec-wip.md"
 ---
 
 # Step 3: Generate Implementation Plan
@@ -108,7 +108,7 @@ b) **Update frontmatter:**
 ```yaml
 ---
 # ... existing values ...
-status: 'review'
+status: "review"
 stepsCompleted: [1, 2, 3]
 ---
 ```

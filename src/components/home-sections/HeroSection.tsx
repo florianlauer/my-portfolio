@@ -16,10 +16,8 @@ export const HeroSection = ({
   primaryContactLink,
 }: HeroSectionProps): React.JSX.Element => {
   const stackLine: string = heroStack.map((tech) => tech.label).join(" · ");
-  const ctaLabel: string =
-    primaryContactLink?.label ?? siteContent.primaryCta.label;
-  const ctaHref: string =
-    primaryContactLink?.href ?? siteContent.primaryCta.href;
+  const ctaLabel: string = primaryContactLink?.label ?? siteContent.primaryCta.label;
+  const ctaHref: string = primaryContactLink?.href ?? siteContent.primaryCta.href;
 
   return (
     <section
@@ -41,13 +39,8 @@ export const HeroSection = ({
         </HeroImageParallax>
 
         <div>
-          <p className="text-sm font-medium text-muted-foreground">
-            {siteContent.ownerName}
-          </p>
-          <h1
-            id="hero-title"
-            className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl"
-          >
+          <p className="text-sm font-medium text-muted-foreground">{siteContent.ownerName}</p>
+          <h1 id="hero-title" className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
             {siteContent.heroTitle}
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">

@@ -1,6 +1,6 @@
 ---
-name: 'qa'
-description: 'qa agent'
+name: "qa"
+description: "qa agent"
 disable-model-invocation: true
 ---
 

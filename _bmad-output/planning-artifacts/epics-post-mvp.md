@@ -9,13 +9,13 @@
 
 ## Vue d’ensemble
 
-| Epic    | Thème            | Objectif principal                            |
-| ------- | ---------------- | --------------------------------------------- |
-| Epic 8  | SEO avancé       | Open Graph, Twitter, sitemap, robots, JSON-LD |
-| Epic 9  | CI / qualité     | GitHub Actions (lint + build) sur push/PR     |
-| Epic 10 | A11y post-audit  | Corriger les points soulevés par l’audit      |
-| Epic 11 | Contact (Growth) | Formulaire de contact basique + anti-spam     |
-| Epic 12 | Motion & contenu | Affinage motion, sections supplémentaires     |
+| Epic    | Thème            | Objectif principal                                   |
+| ------- | ---------------- | ---------------------------------------------------- |
+| Epic 8  | SEO avancé       | Open Graph, Twitter, sitemap, robots, JSON-LD        |
+| Epic 9  | CI / qualité     | GitHub Actions (lint + build) sur push/PR            |
+| Epic 10 | A11y post-audit  | Corriger les points soulevés par l’audit             |
+| Epic 11 | Contact (Growth) | Formulaire de contact basique + anti-spam            |
+| Epic 12 | Motion & contenu | Affinage motion, sections supplémentaires            |
 | Epic 13 | Stack vue stylée | Vue stack avec relations entre technos (graph/liens) |
 
 ---
@@ -200,7 +200,6 @@ Les stories **12.3** (404 GeoGuessr), **12.4** (Galerie photos) et **13.1** (Sta
 - Autres améliorations motion (scroll-spy, menu actif) mentionnées en architecture post-MVP.
 
 **Détails 404 / Galerie :** Voir Story 12.3 et 12.4 ci-dessus.
-
 
 ## Priorisation suggérée pour enchaîner
 

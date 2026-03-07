@@ -1,8 +1,24 @@
 ---
-stepsCompleted: ['step-01-init', 'step-02-discovery', 'step-03-core-experience', 'step-04-emotional-response', 'step-05-inspiration', 'step-06-design-system', 'step-07-defining-experience', 'step-08-visual-foundation', 'step-09-design-directions', 'step-10-user-journeys', 'step-11-component-strategy', 'step-12-ux-patterns', 'step-13-responsive-accessibility', 'step-14-complete']
-inputDocuments: 
-  - '_bmad-output/planning-artifacts/prd.md'
-  - '_bmad-output/planning-artifacts/product-brief-my-portfolio-2026-02-01.md'
+stepsCompleted:
+  [
+    "step-01-init",
+    "step-02-discovery",
+    "step-03-core-experience",
+    "step-04-emotional-response",
+    "step-05-inspiration",
+    "step-06-design-system",
+    "step-07-defining-experience",
+    "step-08-visual-foundation",
+    "step-09-design-directions",
+    "step-10-user-journeys",
+    "step-11-component-strategy",
+    "step-12-ux-patterns",
+    "step-13-responsive-accessibility",
+    "step-14-complete",
+  ]
+inputDocuments:
+  - "_bmad-output/planning-artifacts/prd.md"
+  - "_bmad-output/planning-artifacts/product-brief-my-portfolio-2026-02-01.md"
 ---
 
 # UX Design Specification my-portfolio
@@ -96,11 +112,13 @@ L'expérience est conçue pour que ces deux voies coexistent sans friction : le 
 ### Platform Strategy
 
 **Plateforme principale : Desktop**
+
 - Contexte d'utilisation : bureau, recherche de candidats, préparation entretien
 - Interaction : souris/clavier avec enrichissements visuels (hover states, mouse movement, scroll parallax)
 - Motion sobre qui guide l'œil naturellement vers les éléments clés
 
 **Plateforme secondaire : Mobile**
+
 - Doit fonctionner correctement et proprement
 - Motion adapté mais pas de gestures complexes requises
 - Focus sur la lisibilité et l'accès rapide à la stack et au contact
@@ -117,6 +135,7 @@ Les interactions suivantes doivent être **instantanées et sans effort mental**
 4. **Accéder au contact** — CTA Contact (LinkedIn) visible en ≤ 10s, toujours accessible
 
 **Problèmes résolus vs portfolios classiques** :
+
 - Scroll infini sans repères → Navigation avec ancrages et repères visuels clairs
 - Stack noyée dans le texte → Stack visible immédiatement, focus automatique
 - Menus cachés ou navigation obscure → Navigation transparente, toujours accessible
@@ -126,20 +145,24 @@ Les interactions suivantes doivent être **instantanées et sans effort mental**
 ### Critical Success Moments
 
 **Moment "ce portfolio est meilleur"** :
+
 - Quand le visiteur trouve la **stack immédiatement** au chargement
 - Quand il découvre l'**Arsenal structuré** avec relations visuelles entre langages et frameworks (impossible sur LinkedIn/CV)
 - Combinaison = différenciation instantanée
 
 **Moment de satisfaction utilisateur** :
+
 - Quand le visiteur a **compris le parcours** (3 chapitres géographiques + compétences par étape)
 - Signal "j'en ai appris plus sur lui" atteint
 
 **Moments d'échec à éviter absolument** :
+
 - Ne pas trouver la stack en ≤ 10 secondes → Perte immédiate du visiteur pressé
 - Ne pas comprendre comment naviguer → Frustration et abandon
 - Motion qui bloque ou ralentit l'accès à l'information → Ruine l'expérience
 
 **Succès première visite** :
+
 - Le visiteur voit **quelque chose qui le marque** : parcours géographique unique, Arsenal visuel structuré, personnalité voyage/geek sobre, motion qui guide l'œil
 - Mémorabilité = différenciation vs masse de portfolios génériques
 
@@ -181,40 +204,48 @@ Les principes suivants guident toutes les décisions UX pour **my-portfolio** :
 L'expérience émotionnelle de **my-portfolio** repose sur un équilibre entre **originalité créative** et **confiance professionnelle** :
 
 **Émotion principale : Impressionné + Rassuré + Curieux**
+
 - **Impressionné** par l'originalité (motion sobre, Arsenal visuel structuré, photos voyage, parcours géographique)
 - **Rassuré** par la clarté immédiate (stack visible, navigation transparente, propreté sobre)
 - **Curieux** d'explorer davantage (parcours en chapitres, personnalité voyage/geek, easter eggs post-MVP)
 
 **Différenciation émotionnelle : Étonnement par originalité MAIS propre**
+
 - Les visiteurs doivent ressentir "ce portfolio est différent" tout en pensant "c'est pro et fiable"
 - Équilibre entre créativité (motion, visuels) et professionnalisme (structure, clarté, sobriété)
 
 **Émotions post-mission : Convaincus + Confiants**
+
 - Après avoir trouvé stack + contact : convaincus de l'expertise, confiants dans le fit, prêts à initier contact
 
 ### Emotional Journey Mapping
 
 **1. Première découverte (Landing sur Hero)**
+
 - **Émotion désirée** : Rassurés par la clarté
 - **Déclencheurs** : Stack visible immédiatement, structure claire, propreté visuelle sobre
 - **Éviter** : Confusion, surcharge visuelle, motion qui bloque l'accès à l'info
 
 **2. Pendant l'exploration (Scroll/Navigation dans Parcours et Arsenal)**
+
 - **Émotions désirées** : Émerveillés par le motion + Confortables dans la navigation
 - **Déclencheurs** : Motion sobre qui guide l'œil, transitions fluides entre sections, repères visuels clairs, Arsenal structuré unique
 - **Éviter** : Perte d'orientation, scroll infini aveugle, motion qui ralentit ou bloque
 
 **3. Après avoir trouvé stack + contact (Mission accomplie)**
+
 - **Émotions désirées** : Convaincus de l'expertise + Prêts à contacter
 - **Déclencheurs** : Arsenal avec années d'expérience, clarté des compétences, CTA contact accessible et friendly
 - **Éviter** : Doute sur le niveau, difficulté à contacter, intimidation
 
 **4. Si quelque chose rate (Edge case : ne trouve pas stack immédiatement)**
+
 - **Émotion acceptable** : Frustrés MAIS récupérables
 - **Déclencheurs de récupération** : Navigation sticky/ancrages visibles, boutons "Arsenal" / "Contact" toujours accessibles
 - **Éviter** : Frustration irrémédiable qui mène à l'abandon
 
 **5. Quand ils reviennent (Deuxième visite avant entretien)**
+
 - **Émotion désirée** : Confirmés dans leur choix
 - **Déclencheurs** : Mémorabilité (parcours géographique, Arsenal visuel, personnalité), information facile à retrouver
 - **Éviter** : Oubli ou impression "c'était quoi déjà ?"
@@ -255,23 +286,27 @@ L'expérience émotionnelle de **my-portfolio** repose sur un équilibre entre *
 ### Design Implications
 
 **Pour créer la CONFIANCE :**
+
 - Arsenal structuré avec **années d'expérience visible** par techno/domaine
 - **Propreté visuelle sobre** : palette douce et chaude, typographie claire, espaces blancs généreux
 - **Clarté de l'information** : hiérarchie visuelle forte, pas de jargon inutile, structure Frontend/Backend/DevOps limpide
 
 **Pour créer l'ACCOMPLISSEMENT :**
+
 - **Indicateurs de progression** : repères visuels des sections (dots de scroll, menu actif qui s'illumine)
 - **Confirmation visuelle subtile** : quand ils atteignent sections clés (Arsenal, Contact), un signal visuel "vous y êtes"
 - **Structure claire** : nombre de sections visible, position actuelle évidente, pas de confusion sur "où suis-je ?"
 - **"Mission accomplie"** : Stack trouvée ✓, Contact trouvé ✓ → sentiment de succès renforcé visuellement
 
 **Pour créer le DÉLICE (delight) :**
+
 - **Motion sobre au scroll** : parallax, transitions fluides entre sections, animations qui guident l'œil naturellement
 - **Arsenal visuel unique** : relations visuelles entre langages et frameworks (code couleur, groupement graphique, hiérarchie)
 - **Photos voyage intégrées** : Hero, arrière-plans de chapitres, easter eggs (404 GeoGuessr post-MVP)
 - **Transitions entre chapitres** : changement visuel marqué (France → Angleterre → Aujourd'hui) avec icônes/visuels de lieux
 
 **Pour créer l'EXCITATION (sans anxiété) :**
+
 - **Design accessible** : CTA contact friendly, pas intimidant, lien LinkedIn clair et rassurant
 - **Ton conversationnel** : "On gravit la suite ensemble ?" plutôt qu'un "Contactez-moi" formel
 - **Pas de barrière** : pas de formulaire complexe en MVP, juste un lien externe maîtrisé
@@ -320,26 +355,30 @@ Les principes émotionnels suivants guident le design de **my-portfolio** :
 
 **Apple** — Motion au scroll (parallax, apparitions progressives), hover et micro-interactions soignés, hiérarchie visuelle très claire, typo et espacements, pas de surcharge : une idée forte par bloc.
 
-**Brian Cohen (bricohen.com)** — Ton dev assumé ("SELECT * FROM Brian"), site minimal, identité forte en peu d'éléments.
+**Brian Cohen (bricohen.com)** — Ton dev assumé ("SELECT \* FROM Brian"), site minimal, identité forte en peu d'éléments.
 
-**Insight utilisateur (Florian)** : *« Une bonne expérience en data viz = plus d'infos au clic ou au zoom ; et au niveau de l'expérience, les effets au déplacement de la souris et au scroll. »*
+**Insight utilisateur (Florian)** : _« Une bonne expérience en data viz = plus d'infos au clic ou au zoom ; et au niveau de l'expérience, les effets au déplacement de la souris et au scroll. »_
 
 ### Transferable UX Patterns
 
 **Navigation & structure**
+
 - **Menu court et lisible** (type Kent C. Dodds) : Parcours, Arsenal, Contact (+ Blog/courses si besoin plus tard)
 - **Ancrages clairs** pour le "edge case recovery" (comme sur Kent : on sait où on va)
 
 **Data viz / Arsenal (MVP + post-MVP)**
+
 - **Progressive disclosure** (inspiration Musicmap) : vue statique en MVP ; en post-MVP, **clic ou zoom = plus d'infos** (détail techno, années, liens langage↔framework)
 - **Hover pour les relations** (inspiration Musicmap) : au survol d'une techno, mettre en évidence les liens (ex. React ↔ TypeScript)
 - **Cadre visuel** (super-genres = familles) : Frontend / Backend / DevOps avec code couleur ou regroupement graphique
 
 **Motion & ressenti**
+
 - **Effets souris** (Apple + insight utilisateur) : hover sur cartes, boutons, technos ; léger mouvement ou focus pour renforcer la clarté
 - **Effets scroll** (Apple + insight utilisateur) : parallax sobre, apparition des sections (Parcours, Arsenal), motion qui guide l'œil sans bloquer l'accès à la stack
 
 **Identité & confiance**
+
 - **Hero clair** (Kent + Apple) : une phrase d'accroche + stack visible + CTA contact
 - **Personnalité lisible** (Kent, Brian Cohen) : voyage, geek, créativité sans noyer l'info pro
 
@@ -354,16 +393,19 @@ Les principes émotionnels suivants guident le design de **my-portfolio** :
 ### Design Inspiration Strategy
 
 **À adopter**
+
 - **Progressive disclosure** (Musicmap) : vue statique MVP ; post-MVP, **clic/zoom = plus d'infos** sur chaque techno et relations
 - **Hover pour révéler les relations** (Musicmap) : survol d'une techno → liens langage/framework mis en évidence
 - **Motion souris + scroll** (Apple + insight utilisateur) : hover discret sur éléments clés ; scroll avec parallax/transitions sobres qui guident l'œil
 - **Hero + navigation clairs** (Kent C. Dodds) : stack + CTA visibles immédiatement, menu court (Parcours, Arsenal, Contact)
 
 **À adapter**
+
 - **Carta Musicmap** : pour l'Arsenal post-MVP, pas une carte temps mais une **carte de relations** (technos, familles, liens) avec zoom et pan, et détail au clic
 - **Densité Kent C. Dodds** : garder sections bien séparées et lisibles, mais avec moins de blocs que lui pour rester focalisé stack + parcours + contact
 
 **À éviter**
+
 - **Carte trop dense d'entrée** : ne pas afficher tout l'Arsenal en mode "Carta" dès le premier écran ; garder une vue statique scannable en MVP
 - **Motion prioritaire sur l'info** : les effets souris/scroll ne doivent jamais retarder ou masquer la stack et le contact
 
@@ -406,7 +448,7 @@ Les principes émotionnels suivants guident le design de **my-portfolio** :
 
 **Phrase centrale (expérience définissante) :**
 
-*« Trouve ma stack et comment me contacter en quelques secondes, puis explore mon parcours si tu veux en savoir plus. »*
+_« Trouve ma stack et comment me contacter en quelques secondes, puis explore mon parcours si tu veux en savoir plus. »_
 
 C’est l’interaction cœur que le produit doit réussir en priorité : scan rapide (stack + contact) puis exploration optionnelle (parcours, Arsenal, personnalité) sans friction.
 
@@ -437,23 +479,27 @@ C’est l’interaction cœur que le produit doit réussir en priorité : scan r
 
 ### Experience Mechanics
 
-**1. Initiation**  
-- Le visiteur arrive (desktop ou mobile).  
+**1. Initiation**
+
+- Le visiteur arrive (desktop ou mobile).
 - Déclencheur : chargement de la page ; la stack et le CTA contact doivent être visibles sans action (ou avec un scroll minimal).
 
-**2. Interaction**  
-- **Voie rapide** : Lecture du Hero (ligne stack + CTA) → clic sur Contact si objectif atteint.  
-- **Voie exploratoire** : Scroll ou clic sur les ancrages (Parcours, Arsenal, Contact) → lecture des chapitres et de l’Arsenal.  
+**2. Interaction**
+
+- **Voie rapide** : Lecture du Hero (ligne stack + CTA) → clic sur Contact si objectif atteint.
+- **Voie exploratoire** : Scroll ou clic sur les ancrages (Parcours, Arsenal, Contact) → lecture des chapitres et de l’Arsenal.
 - Contrôles : scroll, menu/ancrages, clics sur CTA et liens.
 
-**3. Feedback**  
-- Stack visible = pas de doute "où est la stack ?".  
-- Repères visuels (sections, menu actif) = "je sais où je suis".  
+**3. Feedback**
+
+- Stack visible = pas de doute "où est la stack ?".
+- Repères visuels (sections, menu actif) = "je sais où je suis".
 - Atteindre Arsenal ou Contact = confirmation visuelle subtile (section en vue, CTA accessible).
 
-**4. Completion**  
-- **Succès minimal** : Stack trouvée + contact trouvé (≤ 10s).  
-- **Succès étendu** : Parcours parcouru, Arsenal vu, sentiment "j’en ai appris plus sur lui".  
+**4. Completion**
+
+- **Succès minimal** : Stack trouvée + contact trouvé (≤ 10s).
+- **Succès étendu** : Parcours parcouru, Arsenal vu, sentiment "j’en ai appris plus sur lui".
 - **Suite** : Clic sur CTA LinkedIn (ou autre) pour initier le contact.
 
 ---
@@ -605,15 +651,18 @@ flowchart TD
 ### Journey Patterns
 
 **Navigation**
+
 - **Hero first** : Toujours afficher stack + CTA dans le Hero (Direction 1).
 - **Ancrages de secours** : Menu ou liens "Parcours", "Arsenal", "Contact" pour edge case et exploration.
 - **Un seul scroll** : Pas de pagination ; sections en enchaînement vertical (Parcours → Arsenal → Contact).
 
 **Décision**
+
 - **Scan rapide** : Une seule décision principale = "j'ai ce qu'il me faut (stack + contact) ?" Si oui → CTA ; si non → scroll ou ancrage.
 - **Exploration optionnelle** : Pas de branche obligatoire ; exploration Parcours/Arsenal pour renforcer la confiance.
 
 **Feedback**
+
 - **Repères visuels** : Section en vue = indication (menu actif, ou marqueur de section) pour "où je suis".
 - **CTA toujours accessible** : Sticky ou répété en bas de page pour ne jamais bloquer le contact.
 
@@ -634,6 +683,7 @@ flowchart TD
 **Fondation : Shadcn UI (Radix) + Tailwind CSS.**
 
 **Composants Shadcn utilisables tels quels ou thématisés :**
+
 - **Button** — CTA Contact ("On gravit la suite ensemble ?"), liens secondaires (réseaux).
 - **Card** — Cartes Parcours (chapitres), cartes Arsenal (groupes Frontend/Backend/DevOps) si besoin.
 - **Navigation** — Menu ancrages (Parcours, Arsenal, Contact) ; possiblement Navbar ou liens simples.
@@ -647,30 +697,35 @@ flowchart TD
 **Composants spécifiques au portfolio (non fournis tels quels par Shadcn) :**
 
 #### Hero (Direction 1)
+
 - **Usage** : Bloc d'accueil centré ; stack + contact en ≤ 10s.
 - **Anatomie** : Titre (nom) → tagline → ligne stack (texte) → CTA (Button Shadcn).
 - **States** : default ; hover sur CTA (accent ambre).
 - **Accessibilité** : Titre h1, CTA avec texte explicite ("LinkedIn — On gravit la suite ensemble ?"), focus visible.
 
 #### Section Parcours
+
 - **Usage** : 3 chapitres (Départ, Expansion, Aujourd'hui) avec visuels/icônes lieux et compétences par étape.
 - **Anatomie** : Titre section (h2) → grille de cartes (Card ou custom) ; chaque carte : titre chapitre, lieu, compétences (texte ou tags).
 - **States** : default ; hover sur cartes (léger, motion sobre).
 - **Accessibilité** : Landmark section, titres hiérarchiques, alt sur images/icônes.
 
 #### Section Arsenal
+
 - **Usage** : Stack structurée (Frontend/Backend/DevOps) + tags skills ; relations langage↔framework visibles (groupement, code couleur).
 - **Anatomie** : Titre section (h2) → blocs par famille (ex. Frontend, Backend, DevOps) → liste technos + tags.
 - **States** : default ; hover sur techno (post-MVP : révéler relations). MVP : vue statique.
 - **Accessibilité** : Liste sémantique ou groupes labellisés ; contrastes suffisants pour tags.
 
 #### Section Contact
+
 - **Usage** : CTA principal (LinkedIn) + liens secondaires (autres réseaux).
 - **Anatomie** : Titre section (h2) → CTA (Button) → liens secondaires (liens texte ou boutons secondaires).
 - **States** : default ; hover/focus sur CTA et liens.
 - **Accessibilité** : CTA et liens accessibles au clavier, focus visible, texte de lien explicite.
 
 #### Navigation (ancrages)
+
 - **Usage** : Menu ou barre avec liens "Parcours", "Arsenal", "Contact" pour edge case et exploration.
 - **Anatomie** : Liens ancrés (#parcours, #arsenal, #contact) ; option : menu actif selon section en vue (scroll spy).
 - **States** : default ; active (section en vue) ; hover/focus.
@@ -685,20 +740,23 @@ flowchart TD
 
 ### Implementation Roadmap
 
-**Phase 1 — Core (MVP critique)**  
-- **Hero** — Bloc centré, stack + CTA (flow Recruteur happy path).  
-- **Navigation** — Ancrages Parcours, Arsenal, Contact (edge case recovery).  
-- **Section Contact** — CTA LinkedIn + liens secondaires.  
+**Phase 1 — Core (MVP critique)**
+
+- **Hero** — Bloc centré, stack + CTA (flow Recruteur happy path).
+- **Navigation** — Ancrages Parcours, Arsenal, Contact (edge case recovery).
+- **Section Contact** — CTA LinkedIn + liens secondaires.
 - **Conteneurs de section** — Layout grille 12 colonnes, espacement 8px.
 
-**Phase 2 — Supporting (MVP complet)**  
-- **Section Parcours** — 3 cartes chapitres (lieu, compétences).  
-- **Section Arsenal** — Stack structurée par famille + tags (vue statique).  
+**Phase 2 — Supporting (MVP complet)**
+
+- **Section Parcours** — 3 cartes chapitres (lieu, compétences).
+- **Section Arsenal** — Stack structurée par famille + tags (vue statique).
 - **Cartes et tags** — Composants réutilisables pour Parcours et Arsenal.
 
-**Phase 3 — Enhancement (motion, post-MVP)**  
-- **Motion** — Transitions scroll, hover sobre (parallax léger si besoin).  
-- **Scroll spy** — Menu actif selon section en vue (feedback de progression).  
+**Phase 3 — Enhancement (motion, post-MVP)**
+
+- **Motion** — Transitions scroll, hover sobre (parallax léger si besoin).
+- **Scroll spy** — Menu actif selon section en vue (feedback de progression).
 - **Arsenal interactif** — Post-MVP : vue graphique / progressive disclosure (clic, zoom).
 
 ---
@@ -733,7 +791,7 @@ flowchart TD
 
 - **Loading** — Pas de chargement asynchrone critique en MVP (contenu statique ou SSR). Si chargement futur : skeleton sobre ou spinner minimal, pas de blocage de la stack/CTA.
 - **Empty state** — Peu pertinent pour portfolio (contenu maîtrisé). Si section vide un jour : message court et discret.
-- **Liens externes** — CTA LinkedIn et autres réseaux : ouvrir en nouvel onglet (target="_blank") avec indication accessible (icône ou texte "nouvel onglet") ; rel="noopener noreferrer" pour sécurité.
+- **Liens externes** — CTA LinkedIn et autres réseaux : ouvrir en nouvel onglet (target="\_blank") avec indication accessible (icône ou texte "nouvel onglet") ; rel="noopener noreferrer" pour sécurité.
 
 ---
 

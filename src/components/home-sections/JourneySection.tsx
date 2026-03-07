@@ -12,9 +12,15 @@ type JourneyVisual = {
 };
 
 const chapterAccent: Record<string, { badge: string; border: string }> = {
-  depart:     { badge: "bg-amber-100/50 text-amber-600/80 dark:bg-amber-900/20 dark:text-amber-400/70", border: "border-t-amber-500" },
-  expansion:  { badge: "bg-sky-100/50 text-sky-600/80 dark:bg-sky-900/20 dark:text-sky-400/70",         border: "border-t-sky-500"   },
-  aujourdhui: { badge: "bg-primary/10 text-primary",                                            border: "border-t-primary"   },
+  depart: {
+    badge: "bg-amber-100/50 text-amber-600/80 dark:bg-amber-900/20 dark:text-amber-400/70",
+    border: "border-t-amber-500",
+  },
+  expansion: {
+    badge: "bg-sky-100/50 text-sky-600/80 dark:bg-sky-900/20 dark:text-sky-400/70",
+    border: "border-t-sky-500",
+  },
+  aujourdhui: { badge: "bg-primary/10 text-primary", border: "border-t-primary" },
 };
 
 const visualByKey: Record<string, JourneyVisual> = {
@@ -33,23 +39,23 @@ const visualByKey: Record<string, JourneyVisual> = {
   },
 };
 
-export const JourneySection = ({
-  journeyChapters,
-}: JourneySectionProps): React.JSX.Element => {
+export const JourneySection = ({ journeyChapters }: JourneySectionProps): React.JSX.Element => {
   return (
     <section
       id="parcours"
       aria-labelledby="journey-title"
       className="scroll-mt-24 rounded-2xl border border-border bg-background/92 p-6 md:p-8 backdrop-blur-sm"
     >
-      <h2 id="journey-title" className="border-l-2 border-primary pl-3 text-2xl font-semibold tracking-tight">
+      <h2
+        id="journey-title"
+        className="border-l-2 border-primary pl-3 text-2xl font-semibold tracking-tight"
+      >
         Parcours
       </h2>
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
         {journeyChapters.map((chapter) => {
-          const chapterVisual: JourneyVisual | undefined =
-            visualByKey[chapter.visualKey];
+          const chapterVisual: JourneyVisual | undefined = visualByKey[chapter.visualKey];
 
           return (
             <article
@@ -57,27 +63,18 @@ export const JourneySection = ({
               className={`rounded-xl border border-border/70 border-t-2 p-4 transition-all duration-200 pointer-hover:-translate-y-1 pointer-hover:shadow-md pointer-hover:border-border md:pointer-hover:scale-[1.02] ${chapterAccent[chapter.id]?.border ?? ""}`}
             >
               {chapterVisual?.imageSrc ? (
-                <FlagImage
-                  src={chapterVisual.imageSrc}
-                  label={chapterVisual.label}
-                />
+                <FlagImage src={chapterVisual.imageSrc} label={chapterVisual.label} />
               ) : (
                 <p
                   className="text-2xl"
-                  aria-label={`Visuel lieu: ${
-                    chapterVisual?.label ?? chapter.location
-                  }`}
+                  aria-label={`Visuel lieu: ${chapterVisual?.label ?? chapter.location}`}
                 >
                   {chapterVisual?.icon ?? "📍"}
                 </p>
               )}
               <h3 className="mt-2 text-lg font-medium">{chapter.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {chapter.location}
-              </p>
-              <p className="mt-3 text-sm text-muted-foreground">
-                {chapter.description}
-              </p>
+              <p className="mt-1 text-sm text-muted-foreground">{chapter.location}</p>
+              <p className="mt-3 text-sm text-muted-foreground">{chapter.description}</p>
               <ul
                 className="mt-4 flex flex-wrap gap-2"
                 aria-label={`Compétences - ${chapter.title}`}

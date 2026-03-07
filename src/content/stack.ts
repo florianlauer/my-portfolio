@@ -70,10 +70,4 @@ export const stackGroups: StackGroup[] = [
   },
 ];
 
-export const stackTags: string[] = [
-  "TypeScript",
-  "Vitest / Jest",
-  "CI/CD",
-  "Performance",
-  "DX",
-];
+export const stackTags: string[] = ["TypeScript", "Vitest / Jest", "CI/CD", "Performance", "DX"];

@@ -3,8 +3,7 @@ import type { AProposContent, PassionsSectionContent } from "@/types/passions";
 /** Section Passions sur la home (teaser, ton pro). Modifiable ici. */
 export const passionsSectionContent: PassionsSectionContent = {
   title: "Passions",
-  subtitle:
-    "En dehors du code, le voyage, les side projects et le sport occupent une bonne place.",
+  subtitle: "En dehors du code, le voyage, les side projects et le sport occupent une bonne place.",
   blocks: [
     {
       id: "sport",
@@ -15,11 +14,7 @@ export const passionsSectionContent: PassionsSectionContent = {
     {
       id: "side-projects",
       title: "Side projects",
-      items: [
-        "🏠 Domotique (Home Assistant)",
-        "🖨️ Impression 3D",
-        "⌨️ Outils dev",
-      ],
+      items: ["🏠 Domotique (Home Assistant)", "🖨️ Impression 3D", "⌨️ Outils dev"],
       closing: "Des expérimentations qui s'enchaînent.",
     },
     {

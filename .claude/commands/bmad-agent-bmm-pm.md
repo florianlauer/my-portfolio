@@ -1,6 +1,6 @@
 ---
-name: 'pm'
-description: 'pm agent'
+name: "pm"
+description: "pm agent"
 disable-model-invocation: true
 ---
 

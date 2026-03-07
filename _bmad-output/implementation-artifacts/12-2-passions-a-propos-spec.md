@@ -56,14 +56,14 @@
 
 ## Récap implémentation
 
-| Élément | Détail |
-|--------|--------|
-| Section home | Bloc « Passions » entre Arsenal et Contact, sous-blocs, ton pro |
-| Page dédiée | `/a-propos`, contenu détaillé, ton perso, mention « En dehors du code » |
-| Nav home | Parcours · Arsenal · **Passions** · **À propos** · Contact |
-| Ancrage | `#passions` pour la section Passions |
-| Contenu | `src/content/*` (ex. `passions.ts` ou `aPropos.ts`) |
-| Optionnel | Bouton « En savoir plus » section Passions → `/a-propos` |
+| Élément      | Détail                                                                  |
+| ------------ | ----------------------------------------------------------------------- |
+| Section home | Bloc « Passions » entre Arsenal et Contact, sous-blocs, ton pro         |
+| Page dédiée  | `/a-propos`, contenu détaillé, ton perso, mention « En dehors du code » |
+| Nav home     | Parcours · Arsenal · **Passions** · **À propos** · Contact              |
+| Ancrage      | `#passions` pour la section Passions                                    |
+| Contenu      | `src/content/*` (ex. `passions.ts` ou `aPropos.ts`)                     |
+| Optionnel    | Bouton « En savoir plus » section Passions → `/a-propos`                |
 
 ---
 

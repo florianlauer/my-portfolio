@@ -3,12 +3,12 @@ stepsCompleted: [1, 2, 3, 4]
 session_active: false
 workflow_completed: true
 inputDocuments: []
-session_topic: 'Portfolio développeur full-stack : site vitrine rassemblant projets personnels et professionnels, reflétant créativité et intérêt pour le design (7+ ans d''expérience).'
-session_goals: 'Site complet (infos pro, projets, passions) ; inspiration benchmarks/concurrents ; identité visuelle et style distinctif.'
-selected_approach: 'AI-Recommended Techniques'
-techniques_used: ['Cross-Pollination', 'Metaphor Mapping', 'SCAMPER Method']
+session_topic: "Portfolio développeur full-stack : site vitrine rassemblant projets personnels et professionnels, reflétant créativité et intérêt pour le design (7+ ans d'expérience)."
+session_goals: "Site complet (infos pro, projets, passions) ; inspiration benchmarks/concurrents ; identité visuelle et style distinctif."
+selected_approach: "AI-Recommended Techniques"
+techniques_used: ["Cross-Pollination", "Metaphor Mapping", "SCAMPER Method"]
 ideas_generated: 25
-context_file: '_bmad/bmm/data/project-context-template.md'
+context_file: "_bmad/bmm/data/project-context-template.md"
 ---
 
 # Brainstorming Session Results
@@ -89,6 +89,7 @@ Session validée : focus portfolio créatif et orienté design, objectifs sur co
 - **R (Reverse)** : Inverser « ce que je cherche » / « ce que j'offre » (ou logique d'une section) — à voir.
 
 **Clarifications retenues :**
+
 - Parcours (3 lieux) = **mouvements pro/vie** (où tu as vécu). Voyages vacances = hero, 404, photos (~20 pays).
 - Structure Parcours + compétences : **Option C** — Chapitre 1 Départ (France), Chapitre 2 Expansion (Angleterre), Chapitre 3 Aujourd'hui + Arsenal (stack, compétences).
 
