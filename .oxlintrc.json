@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "nextjs", "jsx-a11y", "typescript"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off"
+  },
+  "settings": {
+    "next": {
+      "rootDir": ["."]
+    },
+    "react": {
+      "formComponents": [],
+      "linkComponents": [{ "name": "Link", "attribute": "href" }],
+      "version": null,
+      "componentWrapperFunctions": []
+    },
+    "jsx-a11y": {
+      "polymorphicPropName": null,
+      "components": {},
+      "attributes": {}
+    }
+  },
+  "env": {
+    "builtin": true
+  },
+  "globals": {},
+  "ignorePatterns": [".next/**", "out/**", "build/**"]
+}

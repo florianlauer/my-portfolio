@@ -11,10 +11,12 @@ Personal portfolio site in French — Next.js 16 App Router, TypeScript, Tailwin
 ```bash
 npm run dev      # Dev server (Turbopack) — http://localhost:3000
 npm run build    # Production build
-npm run lint     # ESLint (flat config, core-web-vitals + TS)
+npm run lint     # oxlint (fast Rust-based linter)
+npm run fmt      # oxfmt — format src/ in place
+npm run fmt:check # oxfmt — check formatting (CI)
 ```
 
-No test runner is configured. Linting is the only quality gate.
+No test runner is configured. Linting + formatting are the quality gates.
 
 ## Dev Environment
 

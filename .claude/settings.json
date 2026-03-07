@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "mcp__exa__web_search_exa",
+      "Bash(claude:*)",
+      "Bash(npm run dev)",
+      "Bash(head:*)",
+      "Bash(npm run:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl:*)",
+      "Bash(echo {}:*)",
+      "Bash(LC_ALL=C echo {}:*)",
+      "Bash(~/.claude/statusline.sh:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "shadcn"
+  ]
+}
