@@ -111,6 +111,7 @@ export function Lightbox({
       aria-modal="true"
       aria-label={`Image ${currentIndex + 1} sur ${n} : ${currentItem?.caption ?? ""}`}
       onClick={onClose}
+      onKeyDown={(e) => { if (e.key === "Escape") onClose(); }}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}

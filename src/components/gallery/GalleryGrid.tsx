@@ -100,7 +100,7 @@ export function GalleryGrid({
               const delayMs = isNewFromLoadMore ? rowIndex * 120 : 0;
               return (
                 <figure
-                  key={`${item.id}-${index}`}
+                  key={item.id}
                   className={isNewFromLoadMore ? "gallery-item-new opacity-0" : ""}
                   style={isNewFromLoadMore ? { animationDelay: `${delayMs}ms` } : undefined}
                   role="listitem"
