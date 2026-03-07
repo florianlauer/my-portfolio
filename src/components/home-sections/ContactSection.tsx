@@ -25,7 +25,7 @@ export const ContactSection = ({
         <p className="mt-4 text-sm text-muted-foreground">
           Canal principal:{" "}
           <a
-            className="font-medium text-foreground underline underline-offset-4"
+            className="font-medium text-foreground underline underline-offset-4 pointer-hover:text-primary transition-colors"
             href={primaryContactLink.href}
             target="_blank"
             rel="noopener noreferrer"
@@ -44,7 +44,7 @@ export const ContactSection = ({
         <p className="mt-2 text-sm text-muted-foreground">
           Email:{" "}
           <a
-            className="font-medium text-foreground underline underline-offset-4"
+            className="font-medium text-foreground underline underline-offset-4 pointer-hover:text-primary transition-colors"
             href={`mailto:${contactEmail}`}
             aria-label={`Envoyer un email à ${contactEmail}`}
           >
@@ -57,7 +57,7 @@ export const ContactSection = ({
         {socialLinks.map((link) => (
           <li key={link.id}>
             <a
-              className="text-sm text-foreground underline underline-offset-4"
+              className="text-sm text-foreground underline underline-offset-4 pointer-hover:text-primary transition-colors"
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"

@@ -38,7 +38,7 @@ export default function AProposPage(): React.JSX.Element {
                 <p className="mt-3">
                   <Link
                     href="/galerie"
-                    className="text-sm font-medium text-primary underline underline-offset-4 hover:text-primary/90"
+                    className="text-sm font-medium text-primary underline underline-offset-4 pointer-hover:text-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
                   >
                     Voir plus de photos →
                   </Link>

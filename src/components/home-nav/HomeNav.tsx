@@ -17,7 +17,7 @@ const AT_MAX_THRESHOLD = 0.02;
 const BOUNCE_DURATION_MS = 750;
 
 const linkBaseClass =
-  "home-nav-link shrink-0 rounded-full text-foreground whitespace-nowrap outline-none transition-colors duration-200 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+  "home-nav-link shrink-0 rounded-full text-foreground whitespace-nowrap outline-none transition-colors duration-200 pointer-hover:bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 min-h-[2.75rem] inline-flex items-center";
 
 const SECTION_IDS = ["parcours", "stack", "passions", "contact"] as const;
 
@@ -30,9 +30,24 @@ const ANCHOR_TO_SECTION: Record<string, string> = {
 
 export function HomeNav(): React.JSX.Element {
   const navRef = useRef<HTMLElement>(null);
+  const leftFadeRef = useRef<HTMLDivElement>(null);
   const [bounceType, setBounceType] = useState<"min" | "max" | null>(null);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const pathname = usePathname();
+
+  // Indicateur de scroll gauche sur la nav
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+    const handleNavScroll = (): void => {
+      if (leftFadeRef.current) {
+        leftFadeRef.current.style.opacity = nav.scrollLeft > 4 ? "1" : "0";
+      }
+    };
+    nav.addEventListener("scroll", handleNavScroll, { passive: true });
+    handleNavScroll();
+    return () => nav.removeEventListener("scroll", handleNavScroll);
+  }, []);
 
   // Détection section active au scroll
   useEffect(() => {
@@ -166,6 +181,11 @@ export function HomeNav(): React.JSX.Element {
             Contact
           </a>
         </nav>
+        <div
+          ref={leftFadeRef}
+          className="pointer-events-none absolute left-0 top-0 bottom-0 w-10 bg-linear-to-r from-background/98 to-transparent rounded-l-full opacity-0 transition-opacity duration-200"
+          aria-hidden
+        />
         <div
           className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 bg-linear-to-l from-background/98 to-transparent rounded-r-full"
           aria-hidden

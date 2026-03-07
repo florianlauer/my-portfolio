@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { JourneyChapter } from "@/types/journey";
+import { FlagImage } from "./FlagImage";
 
 type JourneySectionProps = {
   journeyChapters: JourneyChapter[];
@@ -54,15 +54,12 @@ export const JourneySection = ({
           return (
             <article
               key={chapter.id}
-              className={`rounded-xl border border-border/70 border-t-2 p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-border md:hover:scale-[1.02] ${chapterAccent[chapter.id]?.border ?? ""}`}
+              className={`rounded-xl border border-border/70 border-t-2 p-4 transition-all duration-200 pointer-hover:-translate-y-1 pointer-hover:shadow-md pointer-hover:border-border md:pointer-hover:scale-[1.02] ${chapterAccent[chapter.id]?.border ?? ""}`}
             >
               {chapterVisual?.imageSrc ? (
-                <Image
+                <FlagImage
                   src={chapterVisual.imageSrc}
-                  alt={`Drapeau ${chapterVisual.label}`}
-                  width={30}
-                  height={18}
-                  className="h-5 w-7 rounded-sm border border-border/60 object-cover"
+                  label={chapterVisual.label}
                 />
               ) : (
                 <p

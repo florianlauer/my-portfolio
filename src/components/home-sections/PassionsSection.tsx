@@ -23,7 +23,7 @@ export const PassionsSection = ({
         {content.blocks.map((block) => (
           <article
             key={block.id}
-            className="rounded-xl border border-border/70 p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-border md:hover:scale-[1.02]"
+            className="rounded-xl border border-border/70 border-t-2 border-t-primary p-4 transition-all duration-200 pointer-hover:-translate-y-1 pointer-hover:shadow-md pointer-hover:border-border md:pointer-hover:scale-[1.02]"
           >
             <h3 className="text-lg font-medium">{block.title}</h3>
             <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
@@ -40,7 +40,7 @@ export const PassionsSection = ({
         <p className="mt-6">
           <Link
             href="/a-propos"
-            className="text-sm font-medium text-primary underline underline-offset-4 hover:text-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
+            className="text-sm font-medium text-primary underline underline-offset-4 pointer-hover:text-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded"
           >
             {content.linkToAProposLabel}
           </Link>

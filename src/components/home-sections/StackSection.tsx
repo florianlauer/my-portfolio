@@ -36,7 +36,7 @@ export const StackSection = ({
           <article
             key={group.family}
             className={cn(
-              "rounded-xl border border-border/70 border-t-2 p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-border md:hover:scale-[1.02]",
+              "rounded-xl border border-border/70 border-t-2 p-4 transition-all duration-200 pointer-hover:-translate-y-1 pointer-hover:shadow-md pointer-hover:border-border md:pointer-hover:scale-[1.02]",
               accent.border
             )}
           >
@@ -61,7 +61,7 @@ export const StackSection = ({
         {stackTags.map((tag) => (
           <li
             key={tag}
-            className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary transition-transform duration-150 hover:scale-105"
+            className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary transition-transform duration-150 pointer-hover:scale-105"
           >
             {tag}
           </li>
