@@ -213,3 +213,14 @@
 .home-nav-bounce-max {
   animation: home-nav-bounce-max 0.4s ease-out;
 }
+
+/* HomeNav : taille pilotée par des custom properties (1 élément muté, cascade aux enfants) */
+.home-nav {
+  padding: var(--nav-padding, 16px);
+  gap: var(--nav-gap, 12px);
+}
+
+.home-nav-link {
+  padding: var(--link-py, 8px) var(--link-px, 16px);
+  font-size: var(--link-fs, 16px);
+}

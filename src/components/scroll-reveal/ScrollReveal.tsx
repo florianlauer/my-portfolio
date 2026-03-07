@@ -33,7 +33,7 @@ export function ScrollReveal({
       ref={ref}
       className={cn(
         "scroll-reveal transition-[opacity,transform] duration-700 ease-out",
-        isVisible ? "scroll-reveal-visible" : "scroll-reveal-hidden",
+        isVisible ? "scroll-reveal-visible" : "scroll-reveal-hidden will-change-[opacity,transform]",
         className
       )}
     >

@@ -118,6 +118,7 @@ export function Lightbox({
                     alt={item.alt}
                     width={1200}
                     height={800}
+                    sizes="(max-width: 768px) 100vw, 80vw"
                     className="max-h-[85vh] w-auto object-contain"
                     priority={idx === currentIndex}
                   />

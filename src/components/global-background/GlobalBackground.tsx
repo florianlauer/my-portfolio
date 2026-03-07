@@ -61,13 +61,11 @@ export function GlobalBackground(): React.JSX.Element {
     handleScroll();
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", updateLayout, { passive: true });
     const resizeObserver = new ResizeObserver(updateLayout);
     resizeObserver.observe(document.body);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updateLayout);
       resizeObserver.disconnect();
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
