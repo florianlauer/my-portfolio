@@ -14,10 +14,10 @@
 
 ### Graph Rendering
 
-- [ ] **RENDER-01**: Noeuds SVG affichant nom, icone et couleur de categorie
-- [ ] **RENDER-02**: Edges SVG entre technos liees (lignes/courbes reliant les noeuds)
+- [x] **RENDER-01**: Noeuds SVG affichant nom, icone et couleur de categorie
+- [x] **RENDER-02**: Edges SVG entre technos liees (lignes/courbes reliant les noeuds)
 - [ ] **RENDER-03**: Layout force-directed via d3-force (positionnement automatique des noeuds)
-- [ ] **RENDER-04**: Legende des categories avec code couleur
+- [x] **RENDER-04**: Legende des categories avec code couleur
 
 ### Interactivity
 
@@ -28,9 +28,9 @@
 
 ### Page Integration
 
-- [ ] **PAGE-01**: Route `/stack` utilisant PageShell (nav, background, skip-to-content)
-- [ ] **PAGE-02**: Lien vers /stack dans la navigation principale (HomeNav)
-- [ ] **PAGE-03**: Metadata SEO (title, description, Open Graph) pour /stack
+- [x] **PAGE-01**: Route `/stack` utilisant PageShell (nav, background, skip-to-content)
+- [x] **PAGE-02**: Lien vers /stack dans la navigation principale (HomeNav)
+- [x] **PAGE-03**: Metadata SEO (title, description, Open Graph) pour /stack
 
 ### Accessibility
 
@@ -72,13 +72,13 @@
 | DATA-02     | Phase 1 | Complete |
 | DATA-03     | Phase 1 | Complete |
 | DATA-04     | Phase 1 | Complete |
-| RENDER-01   | Phase 2 | Pending  |
-| RENDER-02   | Phase 2 | Pending  |
+| RENDER-01   | Phase 2 | Complete |
+| RENDER-02   | Phase 2 | Complete |
 | RENDER-03   | Phase 2 | Pending  |
-| RENDER-04   | Phase 2 | Pending  |
-| PAGE-01     | Phase 2 | Pending  |
-| PAGE-02     | Phase 2 | Pending  |
-| PAGE-03     | Phase 2 | Pending  |
+| RENDER-04   | Phase 2 | Complete |
+| PAGE-01     | Phase 2 | Complete |
+| PAGE-02     | Phase 2 | Complete |
+| PAGE-03     | Phase 2 | Complete |
 | INTER-01    | Phase 3 | Pending  |
 | INTER-02    | Phase 3 | Pending  |
 | INTER-03    | Phase 3 | Pending  |
