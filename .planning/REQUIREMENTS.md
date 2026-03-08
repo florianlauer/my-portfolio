@@ -7,10 +7,10 @@
 
 ### Data Model
 
-- [ ] **DATA-01**: Types TypeScript pour noeuds (id, nom, icone, categorie, niveau, description) et edges (source, target, type)
-- [ ] **DATA-02**: Contenu graph dans `src/content/stack-graph.ts` avec relations entre technos (React <-> TypeScript, Node <-> Express...)
-- [ ] **DATA-03**: Niveaux d'experience par techno (ex: expert, advanced, intermediate)
-- [ ] **DATA-04**: Categories couleur par domaine (Frontend, Backend, DevOps) avec code oklch
+- [x] **DATA-01**: Types TypeScript pour noeuds (id, nom, icone, categorie, niveau, description) et edges (source, target, type)
+- [x] **DATA-02**: Contenu graph dans `src/content/stack-graph.ts` avec relations entre technos (React <-> TypeScript, Node <-> Express...)
+- [x] **DATA-03**: Niveaux d'experience par techno (ex: expert, advanced, intermediate)
+- [x] **DATA-04**: Categories couleur par domaine (Frontend, Backend, DevOps) avec code oklch
 
 ### Graph Rendering
 
@@ -68,10 +68,10 @@
 
 | Requirement | Phase   | Status  |
 | ----------- | ------- | ------- |
-| DATA-01     | Phase 1 | Pending |
-| DATA-02     | Phase 1 | Pending |
-| DATA-03     | Phase 1 | Pending |
-| DATA-04     | Phase 1 | Pending |
+| DATA-01     | Phase 1 | Complete |
+| DATA-02     | Phase 1 | Complete |
+| DATA-03     | Phase 1 | Complete |
+| DATA-04     | Phase 1 | Complete |
 | RENDER-01   | Phase 2 | Pending |
 | RENDER-02   | Phase 2 | Pending |
 | RENDER-03   | Phase 2 | Pending |

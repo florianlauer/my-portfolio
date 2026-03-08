@@ -62,8 +62,7 @@ export const stackGraph = {
       label: "Vite",
       family: "frontend",
       level: "Avancé",
-      description:
-        "Bundler ultra-rapide que j'utilise sur les projets hors Next.js.",
+      description: "Bundler ultra-rapide que j'utilise sur les projets hors Next.js.",
     },
     {
       id: "angular",
@@ -78,16 +77,14 @@ export const stackGraph = {
       label: "SCSS",
       family: "frontend",
       level: "Intermédiaire",
-      description:
-        "Utilisé avant Tailwind — je sais m'en servir mais je n'y reviens plus.",
+      description: "Utilisé avant Tailwind — je sais m'en servir mais je n'y reviens plus.",
     },
     {
       id: "styled-components",
       label: "Styled Components",
       family: "frontend",
       level: "Avancé",
-      description:
-        "CSS-in-JS utilisé sur les projets professionnels au quotidien.",
+      description: "CSS-in-JS utilisé sur les projets professionnels au quotidien.",
     },
     {
       id: "gatsbyjs",
@@ -104,16 +101,14 @@ export const stackGraph = {
       label: "Capacitor (iOS/Android)",
       family: "mobile",
       level: "Expert",
-      description:
-        "J'ai livré des apps hybrides iOS/Android à partir de bases React existantes.",
+      description: "J'ai livré des apps hybrides iOS/Android à partir de bases React existantes.",
     },
     {
       id: "capacitor-plugin",
       label: "Plugins Capacitor",
       family: "mobile",
       level: "Intermédiaire",
-      description:
-        "Développement de plugins natifs custom pour combler les besoins métier.",
+      description: "Développement de plugins natifs custom pour combler les besoins métier.",
     },
     {
       id: "bitrise",
@@ -145,32 +140,28 @@ export const stackGraph = {
       label: "Express",
       family: "backend",
       level: "Avancé",
-      description:
-        "Le classique Node.js — utilisé sur de nombreux projets avant NestJS.",
+      description: "Le classique Node.js — utilisé sur de nombreux projets avant NestJS.",
     },
     {
       id: "graphql",
       label: "GraphQL (Apollo)",
       family: "backend",
       level: "Avancé",
-      description:
-        "APIs GraphQL avec Apollo Server et Client. Schemas, resolvers, subscriptions.",
+      description: "APIs GraphQL avec Apollo Server et Client. Schemas, resolvers, subscriptions.",
     },
     {
       id: "python-fastapi",
       label: "Python / FastAPI",
       family: "backend",
       level: "Intermédiaire",
-      description:
-        "Utilisé pour des microservices data et des APIs légères en Python.",
+      description: "Utilisé pour des microservices data et des APIs légères en Python.",
     },
     {
       id: "kafka",
       label: "Kafka",
       family: "backend",
       level: "Notions",
-      description:
-        "Event streaming en production — consumers, producers, topics partitionnés.",
+      description: "Event streaming en production — consumers, producers, topics partitionnés.",
     },
 
     // ── Data (4) ──────────────────────────────────────────────────
@@ -194,8 +185,7 @@ export const stackGraph = {
       label: "Drizzle ORM",
       family: "data",
       level: "Avancé",
-      description:
-        "ORM TypeScript léger que j'adopte sur les nouveaux projets.",
+      description: "ORM TypeScript léger que j'adopte sur les nouveaux projets.",
     },
     {
       id: "prisma",
@@ -227,8 +217,7 @@ export const stackGraph = {
       label: "GitHub Actions",
       family: "infra",
       level: "Avancé",
-      description:
-        "Pipelines CI/CD sur tous mes repos — tests, lint, deploy automatisés.",
+      description: "Pipelines CI/CD sur tous mes repos — tests, lint, deploy automatisés.",
     },
     {
       id: "aws",
@@ -243,8 +232,7 @@ export const stackGraph = {
       label: "Datadog",
       family: "infra",
       level: "Avancé",
-      description:
-        "Monitoring et alerting en production — dashboards, APM, logs centralisés.",
+      description: "Monitoring et alerting en production — dashboards, APM, logs centralisés.",
     },
     {
       id: "nix",
@@ -261,8 +249,7 @@ export const stackGraph = {
       label: "HubSpot",
       family: "integrations",
       level: "Avancé",
-      description:
-        "Intégration CRM via API — sync contacts, deals, workflows automatisés.",
+      description: "Intégration CRM via API — sync contacts, deals, workflows automatisés.",
     },
     {
       id: "chargebee",
@@ -276,24 +263,21 @@ export const stackGraph = {
       label: "Mixpanel",
       family: "integrations",
       level: "Expert",
-      description:
-        "Analytics produit — tracking d'événements, funnels, rétention.",
+      description: "Analytics produit — tracking d'événements, funnels, rétention.",
     },
     {
       id: "intercom",
       label: "Intercom",
       family: "integrations",
       level: "Avancé",
-      description:
-        "Intégration du widget et des APIs pour le support client in-app.",
+      description: "Intégration du widget et des APIs pour le support client in-app.",
     },
     {
       id: "contentful",
       label: "Contentful",
       family: "integrations",
       level: "Avancé",
-      description:
-        "CMS headless — modèles de contenu, API GraphQL, webhooks de publication.",
+      description: "CMS headless — modèles de contenu, API GraphQL, webhooks de publication.",
     },
 
     // ── Méthodes & Architecture (5) ──────────────────────────────
@@ -318,16 +302,14 @@ export const stackGraph = {
       label: "Architecture Hexagonale",
       family: "methods",
       level: "Expert",
-      description:
-        "Ports & Adapters — découplage du domaine métier des dépendances techniques.",
+      description: "Ports & Adapters — découplage du domaine métier des dépendances techniques.",
     },
     {
       id: "cqrs",
       label: "CQRS",
       family: "methods",
       level: "Intermédiaire",
-      description:
-        "Séparation lecture/écriture pour des systèmes scalables et maintenables.",
+      description: "Séparation lecture/écriture pour des systèmes scalables et maintenables.",
     },
     {
       id: "clean-architecture",
