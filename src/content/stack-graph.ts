@@ -131,7 +131,7 @@ export const stackGraph = {
       id: "nestjs",
       label: "NestJS",
       family: "backend",
-      level: "Avancé",
+      level: "Expert",
       description:
         "Framework structuré pour les APIs complexes. Modules, guards, interceptors — très productif en équipe.",
     },

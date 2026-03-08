@@ -15,9 +15,11 @@ export const metadata = {
 
 export default function StackPage(): React.JSX.Element {
   return (
-    <PageShell containerClassName="max-w-none px-0">
-      <h1 className="px-6 text-2xl font-semibold tracking-tight text-foreground/80">Ma Stack</h1>
-      <StackGraph data={stackGraph} />
+    <PageShell containerClassName="max-w-7xl">
+      <div className="rounded-2xl border border-border bg-background/92 p-6 md:p-8 backdrop-blur-sm">
+        <h1 className="mb-6 text-3xl font-semibold tracking-tight">Ma Stack</h1>
+        <StackGraph data={stackGraph} />
+      </div>
     </PageShell>
   );
 }

@@ -1,9 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { forceSimulation, forceCenter, forceManyBody, forceLink, forceCollide } from "d3-force";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  forceSimulation,
+  forceCenter,
+  forceManyBody,
+  forceLink,
+  forceCollide,
+  forceX,
+  forceY,
+} from "d3-force";
 import type { Simulation, SimulationNodeDatum, SimulationLinkDatum } from "d3-force";
-import type { GraphNode, GraphEdge } from "@/types/stack-graph";
+import type { GraphNode, GraphEdge, ExperienceLevel } from "@/types/stack-graph";
 
 export type SimNode = GraphNode &
   SimulationNodeDatum & {
@@ -18,15 +26,23 @@ type SimEdge = SimulationLinkDatum<SimNode> & {
   target: string | SimNode;
 };
 
+// Collision radius per level — circle radius + spacing
+export const COLLIDE_RADIUS: Record<ExperienceLevel, number> = {
+  Expert: 40,
+  Avancé: 32,
+  Intermédiaire: 26,
+  Notions: 20,
+};
+
 export function useForceLayout(
   nodes: GraphNode[],
   edges: GraphEdge[],
   width: number,
   height: number,
-): { positions: SimNode[]; isStabilized: boolean } {
+) {
   const [positions, setPositions] = useState<SimNode[]>([]);
-  const [isStabilized, setIsStabilized] = useState(false);
   const simRef = useRef<Simulation<SimNode, SimEdge> | null>(null);
+  const nodesRef = useRef<SimNode[]>([]);
   const initRef = useRef(false);
 
   useEffect(() => {
@@ -36,11 +52,12 @@ export function useForceLayout(
 
     const simNodes: SimNode[] = nodes.map((n) => ({
       ...n,
-      x: width / 2 + (Math.random() - 0.5) * 100,
-      y: height / 2 + (Math.random() - 0.5) * 100,
+      x: width / 2 + (Math.random() - 0.5) * width * 0.6,
+      y: height / 2 + (Math.random() - 0.5) * height * 0.6,
       vx: 0,
       vy: 0,
     }));
+    nodesRef.current = simNodes;
 
     const simEdges: SimEdge[] = edges.map((e) => ({
       source: e.source,
@@ -54,20 +71,30 @@ export function useForceLayout(
         "link",
         forceLink<SimNode, SimEdge>(simEdges)
           .id((d) => d.id)
-          .distance(120)
-          .strength(0.4),
+          .distance(100)
+          .strength(0.3),
       )
-      .force("collide", forceCollide<SimNode>().radius(40))
+      .force(
+        "collide",
+        forceCollide<SimNode>()
+          .radius((d) => COLLIDE_RADIUS[d.level] ?? 28)
+          .strength(1)
+          .iterations(3),
+      )
+      // Gentle pull to keep nodes within bounds
+      .force("x", forceX<SimNode>(width / 2).strength(0.03))
+      .force("y", forceY<SimNode>(height / 2).strength(0.03))
       .alpha(1)
       .alphaDecay(0.02)
       .velocityDecay(0.3);
 
+    const padding = 40;
     sim.on("tick", () => {
+      for (const n of simNodes) {
+        n.x = Math.max(padding, Math.min(width - padding, n.x));
+        n.y = Math.max(padding, Math.min(height - padding, n.y));
+      }
       setPositions([...simNodes]);
-    });
-
-    sim.on("end", () => {
-      setIsStabilized(true);
     });
 
     simRef.current = sim;
@@ -78,5 +105,36 @@ export function useForceLayout(
     };
   }, [nodes, edges, width, height]);
 
-  return { positions, isStabilized };
+  // Drag handlers — reheat simulation, fix/release node
+  const dragStart = useCallback((id: string, svgX: number, svgY: number) => {
+    const sim = simRef.current;
+    if (!sim) return;
+    sim.alphaTarget(0.3).restart();
+    const node = nodesRef.current.find((n) => n.id === id);
+    if (node) {
+      node.fx = svgX;
+      node.fy = svgY;
+    }
+  }, []);
+
+  const dragMove = useCallback((id: string, svgX: number, svgY: number) => {
+    const node = nodesRef.current.find((n) => n.id === id);
+    if (node) {
+      node.fx = svgX;
+      node.fy = svgY;
+    }
+  }, []);
+
+  const dragEnd = useCallback((id: string) => {
+    const sim = simRef.current;
+    if (!sim) return;
+    sim.alphaTarget(0);
+    const node = nodesRef.current.find((n) => n.id === id);
+    if (node) {
+      node.fx = null;
+      node.fy = null;
+    }
+  }, []);
+
+  return { positions, dragStart, dragMove, dragEnd };
 }
