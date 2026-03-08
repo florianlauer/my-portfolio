@@ -4,10 +4,23 @@ export const stackGraph = {
   familyColors: [
     { family: "frontend", label: "Frontend", color: "oklch(0.75 0.18 85)" },
     { family: "mobile", label: "Mobile", color: "oklch(0.70 0.19 55)" },
-    { family: "backend", label: "Backend & API", color: "oklch(0.68 0.16 230)" },
+    {
+      family: "backend",
+      label: "Backend & API",
+      color: "oklch(0.68 0.16 230)",
+    },
     { family: "data", label: "Data", color: "oklch(0.72 0.14 195)" },
     { family: "infra", label: "Infra / DevOps", color: "oklch(0.70 0.14 170)" },
-    { family: "integrations", label: "Integrations SaaS", color: "oklch(0.65 0.20 300)" },
+    {
+      family: "integrations",
+      label: "Integrations SaaS",
+      color: "oklch(0.65 0.20 300)",
+    },
+    {
+      family: "methods",
+      label: "Méthodes & Architecture",
+      color: "oklch(0.72 0.15 145)",
+    },
   ],
 
   nodes: [
@@ -24,9 +37,9 @@ export const stackGraph = {
       id: "nextjs",
       label: "Next.js",
       family: "frontend",
-      level: "Expert",
+      level: "Avancé",
       description:
-        "Mon framework de prédilection pour le web. App Router, SSR, RSC — je l'utilise au quotidien.",
+        "Framework React que je connais bien — App Router, SSR, RSC. Utilisé sur plusieurs projets perso et pro.",
     },
     {
       id: "typescript",
@@ -40,7 +53,7 @@ export const stackGraph = {
       id: "tailwindcss",
       label: "Tailwind CSS",
       family: "frontend",
-      level: "Expert",
+      level: "Avancé",
       description:
         "Mon approche CSS par défaut. Rapide, cohérent, parfait avec les composants React.",
     },
@@ -49,7 +62,8 @@ export const stackGraph = {
       label: "Vite",
       family: "frontend",
       level: "Avancé",
-      description: "Bundler ultra-rapide que j'utilise sur les projets hors Next.js.",
+      description:
+        "Bundler ultra-rapide que j'utilise sur les projets hors Next.js.",
     },
     {
       id: "angular",
@@ -63,8 +77,25 @@ export const stackGraph = {
       id: "scss",
       label: "SCSS",
       family: "frontend",
-      level: "Notions",
-      description: "Utilisé avant Tailwind — je sais m'en servir mais je n'y reviens plus.",
+      level: "Intermédiaire",
+      description:
+        "Utilisé avant Tailwind — je sais m'en servir mais je n'y reviens plus.",
+    },
+    {
+      id: "styled-components",
+      label: "Styled Components",
+      family: "frontend",
+      level: "Avancé",
+      description:
+        "CSS-in-JS utilisé sur les projets professionnels au quotidien.",
+    },
+    {
+      id: "gatsbyjs",
+      label: "Gatsby",
+      family: "frontend",
+      level: "Intermédiaire",
+      description:
+        "Générateur de sites statiques React — utilisé pour des sites vitrines avant l'adoption de Next.js.",
     },
 
     // ── Mobile (3) ────────────────────────────────────────────────
@@ -72,21 +103,23 @@ export const stackGraph = {
       id: "capacitor",
       label: "Capacitor (iOS/Android)",
       family: "mobile",
-      level: "Intermédiaire",
-      description: "J'ai livré des apps hybrides iOS/Android à partir de bases React existantes.",
+      level: "Expert",
+      description:
+        "J'ai livré des apps hybrides iOS/Android à partir de bases React existantes.",
     },
     {
       id: "capacitor-plugin",
       label: "Plugins Capacitor",
       family: "mobile",
       level: "Intermédiaire",
-      description: "Développement de plugins natifs custom pour combler les besoins métier.",
+      description:
+        "Développement de plugins natifs custom pour combler les besoins métier.",
     },
     {
       id: "bitrise",
       label: "Bitrise CI",
       family: "mobile",
-      level: "Notions",
+      level: "Expert",
       description: "CI/CD mobile configuré pour les builds iOS et Android.",
     },
 
@@ -112,28 +145,32 @@ export const stackGraph = {
       label: "Express",
       family: "backend",
       level: "Avancé",
-      description: "Le classique Node.js — utilisé sur de nombreux projets avant NestJS.",
+      description:
+        "Le classique Node.js — utilisé sur de nombreux projets avant NestJS.",
     },
     {
       id: "graphql",
       label: "GraphQL (Apollo)",
       family: "backend",
       level: "Avancé",
-      description: "APIs GraphQL avec Apollo Server et Client. Schemas, resolvers, subscriptions.",
+      description:
+        "APIs GraphQL avec Apollo Server et Client. Schemas, resolvers, subscriptions.",
     },
     {
       id: "python-fastapi",
       label: "Python / FastAPI",
       family: "backend",
       level: "Intermédiaire",
-      description: "Utilisé pour des microservices data et des APIs légères en Python.",
+      description:
+        "Utilisé pour des microservices data et des APIs légères en Python.",
     },
     {
       id: "kafka",
       label: "Kafka",
       family: "backend",
-      level: "Intermédiaire",
-      description: "Event streaming en production — consumers, producers, topics partitionnés.",
+      level: "Notions",
+      description:
+        "Event streaming en production — consumers, producers, topics partitionnés.",
     },
 
     // ── Data (4) ──────────────────────────────────────────────────
@@ -149,22 +186,23 @@ export const stackGraph = {
       id: "mysql",
       label: "MySQL",
       family: "data",
-      level: "Notions",
+      level: "Avancé",
       description: "Utilisé sur des projets legacy, je préfère PostgreSQL.",
     },
     {
       id: "drizzle",
       label: "Drizzle ORM",
       family: "data",
-      level: "Intermédiaire",
-      description: "ORM TypeScript léger que j'adopte sur les nouveaux projets.",
+      level: "Avancé",
+      description:
+        "ORM TypeScript léger que j'adopte sur les nouveaux projets.",
     },
     {
       id: "prisma",
       label: "Prisma",
       family: "data",
       level: "Intermédiaire",
-      description: "ORM bien typé, utilisé sur plusieurs projets Next.js/NestJS.",
+      description: "ORM bien typé, utilisé sur NestJS avant Drizzle.",
     },
 
     // ── Infra / DevOps (6) ────────────────────────────────────────
@@ -181,29 +219,32 @@ export const stackGraph = {
       label: "Docker",
       family: "infra",
       level: "Avancé",
-      description: "Conteneurisation systématique. Dockerfiles multi-stage, compose, registries.",
+      description:
+        "Conteneurisation systématique. Dockerfiles multi-stage, compose, registries. Utilisé en perso comme en entreprise.",
     },
     {
       id: "github-actions",
       label: "GitHub Actions",
       family: "infra",
-      level: "Intermédiaire",
-      description: "Pipelines CI/CD sur tous mes repos — tests, lint, deploy automatisés.",
+      level: "Avancé",
+      description:
+        "Pipelines CI/CD sur tous mes repos — tests, lint, deploy automatisés.",
     },
     {
       id: "aws",
-      label: "AWS (Lambda, S3)",
+      label: "AWS (Lambda, S3, RDS, ECS, ECR, Route 53, etc.)",
       family: "infra",
-      level: "Intermédiaire",
+      level: "Avancé",
       description:
-        "Lambda, S3, CloudFront, RDS — les briques classiques pour du serverless et du hosting.",
+        "Lambda, S3, CloudFront, RDS, ECS, ECR, Route 53, etc. — les briques classiques pour du serverless et du hosting.",
     },
     {
       id: "datadog",
       label: "Datadog",
       family: "infra",
-      level: "Notions",
-      description: "Monitoring et alerting en production — dashboards, APM, logs centralisés.",
+      level: "Avancé",
+      description:
+        "Monitoring et alerting en production — dashboards, APM, logs centralisés.",
     },
     {
       id: "nix",
@@ -211,7 +252,7 @@ export const stackGraph = {
       family: "infra",
       level: "Notions",
       description:
-        "Environnements de dev reproductibles avec devenv — c'est ce qui fait tourner ce portfolio.",
+        "Environnements de dev reproductibles avec devenv — j'essaie de l'utiliser partout.",
     },
 
     // ── Integrations SaaS (5) ─────────────────────────────────────
@@ -219,36 +260,90 @@ export const stackGraph = {
       id: "hubspot",
       label: "HubSpot",
       family: "integrations",
-      level: "Notions",
-      description: "Intégration CRM via API — sync contacts, deals, workflows automatisés.",
+      level: "Avancé",
+      description:
+        "Intégration CRM via API — sync contacts, deals, workflows automatisés.",
     },
     {
       id: "chargebee",
       label: "Chargebee",
       family: "integrations",
-      level: "Notions",
+      level: "Avancé",
       description: "Gestion d'abonnements et facturation via API et webhooks.",
     },
     {
       id: "mixpanel",
       label: "Mixpanel",
       family: "integrations",
-      level: "Notions",
-      description: "Analytics produit — tracking d'événements, funnels, rétention.",
+      level: "Expert",
+      description:
+        "Analytics produit — tracking d'événements, funnels, rétention.",
     },
     {
       id: "intercom",
       label: "Intercom",
       family: "integrations",
-      level: "Notions",
-      description: "Intégration du widget et des APIs pour le support client in-app.",
+      level: "Avancé",
+      description:
+        "Intégration du widget et des APIs pour le support client in-app.",
     },
     {
       id: "contentful",
       label: "Contentful",
       family: "integrations",
-      level: "Notions",
-      description: "CMS headless — modèles de contenu, API GraphQL, webhooks de publication.",
+      level: "Avancé",
+      description:
+        "CMS headless — modèles de contenu, API GraphQL, webhooks de publication.",
+    },
+
+    // ── Méthodes & Architecture (5) ──────────────────────────────
+    {
+      id: "tdd",
+      label: "TDD",
+      family: "methods",
+      level: "Avancé",
+      description:
+        "Test-Driven Development appliqué au quotidien — red/green/refactor pour un code fiable.",
+    },
+    {
+      id: "ddd",
+      label: "DDD",
+      family: "methods",
+      level: "Avancé",
+      description:
+        "Domain-Driven Design — bounded contexts, agrégats, ubiquitous language pour modéliser le métier.",
+    },
+    {
+      id: "hexagonal",
+      label: "Architecture Hexagonale",
+      family: "methods",
+      level: "Expert",
+      description:
+        "Ports & Adapters — découplage du domaine métier des dépendances techniques.",
+    },
+    {
+      id: "cqrs",
+      label: "CQRS",
+      family: "methods",
+      level: "Intermédiaire",
+      description:
+        "Séparation lecture/écriture pour des systèmes scalables et maintenables.",
+    },
+    {
+      id: "clean-architecture",
+      label: "Clean Architecture",
+      family: "methods",
+      level: "Expert",
+      description:
+        "Structuration en couches avec inversion de dépendances — code métier isolé et testable.",
+    },
+    {
+      id: "microservices",
+      label: "Microservices",
+      family: "methods",
+      level: "Avancé",
+      description:
+        "Découpage en services autonomes communiquant par API et événements — déployés indépendamment.",
     },
   ],
 
@@ -261,6 +356,9 @@ export const stackGraph = {
     { source: "vite", target: "react" },
     { source: "angular", target: "typescript" },
     { source: "angular", target: "scss" },
+    { source: "styled-components", target: "react" },
+    { source: "gatsbyjs", target: "react" },
+    { source: "gatsbyjs", target: "graphql" },
 
     // ── Backend core ──────────────────────────────────────────────
     { source: "nodejs", target: "nestjs" },
@@ -304,6 +402,19 @@ export const stackGraph = {
     { source: "contentful", target: "nextjs" },
     { source: "mixpanel", target: "react" },
     { source: "intercom", target: "react" },
+
+    // ── Méthodes & Architecture ──────────────────────────────────
+    { source: "tdd", target: "nestjs" },
+    { source: "ddd", target: "nestjs" },
+    { source: "hexagonal", target: "nestjs" },
+    { source: "hexagonal", target: "ddd" },
+    { source: "cqrs", target: "ddd" },
+    { source: "cqrs", target: "nestjs" },
+    { source: "clean-architecture", target: "hexagonal" },
+    { source: "clean-architecture", target: "nestjs" },
+    { source: "microservices", target: "nestjs" },
+    { source: "microservices", target: "docker" },
+    { source: "microservices", target: "kafka" },
   ],
 } as const satisfies StackGraph;
 
