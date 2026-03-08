@@ -66,27 +66,27 @@
 
 ## Traceability
 
-| Requirement | Phase   | Status  |
-| ----------- | ------- | ------- |
+| Requirement | Phase   | Status   |
+| ----------- | ------- | -------- |
 | DATA-01     | Phase 1 | Complete |
 | DATA-02     | Phase 1 | Complete |
 | DATA-03     | Phase 1 | Complete |
 | DATA-04     | Phase 1 | Complete |
-| RENDER-01   | Phase 2 | Pending |
-| RENDER-02   | Phase 2 | Pending |
-| RENDER-03   | Phase 2 | Pending |
-| RENDER-04   | Phase 2 | Pending |
-| PAGE-01     | Phase 2 | Pending |
-| PAGE-02     | Phase 2 | Pending |
-| PAGE-03     | Phase 2 | Pending |
-| INTER-01    | Phase 3 | Pending |
-| INTER-02    | Phase 3 | Pending |
-| INTER-03    | Phase 3 | Pending |
-| INTER-04    | Phase 3 | Pending |
-| A11Y-01     | Phase 4 | Pending |
-| A11Y-02     | Phase 4 | Pending |
-| A11Y-03     | Phase 4 | Pending |
-| A11Y-04     | Phase 4 | Pending |
+| RENDER-01   | Phase 2 | Pending  |
+| RENDER-02   | Phase 2 | Pending  |
+| RENDER-03   | Phase 2 | Pending  |
+| RENDER-04   | Phase 2 | Pending  |
+| PAGE-01     | Phase 2 | Pending  |
+| PAGE-02     | Phase 2 | Pending  |
+| PAGE-03     | Phase 2 | Pending  |
+| INTER-01    | Phase 3 | Pending  |
+| INTER-02    | Phase 3 | Pending  |
+| INTER-03    | Phase 3 | Pending  |
+| INTER-04    | Phase 3 | Pending  |
+| A11Y-01     | Phase 4 | Pending  |
+| A11Y-02     | Phase 4 | Pending  |
+| A11Y-03     | Phase 4 | Pending  |
+| A11Y-04     | Phase 4 | Pending  |
 
 **Coverage:**
 
