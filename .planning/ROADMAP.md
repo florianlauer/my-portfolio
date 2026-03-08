@@ -35,13 +35,14 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 
-- [ ] 01-01-PLAN.md — Graph types, content data (31 nodes, ~35 edges, 6 family colors), user validation
+- [x] 01-01-PLAN.md — Graph types, content data (39 nodes, 53 edges, 7 family colors), user validation
 
 ### Phase 2: Page and Graph Rendering
 
 **Goal**: Visitor can navigate to /stack and see the full tech graph with positioned nodes, edges, and a color-coded legend
 **Depends on**: Phase 1
 **Requirements**: PAGE-01, PAGE-02, PAGE-03, RENDER-01, RENDER-02, RENDER-03, RENDER-04
+**Plans:** 2 plans
 **Success Criteria** (what must be TRUE):
 
 1. `/stack` route renders inside PageShell with correct nav, background, and skip-to-content
@@ -49,11 +50,11 @@ Plans:
 3. Each node displays its name, icon, and category color as an SVG element
 4. Edges visually connect related technologies with lines/curves
 5. Nodes are positioned via d3-force layout (not manual coordinates) and the legend shows all categories with their colors
-   **Plans**: TBD
 
 Plans:
 
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md — Page route, nav link, SEO metadata, icon map, node/edge/legend components
+- [ ] 02-02-PLAN.md — Force layout simulation, StackGraph orchestrator, micro-movement, drag interaction
 
 ### Phase 3: Interactivity
 
@@ -97,6 +98,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase                       | Plans Complete | Status      | Completed  |
 | --------------------------- | -------------- | ----------- | ---------- |
 | 1. Data Foundation          | 1/1            | Complete    | 2026-03-08 |
-| 2. Page and Graph Rendering | 0/?            | Not started | -          |
+| 2. Page and Graph Rendering | 0/2            | Planning    | -          |
 | 3. Interactivity            | 0/?            | Not started | -          |
 | 4. Accessibility            | 0/?            | Not started | -          |
