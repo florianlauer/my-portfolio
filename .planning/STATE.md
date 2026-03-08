@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-03-08T20:32:56.316Z"
-last_activity: 2026-03-07 — Roadmap created
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-03-08T21:25:08.883Z"
+last_activity: 2026-03-08 — Completed 02-01 page route and rendering components
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 3
-  completed_plans: 2
-  percent: 0
+  completed_plans: 3
+  percent: 67
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-07)
 
 **Core value:** Le visiteur comprend en un coup d'oeil les relations entre les compétences de Florian
-**Current focus:** Phase 2 - Page and Graph Rendering
+**Current focus:** Phase 2 complete, ready for Phase 3 - Interactivity
 
 ## Current Position
 
-Phase: 2 of 4 (Page and Graph Rendering)
-Plan: 1 of 2 in current phase
-Status: Executing phase 02
-Last activity: 2026-03-08 — Completed 02-01 page route and rendering components
+Phase: 2 of 4 (Page and Graph Rendering) -- COMPLETE
+Plan: 2 of 2 in current phase (all done)
+Status: Phase 02 complete
+Last activity: 2026-03-08 -- Completed 02-02 force layout and graph interaction
 
-Progress: [███████░░░] 67%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -54,6 +54,7 @@ Progress: [███████░░░] 67%
 _Updated after each plan completion_
 | Phase 01 P01 | 25min | 2 tasks | 5 files |
 | Phase 02 P01 | 3min | 2 tasks | 7 files |
+| Phase 02 P02 | 45min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -70,6 +71,9 @@ Recent decisions affecting current work:
 - [Phase 02]: Used siFastapi for python-fastapi icon (more specific than siPython)
 - [Phase 02]: 29/39 nodes have simple-icons; 10 fallback to text-only pills
 - [Phase 02]: SVG feDropShadow for glow (more reliable than CSS filter in SVG)
+- [Phase 02]: Circles with centered icons instead of pill shapes (cleaner, scales better)
+- [Phase 02]: d3-native drag via fx/fy with simulation reheat (elastic links, connected nodes follow)
+- [Phase 02]: Removed micro-movement and spring-back -- d3 simulation provides organic feel via drag
 
 ### Pending Todos
 
@@ -81,6 +85,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-08T20:32:00Z
-Stopped at: Completed 02-01-PLAN.md
-Resume file: .planning/phases/02-page-and-graph-rendering/02-01-SUMMARY.md
+Last session: 2026-03-08T21:25:08.881Z
+Stopped at: Completed 02-02-PLAN.md
+Resume file: None

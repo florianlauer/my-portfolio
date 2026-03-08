@@ -16,7 +16,7 @@
 
 - [x] **RENDER-01**: Noeuds SVG affichant nom, icone et couleur de categorie
 - [x] **RENDER-02**: Edges SVG entre technos liees (lignes/courbes reliant les noeuds)
-- [ ] **RENDER-03**: Layout force-directed via d3-force (positionnement automatique des noeuds)
+- [x] **RENDER-03**: Layout force-directed via d3-force (positionnement automatique des noeuds)
 - [x] **RENDER-04**: Legende des categories avec code couleur
 
 ### Interactivity
@@ -74,7 +74,7 @@
 | DATA-04     | Phase 1 | Complete |
 | RENDER-01   | Phase 2 | Complete |
 | RENDER-02   | Phase 2 | Complete |
-| RENDER-03   | Phase 2 | Pending  |
+| RENDER-03   | Phase 2 | Complete |
 | RENDER-04   | Phase 2 | Complete |
 | PAGE-01     | Phase 2 | Complete |
 | PAGE-02     | Phase 2 | Complete |
