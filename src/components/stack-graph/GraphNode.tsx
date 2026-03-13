@@ -1,18 +1,24 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import type { GraphNode as GraphNodeType } from "@/types/stack-graph";
 import type { ExperienceLevel } from "@/types/stack-graph";
 import { iconMap } from "@/components/stack-graph/icon-map";
+
+// Distance threshold (px) to distinguish click from drag
+const CLICK_THRESHOLD = 8;
 
 type GraphNodeProps = {
   node: GraphNodeType;
   x: number;
   y: number;
   color: string;
+  opacity?: number;
   onDragStart?: (id: string, x: number, y: number) => void;
   onDragMove?: (id: string, x: number, y: number) => void;
   onDragEnd?: (id: string) => void;
+  onNodeClick?: (id: string) => void;
+  onHoverChange?: (id: string | null) => void;
 };
 
 // Circle radius per experience level — big spread for visual hierarchy
@@ -48,9 +54,12 @@ export function GraphNode({
   x,
   y,
   color,
+  opacity,
   onDragStart,
   onDragMove,
   onDragEnd,
+  onNodeClick,
+  onHoverChange,
 }: GraphNodeProps): React.JSX.Element {
   const icon = iconMap[node.id];
   const r = RADIUS_BY_LEVEL[node.level];
@@ -59,7 +68,8 @@ export function GraphNode({
   const shortLabel = SHORT_LABEL[node.id] ?? node.label;
 
   const draggingRef = useRef(false);
-  const [hovered, setHovered] = useState(false);
+  // Track pointer position at down for click vs drag detection
+  const pointerDownPos = useRef<{ x: number; y: number } | null>(null);
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent<SVGGElement>) => {
@@ -67,6 +77,7 @@ export function GraphNode({
       const svg = (e.currentTarget as SVGGElement).ownerSVGElement;
       if (!svg) return;
 
+      pointerDownPos.current = { x: e.clientX, y: e.clientY };
       const svgPt = clientToSVG(svg, e.clientX, e.clientY);
       draggingRef.current = true;
       (e.currentTarget as SVGGElement).setPointerCapture(e.pointerId);
@@ -87,20 +98,35 @@ export function GraphNode({
     [node.id, onDragMove],
   );
 
-  const handlePointerUp = useCallback(() => {
-    draggingRef.current = false;
-    onDragEnd?.(node.id);
-  }, [node.id, onDragEnd]);
+  const handlePointerUp = useCallback(
+    (e: React.PointerEvent<SVGGElement>) => {
+      draggingRef.current = false;
+      onDragEnd?.(node.id);
+
+      // Click vs drag detection: only fire onNodeClick if pointer moved < CLICK_THRESHOLD
+      if (pointerDownPos.current) {
+        const dx = e.clientX - pointerDownPos.current.x;
+        const dy = e.clientY - pointerDownPos.current.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < CLICK_THRESHOLD) {
+          onNodeClick?.(node.id);
+        }
+      }
+      pointerDownPos.current = null;
+    },
+    [node.id, onDragEnd, onNodeClick],
+  );
 
   return (
     <g
       transform={`translate(${x}, ${y})`}
       className="cursor-grab active:cursor-grabbing"
+      style={{ opacity: opacity ?? 1, transition: "opacity 200ms ease" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
-      onPointerEnter={() => setHovered(true)}
-      onPointerLeave={() => setHovered(false)}
+      onPointerEnter={() => onHoverChange?.(node.id)}
+      onPointerLeave={() => onHoverChange?.(null)}
     >
       <defs>
         <filter id={filterId} x="-50%" y="-50%" width="200%" height="200%">
@@ -138,32 +164,6 @@ export function GraphNode({
         >
           {shortLabel}
         </text>
-      )}
-
-      {/* Tooltip label on hover */}
-      {hovered && (
-        <g>
-          <rect
-            x={-node.label.length * 3.5 - 8}
-            y={-r - 28}
-            width={node.label.length * 7 + 16}
-            height={22}
-            rx={6}
-            fill="var(--color-popover, #1a1a1a)"
-            fillOpacity={0.92}
-          />
-          <text
-            x={0}
-            y={-r - 17}
-            textAnchor="middle"
-            dominantBaseline="central"
-            fill="var(--color-popover-foreground, white)"
-            fontSize={11}
-            fontFamily="var(--font-dm-sans)"
-          >
-            {node.label}
-          </text>
-        </g>
       )}
     </g>
   );
