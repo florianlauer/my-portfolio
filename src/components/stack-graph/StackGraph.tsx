@@ -8,6 +8,7 @@ import "d3-transition";
 import type { StackGraph as StackGraphType } from "@/types/stack-graph";
 import type { StackFamilyKey } from "@/types/stack";
 import { useForceLayout } from "@/components/stack-graph/use-force-layout";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { GraphNode } from "@/components/stack-graph/GraphNode";
 import { GraphEdge } from "@/components/stack-graph/GraphEdge";
 import { GraphLegend } from "@/components/stack-graph/GraphLegend";
@@ -52,6 +53,8 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     () => new Set(["frontend", "backend", "devops"]),
   );
 
+  const reducedMotion = usePrefersReducedMotion();
+
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -72,6 +75,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     data.edges,
     size.width,
     size.height,
+    reducedMotion,
   );
 
   // Color lookup by family
@@ -116,7 +120,11 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     const bgRect = bgRectRef.current;
     const zoomBehavior = zoomRef.current;
     if (!bgRect || !zoomBehavior) return;
-    select(bgRect).transition().duration(300).call(zoomBehavior.transform, zoomIdentity);
+    if (reducedMotion) {
+      select(bgRect).call(zoomBehavior.transform, zoomIdentity);
+    } else {
+      select(bgRect).transition().duration(300).call(zoomBehavior.transform, zoomIdentity);
+    }
   };
 
   // Adjacency computation for focus highlighting
