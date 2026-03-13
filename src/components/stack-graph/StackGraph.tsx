@@ -39,8 +39,11 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
   // Exposed for tooltip positioning
   const transformRef = useRef<ZoomTransform>(zoomIdentity);
 
-  // Focus/highlight state
+  // Focus/highlight state (click-to-focus highlighting)
   const [focusedId, setFocusedId] = useState<string | null>(null);
+
+  // Keyboard focus state (for visible focus ring)
+  const [keyboardFocusedId, setKeyboardFocusedId] = useState<string | null>(null);
 
   // Hover state for tooltip
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -178,7 +181,10 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     if (focusedId !== null && !activeNodeIds.has(focusedId)) {
       setFocusedId(null);
     }
-  }, [activeNodeIds, focusedId]);
+    if (keyboardFocusedId !== null && !activeNodeIds.has(keyboardFocusedId)) {
+      setKeyboardFocusedId(null);
+    }
+  }, [activeNodeIds, focusedId, keyboardFocusedId]);
 
   // Compute tooltip data for hovered node
   const tooltipData = useMemo(() => {
@@ -338,6 +344,8 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                     onDragEnd={dragEnd}
                     onNodeClick={setFocusedId}
                     onHoverChange={setHoveredId}
+                    onFocusChange={setKeyboardFocusedId}
+                    isFocused={keyboardFocusedId === pos.id}
                     opacity={getNodeOpacity(pos.id)}
                   />
                 ))}

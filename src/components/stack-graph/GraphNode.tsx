@@ -14,12 +14,14 @@ type GraphNodeProps = {
   y: number;
   color: string;
   opacity?: number;
+  isFocused?: boolean;
   zoomGroupRef: React.RefObject<SVGGElement | null>;
   onDragStart?: (id: string, x: number, y: number) => void;
   onDragMove?: (id: string, x: number, y: number) => void;
   onDragEnd?: (id: string) => void;
   onNodeClick?: (id: string) => void;
   onHoverChange?: (id: string | null) => void;
+  onFocusChange?: (id: string | null) => void;
 };
 
 // Circle radius per experience level — big spread for visual hierarchy
@@ -58,12 +60,14 @@ export function GraphNode({
   y,
   color,
   opacity,
+  isFocused,
   zoomGroupRef,
   onDragStart,
   onDragMove,
   onDragEnd,
   onNodeClick,
   onHoverChange,
+  onFocusChange,
 }: GraphNodeProps): React.JSX.Element {
   const icon = iconMap[node.id];
   const r = RADIUS_BY_LEVEL[node.level];
@@ -121,16 +125,39 @@ export function GraphNode({
     [node.id, onDragEnd, onNodeClick],
   );
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<SVGGElement>) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onNodeClick?.(node.id);
+      }
+    },
+    [node.id, onNodeClick],
+  );
+
   return (
     <g
       transform={`translate(${x}, ${y})`}
       className="cursor-grab active:cursor-grabbing"
       style={{ opacity: opacity ?? 1, transition: "opacity 200ms ease" }}
+      tabIndex={0}
+      // eslint-disable-next-line jsx-a11y/prefer-tag-over-role -- SVG <g> cannot be replaced by <button>
+      role="button"
+      aria-label={`${node.label}, niveau ${node.level}, famille ${node.family}`}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerEnter={() => onHoverChange?.(node.id)}
       onPointerLeave={() => onHoverChange?.(null)}
+      onFocus={() => {
+        onHoverChange?.(node.id);
+        onFocusChange?.(node.id);
+      }}
+      onBlur={() => {
+        onHoverChange?.(null);
+        onFocusChange?.(null);
+      }}
+      onKeyDown={handleKeyDown}
     >
       <defs>
         <filter id={filterId} x="-50%" y="-50%" width="200%" height="200%">
@@ -140,6 +167,18 @@ export function GraphNode({
 
       {/* Circle */}
       <circle r={r} fill={color} fillOpacity={0.95} filter={`url(#${filterId})`} />
+
+      {/* Focus ring — visible dashed white ring when node is keyboard-focused */}
+      {isFocused && (
+        <circle
+          r={r + 5}
+          fill="none"
+          stroke="white"
+          strokeWidth={2}
+          strokeDasharray="4 2"
+          opacity={0.85}
+        />
+      )}
 
       {/* Icon or abbreviation */}
       {icon ? (
