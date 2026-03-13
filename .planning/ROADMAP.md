@@ -79,17 +79,18 @@ Plans:
 **Goal**: The graph is usable without a mouse and respects user motion preferences
 **Depends on**: Phase 3
 **Requirements**: A11Y-01, A11Y-02, A11Y-03, A11Y-04
+**Plans:** 2 plans
 **Success Criteria** (what must be TRUE):
 
 1. User can Tab between graph nodes with a visible focus indicator
 2. Focusing a node via keyboard triggers the same tooltip as hover
 3. With `prefers-reduced-motion: reduce` enabled, force-directed animation is skipped and nodes appear in a static layout
 4. A visually hidden structured list of all technologies and their relations is available to screen readers
-   **Plans**: TBD
 
 Plans:
 
-- [ ] 04-01: TBD
+- [ ] 04-01-PLAN.md — Reduced motion support: usePrefersReducedMotion hook, static d3 layout, StackGraph wiring
+- [ ] 04-02-PLAN.md — Keyboard navigation with focus ring/tooltips, screen reader list (StackGraphSRList)
 
 ## Progress
 
@@ -101,4 +102,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Data Foundation          | 1/1            | Complete    | 2026-03-08 |
 | 2. Page and Graph Rendering | 2/2            | Complete    | 2026-03-08 |
 | 3. Interactivity            | 1/2            | In Progress |            |
-| 4. Accessibility            | 0/?            | Not started | -          |
+| 4. Accessibility            | 0/2            | Not started | -          |
