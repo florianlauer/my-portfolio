@@ -14,6 +14,7 @@ import { GraphEdge } from "@/components/stack-graph/GraphEdge";
 import { GraphLegend } from "@/components/stack-graph/GraphLegend";
 import { GraphTooltip } from "@/components/stack-graph/GraphTooltip";
 import { GraphFilters } from "@/components/stack-graph/GraphFilters";
+import { StackGraphSRList } from "@/components/stack-graph/StackGraphSRList";
 import type { SimNode } from "@/components/stack-graph/use-force-layout";
 
 type StackGraphProps = {
@@ -296,7 +297,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
             viewBox={`0 0 ${size.width} ${size.height}`}
             className="w-full h-full"
             overflow="hidden"
-            aria-label="Graphe interactif de la stack technique de Florian"
+            aria-hidden="true"
           >
             {/* Background rect: zoom/pan target, click to clear focus */}
             <rect
@@ -363,6 +364,10 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
         />
         <GraphLegend familyColors={data.familyColors} />
       </div>
+      <StackGraphSRList
+        nodes={data.nodes.filter((n) => activeNodeIds.has(n.id))}
+        edges={data.edges}
+      />
     </div>
   );
 }
