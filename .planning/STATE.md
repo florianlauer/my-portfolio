@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: "Completed 03-02-PLAN.md: rich HTML tooltips and category filter pills"
-last_updated: "2026-03-13T17:59:47.007Z"
+stopped_at: "Completed 04-01-PLAN.md: prefers-reduced-motion support for stack graph"
+last_updated: "2026-03-13T18:16:06.115Z"
 last_activity: 2026-03-08 -- Completed 02-02 force layout and graph interaction
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 5
-  completed_plans: 5
+  total_plans: 7
+  completed_plans: 6
   percent: 100
 ---
 
@@ -57,6 +57,7 @@ _Updated after each plan completion_
 | Phase 02 P02 | 45min | 2 tasks | 6 files |
 | Phase 03-interactivity P01 | 12 | 2 tasks | 5 files |
 | Phase 03-interactivity P02 | 30min | 2 tasks | 6 files |
+| Phase 04-accessibility P01 | 15 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -81,6 +82,8 @@ Recent decisions affecting current work:
 - [Phase 03-interactivity]: Tooltip position uses innerGRef.getScreenCTM() for accurate coords at all zoom levels
 - [Phase 03-interactivity]: filterNodes updates running d3 simulation in-place (no reinit) — sim.nodes + link force + alpha 0.5 restart
 - [Phase 03-interactivity]: FILTER_GROUPS: frontend->['frontend','mobile'], backend->['backend','data'], devops->['infra','integrations']; methods always visible
+- [Phase 04-accessibility]: SSR default reducedMotion=true (safe): avoids animation flash on hydration
+- [Phase 04-accessibility]: simRef stays null in reduced-motion mode — drag handlers no-op via existing (!sim) guards
 
 ### Pending Todos
 
@@ -92,6 +95,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-13T17:56:52.841Z
-Stopped at: Completed 03-02-PLAN.md: rich HTML tooltips and category filter pills
+Last session: 2026-03-13T18:16:06.112Z
+Stopped at: Completed 04-01-PLAN.md: prefers-reduced-motion support for stack graph
 Resume file: None
