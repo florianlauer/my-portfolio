@@ -139,7 +139,7 @@ export function GraphNode({
     <g
       transform={`translate(${x}, ${y})`}
       className="cursor-grab active:cursor-grabbing"
-      style={{ opacity: opacity ?? 1, transition: "opacity 200ms ease" }}
+      style={{ opacity: opacity ?? 1, transition: "opacity 200ms ease", outline: "none" }}
       tabIndex={0}
       // eslint-disable-next-line jsx-a11y/prefer-tag-over-role -- SVG <g> cannot be replaced by <button>
       role="button"
