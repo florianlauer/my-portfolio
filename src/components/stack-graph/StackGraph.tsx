@@ -88,7 +88,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     posMap.set(pos.id, pos);
   }
 
-  // Set up zoom behavior — only once (empty deps), stable behavior
+  // Set up zoom behavior — re-run when SVG is in the DOM (size > 0)
   useEffect(() => {
     const bgRect = bgRectRef.current;
     const innerG = innerGRef.current;
@@ -110,7 +110,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     return () => {
       select(bgRect).on(".zoom", null);
     };
-  }, []);
+  }, [size.width, size.height]);
 
   const handleBgDoubleClick = () => {
     const bgRect = bgRectRef.current;
@@ -324,6 +324,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                     x={pos.x}
                     y={pos.y}
                     color={colorMap.current.get(pos.family) ?? "#888"}
+                    zoomGroupRef={innerGRef}
                     onDragStart={dragStart}
                     onDragMove={dragMove}
                     onDragEnd={dragEnd}

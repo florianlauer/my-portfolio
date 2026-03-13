@@ -14,6 +14,7 @@ type GraphNodeProps = {
   y: number;
   color: string;
   opacity?: number;
+  zoomGroupRef: React.RefObject<SVGGElement | null>;
   onDragStart?: (id: string, x: number, y: number) => void;
   onDragMove?: (id: string, x: number, y: number) => void;
   onDragEnd?: (id: string) => void;
@@ -42,11 +43,13 @@ const SHORT_LABEL: Record<string, string> = {
   chargebee: "CB",
 };
 
-function clientToSVG(svg: SVGSVGElement, clientX: number, clientY: number) {
+function clientToSVG(zoomGroup: SVGGElement, clientX: number, clientY: number) {
+  const svg = zoomGroup.ownerSVGElement!;
   const pt = svg.createSVGPoint();
   pt.x = clientX;
   pt.y = clientY;
-  return pt.matrixTransform(svg.getScreenCTM()?.inverse());
+  // Use the zoom group CTM — includes zoom transform but not individual node translate
+  return pt.matrixTransform(zoomGroup.getScreenCTM()?.inverse());
 }
 
 export function GraphNode({
@@ -55,6 +58,7 @@ export function GraphNode({
   y,
   color,
   opacity,
+  zoomGroupRef,
   onDragStart,
   onDragMove,
   onDragEnd,
@@ -74,28 +78,28 @@ export function GraphNode({
   const handlePointerDown = useCallback(
     (e: React.PointerEvent<SVGGElement>) => {
       e.stopPropagation();
-      const svg = (e.currentTarget as SVGGElement).ownerSVGElement;
-      if (!svg) return;
+      const zg = zoomGroupRef.current;
+      if (!zg) return;
 
       pointerDownPos.current = { x: e.clientX, y: e.clientY };
-      const svgPt = clientToSVG(svg, e.clientX, e.clientY);
+      const svgPt = clientToSVG(zg, e.clientX, e.clientY);
       draggingRef.current = true;
       (e.currentTarget as SVGGElement).setPointerCapture(e.pointerId);
       onDragStart?.(node.id, svgPt.x, svgPt.y);
     },
-    [node.id, onDragStart],
+    [node.id, onDragStart, zoomGroupRef],
   );
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent<SVGGElement>) => {
       if (!draggingRef.current) return;
-      const svg = (e.currentTarget as SVGGElement).ownerSVGElement;
-      if (!svg) return;
+      const zg = zoomGroupRef.current;
+      if (!zg) return;
 
-      const svgPt = clientToSVG(svg, e.clientX, e.clientY);
+      const svgPt = clientToSVG(zg, e.clientX, e.clientY);
       onDragMove?.(node.id, svgPt.x, svgPt.y);
     },
-    [node.id, onDragMove],
+    [node.id, onDragMove, zoomGroupRef],
   );
 
   const handlePointerUp = useCallback(
