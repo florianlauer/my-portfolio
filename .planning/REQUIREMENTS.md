@@ -21,10 +21,10 @@
 
 ### Interactivity
 
-- [ ] **INTER-01**: Hover sur un noeud affiche un tooltip avec details (niveau, description, technos liees)
-- [ ] **INTER-02**: Zoom et pan pour naviguer dans le graph (molette + drag)
-- [ ] **INTER-03**: Click-to-focus : cliquer un noeud met en surbrillance ses connexions et attenue le reste
-- [ ] **INTER-04**: Filtres par categorie (Frontend, Backend, DevOps) pour montrer/masquer des groupes de noeuds
+- [x] **INTER-01**: Hover sur un noeud affiche un tooltip avec details (niveau, description, technos liees)
+- [x] **INTER-02**: Zoom et pan pour naviguer dans le graph (molette + drag)
+- [x] **INTER-03**: Click-to-focus : cliquer un noeud met en surbrillance ses connexions et attenue le reste
+- [x] **INTER-04**: Filtres par categorie (Frontend, Backend, DevOps) pour montrer/masquer des groupes de noeuds
 
 ### Page Integration
 
@@ -79,10 +79,10 @@
 | PAGE-01     | Phase 2 | Complete |
 | PAGE-02     | Phase 2 | Complete |
 | PAGE-03     | Phase 2 | Complete |
-| INTER-01    | Phase 3 | Pending  |
-| INTER-02    | Phase 3 | Pending  |
-| INTER-03    | Phase 3 | Pending  |
-| INTER-04    | Phase 3 | Pending  |
+| INTER-01    | Phase 3 | Complete |
+| INTER-02    | Phase 3 | Complete |
+| INTER-03    | Phase 3 | Complete |
+| INTER-04    | Phase 3 | Complete |
 | A11Y-01     | Phase 4 | Pending  |
 | A11Y-02     | Phase 4 | Pending  |
 | A11Y-03     | Phase 4 | Pending  |
