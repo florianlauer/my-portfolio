@@ -43,7 +43,17 @@ export function useForceLayout(
   const [positions, setPositions] = useState<SimNode[]>([]);
   const simRef = useRef<Simulation<SimNode, SimEdge> | null>(null);
   const nodesRef = useRef<SimNode[]>([]);
+  // Store the original full node/edge arrays for filter restores
+  const allNodesRef = useRef<SimNode[]>([]);
+  const allEdgesRef = useRef<GraphEdge[]>([]);
   const initRef = useRef(false);
+  const widthRef = useRef(width);
+  const heightRef = useRef(height);
+
+  useEffect(() => {
+    widthRef.current = width;
+    heightRef.current = height;
+  }, [width, height]);
 
   useEffect(() => {
     if (width <= 0 || height <= 0 || nodes.length === 0) return;
@@ -58,6 +68,9 @@ export function useForceLayout(
       vy: 0,
     }));
     nodesRef.current = simNodes;
+    // Store originals for filter restore
+    allNodesRef.current = simNodes;
+    allEdgesRef.current = edges;
 
     const simEdges: SimEdge[] = edges.map((e) => ({
       source: e.source,
@@ -90,11 +103,11 @@ export function useForceLayout(
 
     const padding = 40;
     sim.on("tick", () => {
-      for (const n of simNodes) {
-        n.x = Math.max(padding, Math.min(width - padding, n.x));
-        n.y = Math.max(padding, Math.min(height - padding, n.y));
+      for (const n of nodesRef.current) {
+        n.x = Math.max(padding, Math.min(widthRef.current - padding, n.x));
+        n.y = Math.max(padding, Math.min(heightRef.current - padding, n.y));
       }
-      setPositions([...simNodes]);
+      setPositions([...nodesRef.current]);
     });
 
     simRef.current = sim;
@@ -103,7 +116,50 @@ export function useForceLayout(
       sim.stop();
       simRef.current = null;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nodes, edges, width, height]);
+
+  // Filter the running simulation to only show active nodes
+  // CRITICAL: must NOT be called during init — only called via useEffect in StackGraph when filters change
+  const filterNodes = useCallback((activeNodeIds: Set<string>) => {
+    const sim = simRef.current;
+    if (!sim) return;
+
+    // Build a position map from current nodes to preserve positions
+    const positionMap = new Map<string, { x: number; y: number; vx: number; vy: number }>();
+    for (const n of allNodesRef.current) {
+      positionMap.set(n.id, { x: n.x, y: n.y, vx: n.vx ?? 0, vy: n.vy ?? 0 });
+    }
+
+    // Filter nodes — always include methods family
+    const filteredNodes = allNodesRef.current.filter((n) => activeNodeIds.has(n.id));
+
+    // Restore positions for remaining nodes
+    for (const n of filteredNodes) {
+      const saved = positionMap.get(n.id);
+      if (saved) {
+        n.x = saved.x;
+        n.y = saved.y;
+        n.vx = saved.vx;
+        n.vy = saved.vy;
+      }
+    }
+
+    nodesRef.current = filteredNodes;
+
+    // Filter edges to only those where both endpoints are active
+    const filteredSimEdges: SimEdge[] = allEdgesRef.current
+      .filter((e) => activeNodeIds.has(e.source) && activeNodeIds.has(e.target))
+      .map((e) => ({ source: e.source, target: e.target }));
+
+    // Update the running simulation in-place
+    sim.nodes(filteredNodes);
+    const linkForce = sim.force<ReturnType<typeof forceLink>>("link");
+    if (linkForce) {
+      linkForce.links(filteredSimEdges);
+    }
+    sim.alpha(0.5).restart();
+  }, []);
 
   // Drag handlers — reheat simulation, fix/release node
   const dragStart = useCallback((id: string, svgX: number, svgY: number) => {
@@ -136,5 +192,5 @@ export function useForceLayout(
     }
   }, []);
 
-  return { positions, dragStart, dragMove, dragEnd };
+  return { positions, dragStart, dragMove, dragEnd, filterNodes };
 }
