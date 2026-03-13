@@ -61,17 +61,18 @@ Plans:
 **Goal**: Visitor can explore the graph through hover, click, zoom, pan, and filtering by domain
 **Depends on**: Phase 2
 **Requirements**: INTER-01, INTER-02, INTER-03, INTER-04
+**Plans:** 1/2 plans executed
 **Success Criteria** (what must be TRUE):
 
 1. Hovering a node shows a tooltip with the technology's level, description, and connected technologies
 2. Mouse wheel zooms and click-drag pans the graph viewport
 3. Clicking a node highlights its direct connections and dims unrelated nodes
 4. Category filter controls (Frontend, Backend, DevOps) show/hide groups of nodes and their edges
-   **Plans**: TBD
 
 Plans:
 
-- [ ] 03-01: TBD
+- [ ] 03-01-PLAN.md — Zoom/pan via d3-zoom, click-to-focus highlighting with adjacency dimming
+- [ ] 03-02-PLAN.md — Rich HTML tooltip, category filter pills with d3-force reflow
 
 ### Phase 4: Accessibility
 
@@ -99,5 +100,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | --------------------------- | -------------- | ----------- | ---------- |
 | 1. Data Foundation          | 1/1            | Complete    | 2026-03-08 |
 | 2. Page and Graph Rendering | 2/2            | Complete    | 2026-03-08 |
-| 3. Interactivity            | 0/?            | Not started | -          |
+| 3. Interactivity            | 1/2 | In Progress|  |
 | 4. Accessibility            | 0/?            | Not started | -          |
