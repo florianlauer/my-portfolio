@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: "Completed 04-01-PLAN.md: prefers-reduced-motion support for stack graph"
-last_updated: "2026-03-13T18:16:06.115Z"
+stopped_at: "Completed 04-02-PLAN.md: keyboard nav and screen reader accessibility for stack graph"
+last_updated: "2026-03-13T18:20:16.684Z"
 last_activity: 2026-03-08 -- Completed 02-02 force layout and graph interaction
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 7
-  completed_plans: 6
+  completed_plans: 7
   percent: 100
 ---
 
@@ -58,6 +58,7 @@ _Updated after each plan completion_
 | Phase 03-interactivity P01 | 12 | 2 tasks | 5 files |
 | Phase 03-interactivity P02 | 30min | 2 tasks | 6 files |
 | Phase 04-accessibility P01 | 15 | 2 tasks | 3 files |
+| Phase 04-accessibility P02 | 10min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -84,6 +85,8 @@ Recent decisions affecting current work:
 - [Phase 03-interactivity]: FILTER_GROUPS: frontend->['frontend','mobile'], backend->['backend','data'], devops->['infra','integrations']; methods always visible
 - [Phase 04-accessibility]: SSR default reducedMotion=true (safe): avoids animation flash on hydration
 - [Phase 04-accessibility]: simRef stays null in reduced-motion mode — drag handlers no-op via existing (!sim) guards
+- [Phase 04-accessibility]: eslint-disable for prefer-tag-over-role on SVG <g> — HTML button cannot be used inside SVG
+- [Phase 04-accessibility]: SR list renders filtered nodes (activeNodeIds) so it stays in sync with filter pills
 
 ### Pending Todos
 
@@ -95,6 +98,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-13T18:16:06.112Z
-Stopped at: Completed 04-01-PLAN.md: prefers-reduced-motion support for stack graph
+Last session: 2026-03-13T18:20:16.682Z
+Stopped at: Completed 04-02-PLAN.md: keyboard nav and screen reader accessibility for stack graph
 Resume file: None

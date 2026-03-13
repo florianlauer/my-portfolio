@@ -34,10 +34,10 @@
 
 ### Accessibility
 
-- [ ] **A11Y-01**: Navigation clavier entre les noeuds (Tab) avec focus visible
-- [ ] **A11Y-02**: Tooltips declenches au focus (pas seulement au hover)
+- [x] **A11Y-01**: Navigation clavier entre les noeuds (Tab) avec focus visible
+- [x] **A11Y-02**: Tooltips declenches au focus (pas seulement au hover)
 - [x] **A11Y-03**: Respect de prefers-reduced-motion (desactiver animations force-directed, afficher layout statique)
-- [ ] **A11Y-04**: Alternative textuelle cachee pour lecteurs d'ecran (liste structuree des technos et relations)
+- [x] **A11Y-04**: Alternative textuelle cachee pour lecteurs d'ecran (liste structuree des technos et relations)
 
 ## v2 Requirements
 
@@ -83,10 +83,10 @@
 | INTER-02    | Phase 3 | Complete |
 | INTER-03    | Phase 3 | Complete |
 | INTER-04    | Phase 3 | Complete |
-| A11Y-01     | Phase 4 | Pending  |
-| A11Y-02     | Phase 4 | Pending  |
+| A11Y-01     | Phase 4 | Complete |
+| A11Y-02     | Phase 4 | Complete |
 | A11Y-03     | Phase 4 | Complete |
-| A11Y-04     | Phase 4 | Pending  |
+| A11Y-04     | Phase 4 | Complete |
 
 **Coverage:**
 
