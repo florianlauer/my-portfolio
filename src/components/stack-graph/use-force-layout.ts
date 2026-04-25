@@ -11,7 +11,8 @@ import {
   forceY,
 } from "d3-force";
 import type { Simulation, SimulationNodeDatum, SimulationLinkDatum } from "d3-force";
-import type { GraphNode, GraphEdge, ExperienceLevel } from "@/types/stack-graph";
+import type { GraphNode, GraphEdge } from "@/types/stack-graph";
+import { COLLIDE_RADIUS_BY_LEVEL, FORCE_CONFIG } from "@/components/stack-graph/constants";
 
 export type SimNode = GraphNode &
   SimulationNodeDatum & {
@@ -26,13 +27,37 @@ type SimEdge = SimulationLinkDatum<SimNode> & {
   target: string | SimNode;
 };
 
-// Collision radius per level — circle radius + spacing
-export const COLLIDE_RADIUS: Record<ExperienceLevel, number> = {
-  Expert: 40,
-  Avancé: 32,
-  Intermédiaire: 26,
-  Notions: 20,
-};
+// Single source of truth for force configuration — used by init and filter rebuilds
+function buildSimulation(
+  simNodes: SimNode[],
+  simEdges: SimEdge[],
+  width: number,
+  height: number,
+  alpha: number,
+): Simulation<SimNode, SimEdge> {
+  return forceSimulation<SimNode>(simNodes)
+    .force("center", forceCenter(width / 2, height / 2))
+    .force("charge", forceManyBody<SimNode>().strength(FORCE_CONFIG.charge))
+    .force(
+      "link",
+      forceLink<SimNode, SimEdge>(simEdges)
+        .id((d) => d.id)
+        .distance(FORCE_CONFIG.linkDistance)
+        .strength(FORCE_CONFIG.linkStrength),
+    )
+    .force(
+      "collide",
+      forceCollide<SimNode>()
+        .radius((d) => COLLIDE_RADIUS_BY_LEVEL[d.level] ?? 28)
+        .strength(FORCE_CONFIG.collideStrength)
+        .iterations(FORCE_CONFIG.collideIterations),
+    )
+    .force("x", forceX<SimNode>(width / 2).strength(FORCE_CONFIG.positionStrength))
+    .force("y", forceY<SimNode>(height / 2).strength(FORCE_CONFIG.positionStrength))
+    .alpha(alpha)
+    .alphaDecay(FORCE_CONFIG.alphaDecay)
+    .velocityDecay(FORCE_CONFIG.velocityDecay);
+}
 
 export function useForceLayout(
   nodes: GraphNode[],
@@ -61,9 +86,33 @@ export function useForceLayout(
     reducedMotionRef.current = reducedMotion;
   }, [reducedMotion]);
 
+  // Init effect: builds the simulation on first valid size; on subsequent
+  // size changes, updates positional forces in place rather than rebuilding
+  // (a rebuild would reset all node positions to fresh Math.random() seeds).
+  // The cleanup is intentionally NOT placed here — see the unmount-only
+  // cleanup effect below. Otherwise React would tear down the simulation on
+  // every ResizeObserver tick (initial layout, font load, scrollbar, rotate)
+  // and the stale `initRef.current` would prevent re-init, leaving drag/filter
+  // permanently broken.
   useEffect(() => {
     if (width <= 0 || height <= 0 || nodes.length === 0) return;
-    if (initRef.current) return;
+
+    if (initRef.current) {
+      // Already initialized: re-tune positional forces in place. Only the
+      // animated branch keeps a live sim; the reduced-motion branch ignores
+      // resize (acceptable — its layout is computed once at init).
+      const sim = simRef.current;
+      if (sim) {
+        sim.force("center", forceCenter(width / 2, height / 2));
+        sim.force("x", forceX<SimNode>(width / 2).strength(FORCE_CONFIG.positionStrength));
+        sim.force("y", forceY<SimNode>(height / 2).strength(FORCE_CONFIG.positionStrength));
+        sim.alpha(0.3).restart();
+      }
+      return;
+    }
+
+    // One-shot init: data (nodes/edges) is treated as static at runtime.
+    // Re-running on data changes would reset positions; we accept this trade-off.
     initRef.current = true;
 
     const simNodes: SimNode[] = nodes.map((n) => ({
@@ -74,7 +123,6 @@ export function useForceLayout(
       vy: 0,
     }));
     nodesRef.current = simNodes;
-    // Store originals for filter restore
     allNodesRef.current = simNodes;
     allEdgesRef.current = edges;
 
@@ -83,31 +131,8 @@ export function useForceLayout(
       target: e.target,
     }));
 
-    const sim = forceSimulation<SimNode>(simNodes)
-      .force("center", forceCenter(width / 2, height / 2))
-      .force("charge", forceManyBody<SimNode>().strength(-250))
-      .force(
-        "link",
-        forceLink<SimNode, SimEdge>(simEdges)
-          .id((d) => d.id)
-          .distance(100)
-          .strength(0.3),
-      )
-      .force(
-        "collide",
-        forceCollide<SimNode>()
-          .radius((d) => COLLIDE_RADIUS[d.level] ?? 28)
-          .strength(1)
-          .iterations(3),
-      )
-      // Gentle pull to keep nodes within bounds
-      .force("x", forceX<SimNode>(width / 2).strength(0.03))
-      .force("y", forceY<SimNode>(height / 2).strength(0.03))
-      .alpha(1)
-      .alphaDecay(0.02)
-      .velocityDecay(0.3);
-
-    const padding = 40;
+    const sim = buildSimulation(simNodes, simEdges, width, height, 1);
+    const padding = FORCE_CONFIG.clampPadding;
 
     if (reducedMotion) {
       // Sync branch: compute fully converged layout without animation frames
@@ -115,7 +140,6 @@ export function useForceLayout(
       while (sim.alpha() > sim.alphaMin()) {
         sim.tick();
       }
-      // Clamp all nodes within bounds after convergence
       for (const n of nodesRef.current) {
         n.x = Math.max(padding, Math.min(width - padding, n.x));
         n.y = Math.max(padding, Math.min(height - padding, n.y));
@@ -134,13 +158,20 @@ export function useForceLayout(
 
       simRef.current = sim;
     }
-
-    return () => {
-      sim.stop();
-      simRef.current = null;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-shot init: nodes/edges/reducedMotion changes after mount are intentionally ignored; size changes are handled in-place above.
   }, [nodes, edges, width, height]);
+
+  // Unmount-only cleanup: tear down the simulation exactly once when the
+  // component leaves. Decoupled from the init effect so size-related re-runs
+  // don't kill the simulation (see comment on init effect above).
+  useEffect(
+    () => () => {
+      simRef.current?.stop();
+      simRef.current = null;
+      initRef.current = false;
+    },
+    [],
+  );
 
   // Filter the running simulation to only show active nodes
   // CRITICAL: must NOT be called during init — only called via useEffect in StackGraph when filters change
@@ -173,37 +204,23 @@ export function useForceLayout(
       .map((e) => ({ source: e.source, target: e.target }));
 
     if (reducedMotionRef.current) {
-      // Reduced-motion branch: create a temporary simulation and run synchronously to convergence
+      // Reduced-motion branch: build a temp simulation via the shared factory
+      // and run it synchronously to convergence.
       const tempNodes = filteredNodes.map((n) => ({ ...n }));
-      const tempSim = forceSimulation<SimNode>(tempNodes)
-        .force("center", forceCenter(widthRef.current / 2, heightRef.current / 2))
-        .force("charge", forceManyBody<SimNode>().strength(-250))
-        .force(
-          "link",
-          forceLink<SimNode, SimEdge>(filteredSimEdges)
-            .id((d) => d.id)
-            .distance(100)
-            .strength(0.3),
-        )
-        .force(
-          "collide",
-          forceCollide<SimNode>()
-            .radius((d) => COLLIDE_RADIUS[d.level] ?? 28)
-            .strength(1)
-            .iterations(3),
-        )
-        .force("x", forceX<SimNode>(widthRef.current / 2).strength(0.03))
-        .force("y", forceY<SimNode>(heightRef.current / 2).strength(0.03))
-        .alpha(0.5)
-        .alphaDecay(0.02)
-        .velocityDecay(0.3);
+      const tempSim = buildSimulation(
+        tempNodes,
+        filteredSimEdges,
+        widthRef.current,
+        heightRef.current,
+        0.5,
+      );
 
       tempSim.stop();
       while (tempSim.alpha() > tempSim.alphaMin()) {
         tempSim.tick();
       }
 
-      const padding = 40;
+      const padding = FORCE_CONFIG.clampPadding;
       for (const n of tempNodes) {
         n.x = Math.max(padding, Math.min(widthRef.current - padding, n.x));
         n.y = Math.max(padding, Math.min(heightRef.current - padding, n.y));

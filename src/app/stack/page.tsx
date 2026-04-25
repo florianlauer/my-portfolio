@@ -1,15 +1,20 @@
+import dynamic from "next/dynamic";
 import { PageShell } from "@/components/page-shell/PageShell";
-import { StackGraph } from "@/components/stack-graph/StackGraph";
 import { stackGraph } from "@/content/stack-graph";
+
+// Heavy client-side bundle (d3-force, d3-zoom, d3-transition, simple-icons) — split out
+const StackGraph = dynamic(() =>
+  import("@/components/stack-graph/StackGraph").then((m) => m.StackGraph),
+);
 
 export const metadata = {
   title: "Ma Stack",
   description:
-    "Visualisation interactive des competences techniques de Florian Lauer et de leurs relations.",
+    "Visualisation interactive des compétences techniques de Florian Lauer et de leurs relations.",
   openGraph: {
     title: "Ma Stack - Florian Lauer",
     description:
-      "Visualisation interactive des competences techniques de Florian Lauer et de leurs relations.",
+      "Visualisation interactive des compétences techniques de Florian Lauer et de leurs relations.",
   },
 };
 

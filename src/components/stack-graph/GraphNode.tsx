@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { memo, useCallback, useRef } from "react";
 import type { GraphNode as GraphNodeType } from "@/types/stack-graph";
-import type { ExperienceLevel } from "@/types/stack-graph";
 import { iconMap } from "@/components/stack-graph/icon-map";
-
-// Distance threshold (px) to distinguish click from drag
-const CLICK_THRESHOLD = 8;
+import {
+  CLICK_THRESHOLD,
+  MIN_TOUCH_RADIUS,
+  NODE_RADIUS_BY_LEVEL,
+} from "@/components/stack-graph/constants";
 
 type GraphNodeProps = {
   node: GraphNodeType;
@@ -14,22 +15,12 @@ type GraphNodeProps = {
   y: number;
   color: string;
   opacity?: number;
-  isFocused?: boolean;
   zoomGroupRef: React.RefObject<SVGGElement | null>;
   onDragStart?: (id: string, x: number, y: number) => void;
   onDragMove?: (id: string, x: number, y: number) => void;
   onDragEnd?: (id: string) => void;
   onNodeClick?: (id: string) => void;
   onHoverChange?: (id: string | null) => void;
-  onFocusChange?: (id: string | null) => void;
-};
-
-// Circle radius per experience level — big spread for visual hierarchy
-const RADIUS_BY_LEVEL: Record<ExperienceLevel, number> = {
-  Expert: 34,
-  Avancé: 26,
-  Intermédiaire: 20,
-  Notions: 14,
 };
 
 // Short labels for nodes without icons
@@ -54,26 +45,25 @@ function clientToSVG(zoomGroup: SVGGElement, clientX: number, clientY: number) {
   return pt.matrixTransform(zoomGroup.getScreenCTM()?.inverse());
 }
 
-export function GraphNode({
+function GraphNodeImpl({
   node,
   x,
   y,
   color,
   opacity,
-  isFocused,
   zoomGroupRef,
   onDragStart,
   onDragMove,
   onDragEnd,
   onNodeClick,
   onHoverChange,
-  onFocusChange,
 }: GraphNodeProps): React.JSX.Element {
   const icon = iconMap[node.id];
-  const r = RADIUS_BY_LEVEL[node.level];
+  const r = NODE_RADIUS_BY_LEVEL[node.level];
   const iconSize = Math.round(r * 0.9);
-  const filterId = `glow-${node.id}`;
   const shortLabel = SHORT_LABEL[node.id] ?? node.label;
+  // Hit-area: at least MIN_TOUCH_RADIUS to satisfy WCAG 2.5.5 (44×44 minimum)
+  const hitRadius = Math.max(r, MIN_TOUCH_RADIUS);
 
   const draggingRef = useRef(false);
   // Track pointer position at down for click vs drag detection
@@ -125,60 +115,22 @@ export function GraphNode({
     [node.id, onDragEnd, onNodeClick],
   );
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<SVGGElement>) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        onNodeClick?.(node.id);
-      }
-    },
-    [node.id, onNodeClick],
-  );
-
   return (
     <g
       transform={`translate(${x}, ${y})`}
       className="cursor-grab active:cursor-grabbing"
-      style={{ opacity: opacity ?? 1, transition: "opacity 200ms ease", outline: "none" }}
-      tabIndex={0}
-      // eslint-disable-next-line jsx-a11y/prefer-tag-over-role -- SVG <g> cannot be replaced by <button>
-      role="button"
-      aria-label={`${node.label}, niveau ${node.level}, famille ${node.family}`}
+      style={{ opacity: opacity ?? 1, transition: "opacity 200ms ease" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerEnter={() => onHoverChange?.(node.id)}
       onPointerLeave={() => onHoverChange?.(null)}
-      onFocus={() => {
-        onHoverChange?.(node.id);
-        onFocusChange?.(node.id);
-      }}
-      onBlur={() => {
-        onHoverChange?.(null);
-        onFocusChange?.(null);
-      }}
-      onKeyDown={handleKeyDown}
     >
-      <defs>
-        <filter id={filterId} x="-50%" y="-50%" width="200%" height="200%">
-          <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor={color} floodOpacity="0.25" />
-        </filter>
-      </defs>
+      {/* Hit area: invisible circle that guarantees a 44×44 touch target */}
+      <circle r={hitRadius} fill="transparent" pointerEvents="all" />
 
-      {/* Circle */}
-      <circle r={r} fill={color} fillOpacity={0.95} filter={`url(#${filterId})`} />
-
-      {/* Focus ring — visible dashed white ring when node is keyboard-focused */}
-      {isFocused && (
-        <circle
-          r={r + 5}
-          fill="none"
-          stroke="white"
-          strokeWidth={2}
-          strokeDasharray="4 2"
-          opacity={0.85}
-        />
-      )}
+      {/* Visible circle — drop-shadow filter is hoisted into StackGraph <defs> as glow-${family} */}
+      <circle r={r} fill={color} fillOpacity={0.95} filter={`url(#glow-${node.family})`} />
 
       {/* Icon or abbreviation */}
       {icon ? (
@@ -211,3 +163,19 @@ export function GraphNode({
     </g>
   );
 }
+
+export const GraphNode = memo(GraphNodeImpl, (prev, next) => {
+  return (
+    prev.x === next.x &&
+    prev.y === next.y &&
+    prev.color === next.color &&
+    prev.opacity === next.opacity &&
+    prev.node === next.node &&
+    prev.onDragStart === next.onDragStart &&
+    prev.onDragMove === next.onDragMove &&
+    prev.onDragEnd === next.onDragEnd &&
+    prev.onNodeClick === next.onNodeClick &&
+    prev.onHoverChange === next.onHoverChange &&
+    prev.zoomGroupRef === next.zoomGroupRef
+  );
+});

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import type { GraphNode } from "@/types/stack-graph";
 import type { StackFamilyKey } from "@/types/stack";
+import { TOOLTIP_EDGE_PADDING_PX, TOOLTIP_MAX_WIDTH_PX } from "@/components/stack-graph/constants";
 
 type TooltipNeighbor = {
   id: string;
@@ -35,11 +36,15 @@ export function GraphTooltip({
   useEffect(() => {
     if (!visible || !tooltipRef.current) return;
     const height = tooltipRef.current.offsetHeight;
-    setFlipped(position.y - height < 8);
+    setFlipped(position.y - height < TOOLTIP_EDGE_PADDING_PX);
   }, [visible, position.y, node?.id]);
 
-  // Clamp x to keep tooltip within container
-  const clampedX = Math.max(8, Math.min(position.x, containerWidth - 288));
+  // Clamp x to keep the tooltip within container.
+  // The +PADDING term mirrors the left-edge minimum so both edges respect the same gutter.
+  const clampedX = Math.max(
+    TOOLTIP_EDGE_PADDING_PX,
+    Math.min(position.x, containerWidth - TOOLTIP_MAX_WIDTH_PX - TOOLTIP_EDGE_PADDING_PX),
+  );
 
   const transform = flipped ? "translate(-50%, 12px)" : "translate(-50%, -100%)";
 

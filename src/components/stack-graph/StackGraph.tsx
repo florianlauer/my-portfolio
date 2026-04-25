@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { select } from "d3-selection";
 import { zoom, zoomIdentity } from "d3-zoom";
-import type { ZoomBehavior, ZoomTransform } from "d3-zoom";
+import type { ZoomBehavior } from "d3-zoom";
 import "d3-transition";
 import type { StackGraph as StackGraphType } from "@/types/stack-graph";
 import type { StackFamilyKey } from "@/types/stack";
@@ -15,6 +15,11 @@ import { GraphLegend } from "@/components/stack-graph/GraphLegend";
 import { GraphTooltip } from "@/components/stack-graph/GraphTooltip";
 import { GraphFilters } from "@/components/stack-graph/GraphFilters";
 import { StackGraphSRList } from "@/components/stack-graph/StackGraphSRList";
+import {
+  CLICK_THRESHOLD,
+  NODE_RADIUS_BY_LEVEL,
+  TOOLTIP_NODE_OFFSET_PX,
+} from "@/components/stack-graph/constants";
 import type { SimNode } from "@/components/stack-graph/use-force-layout";
 
 type StackGraphProps = {
@@ -36,15 +41,13 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
   const svgRef = useRef<SVGSVGElement>(null);
   const bgRectRef = useRef<SVGRectElement>(null);
   const innerGRef = useRef<SVGGElement>(null);
-  const zoomRef = useRef<ZoomBehavior<SVGRectElement, unknown> | null>(null);
-  // Exposed for tooltip positioning
-  const transformRef = useRef<ZoomTransform>(zoomIdentity);
+  const zoomRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+
+  // Track bg pointer-down position to distinguish click-on-empty from end-of-pan
+  const bgPointerDownPos = useRef<{ x: number; y: number } | null>(null);
 
   // Focus/highlight state (click-to-focus highlighting)
   const [focusedId, setFocusedId] = useState<string | null>(null);
-
-  // Keyboard focus state (for visible focus ring)
-  const [keyboardFocusedId, setKeyboardFocusedId] = useState<string | null>(null);
 
   // Hover state for tooltip
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -96,38 +99,64 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     posMap.set(pos.id, pos);
   }
 
-  // Set up zoom behavior — re-run when SVG is in the DOM (size > 0)
+  // Set up zoom behavior — attached to the SVG so wheel events from anywhere
+  // inside (including over nodes) are captured and preventDefault'd. Pan
+  // (mousedown/touchstart) is filtered to only start on the background rect,
+  // so node drags aren't hijacked.
   useEffect(() => {
+    const svgEl = svgRef.current;
     const bgRect = bgRectRef.current;
     const innerG = innerGRef.current;
-    if (!bgRect || !innerG) return;
+    if (!svgEl || !bgRect || !innerG) return;
 
-    const zoomBehavior = zoom<SVGRectElement, unknown>()
+    const zoomBehavior = zoom<SVGSVGElement, unknown>()
       .scaleExtent([0.5, 3])
+      .filter((event) => {
+        // Wheel: always allow (zoom + preventDefault page scroll)
+        if (event.type === "wheel") return true;
+        // Pan: only when initiated on the background rect, not on a node
+        return event.target === bgRect;
+      })
       .on("zoom", (event) => {
         // Direct DOM mutation — no setState, no React re-render
         innerG.setAttribute("transform", event.transform.toString());
-        transformRef.current = event.transform;
       });
 
     zoomRef.current = zoomBehavior;
-    select(bgRect).call(zoomBehavior);
+    select(svgEl).call(zoomBehavior);
     // Disable d3-zoom's built-in double-click zoom (we handle it ourselves)
-    select(bgRect).on("dblclick.zoom", null);
+    select(svgEl).on("dblclick.zoom", null);
 
     return () => {
-      select(bgRect).on(".zoom", null);
+      select(svgEl).on(".zoom", null);
     };
   }, [size.width, size.height]);
 
   const handleBgDoubleClick = () => {
-    const bgRect = bgRectRef.current;
+    const svgEl = svgRef.current;
     const zoomBehavior = zoomRef.current;
-    if (!bgRect || !zoomBehavior) return;
+    if (!svgEl || !zoomBehavior) return;
     if (reducedMotion) {
-      select(bgRect).call(zoomBehavior.transform, zoomIdentity);
+      select(svgEl).call(zoomBehavior.transform, zoomIdentity);
     } else {
-      select(bgRect).transition().duration(300).call(zoomBehavior.transform, zoomIdentity);
+      select(svgEl).transition().duration(300).call(zoomBehavior.transform, zoomIdentity);
+    }
+  };
+
+  // Bg click handler: only clear focus when the gesture was a real click,
+  // not the tail of a d3-zoom pan (which fires mousedown→move→up→click).
+  const handleBgPointerDown = (e: React.PointerEvent<SVGRectElement>) => {
+    bgPointerDownPos.current = { x: e.clientX, y: e.clientY };
+  };
+
+  const handleBgClick = (e: React.MouseEvent<SVGRectElement>) => {
+    const down = bgPointerDownPos.current;
+    bgPointerDownPos.current = null;
+    if (!down) return;
+    const dx = e.clientX - down.x;
+    const dy = e.clientY - down.y;
+    if (Math.hypot(dx, dy) < CLICK_THRESHOLD) {
+      setFocusedId(null);
     }
   };
 
@@ -182,10 +211,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     if (focusedId !== null && !activeNodeIds.has(focusedId)) {
       setFocusedId(null);
     }
-    if (keyboardFocusedId !== null && !activeNodeIds.has(keyboardFocusedId)) {
-      setKeyboardFocusedId(null);
-    }
-  }, [activeNodeIds, focusedId, keyboardFocusedId]);
+  }, [activeNodeIds, focusedId]);
 
   // Compute tooltip data for hovered node
   const tooltipData = useMemo(() => {
@@ -215,18 +241,11 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     const simNode = positions.find((p) => p.id === nodeId);
     if (!simNode) return;
 
-    // Compute node radius to offset tooltip above the circle
-    const RADIUS_BY_LEVEL: Record<string, number> = {
-      Expert: 34,
-      Avancé: 26,
-      Intermédiaire: 20,
-      Notions: 14,
-    };
-    const nodeRadius = RADIUS_BY_LEVEL[simNode.level] ?? 20;
+    const nodeRadius = NODE_RADIUS_BY_LEVEL[simNode.level] ?? 20;
 
     const pt = svgEl.createSVGPoint();
     pt.x = simNode.x;
-    pt.y = simNode.y - nodeRadius - 12;
+    pt.y = simNode.y - nodeRadius - TOOLTIP_NODE_OFFSET_PX;
 
     const ctm = innerG.getScreenCTM();
     if (!ctm) return;
@@ -244,7 +263,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     if (hoveredId) {
       computeTooltipPosition(hoveredId);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- computeTooltipPosition reads only refs and the captured `positions`; both are listed in deps.
   }, [hoveredId, positions]);
 
   // Filter toggle handler — enforce at-least-1 active
@@ -290,7 +309,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
         activeFilters={activeFilters}
         onToggle={handleFilterToggle}
       />
-      <div ref={containerRef} className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
+      <div ref={containerRef} className="relative w-full aspect-[3/4] md:aspect-[4/3]">
         {size.width > 0 && size.height > 0 && (
           <svg
             ref={svgRef}
@@ -299,6 +318,27 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
             overflow="hidden"
             aria-hidden="true"
           >
+            {/* Shared filters: one drop-shadow per family (≤8) instead of per node (39+) */}
+            <defs>
+              {data.familyColors.map((fc) => (
+                <filter
+                  key={fc.family}
+                  id={`glow-${fc.family}`}
+                  x="-50%"
+                  y="-50%"
+                  width="200%"
+                  height="200%"
+                >
+                  <feDropShadow
+                    dx="0"
+                    dy="0"
+                    stdDeviation="4"
+                    floodColor={fc.color}
+                    floodOpacity="0.25"
+                  />
+                </filter>
+              ))}
+            </defs>
             {/* Background rect: zoom/pan target, click to clear focus */}
             <rect
               ref={bgRectRef}
@@ -309,7 +349,8 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
               fill="transparent"
               pointerEvents="all"
               style={{ cursor: "grab" }}
-              onClick={() => setFocusedId(null)}
+              onPointerDown={handleBgPointerDown}
+              onClick={handleBgClick}
               onDoubleClick={handleBgDoubleClick}
             />
             {/* Inner g: receives zoom transform via direct DOM setAttribute */}
@@ -345,8 +386,6 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                     onDragEnd={dragEnd}
                     onNodeClick={setFocusedId}
                     onHoverChange={setHoveredId}
-                    onFocusChange={setKeyboardFocusedId}
-                    isFocused={keyboardFocusedId === pos.id}
                     opacity={getNodeOpacity(pos.id)}
                   />
                 ))}
