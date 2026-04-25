@@ -1,105 +1,37 @@
 # Roadmap: Stack Graph
 
-## Overview
+## Milestones
 
-Transform the existing tech skills data into an interactive force-directed graph on a dedicated `/stack` page. The roadmap progresses from data modeling through visual rendering, interactivity, and accessibility -- each phase producing a verifiable artifact that builds on the previous.
+- ✅ **v1.0.0 Stack Graph** — Phases 1–4 (shipped 2026-04-25) — see [milestones/v1.0.0-ROADMAP.md](milestones/v1.0.0-ROADMAP.md)
 
 ## Phases
 
-**Phase Numbering:**
+<details>
+<summary>✅ v1.0.0 Stack Graph (Phases 1–4) — SHIPPED 2026-04-25</summary>
 
-- Integer phases (1, 2, 3): Planned milestone work
-- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+- [x] Phase 1: Data Foundation (1/1 plans) — completed 2026-03-08
+- [x] Phase 2: Page and Graph Rendering (2/2 plans) — completed 2026-03-08
+- [x] Phase 3: Interactivity (2/2 plans) — completed 2026-03-13
+- [x] Phase 4: Accessibility (2/2 plans) — completed 2026-03-13
 
-Decimal phases appear between their surrounding integers in numeric order.
+Full details : [milestones/v1.0.0-ROADMAP.md](milestones/v1.0.0-ROADMAP.md)
 
-- [x] **Phase 1: Data Foundation** - TypeScript types and graph content data with relations, levels, and category colors (completed 2026-03-08)
-- [x] **Phase 2: Page and Graph Rendering** - /stack route with SVG nodes, edges, force layout, and legend (completed 2026-03-08)
-- [ ] **Phase 3: Interactivity** - Tooltips, zoom/pan, click-to-focus, and category filters
-- [ ] **Phase 4: Accessibility** - Keyboard navigation, reduced motion, focus-triggered tooltips, screen reader support
+</details>
 
-## Phase Details
+### 📋 v1.1+ (To Be Defined)
 
-### Phase 1: Data Foundation
+Run `/gsd-new-milestone` to start the next milestone cycle.
 
-**Goal**: Graph data model exists and is populated with real content, ready for rendering
-**Depends on**: Nothing (first phase)
-**Requirements**: DATA-01, DATA-02, DATA-03, DATA-04
-**Plans:** 1/1 plans complete
-**Success Criteria** (what must be TRUE):
+Candidate themes from the v2 backlog (`milestones/v1.0.0-REQUIREMENTS.md`) :
 
-1. TypeScript types for nodes (id, name, icon, category, level, description) and edges (source, target, type) exist and compile without errors
-2. `src/content/stack-graph.ts` exports a complete graph dataset with all current technologies as nodes and meaningful relations as edges
-3. Each node has an experience level (expert, advanced, intermediate) and belongs to a category (Frontend, Backend, DevOps) with an oklch color value
-4. Existing `src/content/stack.ts` imports remain unbroken -- the current Arsenal section still works
-
-Plans:
-
-- [x] 01-01-PLAN.md — Graph types, content data (39 nodes, 53 edges, 7 family colors), user validation
-
-### Phase 2: Page and Graph Rendering
-
-**Goal**: Visitor can navigate to /stack and see the full tech graph with positioned nodes, edges, and a color-coded legend
-**Depends on**: Phase 1
-**Requirements**: PAGE-01, PAGE-02, PAGE-03, RENDER-01, RENDER-02, RENDER-03, RENDER-04
-**Plans:** 2/2 plans complete
-**Success Criteria** (what must be TRUE):
-
-1. `/stack` route renders inside PageShell with correct nav, background, and skip-to-content
-2. Navigation includes a link to /stack visible from all pages
-3. Each node displays its name, icon, and category color as an SVG element
-4. Edges visually connect related technologies with lines/curves
-5. Nodes are positioned via d3-force layout (not manual coordinates) and the legend shows all categories with their colors
-
-Plans:
-
-- [ ] 02-01-PLAN.md — Page route, nav link, SEO metadata, icon map, node/edge/legend components
-- [ ] 02-02-PLAN.md — Force layout simulation, StackGraph orchestrator, micro-movement, drag interaction
-
-### Phase 3: Interactivity
-
-**Goal**: Visitor can explore the graph through hover, click, zoom, pan, and filtering by domain
-**Depends on**: Phase 2
-**Requirements**: INTER-01, INTER-02, INTER-03, INTER-04
-**Plans:** 1/2 plans executed
-**Success Criteria** (what must be TRUE):
-
-1. Hovering a node shows a tooltip with the technology's level, description, and connected technologies
-2. Mouse wheel zooms and click-drag pans the graph viewport
-3. Clicking a node highlights its direct connections and dims unrelated nodes
-4. Category filter controls (Frontend, Backend, DevOps) show/hide groups of nodes and their edges
-
-Plans:
-
-- [ ] 03-01-PLAN.md — Zoom/pan via d3-zoom, click-to-focus highlighting with adjacency dimming
-- [ ] 03-02-PLAN.md — Rich HTML tooltip, category filter pills with d3-force reflow
-
-### Phase 4: Accessibility
-
-**Goal**: The graph is usable without a mouse and respects user motion preferences
-**Depends on**: Phase 3
-**Requirements**: A11Y-01, A11Y-02, A11Y-03, A11Y-04
-**Plans:** 1/2 plans executed
-**Success Criteria** (what must be TRUE):
-
-1. User can Tab between graph nodes with a visible focus indicator
-2. Focusing a node via keyboard triggers the same tooltip as hover
-3. With `prefers-reduced-motion: reduce` enabled, force-directed animation is skipped and nodes appear in a static layout
-4. A visually hidden structured list of all technologies and their relations is available to screen readers
-
-Plans:
-
-- [ ] 04-01-PLAN.md — Reduced motion support: usePrefersReducedMotion hook, static d3 layout, StackGraph wiring
-- [ ] 04-02-PLAN.md — Keyboard navigation with focus ring/tooltips, screen reader list (StackGraphSRList)
+- Visual Polish : entry animation, level-proportional node size, "ma stack typique" preset, edge focus animations
+- Mobile : responsive graph, touch gestures for zoom/pan
 
 ## Progress
 
-**Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4
-
-| Phase                       | Plans Complete | Status      | Completed  |
-| --------------------------- | -------------- | ----------- | ---------- |
-| 1. Data Foundation          | 1/1            | Complete    | 2026-03-08 |
-| 2. Page and Graph Rendering | 2/2            | Complete    | 2026-03-08 |
-| 3. Interactivity            | 1/2            | In Progress |            |
-| 4. Accessibility            | 1/2            | In Progress |            |
+| Phase                       | Milestone | Plans Complete | Status   | Completed  |
+| --------------------------- | --------- | -------------- | -------- | ---------- |
+| 1. Data Foundation          | v1.0.0    | 1/1            | Complete | 2026-03-08 |
+| 2. Page and Graph Rendering | v1.0.0    | 2/2            | Complete | 2026-03-08 |
+| 3. Interactivity            | v1.0.0    | 2/2            | Complete | 2026-03-13 |
+| 4. Accessibility            | v1.0.0    | 2/2            | Complete | 2026-03-13 |

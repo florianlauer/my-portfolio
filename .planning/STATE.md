@@ -1,11 +1,11 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-status: completed
-stopped_at: "Completed 04-02-PLAN.md: keyboard nav and screen reader accessibility for stack graph"
-last_updated: "2026-03-13T18:28:09.130Z"
-last_activity: 2026-03-08 -- Completed 02-02 force layout and graph interaction
+milestone: v1.0.0
+milestone_name: Stack Graph
+status: shipped
+stopped_at: "v1.0.0 milestone shipped — ready for /gsd-new-milestone"
+last_updated: "2026-04-25T17:30:00.000Z"
+last_activity: 2026-04-25 -- v1.0.0 milestone closed and archived
 progress:
   total_phases: 4
   completed_phases: 4
@@ -18,19 +18,20 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-07)
+See: .planning/PROJECT.md (updated 2026-04-25 after v1.0.0)
 
 **Core value:** Le visiteur comprend en un coup d'oeil les relations entre les compétences de Florian
-**Current focus:** Phase 2 complete, ready for Phase 3 - Interactivity
+**Current focus:** v1.0.0 shipped — planning next milestone (POLISH or MOBILE)
 
 ## Current Position
 
-Phase: 2 of 4 (Page and Graph Rendering) -- COMPLETE
-Plan: 2 of 2 in current phase (all done)
-Status: Phase 02 complete
-Last activity: 2026-03-08 -- Completed 02-02 force layout and graph interaction
+Milestone: v1.0.0 -- SHIPPED 2026-04-25
+Status: All 4 phases complete (7/7 plans), 19/19 v1 requirements validated
+Last activity: 2026-04-25 -- v1.0.0 milestone closed and archived
 
 Progress: [██████████] 100%
+
+Next step: `/gsd-new-milestone` to define v1.1+
 
 ## Performance Metrics
 
@@ -95,6 +96,15 @@ None yet.
 ### Blockers/Concerns
 
 None yet.
+
+## Deferred Items
+
+Items acknowledged and deferred at v1.0.0 milestone close on 2026-04-25:
+
+| Category         | Item                         | Status       | Note                                                                                                                                           |
+| ---------------- | ---------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| verification_gap | Phase 02: 02-VERIFICATION.md | gaps_found   | Reduced-motion gap formally closed by Phase 04 (A11Y-03 SATISFIED). Orphaned `use-micro-movement.ts` already removed in commit 009f42e.        |
+| verification_gap | Phase 04: 04-VERIFICATION.md | human_needed | 9/9 must-haves verified statically; 6 runtime tests (browser focus ring, OS Reduce Motion, VoiceOver) require manual validation. No code gaps. |
 
 ## Session Continuity
 
