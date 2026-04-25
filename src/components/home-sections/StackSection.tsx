@@ -13,6 +13,7 @@ const familyAccent: Record<StackFamilyKey, { border: string; label: string; text
   data: { border: "border-t-cyan-500", label: "Base de données", text: "text-cyan-600" },
   infra: { border: "border-t-teal-500", label: "CI / Infra", text: "text-teal-600" },
   integrations: { border: "border-t-violet-500", label: "Intégrations", text: "text-violet-600" },
+  methods: { border: "border-t-emerald-500", label: "Craft", text: "text-emerald-600" },
 };
 
 export const StackSection = ({ stackGroups, stackTags }: StackSectionProps): React.JSX.Element => {

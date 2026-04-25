@@ -12,6 +12,8 @@ export const stackGroups: StackGroup[] = [
       { id: "vite", label: "Vite" },
       { id: "angular", label: "Angular" },
       { id: "scss", label: "SCSS" },
+      { id: "styled-components", label: "Styled Components" },
+      { id: "gatsbyjs", label: "Gatsby" },
     ],
   },
   {
@@ -66,6 +68,18 @@ export const stackGroups: StackGroup[] = [
       { id: "mixpanel", label: "Mixpanel" },
       { id: "intercom", label: "Intercom" },
       { id: "contentful", label: "Contentful" },
+    ],
+  },
+  {
+    family: "methods",
+    title: "Méthodes & Architecture",
+    items: [
+      { id: "tdd", label: "TDD" },
+      { id: "ddd", label: "DDD" },
+      { id: "hexagonal", label: "Architecture Hexagonale" },
+      { id: "cqrs", label: "CQRS" },
+      { id: "clean-architecture", label: "Clean Architecture" },
+      { id: "microservices", label: "Microservices" },
     ],
   },
 ];

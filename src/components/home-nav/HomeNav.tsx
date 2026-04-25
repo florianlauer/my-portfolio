@@ -185,6 +185,12 @@ export function HomeNav(): React.JSX.Element {
           >
             Galerie
           </Link>
+          <Link
+            href="/stack"
+            className={cn(linkBaseClass, isActive("/stack") && "bg-primary/10 text-primary")}
+          >
+            Ma Stack
+          </Link>
           <a
             href={sectionHref("#contact")}
             className={cn(linkBaseClass, isActive("#contact") && "bg-primary/10 text-primary")}
