@@ -3,19 +3,21 @@ import type { AProposContent, PassionsSectionContent } from "@/types/passions";
 /** Section Passions sur la home (teaser, ton pro). Modifiable ici. */
 export const passionsSectionContent: PassionsSectionContent = {
   title: "Passions",
-  subtitle: "En dehors du code, le voyage, les side projects et le sport occupent une bonne place.",
+  subtitle:
+    "En dehors du code : voyage en Amérique latine, domotique maison, et trois sports pour vider la tête.",
   blocks: [
     {
       id: "sport",
       title: "Sport & plein air",
       items: ["🚴 Cyclisme", "🏃 Running", "🎾 Padel", "🥾 Randonnée"],
-      closing: "Des sports variés mais complémentaires.",
+      closing: "Effort solitaire ou collectif, selon l'humeur.",
     },
     {
       id: "side-projects",
       title: "Side projects",
       items: ["🏠 Domotique (Home Assistant)", "🖨️ Impression 3D", "⌨️ Outils dev"],
-      closing: "Des expérimentations qui s'enchaînent.",
+      closing:
+        "Lumières, capteurs CO2, support brosse à dent imprimé. Le quotidien automatisé ou rangé.",
     },
     {
       id: "voyage",
@@ -26,7 +28,7 @@ export const passionsSectionContent: PassionsSectionContent = {
         "🌏 Asie · 2 pays",
         "📷 Photographie",
       ],
-      closing: "Appareil photo toujours dans la poche.",
+      closing: "Amériques, Asie, iPhone toujours en poche.",
     },
   ],
   linkToAProposLabel: "En savoir plus",
@@ -41,25 +43,25 @@ export const aProposContent: AProposContent = {
       id: "intro",
       title: "Qui je suis",
       content:
-        "Florian, senior fullstack engineer. J’aime concevoir des expériences web robustes et lisibles, et en dehors du bureau je m’investis dans le voyage, les side projects et le sport.",
+        "Florian, dev senior fullstack avec une formation à touche hardware. Dev produit avant tout : pairing avec PM et designers, à l'écoute des besoins clients, et pose de KPI pour comprendre d'où viennent vraiment les problèmes avant de coder.",
     },
     {
       id: "sport",
       title: "Sport & plein air",
       content:
-        "Vélo de route, running, randos en montagne, padel — le mouvement occupe une bonne partie de mes semaines. J’aime alterner effort solitaire et sports avec des amis selon l’humeur.",
+        "Vélo de route, running, padel, randos en montagne. Alternance entre l'effort solitaire qui vide la tête et les sports collectifs avec des amis, selon l'humeur du moment.",
     },
     {
       id: "side-projects",
       title: "Domotique & impression 3D",
       content:
-        "À la maison, j’automatise ce que je peux (Home Assistant, scripts perso) et je conçois ou répare des pièces en impression 3D. Un terrain d’expérimentation sans contraintes — là où j’apprends souvent le plus vite.",
+        "À la maison, Home Assistant pilote les lumières, les capteurs de température et de CO2. À côté, l'imprimante 3D sort surtout des petits outils du quotidien : support brosse à dent, mini armoire à piles, et tous les \"ça serait pratique si...\" qu'on finit par modéliser. Terrain d'expérimentation libre — souvent là où j'apprends le plus vite.",
     },
     {
       id: "voyage",
       title: "Voyage",
       content:
-        "Quelques destinations marquantes : Lençóis Maranhenses, Rio, et plusieurs escapades en Europe. Les photos récupèrent souvent une vie sur ce site — dans les fonds, le hero, et peut-être des endroits cachés.",
+        "Une obsession Amériques (Brésil, Colombie, Guatemala, Belize) née par hasard, et quelques détours par l'Asie (Malaisie, Inde). Deux moments restent. Tuk-tuk vers le Taj Mahal sous 40°C — croisé en route une procession de Kanwariyas, pèlerins de Shiva qui rapportent l'eau du Gange sur des kilomètres, sound system à fond et bâtons d'eau en équilibre sur l'épaule. Inde au format brut. Et la Comuna 13 de Medellín, visitée avec un guide local qui a vu le quartier passer du pire au touristique. Photos prises à l'iPhone, recyclées sur ce site — hero, fonds, et deux ou trois endroits cachés.",
     },
   ],
 };

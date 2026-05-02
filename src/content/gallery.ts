@@ -489,8 +489,8 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "img-9564",
     src: "/gallery/IMG_9564.compressed.jpeg",
-    alt: "Amazon Rainforest, Colombie",
-    caption: "Amazon Rainforest, Colombie",
+    alt: "Amazon Rainforest, Brésil",
+    caption: "Amazon Rainforest, Brésil",
   },
   {
     id: "img-9572",

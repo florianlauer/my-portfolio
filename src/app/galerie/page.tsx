@@ -18,7 +18,8 @@ export default function GaleriePage(): React.JSX.Element {
         <header className="mb-10">
           <h1 className="text-3xl font-semibold tracking-tight">Galerie</h1>
           <p className="mt-2 text-lg text-muted-foreground">
-            Photos de voyage — ordre aléatoire à chaque visite.
+            Du désert de la Tatacoa (Colombie) aux dunes des Lençóis Maranhenses (Nordeste
+            brésilien), du Fuego (Guatemala) aux aurores de Laponie.
           </p>
         </header>
 
