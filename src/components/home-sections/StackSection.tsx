@@ -3,7 +3,7 @@ import type { StackFamilyKey, StackGroup } from "@/types/stack";
 
 type StackSectionProps = {
   stackGroups: StackGroup[];
-  stackTags: string[];
+  opinion?: string;
 };
 
 const familyAccent: Record<StackFamilyKey, { border: string; label: string; text: string }> = {
@@ -16,7 +16,7 @@ const familyAccent: Record<StackFamilyKey, { border: string; label: string; text
   methods: { border: "border-t-emerald-500", label: "Craft", text: "text-emerald-600" },
 };
 
-export const StackSection = ({ stackGroups, stackTags }: StackSectionProps): React.JSX.Element => {
+export const StackSection = ({ stackGroups, opinion }: StackSectionProps): React.JSX.Element => {
   return (
     <section
       id="stack"
@@ -55,16 +55,11 @@ export const StackSection = ({ stackGroups, stackTags }: StackSectionProps): Rea
         })}
       </div>
 
-      <ul className="mt-6 flex flex-wrap gap-2" aria-label="Tags de compétences">
-        {stackTags.map((tag) => (
-          <li
-            key={tag}
-            className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary transition-transform duration-150 pointer-hover:scale-105"
-          >
-            {tag}
-          </li>
-        ))}
-      </ul>
+      {opinion ? (
+        <p className="mt-6 border-l-2 border-muted-foreground/30 pl-3 text-sm italic text-muted-foreground">
+          {opinion}
+        </p>
+      ) : null}
     </section>
   );
 };

@@ -6,7 +6,7 @@ import { ContactSection } from "@/components/home-sections/ContactSection";
 import { HeroSection } from "@/components/home-sections/HeroSection";
 import { JourneySection } from "@/components/home-sections/JourneySection";
 import { PassionsSection } from "@/components/home-sections/PassionsSection";
-import { stackGroups, stackTags } from "@/content/stack";
+import { stackGroups, stackOpinion } from "@/content/stack";
 import { journeyChapters } from "@/content/journey";
 import { passionsSectionContent } from "@/content/passions";
 import { heroStack, siteContent } from "@/content/site";
@@ -40,7 +40,7 @@ export default function HomePage(): React.JSX.Element {
           <JourneySection journeyChapters={journeyChapters} />
         </ScrollReveal>
         <ScrollReveal>
-          <StackSection stackGroups={stackGroups} stackTags={stackTags} />
+          <StackSection stackGroups={stackGroups} opinion={stackOpinion} />
         </ScrollReveal>
 
         <ScrollReveal>

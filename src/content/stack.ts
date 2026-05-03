@@ -6,8 +6,8 @@ export const stackGroups: StackGroup[] = [
     title: "Frontend",
     items: [
       { id: "react", label: "React" },
-      { id: "nextjs", label: "Next.js" },
       { id: "typescript", label: "TypeScript" },
+      { id: "nextjs", label: "Next.js" },
       { id: "tailwindcss", label: "Tailwind CSS" },
       { id: "vite", label: "Vite" },
       { id: "angular", label: "Angular" },
@@ -29,10 +29,10 @@ export const stackGroups: StackGroup[] = [
     family: "backend",
     title: "Backend & API",
     items: [
-      { id: "nodejs", label: "Node.js" },
       { id: "nestjs", label: "NestJS" },
-      { id: "express", label: "Express" },
+      { id: "nodejs", label: "Node.js" },
       { id: "graphql", label: "GraphQL (Apollo)" },
+      { id: "express", label: "Express" },
       { id: "python-fastapi", label: "Python / FastAPI" },
       { id: "kafka", label: "Kafka" },
     ],
@@ -74,9 +74,10 @@ export const stackGroups: StackGroup[] = [
     family: "methods",
     title: "Méthodes & Architecture",
     items: [
+      { id: "ddd", label: "DDD (BFF Sencrop)" },
+      { id: "hexagonal", label: "Architecture Hexagonale (BFF Sencrop)" },
+      { id: "adapter", label: "Pattern Adapter & split par domaine" },
       { id: "tdd", label: "TDD" },
-      { id: "ddd", label: "DDD" },
-      { id: "hexagonal", label: "Architecture Hexagonale" },
       { id: "cqrs", label: "CQRS" },
       { id: "clean-architecture", label: "Clean Architecture" },
       { id: "microservices", label: "Microservices" },
@@ -84,4 +85,5 @@ export const stackGroups: StackGroup[] = [
   },
 ];
 
-export const stackTags: string[] = ["TypeScript", "Vitest / Jest", "CI/CD", "Performance", "DX"];
+export const stackOpinion =
+  "Capacitor m'a servi 6 ans en prod côté Sencrop. Pour un nouveau projet mobile, je partirais sur React Native ou Expo.";
