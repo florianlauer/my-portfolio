@@ -1,6 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
+import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
@@ -26,13 +27,20 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps): React.JS
   const t = useTranslations("languageSwitcher");
   const router = useRouter();
   const pathname = usePathname();
+  const params = useParams();
   const currentLocale = useLocale() as Locale;
   const [isPending, startTransition] = useTransition();
 
   function switchTo(nextLocale: Locale): void {
     if (nextLocale === currentLocale) return;
     startTransition(() => {
-      router.replace(pathname, { locale: nextLocale });
+      router.replace(
+        // Typed-pathnames API: pathname is the canonical source path,
+        // params carries any dynamic segments (none on this site).
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        { pathname, params } as any,
+        { locale: nextLocale },
+      );
     });
   }
 
