@@ -1,6 +1,294 @@
 {
+  "site": {
+    "ownerName": "Florian Lauer",
+    "heroTitle": "Senior Fullstack Engineer · orienté produit",
+    "heroSubtitle": "Dev fullstack senior, ~9 ans d'XP, formation en embarqué. Je code aux côtés des PM et designers, et j'aime regarder les chiffres avant de toucher au code.",
+    "heroImageAlt": "Portrait illustre de Florian Lauer",
+    "primaryCta": "Me contacter"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "gallery": "Galerie",
+    "stack": "Ma Stack"
+  },
+  "journey": {
+    "sectionTitle": "Parcours",
+    "chapters": {
+      "depart": {
+        "title": "Départ",
+        "location": "Nancy • France",
+        "description": "Deux ans en HealthTech. Stage sur des chatbots, puis dev fullstack sur des apps e-santé (Angular, Java/Spring, MySQL). C'est là que j'ai appris les premiers réflexes CI/CD et SCRUM. Au bout de deux ans, envie de voir comment on bosse ailleurs."
+      },
+      "expansion": {
+        "title": "Expansion",
+        "location": "Birmingham • Royaume-Uni",
+        "description": "Direction Birmingham pour refondre le site de PM Connect (HTML/SCSS/JS, PHP/Symfony, Docker, Kanban). Ma première startup, ma première équipe internationale, et l'anglais au quotidien a été un cap personnel autant que pro."
+      },
+      "aujourdhui": {
+        "title": "Aujourd'hui",
+        "location": "Lille • France",
+        "description": "Six ans chez Sencrop, en AgTech. J'ai monté l'équipe Growth, puis l'équipe Sales Impact pour faire monter le revenu et faire baisser le churn. Côté produit, j'ai porté l'app de tests et de suivi production de nos stations 4G : depuis le banc capteurs à l'usine jusqu'à l'intégration dans l'app météo agricole. Je contribue aussi au design system, repris par trois équipes. Côté tech : TypeScript partout (React, NestJS, GraphQL), du web et du natif via Capacitor, infra Terraform."
+      }
+    }
+  },
+  "passions": {
+    "title": "Passions",
+    "subtitle": "A part le code : voyage en Amérique latine, domotique à la maison, et pas mal de sports différents.",
+    "linkLabel": "En savoir plus",
+    "blocks": {
+      "sport": {
+        "title": "Sport & plein air",
+        "items": ["🚴 Cyclisme", "🏃 Running", "🎾 Padel", "🥾 Randonnée"],
+        "closing": "Solo ou à plusieurs, ça dépend des jours."
+      },
+      "side-projects": {
+        "title": "Side projects",
+        "items": ["🏠 Domotique (Home Assistant)", "🖨️ Impression 3D", "⌨️ Outils dev"],
+        "closing": "Mes \"ce serait pratique si...\" qui finissent imprimés."
+      },
+      "voyage": {
+        "title": "Voyage",
+        "items": [
+          "🌍 Europe · 15 pays",
+          "🌎 Amériques · 4 pays",
+          "🌏 Asie · 2 pays",
+          "📷 Photographie"
+        ],
+        "closing": "Tout shooté à l'iPhone."
+      }
+    }
+  },
+  "about": {
+    "pageTitle": "À propos",
+    "pageSubtitle": "En dehors du code",
+    "sections": {
+      "intro": {
+        "title": "Qui je suis",
+        "content": "Florian, dev senior fullstack, avec une formation embarqué au départ. J'aime bosser en pairing avec les PM et les designers, comprendre ce que veulent vraiment les utilisateurs, et regarder les métriques avant d'attaquer du code."
+      },
+      "sport": {
+        "title": "Sport & plein air",
+        "content": "Vélo de route, running, padel, randos en montagne. Quand j'ai besoin de m'aérer la tête, le vélo gagne. Sinon je fais du padel pour une session plus intense."
+      },
+      "side-projects": {
+        "title": "Domotique & impression 3D",
+        "content": "À la maison, Home Assistant pilote les lumières, les capteurs de température et de CO2. À côté, l'imprimante 3D sort surtout des petits outils du quotidien : support brosse à dent, mini armoire à piles, et tous les \"ça serait pratique si...\" qu'on finit par modéliser. C'est souvent là que j'apprends le plus."
+      },
+      "voyage": {
+        "title": "Voyage",
+        "content": "Une obsession Amériques (Brésil, Colombie, Guatemala, Belize) qui est née par hasard, mais quelques détours par l'Asie également (Malaisie, Inde). Deux moments m'ont marqués : Tuk-tuk vers le Taj Mahal sous 40°C — croisé en route une procession de Kanwariyas, pèlerins de Shiva qui rapportent l'eau du Gange sur des kilomètres, musique à fond et bâtons d'eau en équilibre sur l'épaule, et la Comuna 13 de Medellín, visitée avec un guide local qui a vu le quartier passer du pire au tourisme. Mes photos sont toutes prises à l'iPhone, et recyclées un peu partout sur ce site — hero, fonds, et deux ou trois endroits cachés."
+      }
+    }
+  },
+  "stack": {
+    "sectionTitle": "Stack technique",
+    "pageTitle": "Ma Stack",
+    "opinion": "Capacitor m'a servi 6 ans en prod côté Sencrop. Pour un nouveau projet mobile, je partirais sur React Native ou Expo.",
+    "families": {
+      "frontend": "Frontend",
+      "mobile": "Mobile",
+      "backend": "Backend & API",
+      "data": "Data",
+      "infra": "Infra / DevOps",
+      "integrations": "Intégrations SaaS",
+      "methods": "Méthodes & Architecture"
+    },
+    "levels": {
+      "Notions": "Notions",
+      "Intermédiaire": "Intermédiaire",
+      "Avancé": "Avancé",
+      "Expert": "Expert"
+    },
+    "itemLabels": {
+      "react": "React",
+      "typescript": "TypeScript",
+      "nextjs": "Next.js",
+      "vite": "Vite",
+      "angular": "Angular",
+      "scss": "SCSS",
+      "styled-components": "Styled Components",
+      "gatsbyjs": "Gatsby",
+      "capacitor": "Capacitor (iOS/Android)",
+      "capacitor-plugin": "Plugins Capacitor",
+      "bitrise": "Bitrise CI",
+      "nestjs": "NestJS",
+      "nodejs": "Node.js",
+      "graphql": "GraphQL (Apollo)",
+      "express": "Express",
+      "python-fastapi": "Python / FastAPI",
+      "kafka": "Kafka",
+      "postgresql": "PostgreSQL",
+      "mysql": "MySQL",
+      "drizzle": "Drizzle ORM",
+      "prisma": "Prisma",
+      "terraform": "Terraform (HCL)",
+      "docker": "Docker",
+      "github-actions": "GitHub Actions",
+      "aws": "AWS (Lambda, S3, RDS, ECS, ECR, Route 53, etc.)",
+      "datadog": "Datadog",
+      "nix": "Nix",
+      "hubspot": "HubSpot",
+      "chargebee": "Chargebee",
+      "mixpanel": "Mixpanel",
+      "intercom": "Intercom",
+      "contentful": "Contentful",
+      "ddd": "DDD (BFF Sencrop)",
+      "hexagonal": "Architecture Hexagonale (BFF Sencrop)",
+      "adapter": "Pattern Adapter & split par domaine",
+      "tdd": "TDD",
+      "cqrs": "CQRS",
+      "clean-architecture": "Clean Architecture",
+      "microservices": "Microservices"
+    },
+    "nodeDescriptions": {
+      "react": "Ma bibliothèque UI principale — j'ai construit des dizaines de projets React depuis 2018.",
+      "nextjs": "Framework React que je connais bien — App Router, SSR, RSC. Utilisé sur plusieurs projets perso et pro.",
+      "typescript": "Sur tous mes projets depuis 2019. Une fois passé aux types stricts, retour en JS pur impossible.",
+      "vite": "Bundler ultra-rapide que j'utilise sur les projets hors Next.js.",
+      "angular": "Utilisé sur des projets d'entreprise pendant 2 ans. Je connais l'écosystème mais je préfère React.",
+      "scss": "Utilisé avant Tailwind — je sais m'en servir mais je n'y reviens plus.",
+      "styled-components": "CSS-in-JS utilisé sur les projets professionnels au quotidien.",
+      "gatsbyjs": "Générateur de sites statiques React — utilisé pour des sites vitrines avant l'adoption de Next.js.",
+      "capacitor": "J'ai livré des apps hybrides iOS/Android à partir de bases React existantes.",
+      "capacitor-plugin": "Développement de plugins natifs custom pour combler les besoins métier.",
+      "bitrise": "CI/CD mobile configuré pour les builds iOS et Android.",
+      "nodejs": "Mon runtime backend principal. APIs REST, workers, scripts — Node est partout dans ma stack.",
+      "nestjs": "Bien structuré pour les grosses APIs : modules, guards, interceptors. Quand on est plusieurs sur le code, ça aide.",
+      "express": "Le classique Node.js — utilisé sur de nombreux projets avant NestJS.",
+      "graphql": "APIs GraphQL avec Apollo Server et Client. Schemas, resolvers, subscriptions.",
+      "python-fastapi": "Utilisé pour des microservices data et des APIs légères en Python.",
+      "kafka": "Notions seulement. J'ai consommé et produit des messages en prod, mais sans avoir géré la stack moi-même.",
+      "postgresql": "Ma base par défaut. Tient la charge, et la doc Postgres reste la référence.",
+      "mysql": "Utilisé sur des projets legacy, je préfère PostgreSQL.",
+      "drizzle": "Plus léger que Prisma, mieux typé. Je l'adopte sur les nouveaux projets perso.",
+      "prisma": "ORM bien typé, utilisé sur NestJS avant Drizzle.",
+      "terraform": "Infrastructure as Code pour provisionner des environnements AWS reproductibles.",
+      "docker": "Conteneurisation systématique. Dockerfiles multi-stage, compose, registries. Utilisé en perso comme en entreprise.",
+      "github-actions": "Pipelines CI/CD sur tous mes repos — tests, lint, deploy automatisés.",
+      "aws": "Lambda, S3, CloudFront, RDS, ECS, ECR, Route 53, etc. — les briques classiques pour du serverless et du hosting.",
+      "datadog": "Monitoring et alerting en production — dashboards, APM, logs centralisés.",
+      "nix": "Environnements de dev reproductibles avec devenv — j'essaie de l'utiliser partout.",
+      "hubspot": "Intégration CRM via API — sync contacts, deals, workflows automatisés.",
+      "chargebee": "Gestion d'abonnements et facturation via API et webhooks.",
+      "mixpanel": "Analytics produit — tracking d'événements, funnels, rétention.",
+      "intercom": "Intégration du widget et des APIs pour le support client in-app.",
+      "contentful": "CMS headless — modèles de contenu, API GraphQL, webhooks de publication.",
+      "tdd": "Test-Driven Development appliqué au quotidien — red/green/refactor pour un code fiable.",
+      "ddd": "Domain-Driven Design — bounded contexts, agrégats, ubiquitous language pour modéliser le métier.",
+      "hexagonal": "Ports & Adapters — découplage du domaine métier des dépendances techniques.",
+      "cqrs": "Séparation lecture/écriture pour des systèmes scalables et maintenables.",
+      "clean-architecture": "Structuration en couches avec inversion de dépendances — code métier isolé et testable.",
+      "microservices": "Découpage en services autonomes communiquant par API et événements — déployés indépendamment."
+    }
+  },
+  "gallery": {
+    "pageTitle": "Galerie",
+    "pageSubtitle": "Du désert de la Tatacoa (Colombie) aux dunes des Lençóis Maranhenses (Nordeste brésilien), du Fuego (Guatemala) aux aurores de Laponie.",
+    "captions": {
+      "img-0039": "Caye Caulker, Belize",
+      "img-0040": "Caye Caulker, Belize",
+      "img-0041": "Caye Caulker, Belize",
+      "img-0042": "Caye Caulker, Belize",
+      "img-0043": "Caye Caulker, Belize",
+      "img-7460": "Los Angeles, États-Unis",
+      "img-7462": "Los Angeles, États-Unis",
+      "img-7467": "Los Angeles, États-Unis",
+      "img-7471": "Los Angeles, États-Unis",
+      "img-7499": "Antigua, Guatemala",
+      "img-7507": "Antigua, Guatemala",
+      "img-7528": "Volcan Acatenango, Guatemala",
+      "img-7545": "Volcan Fuego, Guatemala",
+      "img-7555": "Volcan Fuego, Guatemala",
+      "img-7570": "Volcan Fuego, Guatemala",
+      "img-7609": "Semuc Champey, Guatemala",
+      "img-7622": "Semuc Champey, Guatemala",
+      "img-7629": "Semuc Champey, Guatemala",
+      "img-7632": "Semuc Champey, Guatemala",
+      "img-7634": "Semuc Champey, Guatemala",
+      "img-7639": "Semuc Champey, Guatemala",
+      "img-7653": "Flores, Guatemala",
+      "img-7678": "Parc national de Tikal, Guatemala",
+      "img-7680": "Parc national de Tikal, Guatemala",
+      "img-7693": "Parc national de Tikal, Guatemala",
+      "img-7697": "Parc national de Tikal, Guatemala",
+      "img-7707": "Parc national de Tikal, Guatemala",
+      "img-7769": "Caye Caulker, Belize",
+      "img-7773": "Barrière de corail, Belize",
+      "img-7791": "Barrière de corail, Belize",
+      "img-7796": "Great Blue Hole, Belize",
+      "img-7808": "Barrière de corail, Belize",
+      "img-7825": "Caye Caulker, Belize",
+      "img-8202": "Forêt amazonienne, Brésil",
+      "img-8234": "Forêt amazonienne, Brésil",
+      "img-8241": "Forêt amazonienne, Brésil",
+      "img-8244": "Forêt amazonienne, Brésil",
+      "img-8249": "Forêt amazonienne, Brésil",
+      "img-8265": "Forêt amazonienne, Brésil",
+      "img-8283": "Forêt amazonienne, Brésil",
+      "img-8302": "Manaus, Brésil",
+      "img-8310": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-8320": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-8328": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-8330": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-8340": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-8341": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-8415": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-8444": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-8451": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-8452": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-8490": "Jericoacoara, Brésil",
+      "img-8516": "Jericoacoara, Brésil",
+      "img-8527": "Rio de Janeiro, Brésil",
+      "img-8529": "Rio de Janeiro, Brésil",
+      "img-8551": "Rio de Janeiro, Brésil",
+      "img-8569": "Rio de Janeiro, Brésil",
+      "img-8575": "Rio de Janeiro, Brésil",
+      "img-8591": "Rio de Janeiro, Brésil",
+      "img-8695": "Volcan Fuego, Guatemala",
+      "img-8801": "Lac du Bourget, France",
+      "img-8818": "Lac du Bourget, France",
+      "img-8860": "Annecy, France",
+      "img-8870": "Annecy, France",
+      "img-8983": "Laponie, Finlande",
+      "img-9074": "Jericoacoara, Brésil",
+      "img-9075": "Jericoacoara, Brésil",
+      "img-9076": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-9077": "Parc national des Lençóis Maranhenses, Brésil",
+      "img-9283": "Désert de la Tatacoa, Colombie",
+      "img-9287": "Désert de la Tatacoa, Colombie",
+      "img-9310": "Désert de la Tatacoa, Colombie",
+      "img-9360": "Salento, Colombie",
+      "img-9370": "Vallée de Cocora, Colombie",
+      "img-9380": "Vallée de Cocora, Colombie",
+      "img-9433": "Piedra del Peñol, Colombie",
+      "img-9462": "Guatapé, Colombie",
+      "img-9525": "Santa Marta, Colombie",
+      "img-9540": "Mendihuaca, Colombie",
+      "img-9557": "Parc national de Tayrona, Colombie",
+      "img-9564": "Forêt amazonienne, Brésil",
+      "img-9572": "Parc national de Tayrona, Colombie",
+      "img-9611": "Carthagène, Colombie",
+      "auroras-laponie": "Laponie, Finlande"
+    }
+  },
+  "footer": {
+    "ownerLabel": "Florian Lauer",
+    "languageLabel": "Langue"
+  },
+  "languageSwitcher": {
+    "fr": "Français",
+    "en": "Anglais",
+    "de": "Allemand",
+    "ariaLabel": "Choisir la langue"
+  },
   "metadata": {
     "siteTitle": "Florian Lauer | Portfolio",
-    "siteDescription": "Portfolio de Florian Lauer, Senior Fullstack Engineer : parcours, stack et contact."
+    "siteDescription": "Portfolio de Florian Lauer, Senior Fullstack Engineer : parcours, stack et contact.",
+    "stackPageTitle": "Ma Stack",
+    "stackPageDescription": "Visualisation interactive des compétences techniques de Florian Lauer et de leurs relations.",
+    "aboutPageTitle": "À propos",
+    "galleryPageTitle": "Galerie",
+    "galleryPageDescription": "Photos de voyage : Laponie, Lençóis, Rio et autres escapades. Florian Lauer."
   }
 }
