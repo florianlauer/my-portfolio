@@ -8,7 +8,6 @@ export const stackGroups: StackGroup[] = [
       { id: "react", label: "React" },
       { id: "typescript", label: "TypeScript" },
       { id: "nextjs", label: "Next.js" },
-      { id: "tailwindcss", label: "Tailwind CSS" },
       { id: "vite", label: "Vite" },
       { id: "angular", label: "Angular" },
       { id: "scss", label: "SCSS" },

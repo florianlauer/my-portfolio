@@ -47,15 +47,7 @@ export const stackGraph = {
       family: "frontend",
       level: "Expert",
       description:
-        "Indispensable sur tous mes projets. Types stricts, generics, inférence — je ne code plus sans.",
-    },
-    {
-      id: "tailwindcss",
-      label: "Tailwind CSS",
-      family: "frontend",
-      level: "Avancé",
-      description:
-        "Mon approche CSS par défaut. Rapide, cohérent, parfait avec les composants React.",
+        "Sur tous mes projets depuis 2019. Une fois passé aux types stricts, retour en JS pur impossible.",
     },
     {
       id: "vite",
@@ -133,7 +125,7 @@ export const stackGraph = {
       family: "backend",
       level: "Expert",
       description:
-        "Framework structuré pour les APIs complexes. Modules, guards, interceptors — très productif en équipe.",
+        "Bien structuré pour les grosses APIs : modules, guards, interceptors. Quand on est plusieurs sur le code, ça aide.",
     },
     {
       id: "express",
@@ -161,7 +153,8 @@ export const stackGraph = {
       label: "Kafka",
       family: "backend",
       level: "Notions",
-      description: "Event streaming en production — consumers, producers, topics partitionnés.",
+      description:
+        "Notions seulement. J'ai consommé et produit des messages en prod, mais sans avoir géré la stack moi-même.",
     },
 
     // ── Data (4) ──────────────────────────────────────────────────
@@ -170,8 +163,7 @@ export const stackGraph = {
       label: "PostgreSQL",
       family: "data",
       level: "Avancé",
-      description:
-        "Ma base de données par défaut. Requêtes complexes, migrations, indexes — solide en prod.",
+      description: "Ma base par défaut. Tient la charge, et la doc Postgres reste la référence.",
     },
     {
       id: "mysql",
@@ -185,7 +177,7 @@ export const stackGraph = {
       label: "Drizzle ORM",
       family: "data",
       level: "Avancé",
-      description: "ORM TypeScript léger que j'adopte sur les nouveaux projets.",
+      description: "Plus léger que Prisma, mieux typé. Je l'adopte sur les nouveaux projets perso.",
     },
     {
       id: "prisma",
@@ -333,7 +325,6 @@ export const stackGraph = {
     // ── Frontend core ─────────────────────────────────────────────
     { source: "react", target: "nextjs" },
     { source: "react", target: "typescript" },
-    { source: "react", target: "tailwindcss" },
     { source: "nextjs", target: "typescript" },
     { source: "vite", target: "react" },
     { source: "angular", target: "typescript" },
