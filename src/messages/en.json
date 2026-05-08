@@ -2,7 +2,7 @@
   "site": {
     "ownerName": "Florian Lauer",
     "heroTitle": "Senior Fullstack Engineer · product-driven",
-    "heroSubtitle": "Senior fullstack dev, ~9 years of XP, hardware background. I code alongside PMs and designers, and I like to look at the numbers before touching the code.",
+    "heroSubtitle": "Senior fullstack dev, ~9 years of XP, embedded software background. I code alongside PMs and designers, and I like to look at the numbers before touching the code.",
     "heroImageAlt": "Illustrated portrait of Florian Lauer",
     "primaryCta": "Get in touch"
   },
@@ -84,7 +84,7 @@
     "sections": {
       "intro": {
         "title": "Who I am",
-        "content": "Florian, senior fullstack dev, with a hardware background to start with. I like pairing with PMs and designers, understanding what users actually want, and looking at metrics before diving into code."
+        "content": "Florian, senior fullstack dev, with an embedded software background to start with. I like pairing with PMs and designers, understanding what users actually want, and looking at metrics before diving into code."
       },
       "sport": {
         "title": "Sports & outdoors",
