@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import type { GalleryItem } from "@/types/gallery";
 
@@ -25,6 +26,7 @@ export function GalleryGrid({
   onLoadMore,
   onOpenLightbox,
 }: GalleryGridProps): React.JSX.Element {
+  const t = useTranslations("gallery");
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const loadedCountRef = useRef(0);
@@ -72,16 +74,16 @@ export function GalleryGrid({
         <div
           className="flex min-h-[200px] items-center justify-center py-16"
           role="status"
-          aria-label="Chargement de la galerie"
+          aria-label={t("loadingLabel")}
         >
-          <span className="text-base font-medium text-foreground">Chargement…</span>
+          <span className="text-base font-medium text-foreground">{t("loadingText")}</span>
         </div>
       )}
 
       <div
         className={isInitialLoad ? "absolute left-[-9999px] opacity-0 pointer-events-none" : ""}
         role="list"
-        aria-label="Galerie de photos"
+        aria-label={t("gridLabel")}
         aria-hidden={isInitialLoad}
       >
         <ResponsiveMasonry
@@ -106,7 +108,7 @@ export function GalleryGrid({
                     type="button"
                     onClick={() => onOpenLightbox(index)}
                     className="relative block w-full cursor-pointer overflow-hidden rounded-xl border border-border bg-muted transition-transform pointer-hover:scale-[1.02] focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    aria-label={`Voir ${item.caption} en grand`}
+                    aria-label={t("viewLargerLabel", { caption: item.caption })}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element -- masonry needs native img for layout */}
                     <img
@@ -132,13 +134,11 @@ export function GalleryGrid({
       {!isInitialLoad && hasMore && <div ref={sentinelRef} className="h-4 w-full" aria-hidden />}
       {!isInitialLoad && !hasMore && items.length > 0 && (
         <p className="mt-8 text-center text-sm text-muted-foreground">
-          Fin de la galerie — {totalCount} photo{totalCount > 1 ? "s" : ""}.
+          {t("endOfGallery", { count: totalCount })}
         </p>
       )}
       {!isInitialLoad && items.length === 0 && (
-        <p className="py-16 text-center text-base text-muted-foreground">
-          Aucune photo pour le moment.
-        </p>
+        <p className="py-16 text-center text-base text-muted-foreground">{t("noPhotos")}</p>
       )}
     </>
   );

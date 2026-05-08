@@ -1,19 +1,18 @@
 import type { StackFamilyKey } from "@/types/stack";
 
-export type ExperienceLevel = "Expert" | "Avancé" | "Intermédiaire" | "Notions";
+// Locale-neutral keys — labels live in src/messages/*.json (stack.levels.*).
+export const experienceLevels = ["basics", "intermediate", "advanced", "expert"] as const;
+export type ExperienceLevel = (typeof experienceLevels)[number];
 
 export type FamilyColor = {
   family: StackFamilyKey;
-  label: string;
   color: string;
 };
 
 export type GraphNode = {
   id: string;
-  label: string;
   family: StackFamilyKey;
   level: ExperienceLevel;
-  description: string;
 };
 
 export type GraphEdge = {
@@ -22,7 +21,7 @@ export type GraphEdge = {
 };
 
 export type StackGraph = {
-  nodes: GraphNode[];
-  edges: GraphEdge[];
-  familyColors: FamilyColor[];
+  nodes: readonly GraphNode[];
+  edges: readonly GraphEdge[];
+  familyColors: readonly FamilyColor[];
 };

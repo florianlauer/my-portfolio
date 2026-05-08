@@ -1,6 +1,7 @@
 "use client";
 
 import { memo, useCallback, useRef } from "react";
+import { useTranslations } from "next-intl";
 import type { GraphNode as GraphNodeType } from "@/types/stack-graph";
 import { iconMap } from "@/components/stack-graph/icon-map";
 import {
@@ -58,10 +59,11 @@ function GraphNodeImpl({
   onNodeClick,
   onHoverChange,
 }: GraphNodeProps): React.JSX.Element {
+  const t = useTranslations("stack");
   const icon = iconMap[node.id];
   const r = NODE_RADIUS_BY_LEVEL[node.level];
   const iconSize = Math.round(r * 0.9);
-  const shortLabel = SHORT_LABEL[node.id] ?? node.label;
+  const shortLabel = SHORT_LABEL[node.id] ?? t(`itemLabels.${node.id}`);
   // Hit-area: at least MIN_TOUCH_RADIUS to satisfy WCAG 2.5.5 (44×44 minimum)
   const hitRadius = Math.max(r, MIN_TOUCH_RADIUS);
 

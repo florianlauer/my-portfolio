@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { GlobalBackground } from "@/components/global-background/GlobalBackground";
 import { HomeNav } from "@/components/home-nav/HomeNav";
 import { ScrollReveal } from "@/components/scroll-reveal/ScrollReveal";
@@ -6,16 +7,21 @@ import { ContactSection } from "@/components/home-sections/ContactSection";
 import { HeroSection } from "@/components/home-sections/HeroSection";
 import { JourneySection } from "@/components/home-sections/JourneySection";
 import { PassionsSection } from "@/components/home-sections/PassionsSection";
-import { stackGroups, stackOpinion } from "@/content/stack";
-import { journeyChapters } from "@/content/journey";
-import { passionsSectionContent } from "@/content/passions";
-import { heroStack, siteContent } from "@/content/site";
+import { heroStack, siteIdentity } from "@/content/site";
 import { primaryContactLink, socialLinks } from "@/content/socialLinks";
+import { resolveLocaleOr404 } from "@/i18n/params";
 
-export default function HomePage(): React.JSX.Element {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<React.JSX.Element> {
+  const locale = await resolveLocaleOr404(params);
+  const tA11y = await getTranslations({ locale, namespace: "a11y" });
+
   return (
     <main
-      id="contenu"
+      id="main-content"
       className="relative min-h-screen overflow-x-hidden text-foreground"
       tabIndex={-1}
     >
@@ -24,33 +30,29 @@ export default function HomePage(): React.JSX.Element {
         href="#content-start"
         className="fixed left-4 top-4 z-100 -translate-y-20 rounded-md bg-primary px-4 py-2 text-primary-foreground shadow-md transition-transform focus-visible:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
-        Aller au contenu
+        {tA11y("skipToContent")}
       </a>
       <div className="relative z-10 mx-auto grid w-full max-w-5xl gap-8 px-6 pt-28 pb-16 md:pt-32 md:pb-24 min-w-0 box-border">
         <HomeNav />
         <div id="content-start" tabIndex={-1} className="sr-only" aria-hidden />
 
-        <HeroSection
-          heroStack={heroStack}
-          siteContent={siteContent}
-          primaryContactLink={primaryContactLink}
-        />
+        <HeroSection heroStack={heroStack} primaryContactLink={primaryContactLink} />
 
         <ScrollReveal>
-          <JourneySection journeyChapters={journeyChapters} />
+          <JourneySection />
         </ScrollReveal>
         <ScrollReveal>
-          <StackSection stackGroups={stackGroups} opinion={stackOpinion} />
+          <StackSection />
         </ScrollReveal>
 
         <ScrollReveal>
-          <PassionsSection content={passionsSectionContent} />
+          <PassionsSection />
         </ScrollReveal>
 
         <ContactSection
           primaryContactLink={primaryContactLink}
           socialLinks={socialLinks}
-          contactEmail={siteContent.contactEmail}
+          contactEmail={siteIdentity.contactEmail}
         />
       </div>
     </main>

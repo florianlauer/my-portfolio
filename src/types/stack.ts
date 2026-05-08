@@ -7,13 +7,17 @@ export type StackFamilyKey =
   | "integrations"
   | "methods";
 
-export type StackItem = {
-  id: string;
-  label: string;
-};
+export const stackFamilyOrder: readonly StackFamilyKey[] = [
+  "frontend",
+  "mobile",
+  "backend",
+  "data",
+  "infra",
+  "integrations",
+  "methods",
+] as const;
 
-export type StackGroup = {
+export type StackGroupStructure = {
   family: StackFamilyKey;
-  title: string;
-  items: StackItem[];
+  itemIds: string[];
 };
