@@ -1,22 +1,21 @@
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import type { StackFamilyKey, StackGroup } from "@/types/stack";
+import { stackGroupStructure } from "@/content/stack";
+import type { StackFamilyKey } from "@/types/stack";
 
-type StackSectionProps = {
-  stackGroups: StackGroup[];
-  opinion?: string;
+const familyAccent: Record<StackFamilyKey, { border: string; text: string }> = {
+  frontend: { border: "border-t-amber-500", text: "text-amber-600" },
+  mobile: { border: "border-t-orange-500", text: "text-orange-600" },
+  backend: { border: "border-t-sky-500", text: "text-sky-600" },
+  data: { border: "border-t-cyan-500", text: "text-cyan-600" },
+  infra: { border: "border-t-teal-500", text: "text-teal-600" },
+  integrations: { border: "border-t-violet-500", text: "text-violet-600" },
+  methods: { border: "border-t-emerald-500", text: "text-emerald-600" },
 };
 
-const familyAccent: Record<StackFamilyKey, { border: string; label: string; text: string }> = {
-  frontend: { border: "border-t-amber-500", label: "UI / Interfaces", text: "text-amber-600" },
-  mobile: { border: "border-t-orange-500", label: "App native", text: "text-orange-600" },
-  backend: { border: "border-t-sky-500", label: "API / Services", text: "text-sky-600" },
-  data: { border: "border-t-cyan-500", label: "Base de données", text: "text-cyan-600" },
-  infra: { border: "border-t-teal-500", label: "CI / Infra", text: "text-teal-600" },
-  integrations: { border: "border-t-violet-500", label: "Intégrations", text: "text-violet-600" },
-  methods: { border: "border-t-emerald-500", label: "Craft", text: "text-emerald-600" },
-};
+export const StackSection = (): React.JSX.Element => {
+  const t = useTranslations("stack");
 
-export const StackSection = ({ stackGroups, opinion }: StackSectionProps): React.JSX.Element => {
   return (
     <section
       id="stack"
@@ -27,11 +26,11 @@ export const StackSection = ({ stackGroups, opinion }: StackSectionProps): React
         id="stack-title"
         className="border-l-2 border-primary pl-3 text-2xl font-semibold tracking-tight"
       >
-        Stack
+        {t("sectionTitle")}
       </h2>
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {stackGroups.map((group) => {
+        {stackGroupStructure.map((group) => {
           const accent = familyAccent[group.family];
           return (
             <article
@@ -42,12 +41,12 @@ export const StackSection = ({ stackGroups, opinion }: StackSectionProps): React
               )}
             >
               <p className={cn("text-xs font-medium uppercase tracking-wider", accent.text)}>
-                {accent.label}
+                {t(`familyAccents.${group.family}`)}
               </p>
-              <h3 className="mt-1 text-lg font-medium">{group.title}</h3>
+              <h3 className="mt-1 text-lg font-medium">{t(`families.${group.family}`)}</h3>
               <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
-                {group.items.map((item) => (
-                  <li key={item.id}>{item.label}</li>
+                {group.itemIds.map((itemId) => (
+                  <li key={itemId}>{t(`itemLabels.${itemId}`)}</li>
                 ))}
               </ul>
             </article>
@@ -55,11 +54,9 @@ export const StackSection = ({ stackGroups, opinion }: StackSectionProps): React
         })}
       </div>
 
-      {opinion ? (
-        <p className="mt-6 border-l-2 border-muted-foreground/30 pl-3 text-sm italic text-muted-foreground">
-          {opinion}
-        </p>
-      ) : null}
+      <p className="mt-6 border-l-2 border-muted-foreground/30 pl-3 text-sm italic text-muted-foreground">
+        {t("opinion")}
+      </p>
     </section>
   );
 };

@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { SocialLink } from "@/types/socialLinks";
 
 type ContactSectionProps = {
@@ -11,6 +12,9 @@ export const ContactSection = ({
   primaryContactLink,
   contactEmail,
 }: ContactSectionProps): React.JSX.Element => {
+  const t = useTranslations("contact");
+  const tA11y = useTranslations("a11y");
+
   return (
     <section
       id="contact"
@@ -21,42 +25,40 @@ export const ContactSection = ({
         id="contact-title"
         className="border-l-2 border-primary pl-3 text-2xl font-semibold tracking-tight"
       >
-        Contact
+        {t("title")}
       </h2>
 
       {primaryContactLink ? (
         <p className="mt-4 text-sm text-muted-foreground">
-          Canal principal:{" "}
+          {t("primaryChannel")}:{" "}
           <a
             className="font-medium text-foreground underline underline-offset-4 pointer-hover:text-primary transition-colors"
             href={primaryContactLink.href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${primaryContactLink.label} (ouvre dans un nouvel onglet)`}
+            aria-label={`${primaryContactLink.label} ${tA11y("openInNewTab")}`}
           >
             {primaryContactLink.label}
           </a>
         </p>
       ) : (
-        <p className="mt-4 text-sm text-muted-foreground">
-          Aucun lien de contact principal n&apos;est configure pour le moment.
-        </p>
+        <p className="mt-4 text-sm text-muted-foreground">{t("noPrimary")}</p>
       )}
 
       {contactEmail ? (
         <p className="mt-2 text-sm text-muted-foreground">
-          Email:{" "}
+          {t("emailLabel")}:{" "}
           <a
             className="font-medium text-foreground underline underline-offset-4 pointer-hover:text-primary transition-colors"
             href={`mailto:${contactEmail}`}
-            aria-label={`Envoyer un email à ${contactEmail}`}
+            aria-label={`${t("sendEmailAria")} ${contactEmail}`}
           >
             {contactEmail}
           </a>
         </p>
       ) : null}
 
-      <ul className="mt-6 flex flex-wrap gap-3" aria-label="Réseaux sociaux">
+      <ul className="mt-6 flex flex-wrap gap-3" aria-label={t("socialNetworksLabel")}>
         {socialLinks.map((link) => (
           <li key={link.id}>
             <a
@@ -64,7 +66,7 @@ export const ContactSection = ({
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${link.label} (ouvre dans un nouvel onglet)`}
+              aria-label={`${link.label} ${tA11y("openInNewTab")}`}
             >
               {link.label}
             </a>

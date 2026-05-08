@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 /** Scroll en px au-delà duquel le menu a sa taille "actuelle" (desktop). */
@@ -29,6 +29,7 @@ const ANCHOR_TO_SECTION: Record<string, string> = {
 };
 
 export function HomeNav(): React.JSX.Element {
+  const t = useTranslations("nav");
   const navRef = useRef<HTMLElement>(null);
   const leftFadeRef = useRef<HTMLDivElement>(null);
   const [bounceType, setBounceType] = useState<"min" | "max" | null>(null);
@@ -152,50 +153,50 @@ export function HomeNav(): React.JSX.Element {
       <div className="relative mx-auto max-w-5xl">
         <nav
           ref={navRef}
-          aria-label="Navigation des sections"
+          aria-label={t("ariaLabel")}
           className={`home-nav flex flex-nowrap items-center overflow-x-auto overflow-y-hidden rounded-full border border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch] ${bounceType === "min" ? "home-nav-bounce-min" : ""} ${bounceType === "max" ? "home-nav-bounce-max" : ""}`}
         >
           <a
             href={sectionHref("#parcours")}
             className={cn(linkBaseClass, isActive("#parcours") && "bg-primary/10 text-primary")}
           >
-            Parcours
+            {t("sections.parcours")}
           </a>
           <a
             href={sectionHref("#stack")}
             className={cn(linkBaseClass, isActive("#stack") && "bg-primary/10 text-primary")}
           >
-            Stack
+            {t("sections.stack")}
           </a>
           <a
             href={sectionHref("#passions")}
             className={cn(linkBaseClass, isActive("#passions") && "bg-primary/10 text-primary")}
           >
-            Passions
+            {t("sections.passions")}
           </a>
           <Link
             href="/a-propos"
             className={cn(linkBaseClass, isActive("/a-propos") && "bg-primary/10 text-primary")}
           >
-            À propos
+            {t("about")}
           </Link>
           <Link
             href="/galerie"
             className={cn(linkBaseClass, isActive("/galerie") && "bg-primary/10 text-primary")}
           >
-            Galerie
+            {t("gallery")}
           </Link>
           <Link
             href="/stack"
             className={cn(linkBaseClass, isActive("/stack") && "bg-primary/10 text-primary")}
           >
-            Ma Stack
+            {t("stack")}
           </Link>
           <a
             href={sectionHref("#contact")}
             className={cn(linkBaseClass, isActive("#contact") && "bg-primary/10 text-primary")}
           >
-            Contact
+            {t("sections.contact")}
           </a>
         </nav>
         <div

@@ -10,7 +10,25 @@
     "home": "Accueil",
     "about": "À propos",
     "gallery": "Galerie",
-    "stack": "Ma Stack"
+    "stack": "Ma Stack",
+    "ariaLabel": "Navigation des sections",
+    "sections": {
+      "parcours": "Parcours",
+      "stack": "Stack",
+      "passions": "Passions",
+      "contact": "Contact"
+    }
+  },
+  "a11y": {
+    "skipToContent": "Aller au contenu",
+    "openInNewTab": "(ouvre dans un nouvel onglet)",
+    "goToStackSection": "Aller à la section Stack",
+    "stackPrincipaleLabel": "Stack principale",
+    "visualLocationPrefix": "Visuel lieu",
+    "skillsForChapter": "Compétences"
+  },
+  "hero": {
+    "viewStackButton": "Voir la stack"
   },
   "journey": {
     "sectionTitle": "Parcours",
@@ -62,6 +80,7 @@
   "about": {
     "pageTitle": "À propos",
     "pageSubtitle": "En dehors du code",
+    "viewMorePhotosLink": "Voir plus de photos →",
     "sections": {
       "intro": {
         "title": "Qui je suis",
@@ -82,8 +101,26 @@
     }
   },
   "stack": {
-    "sectionTitle": "Stack technique",
+    "sectionTitle": "Stack",
     "pageTitle": "Ma Stack",
+    "filterPills": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "devops": "DevOps"
+    },
+    "graph": {
+      "techsListLabel": "Liste des technologies",
+      "relatedToPrefix": "Lié à"
+    },
+    "familyAccents": {
+      "frontend": "UI / Interfaces",
+      "mobile": "App native",
+      "backend": "API / Services",
+      "data": "Base de données",
+      "infra": "CI / Infra",
+      "integrations": "Intégrations",
+      "methods": "Craft"
+    },
     "opinion": "Capacitor m'a servi 6 ans en prod côté Sencrop. Pour un nouveau projet mobile, je partirais sur React Native ou Expo.",
     "families": {
       "frontend": "Frontend",
@@ -185,6 +222,17 @@
   "gallery": {
     "pageTitle": "Galerie",
     "pageSubtitle": "Du désert de la Tatacoa (Colombie) aux dunes des Lençóis Maranhenses (Nordeste brésilien), du Fuego (Guatemala) aux aurores de Laponie.",
+    "loadingLabel": "Chargement de la galerie",
+    "loadingText": "Chargement…",
+    "gridLabel": "Galerie de photos",
+    "loadMore": "Voir plus",
+    "lightboxLabel": "Image {current} sur {total} : {caption}",
+    "closeLabel": "Fermer",
+    "prevLabel": "Image précédente",
+    "nextLabel": "Image suivante",
+    "viewLargerLabel": "Voir {caption} en grand",
+    "endOfGallery": "Fin de la galerie — {count, plural, one {# photo} other {# photos}}.",
+    "noPhotos": "Aucune photo pour le moment.",
     "captions": {
       "img-0039": "Caye Caulker, Belize",
       "img-0040": "Caye Caulker, Belize",
@@ -271,6 +319,14 @@
       "img-9611": "Carthagène, Colombie",
       "auroras-laponie": "Laponie, Finlande"
     }
+  },
+  "contact": {
+    "title": "Contact",
+    "primaryChannel": "Canal principal",
+    "noPrimary": "Aucun lien de contact principal n'est configuré pour le moment.",
+    "emailLabel": "Email",
+    "sendEmailAria": "Envoyer un email à",
+    "socialNetworksLabel": "Réseaux sociaux"
   },
   "footer": {
     "ownerLabel": "Florian Lauer",

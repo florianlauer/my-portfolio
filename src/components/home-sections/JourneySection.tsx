@@ -1,9 +1,6 @@
-import type { JourneyChapter } from "@/types/journey";
+import { useTranslations } from "next-intl";
+import { journeyChapterIds, journeyChapterStructure } from "@/content/journey";
 import { FlagImage } from "./FlagImage";
-
-type JourneySectionProps = {
-  journeyChapters: JourneyChapter[];
-};
 
 type JourneyVisual = {
   label: string;
@@ -39,7 +36,10 @@ const visualByKey: Record<string, JourneyVisual> = {
   },
 };
 
-export const JourneySection = ({ journeyChapters }: JourneySectionProps): React.JSX.Element => {
+export const JourneySection = (): React.JSX.Element => {
+  const t = useTranslations("journey");
+  const tA11y = useTranslations("a11y");
+
   return (
     <section
       id="parcours"
@@ -50,39 +50,43 @@ export const JourneySection = ({ journeyChapters }: JourneySectionProps): React.
         id="journey-title"
         className="border-l-2 border-primary pl-3 text-2xl font-semibold tracking-tight"
       >
-        Parcours
+        {t("sectionTitle")}
       </h2>
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {journeyChapters.map((chapter) => {
-          const chapterVisual: JourneyVisual | undefined = visualByKey[chapter.visualKey];
+        {journeyChapterIds.map((id) => {
+          const structure = journeyChapterStructure[id];
+          const chapterVisual: JourneyVisual | undefined = visualByKey[structure.visualKey];
+          const title = t(`chapters.${id}.title`);
+          const location = t(`chapters.${id}.location`);
+          const description = t(`chapters.${id}.description`);
 
           return (
             <article
-              key={chapter.id}
-              className={`rounded-xl border border-border/70 border-t-2 p-4 transition-all duration-200 pointer-hover:-translate-y-1 pointer-hover:shadow-md pointer-hover:border-border md:pointer-hover:scale-[1.02] ${chapterAccent[chapter.id]?.border ?? ""}`}
+              key={id}
+              className={`rounded-xl border border-border/70 border-t-2 p-4 transition-all duration-200 pointer-hover:-translate-y-1 pointer-hover:shadow-md pointer-hover:border-border md:pointer-hover:scale-[1.02] ${chapterAccent[id]?.border ?? ""}`}
             >
               {chapterVisual?.imageSrc ? (
                 <FlagImage src={chapterVisual.imageSrc} label={chapterVisual.label} />
               ) : (
                 <p
                   className="text-2xl"
-                  aria-label={`Visuel lieu: ${chapterVisual?.label ?? chapter.location}`}
+                  aria-label={`${tA11y("visualLocationPrefix")}: ${chapterVisual?.label ?? location}`}
                 >
                   {chapterVisual?.icon ?? "📍"}
                 </p>
               )}
-              <h3 className="mt-2 text-lg font-medium">{chapter.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{chapter.location}</p>
-              <p className="mt-3 text-sm text-muted-foreground">{chapter.description}</p>
+              <h3 className="mt-2 text-lg font-medium">{title}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{location}</p>
+              <p className="mt-3 text-sm text-muted-foreground">{description}</p>
               <ul
                 className="mt-4 flex flex-wrap gap-2"
-                aria-label={`Compétences - ${chapter.title}`}
+                aria-label={`${tA11y("skillsForChapter")} - ${title}`}
               >
-                {chapter.skills.map((skill) => (
+                {structure.skills.map((skill) => (
                   <li
-                    key={`${chapter.id}-${skill}`}
-                    className={`rounded-full px-3 py-1 text-xs font-medium ${chapterAccent[chapter.id]?.badge ?? "bg-secondary text-secondary-foreground"}`}
+                    key={`${id}-${skill}`}
+                    className={`rounded-full px-3 py-1 text-xs font-medium ${chapterAccent[id]?.badge ?? "bg-secondary text-secondary-foreground"}`}
                   >
                     {skill}
                   </li>

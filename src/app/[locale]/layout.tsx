@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { routing, type Locale } from "@/i18n/routing";
 import { getBaseUrl } from "@/utils/siteUrl";
-import { siteContent } from "@/content/site";
+import { siteIdentity } from "@/content/site";
 
 const baseUrl = getBaseUrl();
 
@@ -23,12 +23,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
   const locale: Locale = hasLocale(routing.locales, rawLocale) ? rawLocale : routing.defaultLocale;
-  const t = await getTranslations({ locale, namespace: "metadata" });
-  const title = t("siteTitle");
-  const description = t("siteDescription");
+  const tMeta = await getTranslations({ locale, namespace: "metadata" });
+  const tSite = await getTranslations({ locale, namespace: "site" });
+  const title = tMeta("siteTitle");
+  const description = tMeta("siteDescription");
+  const heroAlt = tSite("heroImageAlt");
+
   return {
     metadataBase: new URL(baseUrl),
-    title: { default: title, template: `%s | ${siteContent.ownerName}` },
+    title: { default: title, template: `%s | ${siteIdentity.ownerName}` },
     description,
     alternates: {
       canonical: `/${locale}`,
@@ -45,13 +48,13 @@ export async function generateMetadata({
       siteName: title,
       title,
       description,
-      images: [{ url: "/hero-1.jpeg", width: 1200, height: 630, alt: siteContent.heroImage.alt }],
+      images: [{ url: siteIdentity.heroImage.src, width: 1200, height: 630, alt: heroAlt }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [{ url: "/hero-1.jpeg", alt: siteContent.heroImage.alt }],
+      images: [{ url: siteIdentity.heroImage.src, alt: heroAlt }],
     },
   };
 }
@@ -71,26 +74,26 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   const messages = await getMessages();
-  const t = await getTranslations({ locale, namespace: "metadata" });
+  const tMeta = await getTranslations({ locale, namespace: "metadata" });
 
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: siteContent.ownerName,
-    jobTitle: t("siteTitle"),
-    description: t("siteDescription"),
-    image: `${baseUrl}/hero-1.jpeg`,
+    name: siteIdentity.ownerName,
+    jobTitle: tMeta("siteTitle"),
+    description: tMeta("siteDescription"),
+    image: `${baseUrl}${siteIdentity.heroImage.src}`,
     url: `${baseUrl}/${locale}`,
   };
 
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: t("siteTitle"),
-    description: t("siteDescription"),
+    name: tMeta("siteTitle"),
+    description: tMeta("siteDescription"),
     url: `${baseUrl}/${locale}`,
     inLanguage: locale,
-    publisher: { "@type": "Person", name: siteContent.ownerName },
+    publisher: { "@type": "Person", name: siteIdentity.ownerName },
   };
 
   return (

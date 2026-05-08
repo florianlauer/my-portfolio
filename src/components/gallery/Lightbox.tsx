@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
+import { useTranslations } from "next-intl";
 import { useSwipe } from "@/hooks/useSwipe";
 import type { GalleryItem } from "@/types/gallery";
 
@@ -21,8 +22,10 @@ export function Lightbox({
   onPrev,
   onNext,
 }: LightboxProps): React.JSX.Element | null {
+  const t = useTranslations("gallery");
   const n = items.length;
   const currentItem = items[currentIndex];
+  const closeLabel = t("closeLabel");
 
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<Element | null>(null);
@@ -54,7 +57,9 @@ export function Lightbox({
   // Focus management : focus dialog on open, restore on close
   useEffect(() => {
     previouslyFocusedRef.current = document.activeElement;
-    const closeBtn = dialogRef.current?.querySelector<HTMLButtonElement>('[aria-label="Fermer"]');
+    const closeBtn = dialogRef.current?.querySelector<HTMLButtonElement>(
+      `[aria-label="${closeLabel}"]`,
+    );
     closeBtn?.focus();
 
     return () => {
@@ -62,7 +67,7 @@ export function Lightbox({
         previouslyFocusedRef.current.focus();
       }
     };
-  }, []);
+  }, [closeLabel]);
 
   // Focus trap helper
   const trapFocus = useCallback((e: KeyboardEvent): void => {
@@ -107,7 +112,11 @@ export function Lightbox({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 touch-none cursor-pointer"
       role="dialog"
       aria-modal="true"
-      aria-label={`Image ${currentIndex + 1} sur ${n} : ${currentItem?.caption ?? ""}`}
+      aria-label={t("lightboxLabel", {
+        current: currentIndex + 1,
+        total: n,
+        caption: currentItem?.caption ?? "",
+      })}
       onClick={onClose}
       onKeyDown={(e) => {
         if (e.key === "Escape") onClose();
@@ -120,9 +129,9 @@ export function Lightbox({
         type="button"
         onClick={onClose}
         className="absolute right-4 top-[max(1rem,env(safe-area-inset-top,1rem))] z-10 min-h-[44px] min-w-[44px] inline-flex items-center justify-center cursor-pointer rounded-md bg-white/10 px-3 py-2 text-white pointer-hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
-        aria-label="Fermer"
+        aria-label={closeLabel}
       >
-        Fermer
+        {closeLabel}
       </button>
       <button
         type="button"
@@ -131,7 +140,7 @@ export function Lightbox({
           onPrev();
         }}
         className="absolute left-4 top-1/2 z-10 -translate-y-1/2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center cursor-pointer rounded-md bg-white/10 px-3 py-2 text-white pointer-hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
-        aria-label="Image précédente"
+        aria-label={t("prevLabel")}
       >
         ←
       </button>
@@ -142,7 +151,7 @@ export function Lightbox({
           onNext();
         }}
         className="absolute right-4 top-1/2 z-10 -translate-y-1/2 min-h-[44px] min-w-[44px] inline-flex items-center justify-center cursor-pointer rounded-md bg-white/10 px-3 py-2 text-white pointer-hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"
-        aria-label="Image suivante"
+        aria-label={t("nextLabel")}
       >
         →
       </button>

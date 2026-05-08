@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { select } from "d3-selection";
 import { zoom, zoomIdentity } from "d3-zoom";
 import type { ZoomBehavior } from "d3-zoom";
@@ -34,6 +35,7 @@ const FILTER_GROUPS: Record<string, StackFamilyKey[]> = {
 };
 
 export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
+  const t = useTranslations("stack");
   const containerRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
 
@@ -77,9 +79,12 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     return () => ro.disconnect();
   }, []);
 
+  const mutableNodes = useMemo(() => [...data.nodes], [data.nodes]);
+  const mutableEdges = useMemo(() => [...data.edges], [data.edges]);
+
   const { positions, dragStart, dragMove, dragEnd, filterNodes } = useForceLayout(
-    data.nodes,
-    data.edges,
+    mutableNodes,
+    mutableEdges,
     size.width,
     size.height,
     reducedMotion,
@@ -226,7 +231,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     }
     const neighbors = data.nodes
       .filter((n) => neighborIds.has(n.id))
-      .map((n) => ({ id: n.id, label: n.label, family: n.family }));
+      .map((n) => ({ id: n.id, family: n.family }));
 
     return { node, neighbors };
   }, [hoveredId, data.nodes, data.edges]);
@@ -287,17 +292,17 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
   const filterPills = [
     {
       key: "frontend",
-      label: "Frontend",
+      label: t("filterPills.frontend"),
       color: data.familyColors.find((fc) => fc.family === "frontend")?.color ?? "#888",
     },
     {
       key: "backend",
-      label: "Backend",
+      label: t("filterPills.backend"),
       color: data.familyColors.find((fc) => fc.family === "backend")?.color ?? "#888",
     },
     {
       key: "devops",
-      label: "DevOps",
+      label: t("filterPills.devops"),
       color: data.familyColors.find((fc) => fc.family === "infra")?.color ?? "#888",
     },
   ];

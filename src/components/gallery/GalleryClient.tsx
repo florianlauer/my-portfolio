@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { shuffle } from "@/utils/shuffle";
 import type { GalleryItem } from "@/types/gallery";
 import { GalleryGrid } from "./GalleryGrid";
@@ -14,6 +15,7 @@ type GalleryClientProps = {
 };
 
 export function GalleryClient({ items }: GalleryClientProps): React.JSX.Element {
+  const t = useTranslations("gallery");
   // Premier rendu (SSR + hydratation) : même liste que le serveur (items, ordre stable).
   // Après montage client uniquement : mélange et affichage du pool mélangé.
   const [shuffledPool, setShuffledPool] = useState<GalleryItem[]>(() => items);
@@ -56,11 +58,11 @@ export function GalleryClient({ items }: GalleryClientProps): React.JSX.Element 
         <div
           className="flex min-h-[200px] items-center justify-center py-16"
           role="status"
-          aria-label="Chargement de la galerie"
+          aria-label={t("loadingLabel")}
         >
-          <span className="text-base font-medium text-foreground">Chargement…</span>
+          <span className="text-base font-medium text-foreground">{t("loadingText")}</span>
         </div>
-        <div role="list" aria-label="Galerie de photos" className="min-h-[200px]" aria-hidden />
+        <div role="list" aria-label={t("gridLabel")} className="min-h-[200px]" aria-hidden />
       </>
     );
   }
