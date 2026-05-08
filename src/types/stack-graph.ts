@@ -1,6 +1,7 @@
 import type { StackFamilyKey } from "@/types/stack";
 
-export const experienceLevels = ["Notions", "Intermédiaire", "Avancé", "Expert"] as const;
+// Locale-neutral keys — labels live in src/messages/*.json (stack.levels.*).
+export const experienceLevels = ["basics", "intermediate", "advanced", "expert"] as const;
 export type ExperienceLevel = (typeof experienceLevels)[number];
 
 export type FamilyColor = {

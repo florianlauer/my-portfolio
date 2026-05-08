@@ -7,7 +7,6 @@
     "primaryCta": "Me contacter"
   },
   "nav": {
-    "home": "Accueil",
     "about": "À propos",
     "gallery": "Galerie",
     "stack": "Ma Stack",
@@ -25,7 +24,8 @@
     "goToStackSection": "Aller à la section Stack",
     "stackPrincipaleLabel": "Stack principale",
     "visualLocationPrefix": "Visuel lieu",
-    "skillsForChapter": "Compétences"
+    "skillsForChapter": "Compétences",
+    "flagOf": "Drapeau de {label}"
   },
   "hero": {
     "viewStackButton": "Voir la stack"
@@ -112,6 +112,7 @@
       "techsListLabel": "Liste des technologies",
       "relatedToPrefix": "Lié à"
     },
+    "filtersAriaLabel": "Filtrer par domaine",
     "familyAccents": {
       "frontend": "UI / Interfaces",
       "mobile": "App native",
@@ -132,10 +133,10 @@
       "methods": "Méthodes & Architecture"
     },
     "levels": {
-      "Notions": "Notions",
-      "Intermédiaire": "Intermédiaire",
-      "Avancé": "Avancé",
-      "Expert": "Expert"
+      "basics": "Notions",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé",
+      "expert": "Expert"
     },
     "itemLabels": {
       "react": "React",
@@ -346,5 +347,15 @@
     "aboutPageTitle": "À propos",
     "galleryPageTitle": "Galerie",
     "galleryPageDescription": "Photos de voyage : Laponie, Lençóis, Rio et autres escapades. Florian Lauer."
+  },
+  "error": {
+    "title": "Une erreur est survenue",
+    "description": "Quelque chose s'est mal passé. Tu peux réessayer.",
+    "retry": "Réessayer"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "Cette page n'existe pas ou a été déplacée.",
+    "backHome": "Retour à l'accueil"
   }
 }

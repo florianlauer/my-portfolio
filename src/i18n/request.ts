@@ -8,5 +8,14 @@ export default getRequestConfig(async ({ requestLocale }) => {
   return {
     locale,
     messages: (await import(`../messages/${locale}.json`)).default,
+    onError(error) {
+      if (process.env.NODE_ENV !== "production") {
+        console.error("[next-intl]", error);
+      }
+    },
+    getMessageFallback({ namespace, key }) {
+      const path = namespace ? `${namespace}.${key}` : key;
+      return process.env.NODE_ENV === "production" ? path : `!!!${path}!!!`;
+    },
   };
 });

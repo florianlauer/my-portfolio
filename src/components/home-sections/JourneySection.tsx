@@ -67,7 +67,10 @@ export const JourneySection = (): React.JSX.Element => {
               className={`rounded-xl border border-border/70 border-t-2 p-4 transition-all duration-200 pointer-hover:-translate-y-1 pointer-hover:shadow-md pointer-hover:border-border md:pointer-hover:scale-[1.02] ${chapterAccent[id]?.border ?? ""}`}
             >
               {chapterVisual?.imageSrc ? (
-                <FlagImage src={chapterVisual.imageSrc} label={chapterVisual.label} />
+                <FlagImage
+                  src={chapterVisual.imageSrc}
+                  ariaLabel={tA11y("flagOf", { label: chapterVisual.label })}
+                />
               ) : (
                 <p
                   className="text-2xl"

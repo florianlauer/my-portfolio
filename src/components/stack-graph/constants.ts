@@ -2,20 +2,20 @@ import type { ExperienceLevel } from "@/types/stack-graph";
 
 // Visual circle radius per experience level — single source of truth
 export const NODE_RADIUS_BY_LEVEL: Record<ExperienceLevel, number> = {
-  Expert: 34,
-  Avancé: 26,
-  Intermédiaire: 20,
-  Notions: 14,
+  expert: 34,
+  advanced: 26,
+  intermediate: 20,
+  basics: 14,
 };
 
 // Spacing added on top of radius for d3-force collision boundaries
 const COLLIDE_PADDING = 6;
 
 export const COLLIDE_RADIUS_BY_LEVEL: Record<ExperienceLevel, number> = {
-  Expert: NODE_RADIUS_BY_LEVEL.Expert + COLLIDE_PADDING,
-  Avancé: NODE_RADIUS_BY_LEVEL.Avancé + COLLIDE_PADDING,
-  Intermédiaire: NODE_RADIUS_BY_LEVEL.Intermédiaire + COLLIDE_PADDING,
-  Notions: NODE_RADIUS_BY_LEVEL.Notions + COLLIDE_PADDING,
+  expert: NODE_RADIUS_BY_LEVEL.expert + COLLIDE_PADDING,
+  advanced: NODE_RADIUS_BY_LEVEL.advanced + COLLIDE_PADDING,
+  intermediate: NODE_RADIUS_BY_LEVEL.intermediate + COLLIDE_PADDING,
+  basics: NODE_RADIUS_BY_LEVEL.basics + COLLIDE_PADDING,
 };
 
 // d3-force tuning constants — shared between init and filter rebuilds

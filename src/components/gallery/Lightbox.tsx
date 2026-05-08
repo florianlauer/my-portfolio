@@ -28,6 +28,7 @@ export function Lightbox({
   const closeLabel = t("closeLabel");
 
   const dialogRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
   const previouslyFocusedRef = useRef<Element | null>(null);
 
   const {
@@ -54,20 +55,19 @@ export function Lightbox({
     };
   }, []);
 
-  // Focus management : focus dialog on open, restore on close
+  // Focus management : focus close button on open, restore previous focus on close.
+  // Uses a ref instead of querySelector(`[aria-label="..."]`) so locale strings with
+  // quotes/special chars never break focus restoration (and effect runs once on mount).
   useEffect(() => {
     previouslyFocusedRef.current = document.activeElement;
-    const closeBtn = dialogRef.current?.querySelector<HTMLButtonElement>(
-      `[aria-label="${closeLabel}"]`,
-    );
-    closeBtn?.focus();
+    closeBtnRef.current?.focus();
 
     return () => {
       if (previouslyFocusedRef.current instanceof HTMLElement) {
         previouslyFocusedRef.current.focus();
       }
     };
-  }, [closeLabel]);
+  }, []);
 
   // Focus trap helper
   const trapFocus = useCallback((e: KeyboardEvent): void => {
@@ -126,6 +126,7 @@ export function Lightbox({
       onTouchEnd={handleTouchEnd}
     >
       <button
+        ref={closeBtnRef}
         type="button"
         onClick={onClose}
         className="absolute right-4 top-[max(1rem,env(safe-area-inset-top,1rem))] z-10 min-h-[44px] min-w-[44px] inline-flex items-center justify-center cursor-pointer rounded-md bg-white/10 px-3 py-2 text-white pointer-hover:bg-white/20 focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-white"

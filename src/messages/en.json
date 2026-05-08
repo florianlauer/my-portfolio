@@ -7,7 +7,6 @@
     "primaryCta": "Get in touch"
   },
   "nav": {
-    "home": "Home",
     "about": "About",
     "gallery": "Gallery",
     "stack": "My Stack",
@@ -25,7 +24,8 @@
     "goToStackSection": "Go to Stack section",
     "stackPrincipaleLabel": "Main stack",
     "visualLocationPrefix": "Location visual",
-    "skillsForChapter": "Skills"
+    "skillsForChapter": "Skills",
+    "flagOf": "Flag of {label}"
   },
   "hero": {
     "viewStackButton": "View the stack"
@@ -112,6 +112,7 @@
       "techsListLabel": "Technology list",
       "relatedToPrefix": "Related to"
     },
+    "filtersAriaLabel": "Filter by domain",
     "familyAccents": {
       "frontend": "UI / Interfaces",
       "mobile": "Native apps",
@@ -132,10 +133,10 @@
       "methods": "Methods & Architecture"
     },
     "levels": {
-      "Notions": "Basics",
-      "Intermédiaire": "Intermediate",
-      "Avancé": "Advanced",
-      "Expert": "Expert"
+      "basics": "Basics",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "expert": "Expert"
     },
     "itemLabels": {
       "react": "React",
@@ -346,5 +347,15 @@
     "aboutPageTitle": "About",
     "galleryPageTitle": "Gallery",
     "galleryPageDescription": "Travel photos: Lapland, Lençóis, Rio and other escapes. Florian Lauer."
+  },
+  "error": {
+    "title": "Something went wrong",
+    "description": "Something unexpected happened. You can try again.",
+    "retry": "Try again"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This page does not exist or has moved.",
+    "backHome": "Back to home"
   }
 }

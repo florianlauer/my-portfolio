@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { cn } from "@/lib/utils";
 import { GlobalBackground } from "@/components/global-background/GlobalBackground";
 import { HomeNav } from "@/components/home-nav/HomeNav";
@@ -9,22 +10,27 @@ type PageShellProps = {
 };
 
 /**
- * Coquille partagée pour les pages secondaires (à propos, galerie).
- * Server Component : GlobalBackground et HomeNav sont des Client Components enfants.
+ * Coquille partagée pour les pages secondaires (à propos, galerie, stack).
+ * Server Component — relies on the request locale set by the page (setRequestLocale).
  */
-export function PageShell({ children, containerClassName }: PageShellProps): React.JSX.Element {
+export async function PageShell({
+  children,
+  containerClassName,
+}: PageShellProps): Promise<React.JSX.Element> {
+  const tA11y = await getTranslations("a11y");
+
   return (
     <main
-      id="contenu"
+      id="main-content"
       className="relative min-h-screen overflow-x-hidden text-foreground"
       tabIndex={-1}
     >
       <GlobalBackground />
       <a
-        href="#contenu"
+        href="#main-content"
         className="fixed left-4 top-4 z-100 -translate-y-20 rounded-md bg-primary px-4 py-2 text-primary-foreground shadow-md transition-transform focus-visible:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
-        Aller au contenu
+        {tA11y("skipToContent")}
       </a>
       <div
         className={cn(

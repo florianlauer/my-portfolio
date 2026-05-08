@@ -7,7 +7,6 @@
     "primaryCta": "Kontakt aufnehmen"
   },
   "nav": {
-    "home": "Startseite",
     "about": "Über mich",
     "gallery": "Galerie",
     "stack": "Mein Stack",
@@ -25,7 +24,8 @@
     "goToStackSection": "Zum Stack-Abschnitt springen",
     "stackPrincipaleLabel": "Haupt-Stack",
     "visualLocationPrefix": "Ortsdarstellung",
-    "skillsForChapter": "Kompetenzen"
+    "skillsForChapter": "Kompetenzen",
+    "flagOf": "Flagge von {label}"
   },
   "hero": {
     "viewStackButton": "Stack ansehen"
@@ -112,6 +112,7 @@
       "techsListLabel": "Liste der Technologien",
       "relatedToPrefix": "Verbunden mit"
     },
+    "filtersAriaLabel": "Nach Bereich filtern",
     "familyAccents": {
       "frontend": "UI / Interfaces",
       "mobile": "Native Apps",
@@ -132,10 +133,10 @@
       "methods": "Methoden & Architektur"
     },
     "levels": {
-      "Notions": "Grundkenntnisse",
-      "Intermédiaire": "Fortgeschritten",
-      "Avancé": "Erfahren",
-      "Expert": "Experte"
+      "basics": "Grundkenntnisse",
+      "intermediate": "Fortgeschritten",
+      "advanced": "Erfahren",
+      "expert": "Experte"
     },
     "itemLabels": {
       "react": "React",
@@ -346,5 +347,15 @@
     "aboutPageTitle": "Über mich",
     "galleryPageTitle": "Galerie",
     "galleryPageDescription": "Reisefotos: Lappland, Lençóis, Rio und andere Auszeiten. Florian Lauer."
+  },
+  "error": {
+    "title": "Ein Fehler ist aufgetreten",
+    "description": "Etwas Unerwartetes ist passiert. Du kannst es erneut versuchen.",
+    "retry": "Erneut versuchen"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Diese Seite existiert nicht oder wurde verschoben.",
+    "backHome": "Zur Startseite"
   }
 }

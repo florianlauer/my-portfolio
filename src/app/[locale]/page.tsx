@@ -1,4 +1,3 @@
-import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import { GlobalBackground } from "@/components/global-background/GlobalBackground";
 import { HomeNav } from "@/components/home-nav/HomeNav";
@@ -10,25 +9,19 @@ import { JourneySection } from "@/components/home-sections/JourneySection";
 import { PassionsSection } from "@/components/home-sections/PassionsSection";
 import { heroStack, siteIdentity } from "@/content/site";
 import { primaryContactLink, socialLinks } from "@/content/socialLinks";
-import { hasLocale } from "next-intl";
-import { routing, type Locale } from "@/i18n/routing";
-import { notFound } from "next/navigation";
+import { resolveLocaleOr404 } from "@/i18n/params";
 
 export default async function HomePage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<React.JSX.Element> {
-  const { locale: rawLocale } = await params;
-  if (!hasLocale(routing.locales, rawLocale)) notFound();
-  const locale: Locale = rawLocale;
-  setRequestLocale(locale);
-
+  const locale = await resolveLocaleOr404(params);
   const tA11y = await getTranslations({ locale, namespace: "a11y" });
 
   return (
     <main
-      id="contenu"
+      id="main-content"
       className="relative min-h-screen overflow-x-hidden text-foreground"
       tabIndex={-1}
     >

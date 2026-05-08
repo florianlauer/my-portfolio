@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { cn } from "@/lib/utils";
 
@@ -36,6 +37,7 @@ export function HomeNav(): React.JSX.Element {
   const [bounceType, setBounceType] = useState<"min" | "max" | null>(null);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const pathname = usePathname();
+  const locale = useLocale() as Locale;
 
   // Indicateur de scroll gauche sur la nav
   useEffect(() => {
@@ -81,8 +83,9 @@ export function HomeNav(): React.JSX.Element {
 
   const isHome = pathname === "/";
 
-  /** Sur les autres pages, les ancres de section pointent vers la home. */
-  const sectionHref = (hash: string): string => (isHome ? hash : `/${hash}`);
+  // Sur les pages non-home, l'ancre pointe vers la home dans la locale courante,
+  // pour ne pas perdre le préfixe et déclencher une re-detection middleware.
+  const sectionHref = (hash: string): string => (isHome ? hash : `/${locale}/${hash}`);
 
   const isActive = (href: string): boolean => {
     const sectionId = ANCHOR_TO_SECTION[href];

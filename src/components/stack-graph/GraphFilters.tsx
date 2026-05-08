@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 type FilterPill = {
@@ -19,8 +20,9 @@ export function GraphFilters({
   activeFilters,
   onToggle,
 }: GraphFiltersProps): React.JSX.Element {
+  const t = useTranslations("stack");
   return (
-    <div className="flex flex-wrap gap-2 mb-3" role="group" aria-label="Filtrer par domaine">
+    <div className="flex flex-wrap gap-2 mb-3" role="group" aria-label={t("filtersAriaLabel")}>
       {filters.map((filter) => {
         const isActive = activeFilters.has(filter.key);
         return (

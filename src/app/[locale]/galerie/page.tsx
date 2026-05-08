@@ -1,12 +1,10 @@
 import dynamic from "next/dynamic";
-import { hasLocale } from "next-intl";
-import { setRequestLocale, getTranslations } from "next-intl/server";
-import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { PageShell } from "@/components/page-shell/PageShell";
 import { galleryItems } from "@/content/gallery";
-import { routing, type Locale } from "@/i18n/routing";
 import { buildAlternates } from "@/i18n/metadata";
+import { resolveLocaleOr404, resolveLocaleOrDefault } from "@/i18n/params";
 
 const GalleryClient = dynamic(() =>
   import("@/components/gallery/GalleryClient").then((m) => m.GalleryClient),
@@ -17,8 +15,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale: rawLocale } = await params;
-  const locale: Locale = hasLocale(routing.locales, rawLocale) ? rawLocale : routing.defaultLocale;
+  const locale = await resolveLocaleOrDefault(params);
   const tMeta = await getTranslations({ locale, namespace: "metadata" });
   return {
     title: tMeta("galleryPageTitle"),
@@ -32,11 +29,7 @@ export default async function GaleriePage({
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<React.JSX.Element> {
-  const { locale: rawLocale } = await params;
-  if (!hasLocale(routing.locales, rawLocale)) notFound();
-  const locale: Locale = rawLocale;
-  setRequestLocale(locale);
-
+  const locale = await resolveLocaleOr404(params);
   const t = await getTranslations({ locale, namespace: "gallery" });
 
   // Hydrate items with localized captions for the client component
