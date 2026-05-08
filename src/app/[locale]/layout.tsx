@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { routing, type Locale } from "@/i18n/routing";
 import { getBaseUrl } from "@/utils/siteUrl";
 import { siteIdentity } from "@/content/site";
+import { SiteFooter } from "@/components/site-footer";
 
 const baseUrl = getBaseUrl();
 
@@ -105,6 +106,7 @@ export default async function LocaleLayout({
         }}
       />
       {children}
+      <SiteFooter />
     </NextIntlClientProvider>
   );
 }
