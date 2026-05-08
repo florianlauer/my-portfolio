@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { cn } from "@/lib/utils";
 
 /** Scroll en px au-delà duquel le menu a sa taille "actuelle" (desktop). */
@@ -198,6 +199,7 @@ export function HomeNav(): React.JSX.Element {
           >
             {t("sections.contact")}
           </a>
+          <LanguageSwitcher className="ml-auto shrink-0 mr-1" />
         </nav>
         <div
           ref={leftFadeRef}
