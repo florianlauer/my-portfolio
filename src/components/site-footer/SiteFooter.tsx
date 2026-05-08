@@ -1,5 +1,8 @@
-import { getTranslations, getLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+"use client";
+
+import { useParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { socialLinks } from "@/content/socialLinks";
 
@@ -9,9 +12,11 @@ const LOCALE_LABELS: Record<Locale, { native: string; flag: string }> = {
   de: { native: "Deutsch", flag: "🇩🇪" },
 };
 
-export async function SiteFooter(): Promise<React.JSX.Element> {
-  const t = await getTranslations("footer");
-  const currentLocale = (await getLocale()) as Locale;
+export function SiteFooter(): React.JSX.Element {
+  const t = useTranslations("footer");
+  const pathname = usePathname();
+  const params = useParams();
+  const currentLocale = useLocale() as Locale;
 
   return (
     <footer className="relative z-10 mt-12 border-t border-border/40 bg-background/40 py-10">
@@ -30,7 +35,10 @@ export async function SiteFooter(): Promise<React.JSX.Element> {
                 </span>
               )}
               <Link
-                href="/"
+                // Typed-pathnames API: pathname is the canonical source path,
+                // params carries any dynamic segments (none on this site).
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                href={{ pathname, params } as any}
                 locale={locale}
                 aria-current={locale === currentLocale ? "true" : undefined}
                 className={
