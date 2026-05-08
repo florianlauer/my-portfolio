@@ -1,24 +1,18 @@
-export type PrimaryCta = {
-  label: string;
-  href: string;
-};
-
 export type HeroImage = {
   src: string;
-  alt: string;
 };
 
-export type SiteContent = {
+export type SiteIdentity = {
   ownerName: string;
-  heroTitle: string;
-  heroSubtitle: string;
+  /** href du CTA principal (LinkedIn, mail, etc.) */
+  primaryCtaHref: string;
   heroImage: HeroImage;
-  primaryCta: PrimaryCta;
   /** Email de contact (lien mailto:) ; optionnel. */
   contactEmail?: string;
 };
 
 export type HeroTech = {
   id: string;
+  /** Brand label, non traduisible. */
   label: string;
 };

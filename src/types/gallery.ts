@@ -1,6 +1,4 @@
-export type GalleryItem = {
+export type GalleryItemStructure = {
   id: string;
   src: string;
-  alt: string;
-  caption: string;
 };
