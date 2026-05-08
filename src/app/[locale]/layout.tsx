@@ -3,6 +3,7 @@ import { setRequestLocale, getMessages, getTranslations } from "next-intl/server
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { routing, type Locale } from "@/i18n/routing";
+import { buildAlternates } from "@/i18n/metadata";
 import { getBaseUrl } from "@/utils/siteUrl";
 import { siteIdentity } from "@/content/site";
 import { SiteFooter } from "@/components/site-footer";
@@ -34,14 +35,7 @@ export async function generateMetadata({
     metadataBase: new URL(baseUrl),
     title: { default: title, template: `%s | ${siteIdentity.ownerName}` },
     description,
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        fr: "/fr",
-        en: "/en",
-        de: "/de",
-      },
-    },
+    alternates: buildAlternates("/", locale),
     openGraph: {
       type: "website",
       locale: localeToOg(locale),

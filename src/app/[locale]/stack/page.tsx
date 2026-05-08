@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { PageShell } from "@/components/page-shell/PageShell";
 import { stackGraph } from "@/content/stack-graph";
 import { routing, type Locale } from "@/i18n/routing";
+import { buildAlternates } from "@/i18n/metadata";
 
 // Heavy client-side bundle (d3-force, d3-zoom, d3-transition, simple-icons) — split out
 const StackGraph = dynamic(() =>
@@ -23,6 +24,7 @@ export async function generateMetadata({
   return {
     title: tMeta("stackPageTitle"),
     description: tMeta("stackPageDescription"),
+    alternates: buildAlternates("/stack", locale),
     openGraph: {
       title: `${tMeta("stackPageTitle")} - Florian Lauer`,
       description: tMeta("stackPageDescription"),

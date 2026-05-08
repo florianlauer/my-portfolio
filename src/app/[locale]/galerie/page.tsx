@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { PageShell } from "@/components/page-shell/PageShell";
 import { galleryItems } from "@/content/gallery";
 import { routing, type Locale } from "@/i18n/routing";
+import { buildAlternates } from "@/i18n/metadata";
 
 const GalleryClient = dynamic(() =>
   import("@/components/gallery/GalleryClient").then((m) => m.GalleryClient),
@@ -22,6 +23,7 @@ export async function generateMetadata({
   return {
     title: tMeta("galleryPageTitle"),
     description: tMeta("galleryPageDescription"),
+    alternates: buildAlternates("/galerie", locale),
   };
 }
 

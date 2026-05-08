@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { PageShell } from "@/components/page-shell/PageShell";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
+import { buildAlternates } from "@/i18n/metadata";
 import { aboutSectionIds } from "@/types/passions";
 
 export async function generateMetadata({
@@ -19,6 +20,7 @@ export async function generateMetadata({
   return {
     title: tMeta("aboutPageTitle"),
     description: tAbout("pageSubtitle"),
+    alternates: buildAlternates("/a-propos", locale),
   };
 }
 
