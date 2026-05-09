@@ -39,6 +39,10 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
 
+  // Entry animation: false during initial mount, true after first paint.
+  // Combined with `reducedMotion`, this drives the staggered fade-in in GraphNode.
+  const [entered, setEntered] = useState(false);
+
   // Zoom/pan refs — no useState to avoid 60fps re-renders
   const svgRef = useRef<SVGSVGElement>(null);
   const bgRectRef = useRef<SVGRectElement>(null);
@@ -63,6 +67,26 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
   );
 
   const reducedMotion = usePrefersReducedMotion();
+
+  // Trigger entry animation on next paint. requestAnimationFrame ensures the
+  // initial render with entered=false commits to the DOM before we flip,
+  // so the CSS transition has both states to interpolate between.
+  // Reduced motion: skip the delay, set entered immediately (transition is
+  // also disabled in GraphNode under reducedMotion, see Task 2).
+  useEffect(() => {
+    if (reducedMotion) {
+      setEntered(true);
+      return;
+    }
+    let rafId: number | null = null;
+    const timeoutId = window.setTimeout(() => {
+      rafId = window.requestAnimationFrame(() => setEntered(true));
+    }, 50);
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
+    };
+  }, [reducedMotion]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -378,7 +402,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                 })}
               </g>
               <g>
-                {positions.map((pos) => (
+                {positions.map((pos, index) => (
                   <GraphNode
                     key={pos.id}
                     node={pos}
@@ -392,6 +416,9 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                     onNodeClick={setFocusedId}
                     onHoverChange={setHoveredId}
                     opacity={getNodeOpacity(pos.id)}
+                    entered={entered}
+                    enterDelay={Math.min(index * 25, 600)}
+                    reducedMotion={reducedMotion}
                   />
                 ))}
               </g>

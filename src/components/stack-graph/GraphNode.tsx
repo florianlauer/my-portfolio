@@ -22,6 +22,9 @@ type GraphNodeProps = {
   onDragEnd?: (id: string) => void;
   onNodeClick?: (id: string) => void;
   onHoverChange?: (id: string | null) => void;
+  entered?: boolean;
+  enterDelay?: number;
+  reducedMotion?: boolean;
 };
 
 // Short labels for nodes without icons
@@ -58,6 +61,9 @@ function GraphNodeImpl({
   onDragEnd,
   onNodeClick,
   onHoverChange,
+  entered = true,
+  enterDelay = 0,
+  reducedMotion = false,
 }: GraphNodeProps): React.JSX.Element {
   const t = useTranslations("stack");
   const icon = iconMap[node.id];
@@ -118,50 +124,59 @@ function GraphNodeImpl({
   );
 
   return (
-    <g
-      transform={`translate(${x}, ${y})`}
-      className="cursor-grab active:cursor-grabbing"
-      style={{ opacity: opacity ?? 1, transition: "opacity 200ms ease" }}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerEnter={() => onHoverChange?.(node.id)}
-      onPointerLeave={() => onHoverChange?.(null)}
-    >
-      {/* Hit area: invisible circle that guarantees a 44×44 touch target */}
-      <circle r={hitRadius} fill="transparent" pointerEvents="all" />
+    <g transform={`translate(${x}, ${y})`}>
+      <g
+        className="cursor-grab active:cursor-grabbing"
+        style={{
+          opacity: entered ? (opacity ?? 1) : 0,
+          transform: entered ? "scale(1)" : "scale(0.5)",
+          transformOrigin: "0 0",
+          transformBox: "fill-box",
+          transition: reducedMotion
+            ? "none"
+            : `opacity 400ms ease ${enterDelay}ms, transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1) ${enterDelay}ms`,
+        }}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerEnter={() => onHoverChange?.(node.id)}
+        onPointerLeave={() => onHoverChange?.(null)}
+      >
+        {/* Hit area: invisible circle that guarantees a 44×44 touch target */}
+        <circle r={hitRadius} fill="transparent" pointerEvents="all" />
 
-      {/* Visible circle — drop-shadow filter is hoisted into StackGraph <defs> as glow-${family} */}
-      <circle r={r} fill={color} fillOpacity={0.95} filter={`url(#glow-${node.family})`} />
+        {/* Visible circle — drop-shadow filter is hoisted into StackGraph <defs> as glow-${family} */}
+        <circle r={r} fill={color} fillOpacity={0.95} filter={`url(#glow-${node.family})`} />
 
-      {/* Icon or abbreviation */}
-      {icon ? (
-        <svg
-          x={-iconSize / 2}
-          y={-iconSize / 2}
-          width={iconSize}
-          height={iconSize}
-          viewBox={icon.viewBox}
-        >
-          <path d={icon.path} fill="white" />
-        </svg>
-      ) : (
-        <text
-          x={0}
-          y={0}
-          textAnchor="middle"
-          dominantBaseline="central"
-          fill="white"
-          fontSize={Math.min(
-            Math.round(r * 0.7),
-            Math.round((r * 1.6) / Math.max(shortLabel.length * 0.55, 1)),
-          )}
-          fontWeight={600}
-          fontFamily="var(--font-dm-sans)"
-        >
-          {shortLabel}
-        </text>
-      )}
+        {/* Icon or abbreviation */}
+        {icon ? (
+          <svg
+            x={-iconSize / 2}
+            y={-iconSize / 2}
+            width={iconSize}
+            height={iconSize}
+            viewBox={icon.viewBox}
+          >
+            <path d={icon.path} fill="white" />
+          </svg>
+        ) : (
+          <text
+            x={0}
+            y={0}
+            textAnchor="middle"
+            dominantBaseline="central"
+            fill="white"
+            fontSize={Math.min(
+              Math.round(r * 0.7),
+              Math.round((r * 1.6) / Math.max(shortLabel.length * 0.55, 1)),
+            )}
+            fontWeight={600}
+            fontFamily="var(--font-dm-sans)"
+          >
+            {shortLabel}
+          </text>
+        )}
+      </g>
     </g>
   );
 }
@@ -172,6 +187,9 @@ export const GraphNode = memo(GraphNodeImpl, (prev, next) => {
     prev.y === next.y &&
     prev.color === next.color &&
     prev.opacity === next.opacity &&
+    prev.entered === next.entered &&
+    prev.enterDelay === next.enterDelay &&
+    prev.reducedMotion === next.reducedMotion &&
     prev.node === next.node &&
     prev.onDragStart === next.onDragStart &&
     prev.onDragMove === next.onDragMove &&
