@@ -354,6 +354,9 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
         filters={filterPills}
         activeFilters={activeFilters}
         onToggle={handleFilterToggle}
+        presetActive={presetActive}
+        onPresetToggle={() => setPresetActive((prev) => !prev)}
+        presetLabel={t("filterPills.preset")}
       />
       <div ref={containerRef} className="relative w-full aspect-[3/4] md:aspect-[4/3]">
         {size.width > 0 && size.height > 0 && (

@@ -105,7 +105,8 @@
     "filterPills": {
       "frontend": "Frontend",
       "backend": "Backend",
-      "devops": "DevOps"
+      "devops": "DevOps",
+      "preset": "My typical stack"
     },
     "graph": {
       "techsListLabel": "Technology list",
