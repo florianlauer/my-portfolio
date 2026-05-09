@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { stackGroupStructure } from "@/content/stack";
 import type { StackFamilyKey } from "@/types/stack";
@@ -57,6 +58,18 @@ export const StackSection = (): React.JSX.Element => {
       <p className="mt-6 border-l-2 border-muted-foreground/30 pl-3 text-sm italic text-muted-foreground">
         {t("opinion")}
       </p>
+
+      <div className="mt-6 flex justify-end">
+        <Link
+          href="/stack"
+          className="group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-primary outline-none transition-colors duration-200 pointer-hover:bg-primary/10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        >
+          {t("exploreDetailCta")}
+          <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">
+            →
+          </span>
+        </Link>
+      </div>
     </section>
   );
 };

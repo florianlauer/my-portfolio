@@ -87,6 +87,11 @@ export function HomeNav(): React.JSX.Element {
   // pour ne pas perdre le préfixe et déclencher une re-detection middleware.
   const sectionHref = (hash: string): string => (isHome ? hash : `/${locale}/${hash}`);
 
+  // L'item "Stack" route différemment :
+  // - sur la home, c'est une ancre vers la section preview (#stack)
+  // - ailleurs, c'est un lien direct vers la page détaillée /stack
+  const isStackActive = isHome ? activeSection === "stack" : pathname === "/stack";
+
   const isActive = (href: string): boolean => {
     const sectionId = ANCHOR_TO_SECTION[href];
     if (sectionId) return activeSection === sectionId;
@@ -166,12 +171,21 @@ export function HomeNav(): React.JSX.Element {
           >
             {t("sections.parcours")}
           </a>
-          <a
-            href={sectionHref("#stack")}
-            className={cn(linkBaseClass, isActive("#stack") && "bg-primary/10 text-primary")}
-          >
-            {t("sections.stack")}
-          </a>
+          {isHome ? (
+            <a
+              href="#stack"
+              className={cn(linkBaseClass, isStackActive && "bg-primary/10 text-primary")}
+            >
+              {t("sections.stack")}
+            </a>
+          ) : (
+            <Link
+              href="/stack"
+              className={cn(linkBaseClass, isStackActive && "bg-primary/10 text-primary")}
+            >
+              {t("sections.stack")}
+            </Link>
+          )}
           <a
             href={sectionHref("#passions")}
             className={cn(linkBaseClass, isActive("#passions") && "bg-primary/10 text-primary")}
@@ -189,12 +203,6 @@ export function HomeNav(): React.JSX.Element {
             className={cn(linkBaseClass, isActive("/galerie") && "bg-primary/10 text-primary")}
           >
             {t("gallery")}
-          </Link>
-          <Link
-            href="/stack"
-            className={cn(linkBaseClass, isActive("/stack") && "bg-primary/10 text-primary")}
-          >
-            {t("stack")}
           </Link>
           <a
             href={sectionHref("#contact")}

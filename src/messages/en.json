@@ -9,7 +9,6 @@
   "nav": {
     "about": "About",
     "gallery": "Gallery",
-    "stack": "My Stack",
     "ariaLabel": "Section navigation",
     "sections": {
       "parcours": "Journey",
@@ -123,6 +122,7 @@
       "methods": "Craft"
     },
     "opinion": "Capacitor served me well for 6 years in production at Sencrop. For a new mobile project, I'd go with React Native or Expo.",
+    "exploreDetailCta": "Explore the full stack",
     "families": {
       "frontend": "Frontend",
       "mobile": "Mobile",
