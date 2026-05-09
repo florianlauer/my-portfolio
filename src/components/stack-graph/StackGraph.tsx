@@ -66,6 +66,9 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     () => new Set(["frontend", "backend", "devops"]),
   );
 
+  // Preset "ma stack typique" — purely visual highlight, independent of filter pills.
+  const [presetActive, setPresetActive] = useState(false);
+
   const reducedMotion = usePrefersReducedMotion();
 
   // Trigger entry animation on next paint. requestAnimationFrame ensures the
@@ -202,13 +205,23 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
   }, [focusedId, data.edges]);
 
   const getNodeOpacity = (nodeId: string): number => {
-    if (neighborSet === null) return 1;
-    return neighborSet.has(nodeId) ? 1 : 0.15;
+    if (neighborSet !== null) {
+      return neighborSet.has(nodeId) ? 1 : 0.15;
+    }
+    if (presetActive) {
+      return presetSet.has(nodeId) ? 1 : 0.2;
+    }
+    return 1;
   };
 
   const getEdgeOpacity = (source: string, target: string): number => {
-    if (neighborSet === null) return 1;
-    return neighborSet.has(source) && neighborSet.has(target) ? 1 : 0.15;
+    if (neighborSet !== null) {
+      return neighborSet.has(source) && neighborSet.has(target) ? 1 : 0.15;
+    }
+    if (presetActive) {
+      return presetSet.has(source) && presetSet.has(target) ? 1 : 0.2;
+    }
+    return 1;
   };
 
   // Compute which nodes are active given the current filter state
@@ -229,6 +242,10 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     }
     return ids;
   }, [activeFilters, data.nodes]);
+
+  const presetSet = useMemo<Set<string>>(() => {
+    return new Set(data.presetTypicalStack);
+  }, [data.presetTypicalStack]);
 
   // Apply filter to running simulation when activeFilters changes
   useEffect(() => {
