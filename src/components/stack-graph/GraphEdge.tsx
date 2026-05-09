@@ -46,7 +46,7 @@ export function GraphEdge({
       {highlighted && !reducedMotion && (
         <animate
           attributeName="stroke-opacity"
-          values="0.85;1;0.85"
+          values="0.6;1;0.6"
           dur="1.6s"
           repeatCount="indefinite"
         />
