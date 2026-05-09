@@ -65,7 +65,10 @@ export const StackSection = (): React.JSX.Element => {
           className="group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-primary outline-none transition-colors duration-200 pointer-hover:bg-primary/10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         >
           {t("exploreDetailCta")}
-          <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">
+          <span
+            aria-hidden
+            className="transition-transform duration-200 group-hover:translate-x-0.5"
+          >
             →
           </span>
         </Link>
