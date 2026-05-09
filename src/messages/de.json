@@ -9,7 +9,6 @@
   "nav": {
     "about": "Über mich",
     "gallery": "Galerie",
-    "stack": "Mein Stack",
     "ariaLabel": "Abschnittsnavigation",
     "sections": {
       "parcours": "Werdegang",
@@ -123,6 +122,7 @@
       "methods": "Craft"
     },
     "opinion": "Capacitor hat mir 6 Jahre lang in Produktion bei Sencrop gute Dienste geleistet. Für ein neues Mobile-Projekt würde ich React Native oder Expo nehmen.",
+    "exploreDetailCta": "Stack im Detail erkunden",
     "families": {
       "frontend": "Frontend",
       "mobile": "Mobile",
