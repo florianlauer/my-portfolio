@@ -18,7 +18,9 @@ import { GraphFilters } from "@/components/stack-graph/GraphFilters";
 import { StackGraphSRList } from "@/components/stack-graph/StackGraphSRList";
 import {
   CLICK_THRESHOLD,
+  COMPACT_RADIUS_SCALE,
   NODE_RADIUS_BY_LEVEL,
+  STACK_GRAPH_COMPACT_BREAKPOINT_PX,
   TOOLTIP_NODE_OFFSET_PX,
 } from "@/components/stack-graph/constants";
 import type { SimNode } from "@/components/stack-graph/use-force-layout";
@@ -70,6 +72,12 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
   const [presetActive, setPresetActive] = useState(false);
 
   const reducedMotion = usePrefersReducedMotion();
+
+  // Compact mode: triggered when the container width is under the breakpoint.
+  // `size.width === 0` means the ResizeObserver hasn't fired yet — default to
+  // non-compact to avoid a jarring flash on the first paint of a desktop session.
+  const isCompact = size.width > 0 && size.width < STACK_GRAPH_COMPACT_BREAKPOINT_PX;
+  const radiusScale = isCompact ? COMPACT_RADIUS_SCALE : 1;
 
   // Trigger entry animation on next paint. requestAnimationFrame ensures the
   // initial render with entered=false commits to the DOM before we flip,
@@ -287,7 +295,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     const simNode = positions.find((p) => p.id === nodeId);
     if (!simNode) return;
 
-    const nodeRadius = NODE_RADIUS_BY_LEVEL[simNode.level] ?? 20;
+    const nodeRadius = (NODE_RADIUS_BY_LEVEL[simNode.level] ?? 20) * radiusScale;
 
     const pt = svgEl.createSVGPoint();
     pt.x = simNode.x;
@@ -445,6 +453,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                     entered={entered}
                     enterDelay={Math.min(index * 25, 600)}
                     reducedMotion={reducedMotion}
+                    radiusScale={radiusScale}
                   />
                 ))}
               </g>
@@ -459,8 +468,14 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
           familyColorMap={colorMap.current}
           containerWidth={size.width}
         />
-        <GraphLegend familyColors={data.familyColors} />
+        {/* Desktop legend: absolute inside graph container, bottom-left */}
+        <GraphLegend
+          familyColors={data.familyColors}
+          className="hidden md:block absolute bottom-4 left-4"
+        />
       </div>
+      {/* Mobile legend: rendered in document flow below the graph (no overlap with nodes) */}
+      <GraphLegend familyColors={data.familyColors} className="md:hidden mt-3" />
       <StackGraphSRList
         nodes={data.nodes.filter((n) => activeNodeIds.has(n.id))}
         edges={data.edges}

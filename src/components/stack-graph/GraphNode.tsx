@@ -25,6 +25,7 @@ type GraphNodeProps = {
   entered?: boolean;
   enterDelay?: number;
   reducedMotion?: boolean;
+  radiusScale?: number;
 };
 
 // Short labels for nodes without icons
@@ -64,13 +65,16 @@ function GraphNodeImpl({
   entered = true,
   enterDelay = 0,
   reducedMotion = false,
+  radiusScale = 1,
 }: GraphNodeProps): React.JSX.Element {
   const t = useTranslations("stack");
   const icon = iconMap[node.id];
-  const r = NODE_RADIUS_BY_LEVEL[node.level];
+  const r = NODE_RADIUS_BY_LEVEL[node.level] * radiusScale;
   const iconSize = Math.round(r * 0.9);
   const shortLabel = SHORT_LABEL[node.id] ?? t(`itemLabels.${node.id}`);
-  // Hit-area: at least MIN_TOUCH_RADIUS to satisfy WCAG 2.5.5 (44×44 minimum)
+  // Hit-area: at least MIN_TOUCH_RADIUS to satisfy WCAG 2.5.5 (44×44 minimum).
+  // MIN_TOUCH_RADIUS is NOT scaled — keeping the touch target full size on mobile
+  // is more important than visual proportionality.
   const hitRadius = Math.max(r, MIN_TOUCH_RADIUS);
 
   const draggingRef = useRef(false);
@@ -190,6 +194,7 @@ export const GraphNode = memo(GraphNodeImpl, (prev, next) => {
     prev.entered === next.entered &&
     prev.enterDelay === next.enterDelay &&
     prev.reducedMotion === next.reducedMotion &&
+    prev.radiusScale === next.radiusScale &&
     prev.node === next.node &&
     prev.onDragStart === next.onDragStart &&
     prev.onDragMove === next.onDragMove &&

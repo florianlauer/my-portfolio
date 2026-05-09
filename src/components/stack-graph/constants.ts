@@ -41,3 +41,15 @@ export const MIN_TOUCH_RADIUS = 22;
 
 // Click vs drag detection threshold (px)
 export const CLICK_THRESHOLD = 8;
+
+// Viewport width below which the graph switches to compact mode
+// (smaller node radii, legend below the canvas instead of overlapping).
+// 768px aligns with Tailwind's `md:` breakpoint and the existing
+// `aspect-[3/4] md:aspect-[4/3]` switch on the container.
+export const STACK_GRAPH_COMPACT_BREAKPOINT_PX = 768;
+
+// Radius multiplier applied to NODE_RADIUS_BY_LEVEL and COLLIDE_RADIUS_BY_LEVEL
+// when the container width is below the compact breakpoint.
+// 0.7 packs ~30% more nodes per surface unit — measured to give d3-force
+// enough room for 39 nodes in a 320×426 viewBox without clumping.
+export const COMPACT_RADIUS_SCALE = 0.7;
