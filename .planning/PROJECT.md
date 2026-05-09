@@ -8,17 +8,20 @@ Page `/stack` interactive en production avec graph force-directed (39 technologi
 
 Détails : `.planning/MILESTONES.md` et `.planning/milestones/v1.0.0-*.md`.
 
-## Next Milestone Goals
+## Current Milestone: v1.1 Polish & Mobile Stack Graph
 
-À définir via `/gsd-new-milestone`. Pistes naturelles depuis le backlog v2 :
+**Goal:** Améliorer le Stack Graph existant avec animations/preset desktop + rendre l'expérience mobile fonctionnelle.
 
-- **POLISH-0X** — Animation d'entrée, taille de nœud proportionnelle au niveau, presets ("ma stack typique"), animations d'edges au focus.
-- **MOBILE-0X** — Version responsive du graph, touch gestures pour zoom/pan.
+**Target features:**
 
-À arbitrer avec :
+- POLISH-01 — Animation d'entrée (nœuds progressifs)
+- POLISH-02 — Taille nœud ∝ niveau d'expérience
+- POLISH-03 — Preset "ma stack typique" (1 clic)
+- POLISH-04 — Animations transition edges au focus
+- MOBILE-01 — Graph responsive / version simplifiée
+- MOBILE-02 — Gestures touch zoom/pan
 
-- Validation runtime des 6 tests humains de Phase 04 (focus ring, OS Reduce Motion, VoiceOver) avant de capitaliser sur la base actuelle.
-- Décision de produit : continuer sur le polish desktop ou attaquer le mobile en priorité ?
+Détails: `.planning/REQUIREMENTS.md` et `.planning/ROADMAP.md`.
 
 ---
 
@@ -55,7 +58,14 @@ Le visiteur (recruteur ou dev) comprend en un coup d'oeil les relations entre le
 
 ### Active
 
-(À définir via `/gsd-new-milestone` — voir "Next Milestone Goals" en haut)
+v1.1 — Polish & Mobile Stack Graph (en cours) :
+
+- [ ] **POLISH-01** : User voit les nœuds apparaître progressivement à l'arrivée sur `/stack`
+- [ ] **POLISH-02** : User perçoit le niveau d'expérience d'une techno via la taille du nœud
+- [ ] **POLISH-03** : User active le preset "ma stack typique" en un clic et voit les nœuds clés mis en avant
+- [ ] **POLISH-04** : User voit les edges connectés s'animer au focus d'un nœud
+- [ ] **MOBILE-01** : User accède au graph sur mobile sans bug de layout (responsive ou simplifié)
+- [ ] **MOBILE-02** : User zoome et pan le graph sur mobile via gestures touch
 
 ### Out of Scope
 

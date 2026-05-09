@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0.0
-milestone_name: Stack Graph
-status: shipped
-stopped_at: "v1.0.0 milestone shipped — ready for /gsd-new-milestone"
-last_updated: "2026-04-25T17:30:00.000Z"
-last_activity: 2026-04-25 -- v1.0.0 milestone closed and archived
+milestone: v1.1
+milestone_name: Polish & Mobile Stack Graph
+status: planning
+stopped_at: "v1.1 roadmap drafted — ready for /gsd-discuss-phase 5 or /gsd-plan-phase 5"
+last_updated: "2026-05-09T15:30:00.000Z"
+last_activity: 2026-05-09 -- v1.1 milestone started (Polish + Mobile)
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 7
-  completed_plans: 7
-  percent: 100
+  total_phases: 2
+  completed_phases: 0
+  total_plans: 4
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -21,17 +21,19 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-25 after v1.0.0)
 
 **Core value:** Le visiteur comprend en un coup d'oeil les relations entre les compétences de Florian
-**Current focus:** v1.0.0 shipped — planning next milestone (POLISH or MOBILE)
+**Current focus:** v1.1 — Polish & Mobile Stack Graph (Phase 5 + Phase 6)
 
 ## Current Position
 
-Milestone: v1.0.0 -- SHIPPED 2026-04-25
-Status: All 4 phases complete (7/7 plans), 19/19 v1 requirements validated
-Last activity: 2026-04-25 -- v1.0.0 milestone closed and archived
+Milestone: v1.1 -- planning
+Phase: Not started (roadmap drafted)
+Plan: —
+Status: Ready to discuss/plan Phase 5 (Visual Polish)
+Last activity: 2026-05-09 -- v1.1 milestone started
 
-Progress: [██████████] 100%
+Progress: [ ] 0% (0/4 plans)
 
-Next step: `/gsd-new-milestone` to define v1.1+
+Next step: `/gsd-discuss-phase 5` or `/gsd-plan-phase 5`
 
 ## Performance Metrics
 
