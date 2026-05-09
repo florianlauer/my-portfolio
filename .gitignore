@@ -40,3 +40,6 @@ dist-ssr
 
 # Claude
 .claude/settings.local.json
+
+# Worktrees
+.worktrees
