@@ -154,7 +154,18 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
       .filter((event) => {
         // Wheel: always allow (zoom + preventDefault page scroll)
         if (event.type === "wheel") return true;
-        // Pan: only when initiated on the background rect, not on a node
+        // Multi-touch (pinch): always allow, regardless of target.
+        // d3-zoom aggregates touchstart → touchmove → touchend across the SVG
+        // and computes a pinch zoom transform from the two-finger spread.
+        // We can't restrict pinch to bgRect because the user may naturally
+        // place their fingers on/around nodes when pinching to zoom.
+        if (event.type === "touchstart") {
+          const touchEvent = event as TouchEvent;
+          if (touchEvent.touches && touchEvent.touches.length >= 2) return true;
+        }
+        // Pan (single touch / mousedown): only when initiated on the background rect.
+        // Node drags handle their own PointerEvent capture and stopPropagation,
+        // so they never reach this filter.
         return event.target === bgRect;
       })
       .on("zoom", (event) => {
@@ -374,6 +385,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
             className="w-full h-full"
             overflow="hidden"
             aria-hidden="true"
+            style={{ touchAction: "none" }}
           >
             {/* Shared filters: one drop-shadow per family (≤8) instead of per node (39+) */}
             <defs>
