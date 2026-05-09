@@ -409,6 +409,10 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                   const source = posMap.get(edge.source);
                   const target = posMap.get(edge.target);
                   if (!source || !target) return null;
+                  const isHighlighted =
+                    neighborSet !== null &&
+                    neighborSet.has(edge.source) &&
+                    neighborSet.has(edge.target);
                   return (
                     <GraphEdge
                       key={`${edge.source}-${edge.target}`}
@@ -417,6 +421,8 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                       x2={target.x}
                       y2={target.y}
                       opacity={getEdgeOpacity(edge.source, edge.target)}
+                      highlighted={isHighlighted}
+                      reducedMotion={reducedMotion}
                     />
                   );
                 })}
