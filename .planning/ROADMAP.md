@@ -3,7 +3,8 @@
 ## Milestones
 
 - ✅ **v1.0.0 Stack Graph** — Phases 1–4 (shipped 2026-04-25) — see [milestones/v1.0.0-ROADMAP.md](milestones/v1.0.0-ROADMAP.md)
-- 🚧 **v1.1 Polish & Mobile** — Phases 5–6 (started 2026-05-09)
+- ✅ **v1.1 Polish & Mobile** — Phases 5–6 (shipped 2026-05-10)
+- 🚧 **v1.2 CI & Motion Home** — Phases 7–8 (started 2026-05-10)
 
 ## Phases
 
@@ -19,46 +20,58 @@ Full details : [milestones/v1.0.0-ROADMAP.md](milestones/v1.0.0-ROADMAP.md)
 
 </details>
 
-### 🚧 v1.1 Polish & Mobile (Phases 5–6)
+<details>
+<summary>✅ v1.1 Polish & Mobile (Phases 5–6) — SHIPPED 2026-05-10</summary>
 
-#### Phase 5: Visual Polish
+- [x] Phase 5: Visual Polish (2/2 plans) — POLISH-01..04
+- [x] Phase 6: Mobile (2/2 plans) — MOBILE-01..02
 
-**Goal:** Donner du caractère au graph existant via animations d'entrée, taille proportionnelle au niveau, preset "ma stack typique" et animations d'edges au focus.
+Full details : `.planning/MILESTONES.md` (entry v1.1)
 
-**Requirements:** POLISH-01, POLISH-02, POLISH-03, POLISH-04
-**UI hint:** yes (animations + nouvelle interaction preset)
+</details>
 
-**Plans:**
+### 🚧 v1.2 CI & Motion Home (Phases 7–8)
 
-- [ ] 05-01: Entry animation + node sizing (POLISH-01, POLISH-02)
-- [ ] 05-02: Preset "ma stack typique" + edge focus animations (POLISH-03, POLISH-04)
+#### Phase 7: CI Quality Gate
 
-**Success criteria:**
+**Goal:** Établir une CI GitHub Actions qui bloque les PR si lint, format check, ou build échouent.
 
-1. Premier rendu : nœuds apparaissent progressivement (respect `prefers-reduced-motion`)
-2. Taille des nœuds reflète le niveau d'expérience (lisible visuellement)
-3. Bouton preset met en avant un sous-ensemble prédéfini sans casser les filtres existants
-4. Focus clavier ou click sur un nœud anime ses edges connectés
-5. Pas de régression a11y vs v1.0.0 (clavier, SR list, reduced motion)
-
-#### Phase 6: Mobile
-
-**Goal:** Rendre le Stack Graph utilisable sur mobile (responsive + gestures touch).
-
-**Requirements:** MOBILE-01, MOBILE-02
-**UI hint:** yes (responsive layout + interactions tactiles)
+**Requirements:** CI-01, CI-02, CI-03
+**UI hint:** no (infrastructure DevEx)
 
 **Plans:**
 
-- [ ] 06-01: Responsive layout / version simplifiée (MOBILE-01)
-- [ ] 06-02: Touch gestures pour zoom/pan (MOBILE-02)
+- [ ] 07-01: GitHub Actions workflow `ci.yml` — lint + fmt:check + build (CI-01, CI-02, CI-03)
 
 **Success criteria:**
 
-1. Sur viewport ≤ 768px : graph affiché sans débordement, légende et filtres atteignables
-2. Pinch-to-zoom fonctionne
-3. Drag-to-pan fonctionne sans conflit avec le scroll page
-4. Pas de régression desktop (zoom souris, drag, focus)
+1. Workflow déclenché sur PR vers `main` et push direct sur `main`
+2. Job lint : `npm run lint` rouge sur erreur, vert sinon (status check visible sur PR)
+3. Job format check : `npm run fmt:check` rouge sur diff, vert sinon
+4. Job build : `npm run build` rouge sur erreur TS/bundle, vert sinon
+5. Run total < 3 min (cache npm + Next.js build cache si pertinent)
+
+#### Phase 8: Motion Home Polish
+
+**Goal:** Raffiner le motion de la home (indicator HomeNav animé, progress bar scroll, reveal renforcé sur toutes sections, parallax fin) en respectant `prefers-reduced-motion`.
+
+**Requirements:** MOTION-01, MOTION-02, MOTION-03, MOTION-04
+**UI hint:** yes (animations + nouveau composant progress bar)
+
+**Plans:**
+
+- [ ] 08-01: HomeNav indicator slide + ScrollProgressBar (MOTION-01, MOTION-02)
+- [ ] 08-02: Reveal extension + parallax (MOTION-03, MOTION-04)
+
+**Success criteria:**
+
+1. Indicator HomeNav glisse smoothly entre items au scroll spy (sans saut visible)
+2. Progress bar top page se remplit proportionnellement au scrollY (visible et non intrusive)
+3. Hero + Contact wrap par `ScrollReveal` (toutes sections home animées en entrée)
+4. Effet parallax visible sur Hero ou éléments de fond (offset léger via `useScrollY`)
+5. `prefers-reduced-motion: reduce` désactive les animations MOTION-01 (transition), MOTION-03 (reveal), MOTION-04 (parallax) ; MOTION-02 reste statique mais visible
+6. Pas de régression scroll-spy existant (HomeNav active state continue de fonctionner)
+7. Build + lint + fmt:check verts (validés par CI Phase 7)
 
 ## Progress
 
@@ -68,5 +81,7 @@ Full details : [milestones/v1.0.0-ROADMAP.md](milestones/v1.0.0-ROADMAP.md)
 | 2. Page and Graph Rendering | v1.0.0    | 2/2            | Complete    | 2026-03-08 |
 | 3. Interactivity            | v1.0.0    | 2/2            | Complete    | 2026-03-13 |
 | 4. Accessibility            | v1.0.0    | 2/2            | Complete    | 2026-03-13 |
-| 5. Visual Polish            | v1.1      | 0/2            | Not started | —          |
-| 6. Mobile                   | v1.1      | 0/2            | Not started | —          |
+| 5. Visual Polish            | v1.1      | 2/2            | Complete    | 2026-05-10 |
+| 6. Mobile                   | v1.1      | 2/2            | Complete    | 2026-05-10 |
+| 7. CI Quality Gate          | v1.2      | 0/1            | Not started | —          |
+| 8. Motion Home Polish       | v1.2      | 0/2            | Not started | —          |
