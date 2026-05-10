@@ -39,10 +39,16 @@ export function GraphTooltip({
     setFlipped(position.y - height < TOOLTIP_EDGE_PADDING_PX);
   }, [visible, position.y, node?.id]);
 
-  const clampedX = Math.max(
-    TOOLTIP_EDGE_PADDING_PX,
-    Math.min(position.x, containerWidth - TOOLTIP_MAX_WIDTH_PX - TOOLTIP_EDGE_PADDING_PX),
-  );
+  // The tooltip is centered horizontally on `left` via `translate(-50%, ...)`,
+  // so the actual left edge sits at `left - width/2`. Clamp the center so the
+  // box stays within [EDGE_PADDING, containerWidth - EDGE_PADDING]. On narrow
+  // containers (mobile) where the tooltip is wider than the available room,
+  // fall back to centering.
+  const tooltipWidth = Math.min(TOOLTIP_MAX_WIDTH_PX, containerWidth - TOOLTIP_EDGE_PADDING_PX * 2);
+  const halfWidth = tooltipWidth / 2;
+  const minX = TOOLTIP_EDGE_PADDING_PX + halfWidth;
+  const maxX = containerWidth - TOOLTIP_EDGE_PADDING_PX - halfWidth;
+  const clampedX = minX > maxX ? containerWidth / 2 : Math.max(minX, Math.min(position.x, maxX));
 
   const transform = flipped ? "translate(-50%, 12px)" : "translate(-50%, -100%)";
 
@@ -52,7 +58,7 @@ export function GraphTooltip({
       role="tooltip"
       aria-hidden={!visible}
       className={cn(
-        "absolute z-10 w-70 max-w-[280px] rounded-xl border border-border bg-popover/95 backdrop-blur-sm p-3 shadow-lg",
+        "absolute z-10 rounded-xl border border-border bg-popover/95 backdrop-blur-sm p-3 shadow-lg",
         "transition-all duration-150 ease-out pointer-events-none",
         visible ? "opacity-100 scale-100" : "opacity-0 scale-95",
       )}
@@ -60,6 +66,7 @@ export function GraphTooltip({
         left: clampedX,
         top: position.y,
         transform,
+        width: tooltipWidth,
       }}
     >
       {node && (
