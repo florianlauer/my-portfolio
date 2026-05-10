@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Polish & Mobile Stack Graph
-status: planning
-stopped_at: "v1.1 roadmap drafted — ready for /gsd-discuss-phase 5 or /gsd-plan-phase 5"
-last_updated: "2026-05-09T15:30:00.000Z"
-last_activity: 2026-05-09 -- v1.1 milestone started (Polish + Mobile)
+status: complete
+stopped_at: "v1.1 shipped — all 6 requirements (POLISH-01..04, MOBILE-01..02) merged into main"
+last_updated: "2026-05-10T00:00:00.000Z"
+last_activity: 2026-05-10 -- v1.1 milestone merged to main
 progress:
   total_phases: 2
-  completed_phases: 0
+  completed_phases: 2
   total_plans: 4
-  completed_plans: 0
-  percent: 0
+  completed_plans: 4
+  percent: 100
 ---
 
 # Project State
@@ -25,15 +25,15 @@ See: .planning/PROJECT.md (updated 2026-04-25 after v1.0.0)
 
 ## Current Position
 
-Milestone: v1.1 -- planning
-Phase: Not started (roadmap drafted)
-Plan: —
-Status: Ready to discuss/plan Phase 5 (Visual Polish)
-Last activity: 2026-05-09 -- v1.1 milestone started
+Milestone: v1.1 -- complete
+Phase: All shipped (Phase 5 Visual Polish + Phase 6 Mobile)
+Plan: 05-01, 05-02, 06-01, 06-02 -- all merged
+Status: Branch `phase-5-visual-polish` merged to main
+Last activity: 2026-05-10 -- v1.1 milestone merged
 
-Progress: [ ] 0% (0/4 plans)
+Progress: [x] 100% (4/4 plans)
 
-Next step: `/gsd-discuss-phase 5` or `/gsd-plan-phase 5`
+Next step: `/gsd-complete-milestone` to archive, or `/gsd-new-milestone` for v1.2
 
 ## Performance Metrics
 
@@ -110,6 +110,6 @@ Items acknowledged and deferred at v1.0.0 milestone close on 2026-04-25:
 
 ## Session Continuity
 
-Last session: 2026-03-13T18:20:16.682Z
-Stopped at: Completed 04-02-PLAN.md: keyboard nav and screen reader accessibility for stack graph
+Last session: 2026-05-10
+Stopped at: v1.1 milestone shipped — Phase 5 (Polish) + Phase 6 (Mobile) merged to main
 Resume file: None
