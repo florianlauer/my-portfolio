@@ -18,7 +18,9 @@ import { GraphFilters } from "@/components/stack-graph/GraphFilters";
 import { StackGraphSRList } from "@/components/stack-graph/StackGraphSRList";
 import {
   CLICK_THRESHOLD,
+  COMPACT_RADIUS_SCALE,
   NODE_RADIUS_BY_LEVEL,
+  STACK_GRAPH_COMPACT_BREAKPOINT_PX,
   TOOLTIP_NODE_OFFSET_PX,
 } from "@/components/stack-graph/constants";
 import type { SimNode } from "@/components/stack-graph/use-force-layout";
@@ -38,6 +40,10 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
   const t = useTranslations("stack");
   const containerRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
+
+  // Entry animation: false during initial mount, true after first paint.
+  // Combined with `reducedMotion`, this drives the staggered fade-in in GraphNode.
+  const [entered, setEntered] = useState(false);
 
   // Zoom/pan refs — no useState to avoid 60fps re-renders
   const svgRef = useRef<SVGSVGElement>(null);
@@ -62,7 +68,36 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     () => new Set(["frontend", "backend", "devops"]),
   );
 
+  // Preset "ma stack typique" — purely visual highlight, independent of filter pills.
+  const [presetActive, setPresetActive] = useState(false);
+
   const reducedMotion = usePrefersReducedMotion();
+
+  // Compact mode: triggered when the container width is under the breakpoint.
+  // `size.width === 0` means the ResizeObserver hasn't fired yet — default to
+  // non-compact to avoid a jarring flash on the first paint of a desktop session.
+  const isCompact = size.width > 0 && size.width < STACK_GRAPH_COMPACT_BREAKPOINT_PX;
+  const radiusScale = isCompact ? COMPACT_RADIUS_SCALE : 1;
+
+  // Trigger entry animation on next paint. requestAnimationFrame ensures the
+  // initial render with entered=false commits to the DOM before we flip,
+  // so the CSS transition has both states to interpolate between.
+  // Reduced motion: skip the delay, set entered immediately (transition is
+  // also disabled in GraphNode under reducedMotion, see Task 2).
+  useEffect(() => {
+    if (reducedMotion) {
+      setEntered(true);
+      return;
+    }
+    let rafId: number | null = null;
+    const timeoutId = window.setTimeout(() => {
+      rafId = window.requestAnimationFrame(() => setEntered(true));
+    }, 50);
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
+    };
+  }, [reducedMotion]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -119,7 +154,18 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
       .filter((event) => {
         // Wheel: always allow (zoom + preventDefault page scroll)
         if (event.type === "wheel") return true;
-        // Pan: only when initiated on the background rect, not on a node
+        // Multi-touch (pinch): always allow, regardless of target.
+        // d3-zoom aggregates touchstart → touchmove → touchend across the SVG
+        // and computes a pinch zoom transform from the two-finger spread.
+        // We can't restrict pinch to bgRect because the user may naturally
+        // place their fingers on/around nodes when pinching to zoom.
+        if (event.type === "touchstart") {
+          const touchEvent = event as TouchEvent;
+          if (touchEvent.touches && touchEvent.touches.length >= 2) return true;
+        }
+        // Pan (single touch / mousedown): only when initiated on the background rect.
+        // Node drags handle their own PointerEvent capture and stopPropagation,
+        // so they never reach this filter.
         return event.target === bgRect;
       })
       .on("zoom", (event) => {
@@ -178,13 +224,23 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
   }, [focusedId, data.edges]);
 
   const getNodeOpacity = (nodeId: string): number => {
-    if (neighborSet === null) return 1;
-    return neighborSet.has(nodeId) ? 1 : 0.15;
+    if (neighborSet !== null) {
+      return neighborSet.has(nodeId) ? 1 : 0.15;
+    }
+    if (presetActive) {
+      return presetSet.has(nodeId) ? 1 : 0.2;
+    }
+    return 1;
   };
 
   const getEdgeOpacity = (source: string, target: string): number => {
-    if (neighborSet === null) return 1;
-    return neighborSet.has(source) && neighborSet.has(target) ? 1 : 0.15;
+    if (neighborSet !== null) {
+      return neighborSet.has(source) && neighborSet.has(target) ? 1 : 0.15;
+    }
+    if (presetActive) {
+      return presetSet.has(source) && presetSet.has(target) ? 1 : 0.2;
+    }
+    return 1;
   };
 
   // Compute which nodes are active given the current filter state
@@ -205,6 +261,10 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     }
     return ids;
   }, [activeFilters, data.nodes]);
+
+  const presetSet = useMemo<Set<string>>(() => {
+    return new Set(data.presetTypicalStack);
+  }, [data.presetTypicalStack]);
 
   // Apply filter to running simulation when activeFilters changes
   useEffect(() => {
@@ -246,7 +306,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     const simNode = positions.find((p) => p.id === nodeId);
     if (!simNode) return;
 
-    const nodeRadius = NODE_RADIUS_BY_LEVEL[simNode.level] ?? 20;
+    const nodeRadius = (NODE_RADIUS_BY_LEVEL[simNode.level] ?? 20) * radiusScale;
 
     const pt = svgEl.createSVGPoint();
     pt.x = simNode.x;
@@ -313,6 +373,9 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
         filters={filterPills}
         activeFilters={activeFilters}
         onToggle={handleFilterToggle}
+        presetActive={presetActive}
+        onPresetToggle={() => setPresetActive((prev) => !prev)}
+        presetLabel={t("filterPills.preset")}
       />
       <div ref={containerRef} className="relative w-full aspect-[3/4] md:aspect-[4/3]">
         {size.width > 0 && size.height > 0 && (
@@ -322,6 +385,7 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
             className="w-full h-full"
             overflow="hidden"
             aria-hidden="true"
+            style={{ touchAction: "none" }}
           >
             {/* Shared filters: one drop-shadow per family (≤8) instead of per node (39+) */}
             <defs>
@@ -365,6 +429,10 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                   const source = posMap.get(edge.source);
                   const target = posMap.get(edge.target);
                   if (!source || !target) return null;
+                  const isHighlighted =
+                    neighborSet !== null &&
+                    neighborSet.has(edge.source) &&
+                    neighborSet.has(edge.target);
                   return (
                     <GraphEdge
                       key={`${edge.source}-${edge.target}`}
@@ -373,12 +441,14 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                       x2={target.x}
                       y2={target.y}
                       opacity={getEdgeOpacity(edge.source, edge.target)}
+                      highlighted={isHighlighted}
+                      reducedMotion={reducedMotion}
                     />
                   );
                 })}
               </g>
               <g>
-                {positions.map((pos) => (
+                {positions.map((pos, index) => (
                   <GraphNode
                     key={pos.id}
                     node={pos}
@@ -392,6 +462,10 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
                     onNodeClick={setFocusedId}
                     onHoverChange={setHoveredId}
                     opacity={getNodeOpacity(pos.id)}
+                    entered={entered}
+                    enterDelay={Math.min(index * 25, 600)}
+                    reducedMotion={reducedMotion}
+                    radiusScale={radiusScale}
                   />
                 ))}
               </g>
@@ -406,8 +480,14 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
           familyColorMap={colorMap.current}
           containerWidth={size.width}
         />
-        <GraphLegend familyColors={data.familyColors} />
+        {/* Desktop legend: absolute inside graph container, bottom-left */}
+        <GraphLegend
+          familyColors={data.familyColors}
+          className="hidden md:block absolute bottom-4 left-4"
+        />
       </div>
+      {/* Mobile legend: rendered in document flow below the graph (no overlap with nodes) */}
+      <GraphLegend familyColors={data.familyColors} className="md:hidden mt-3" />
       <StackGraphSRList
         nodes={data.nodes.filter((n) => activeNodeIds.has(n.id))}
         edges={data.edges}

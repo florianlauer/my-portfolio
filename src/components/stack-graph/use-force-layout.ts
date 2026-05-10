@@ -27,7 +27,10 @@ type SimEdge = SimulationLinkDatum<SimNode> & {
   target: string | SimNode;
 };
 
-// Single source of truth for force configuration — used by init and filter rebuilds
+// Single source of truth for force configuration — used by init and filter rebuilds.
+// Collision radii are NOT scaled by the visual radiusScale: keeping the spatial
+// footprint constant lets nodes spread to fill the container even when their
+// visible circles are smaller (e.g. compact / mobile mode).
 function buildSimulation(
   simNodes: SimNode[],
   simEdges: SimEdge[],

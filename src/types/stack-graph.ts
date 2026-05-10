@@ -24,4 +24,5 @@ export type StackGraph = {
   nodes: readonly GraphNode[];
   edges: readonly GraphEdge[];
   familyColors: readonly FamilyColor[];
+  presetTypicalStack: readonly string[];
 };

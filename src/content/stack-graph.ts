@@ -133,9 +133,25 @@ export const stackGraph = {
     { source: "microservices", target: "docker" },
     { source: "microservices", target: "kafka" },
   ],
+  presetTypicalStack: [
+    "react",
+    "nextjs",
+    "typescript",
+    "nodejs",
+    "nestjs",
+    "graphql",
+    "postgresql",
+    "drizzle",
+    "docker",
+    "aws",
+    "datadog",
+    "tdd",
+    "ddd",
+    "hexagonal",
+  ],
 } as const satisfies StackGraph;
 
-// Dev-only edge validation — catches orphan references at build time
+// Dev-only validation — catches orphan references at build time
 if (process.env.NODE_ENV === "development") {
   const nodeIds = new Set(stackGraph.nodes.map((n) => n.id));
   for (const edge of stackGraph.edges) {
@@ -143,5 +159,8 @@ if (process.env.NODE_ENV === "development") {
       throw new Error(`[stack-graph] Unknown edge source: ${edge.source}`);
     if (!nodeIds.has(edge.target))
       throw new Error(`[stack-graph] Unknown edge target: ${edge.target}`);
+  }
+  for (const id of stackGraph.presetTypicalStack) {
+    if (!nodeIds.has(id)) throw new Error(`[stack-graph] Unknown presetTypicalStack id: ${id}`);
   }
 }
