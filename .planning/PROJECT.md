@@ -2,26 +2,51 @@
 
 ## Current State
 
-**Shipped:** v1.0.0 — Stack Graph (2026-04-25)
+**Shipped:**
 
-Page `/stack` interactive en production avec graph force-directed (39 technologies, 7 familles), zoom/pan, click-to-focus, tooltips riches, filtres par catégorie, et accessibilité WCAG complète (clavier, screen reader, reduced motion). Tous les 19 requirements v1 validés.
+- v1.0.0 — Stack Graph (2026-04-25) : page `/stack` interactive (39 technos, 7 familles, zoom/pan, click-to-focus, tooltips riches, filtres, WCAG complète). 19/19 requirements validés.
+- v1.1 — Polish & Mobile Stack Graph (2026-05-10) : animations d'entrée nœuds + taille ∝ niveau, preset "ma stack typique", animations edges au focus, responsive mobile, gestures touch (pinch-zoom + pan). 6/6 requirements validés (POLISH-01..04, MOBILE-01..02).
 
-Détails : `.planning/MILESTONES.md` et `.planning/milestones/v1.0.0-*.md`.
+Détails : `.planning/MILESTONES.md` et `.planning/milestones/v*-*.md`.
 
-## Current Milestone: v1.1 Polish & Mobile Stack Graph
+## Current Milestone: v1.2 CI & Motion Home
 
-**Goal:** Améliorer le Stack Graph existant avec animations/preset desktop + rendre l'expérience mobile fonctionnelle.
+**Goal:** Établir un quality gate CI (lint/format/build) et raffiner le motion de la home (HomeNav indicator, progress bar, reveal renforcé, parallax).
 
 **Target features:**
 
-- POLISH-01 — Animation d'entrée (nœuds progressifs)
-- POLISH-02 — Taille nœud ∝ niveau d'expérience
-- POLISH-03 — Preset "ma stack typique" (1 clic)
-- POLISH-04 — Animations transition edges au focus
-- MOBILE-01 — Graph responsive / version simplifiée
-- MOBILE-02 — Gestures touch zoom/pan
+- CI-01 — GitHub Actions lint (oxlint) sur PR + push main
+- CI-02 — GitHub Actions format check (oxfmt) sur PR + push main
+- CI-03 — GitHub Actions build (next build) sur PR + push main
+- MOTION-01 — Indicator slide animé entre items HomeNav actifs
+- MOTION-02 — Progress bar top page (line scroll)
+- MOTION-03 — Reveal animations renforcées (Hero + Contact wrap + stagger items intra-sections)
+- MOTION-04 — Parallax fin sur Hero / sections via `useScrollY`
 
 Détails: `.planning/REQUIREMENTS.md` et `.planning/ROADMAP.md`.
+
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd-transition`):
+
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd-complete-milestone`):
+
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
+
+---
+
+_Last updated: 2026-05-10 — milestone v1.2 (CI & Motion Home) started._
 
 ---
 

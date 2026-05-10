@@ -1,39 +1,37 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1
-milestone_name: Polish & Mobile Stack Graph
-status: complete
-stopped_at: "v1.1 shipped — all 6 requirements (POLISH-01..04, MOBILE-01..02) merged into main"
-last_updated: "2026-05-10T00:00:00.000Z"
-last_activity: 2026-05-10 -- v1.1 milestone merged to main
+milestone: v1.2
+milestone_name: CI & Motion Home
+status: defining-requirements
+stopped_at: ""
+last_updated: "2026-05-10T15:42:00.000Z"
+last_activity: 2026-05-10 -- v1.2 milestone started
 progress:
-  total_phases: 2
-  completed_phases: 2
-  total_plans: 4
-  completed_plans: 4
-  percent: 100
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-25 after v1.0.0)
+See: .planning/PROJECT.md (updated 2026-05-10 after v1.1 close)
 
 **Core value:** Le visiteur comprend en un coup d'oeil les relations entre les compétences de Florian
-**Current focus:** v1.1 — Polish & Mobile Stack Graph (Phase 5 + Phase 6)
+**Current focus:** v1.2 — CI & Motion Home (CI quality gate + raffinement motion home)
 
 ## Current Position
 
-Milestone: v1.1 -- complete
-Phase: All shipped (Phase 5 Visual Polish + Phase 6 Mobile)
-Plan: 05-01, 05-02, 06-01, 06-02 -- all merged
-Status: Branch `phase-5-visual-polish` merged to main
-Last activity: 2026-05-10 -- v1.1 milestone merged
+Milestone: v1.2 -- defining requirements
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-05-10 -- Milestone v1.2 started
 
-Progress: [x] 100% (4/4 plans)
-
-Next step: `/gsd-complete-milestone` to archive, or `/gsd-new-milestone` for v1.2
+Next step: confirmer REQUIREMENTS.md → ROADMAP.md → `/gsd-plan-phase [N]`
 
 ## Performance Metrics
 
@@ -68,28 +66,13 @@ _Updated after each plan completion_
 ### Decisions
 
 Decisions are logged in PROJECT.md Key Decisions table.
-Recent decisions affecting current work:
+Recent decisions affecting current work (carried from v1.1):
 
-- Research: d3-force (~15KB) for layout computation + React SVG rendering. One new dependency. No Canvas/WebGL.
-- Research: SVG chosen over Canvas for native accessibility (tabindex, aria-label, focus events)
-- [Phase 01]: Added methods family (TDD, DDD, Hexagonal Architecture, CQRS, Clean Architecture, Microservices) per user request
-- [Phase 01]: Simple edges (source/target only) — no type, label, or direction fields
-- [Phase 01]: Graph data self-contained — duplicates IDs/labels rather than importing from stack.ts
-- [Phase 02]: Used siFastapi for python-fastapi icon (more specific than siPython)
-- [Phase 02]: 29/39 nodes have simple-icons; 10 fallback to text-only pills
-- [Phase 02]: SVG feDropShadow for glow (more reliable than CSS filter in SVG)
-- [Phase 02]: Circles with centered icons instead of pill shapes (cleaner, scales better)
-- [Phase 02]: d3-native drag via fx/fy with simulation reheat (elastic links, connected nodes follow)
-- [Phase 02]: Removed micro-movement and spring-back -- d3 simulation provides organic feel via drag
-- [Phase 03-interactivity]: Attach d3-zoom to bgRectRef not SVG root — prevents node drag conflicts
-- [Phase 03-interactivity]: ZoomTransform in ref + direct setAttribute (not useState) — no 60fps re-renders
-- [Phase 03-interactivity]: Tooltip position uses innerGRef.getScreenCTM() for accurate coords at all zoom levels
-- [Phase 03-interactivity]: filterNodes updates running d3 simulation in-place (no reinit) — sim.nodes + link force + alpha 0.5 restart
-- [Phase 03-interactivity]: FILTER_GROUPS: frontend->['frontend','mobile'], backend->['backend','data'], devops->['infra','integrations']; methods always visible
-- [Phase 04-accessibility]: SSR default reducedMotion=true (safe): avoids animation flash on hydration
-- [Phase 04-accessibility]: simRef stays null in reduced-motion mode — drag handlers no-op via existing (!sim) guards
-- [Phase 04-accessibility]: eslint-disable for prefer-tag-over-role on SVG <g> — HTML button cannot be used inside SVG
-- [Phase 04-accessibility]: SR list renders filtered nodes (activeNodeIds) so it stays in sync with filter pills
+- Scroll-spy déjà implémenté dans `HomeNav.tsx` (IntersectionObserver + active section state) — drop de la liste deferred
+- ScrollReveal wrappe Journey/Stack/Passions (3/5 sections home) — étendre à Hero + Contact en v1.2 (MOTION-03)
+- `useScrollY` hook existant non utilisé dans home-sections — réutiliser pour parallax (MOTION-04)
+- Pas de test runner configuré → CI gate = oxlint + oxfmt + next build (pas de `npm test`)
+- Stack figée v1.0.0 + v1.1 : Next.js 16, React 19, Tailwind v4, d3-force, motion (Framer Motion installé)
 
 ### Pending Todos
 
@@ -101,7 +84,7 @@ None yet.
 
 ## Deferred Items
 
-Items acknowledged and deferred at v1.0.0 milestone close on 2026-04-25:
+Items acknowledged and deferred at v1.0.0 milestone close on 2026-04-25 (toujours valides) :
 
 | Category         | Item                         | Status       | Note                                                                                                                                           |
 | ---------------- | ---------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -111,5 +94,5 @@ Items acknowledged and deferred at v1.0.0 milestone close on 2026-04-25:
 ## Session Continuity
 
 Last session: 2026-05-10
-Stopped at: v1.1 milestone shipped — Phase 5 (Polish) + Phase 6 (Mobile) merged to main
+Stopped at: v1.2 milestone defining requirements
 Resume file: None

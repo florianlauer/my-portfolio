@@ -48,3 +48,34 @@ Page `/stack` complète avec graph interactif force-directed, 39 technologies da
 ### Tag
 
 `v1.0.0` (à créer après confirmation utilisateur)
+
+---
+
+## v1.1 — Polish & Mobile Stack Graph
+
+**Shipped:** 2026-05-10
+**Phases:** 5–6 (2 phases, 4 plans)
+**Git range:** `f77d643` (milestone start) → `8a7c314` (POLISH-01 staggered entry, PR #4 merged)
+
+### Delivered
+
+Raffinement du Stack Graph desktop (animations d'entrée + taille ∝ niveau, preset "ma stack typique", animations edges au focus) et expérience mobile fonctionnelle (responsive layout + gestures touch pinch-zoom/pan).
+
+### Key Accomplishments
+
+1. **POLISH-01 — Staggered entry animation** : nœuds apparaissent progressivement au mount avec fade + scale, respect `prefers-reduced-motion`.
+2. **POLISH-02 — Node sizing par level** : rayon des nœuds proportionnel à `level` (existant dans `stack-graph.ts`), lisibilité visuelle de l'expérience.
+3. **POLISH-03 — Preset "ma stack typique"** : bouton activable, surligne sous-ensemble de nœuds clés, dim des autres, sans casser les filtres.
+4. **POLISH-04 — Edges focus animation** : edges connectés s'animent / s'épaississent au focus clavier ou click.
+5. **MOBILE-01 — Responsive layout** : graph utilisable sur viewport ≤ 768px, légende lisible, controls atteignables, collision physics découplée du visual scale.
+6. **MOBILE-02 — Touch gestures** : pinch-to-zoom multi-touch via filter d3-zoom, drag-to-pan natif, `touch-action` CSS pour capture gestures, GraphTooltip clamp horizontal sur narrow viewports.
+
+### Stats
+
+- **Phases:** 2 (Visual Polish → Mobile)
+- **Plans:** 4 (05-01, 05-02, 06-01, 06-02)
+- **Requirements:** 6/6 v1.1 validated (POLISH-01..04, MOBILE-01..02)
+
+### Tag
+
+`v1.1` (à créer si souhaité)
