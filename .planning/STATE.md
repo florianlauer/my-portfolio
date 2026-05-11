@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: CI & Motion Home
-status: defining-requirements
+status: phase-7-complete
 stopped_at: ""
-last_updated: "2026-05-10T15:42:00.000Z"
-last_activity: 2026-05-10 -- v1.2 milestone started
+last_updated: "2026-05-11T00:00:00.000Z"
+last_activity: 2026-05-11 -- Phase 7 (CI quality gate) complete
 progress:
-  total_phases: 0
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  total_phases: 2
+  completed_phases: 1
+  total_plans: 3
+  completed_plans: 1
+  percent: 33
 ---
 
 # Project State
@@ -25,21 +25,21 @@ See: .planning/PROJECT.md (updated 2026-05-10 after v1.1 close)
 
 ## Current Position
 
-Milestone: v1.2 -- defining requirements
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-05-10 -- Milestone v1.2 started
+Milestone: v1.2 -- phase 7 complete, phase 8 not started
+Phase: 7 (CI Quality Gate) complete; next = 8 (Motion Home Polish)
+Plan: 07-01 (complete)
+Status: Phase 7 shipped via PR #5
+Last activity: 2026-05-11 -- Phase 7 (CI quality gate) complete
 
-Next step: confirmer REQUIREMENTS.md → ROADMAP.md → `/gsd-plan-phase [N]`
+Next step: `/gsd-plan-phase 8` (Motion Home Polish — MOTION-01..04)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 0
-- Average duration: -
-- Total execution time: 0 hours
+- Total plans completed: 1 (v1.2)
+- Average duration: ~30min (07-01 inline exec)
+- Total execution time: ~0.5 hours
 
 **By Phase:**
 
