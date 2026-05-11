@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 /** Images du diaporama, dans l'ordre d'affichage. */
 const SLIDESHOW_IMAGES = [
@@ -21,6 +22,7 @@ const MAX_OFFSET_VH = 0.28;
 export function GlobalBackground(): React.JSX.Element {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // Diaporama : avance toutes les INTERVAL_MS ms.
   useEffect(() => {
@@ -30,10 +32,16 @@ export function GlobalBackground(): React.JSX.Element {
     return () => clearInterval(id);
   }, []);
 
-  // Parallaxe au scroll.
+  // Parallaxe au scroll. Disabled under prefers-reduced-motion: reset transform
+  // to identity and skip the listener entirely.
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
+
+    if (prefersReducedMotion) {
+      el.style.transform = "";
+      return;
+    }
 
     let maxOffsetPx = 0;
     let maxScroll = 1;
@@ -66,7 +74,7 @@ export function GlobalBackground(): React.JSX.Element {
       resizeObserver.disconnect();
       if (rafId !== null) cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden" aria-hidden>
