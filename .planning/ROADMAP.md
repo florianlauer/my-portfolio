@@ -41,7 +41,7 @@ Full details : `.planning/MILESTONES.md` (entry v1.1)
 
 **Plans:**
 
-- [ ] 07-01: GitHub Actions workflow `ci.yml` — lint + fmt:check + build (CI-01, CI-02, CI-03)
+- [x] 07-01: GitHub Actions workflow `ci.yml` — lint + fmt:check + build (CI-01, CI-02, CI-03)
 
 **Success criteria:**
 
@@ -83,5 +83,5 @@ Full details : `.planning/MILESTONES.md` (entry v1.1)
 | 4. Accessibility            | v1.0.0    | 2/2            | Complete    | 2026-03-13 |
 | 5. Visual Polish            | v1.1      | 2/2            | Complete    | 2026-05-10 |
 | 6. Mobile                   | v1.1      | 2/2            | Complete    | 2026-05-10 |
-| 7. CI Quality Gate          | v1.2      | 0/1            | Not started | —          |
+| 7. CI Quality Gate          | v1.2      | 1/1            | Complete    | 2026-05-11 |
 | 8. Motion Home Polish       | v1.2      | 0/2            | Not started | —          |

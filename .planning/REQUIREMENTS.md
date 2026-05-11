@@ -12,13 +12,13 @@ Référence baseline : `milestones/v1.0.0-REQUIREMENTS.md` (CI et motion home é
 
 ### CI / Quality Gate
 
-- [ ] **CI-01** : Le développeur voit une CI lint (oxlint) qui fail sur PR si le code contient des erreurs de lint
+- [x] **CI-01** : Le développeur voit une CI lint (oxlint) qui fail sur PR si le code contient des erreurs de lint
   - Conditions: GitHub Actions, déclenché sur PR vers `main` + push direct sur `main`
   - Sortie observable: status check rouge sur PR si `npm run lint` échoue, vert sinon
-- [ ] **CI-02** : Le développeur voit une CI format check (oxfmt) qui fail sur PR si le code n'est pas formaté
+- [x] **CI-02** : Le développeur voit une CI format check (oxfmt) qui fail sur PR si le code n'est pas formaté
   - Conditions: GitHub Actions, déclenché sur PR vers `main` + push direct sur `main`
   - Sortie observable: status check rouge sur PR si `npm run fmt:check` échoue, vert sinon
-- [ ] **CI-03** : Le développeur voit une CI build (next build) qui fail sur PR si le projet ne build pas
+- [x] **CI-03** : Le développeur voit une CI build (next build) qui fail sur PR si le projet ne build pas
   - Conditions: GitHub Actions, déclenché sur PR vers `main` + push direct sur `main`
   - Sortie observable: status check rouge sur PR si `npm run build` échoue, vert sinon (couvre erreurs TS et bundle)
 
@@ -65,9 +65,9 @@ Items reportés au-delà de v1.2 :
 
 | REQ-ID    | Phase   | Plan       | Status      | Notes                            |
 | --------- | ------- | ---------- | ----------- | -------------------------------- |
-| CI-01     | Phase 7 | 07-01-PLAN | not-started | GitHub Actions lint              |
-| CI-02     | Phase 7 | 07-01-PLAN | not-started | GitHub Actions format check      |
-| CI-03     | Phase 7 | 07-01-PLAN | not-started | GitHub Actions build             |
+| CI-01     | Phase 7 | 07-01-PLAN | complete    | GitHub Actions lint              |
+| CI-02     | Phase 7 | 07-01-PLAN | complete    | GitHub Actions format check      |
+| CI-03     | Phase 7 | 07-01-PLAN | complete    | GitHub Actions build             |
 | MOTION-01 | Phase 8 | 08-01-PLAN | not-started | HomeNav indicator slide          |
 | MOTION-02 | Phase 8 | 08-01-PLAN | not-started | Progress bar top page            |
 | MOTION-03 | Phase 8 | 08-02-PLAN | not-started | ScrollReveal extension + stagger |
