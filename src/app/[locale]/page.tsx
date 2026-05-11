@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { GlobalBackground } from "@/components/global-background/GlobalBackground";
 import { HomeNav } from "@/components/home-nav/HomeNav";
+import { ScrollProgressBar } from "@/components/scroll-progress/ScrollProgressBar";
 import { ScrollReveal } from "@/components/scroll-reveal/ScrollReveal";
 import { StackSection } from "@/components/home-sections/StackSection";
 import { ContactSection } from "@/components/home-sections/ContactSection";
@@ -25,6 +26,7 @@ export default async function HomePage({
       className="relative min-h-screen overflow-x-hidden text-foreground"
       tabIndex={-1}
     >
+      <ScrollProgressBar />
       <GlobalBackground />
       <a
         href="#content-start"
