@@ -38,7 +38,9 @@ export default async function HomePage({
         <HomeNav />
         <div id="content-start" tabIndex={-1} className="sr-only" aria-hidden />
 
-        <HeroSection heroStack={heroStack} primaryContactLink={primaryContactLink} />
+        <ScrollReveal immediate>
+          <HeroSection heroStack={heroStack} primaryContactLink={primaryContactLink} />
+        </ScrollReveal>
 
         <ScrollReveal>
           <JourneySection />
@@ -51,11 +53,13 @@ export default async function HomePage({
           <PassionsSection />
         </ScrollReveal>
 
-        <ContactSection
-          primaryContactLink={primaryContactLink}
-          socialLinks={socialLinks}
-          contactEmail={siteIdentity.contactEmail}
-        />
+        <ScrollReveal>
+          <ContactSection
+            primaryContactLink={primaryContactLink}
+            socialLinks={socialLinks}
+            contactEmail={siteIdentity.contactEmail}
+          />
+        </ScrollReveal>
       </div>
     </main>
   );
