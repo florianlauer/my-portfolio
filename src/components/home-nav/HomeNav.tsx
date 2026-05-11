@@ -34,6 +34,15 @@ export function HomeNav(): React.JSX.Element {
   const t = useTranslations("nav");
   const navRef = useRef<HTMLElement>(null);
   const leftFadeRef = useRef<HTMLDivElement>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
+  const linkRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
+
+  const registerLink =
+    (key: string) =>
+    (el: HTMLAnchorElement | null): void => {
+      if (el) linkRefs.current.set(key, el);
+      else linkRefs.current.delete(key);
+    };
   const [bounceType, setBounceType] = useState<"min" | "max" | null>(null);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const pathname = usePathname();
@@ -97,6 +106,72 @@ export function HomeNav(): React.JSX.Element {
     if (sectionId) return activeSection === sectionId;
     return pathname === href;
   };
+
+  // Single source of truth for which nav item is "active" right now.
+  // Used both by the sliding indicator and by per-link className logic.
+  const activeKey: string | null = (() => {
+    if (isHome) {
+      return activeSection ? `#${activeSection}` : null;
+    }
+    if (pathname === "/stack") return "/stack";
+    if (pathname === "/a-propos") return "/a-propos";
+    if (pathname === "/galerie") return "/galerie";
+    return null;
+  })();
+
+  // Slide indicator under the active link. Mutates inline styles directly
+  // to avoid re-renders on every scroll/resize tick.
+  useEffect(() => {
+    const nav = navRef.current;
+    const indicator = indicatorRef.current;
+    if (!nav || !indicator) return;
+
+    const update = (): void => {
+      if (!activeKey) {
+        indicator.style.opacity = "0";
+        return;
+      }
+      const target = linkRefs.current.get(activeKey);
+      if (!target) {
+        indicator.style.opacity = "0";
+        return;
+      }
+      const navRect = nav.getBoundingClientRect();
+      const tRect = target.getBoundingClientRect();
+      const x = tRect.left - navRect.left + nav.scrollLeft;
+      const y = tRect.top - navRect.top + nav.scrollTop;
+      indicator.style.transform = `translate(${x}px, ${y}px)`;
+      indicator.style.width = `${tRect.width}px`;
+      indicator.style.height = `${tRect.height}px`;
+      indicator.style.opacity = "1";
+    };
+
+    let rafId: number | null = null;
+    const schedule = (): void => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        update();
+      });
+    };
+
+    update();
+
+    nav.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+
+    const ro = new ResizeObserver(schedule);
+    linkRefs.current.forEach((el) => ro.observe(el));
+
+    return () => {
+      nav.removeEventListener("scroll", schedule);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      ro.disconnect();
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
+  }, [activeKey]);
 
   useEffect(() => {
     let scrollEndPx =
@@ -163,54 +238,73 @@ export function HomeNav(): React.JSX.Element {
         <nav
           ref={navRef}
           aria-label={t("ariaLabel")}
-          className={`home-nav flex flex-nowrap items-center overflow-x-auto overflow-y-hidden rounded-full border border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch] ${bounceType === "min" ? "home-nav-bounce-min" : ""} ${bounceType === "max" ? "home-nav-bounce-max" : ""}`}
+          className={`home-nav relative flex flex-nowrap items-center overflow-x-auto overflow-y-hidden rounded-full border border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80 [scrollbar-width:thin] [-webkit-overflow-scrolling:touch] ${bounceType === "min" ? "home-nav-bounce-min" : ""} ${bounceType === "max" ? "home-nav-bounce-max" : ""}`}
         >
+          <div
+            ref={indicatorRef}
+            aria-hidden
+            className="home-nav-indicator pointer-events-none absolute left-0 top-0 z-0 rounded-full bg-primary/10 transition-[transform,width,height,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+            style={{
+              transform: "translate(0px, 0px)",
+              width: 0,
+              height: 0,
+              opacity: 0,
+              willChange: "transform, width",
+            }}
+          />
           <a
+            ref={registerLink("#parcours")}
             href={sectionHref("#parcours")}
-            className={cn(linkBaseClass, isActive("#parcours") && "bg-primary/10 text-primary")}
+            className={cn(linkBaseClass, "relative z-10", isActive("#parcours") && "text-primary")}
           >
             {t("sections.parcours")}
           </a>
           {isHome ? (
             <a
+              ref={registerLink("#stack")}
               href="#stack"
-              className={cn(linkBaseClass, isStackActive && "bg-primary/10 text-primary")}
+              className={cn(linkBaseClass, "relative z-10", isStackActive && "text-primary")}
             >
               {t("sections.stack")}
             </a>
           ) : (
             <Link
+              ref={registerLink("/stack")}
               href="/stack"
-              className={cn(linkBaseClass, isStackActive && "bg-primary/10 text-primary")}
+              className={cn(linkBaseClass, "relative z-10", isStackActive && "text-primary")}
             >
               {t("sections.stack")}
             </Link>
           )}
           <a
+            ref={registerLink("#passions")}
             href={sectionHref("#passions")}
-            className={cn(linkBaseClass, isActive("#passions") && "bg-primary/10 text-primary")}
+            className={cn(linkBaseClass, "relative z-10", isActive("#passions") && "text-primary")}
           >
             {t("sections.passions")}
           </a>
           <Link
+            ref={registerLink("/a-propos")}
             href="/a-propos"
-            className={cn(linkBaseClass, isActive("/a-propos") && "bg-primary/10 text-primary")}
+            className={cn(linkBaseClass, "relative z-10", isActive("/a-propos") && "text-primary")}
           >
             {t("about")}
           </Link>
           <Link
+            ref={registerLink("/galerie")}
             href="/galerie"
-            className={cn(linkBaseClass, isActive("/galerie") && "bg-primary/10 text-primary")}
+            className={cn(linkBaseClass, "relative z-10", isActive("/galerie") && "text-primary")}
           >
             {t("gallery")}
           </Link>
           <a
+            ref={registerLink("#contact")}
             href={sectionHref("#contact")}
-            className={cn(linkBaseClass, isActive("#contact") && "bg-primary/10 text-primary")}
+            className={cn(linkBaseClass, "relative z-10", isActive("#contact") && "text-primary")}
           >
             {t("sections.contact")}
           </a>
-          <LanguageSwitcher className="ml-auto shrink-0 mr-1" />
+          <LanguageSwitcher className="ml-auto shrink-0 mr-1 relative z-10" />
         </nav>
         <div
           ref={leftFadeRef}
