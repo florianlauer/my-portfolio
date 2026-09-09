@@ -32,8 +32,6 @@ dist-ssr
 # devenv
 .devenv.flake.nix
 .devenv
-.direnv
-!.envrc
 
 # Opencode
 .opencode

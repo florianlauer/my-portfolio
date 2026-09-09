@@ -22,7 +22,7 @@ Personal portfolio website for Florian Lauer, Senior Fullstack Engineer. French-
 ## Environment
 
 - **OS**: macOS (Darwin)
-- **Node**: v22 via Nix devenv (auto-activated with direnv)
+- **Node**: v22 via Nix devenv (auto-activated with `devenv hook zsh`)
 - **Package manager**: npm
 
 ## Key Architecture Decisions
