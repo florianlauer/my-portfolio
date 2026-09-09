@@ -20,7 +20,7 @@ No test runner is configured. Linting + formatting are the quality gates.
 
 ## Dev Environment
 
-Uses **Nix + devenv** (auto-activated via `direnv`). Do not assume global Node.js — Node 22 is provided by devenv. Run `npm`/`npx`/`node` directly in the terminal.
+Uses **Nix + devenv** (auto-activated via `devenv hook zsh`). Do not assume global Node.js — Node 22 is provided by devenv. Run `npm`/`npx`/`node` directly in the terminal.
 
 ## Architecture
 

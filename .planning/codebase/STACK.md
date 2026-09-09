@@ -108,7 +108,7 @@
 
 **Environment:**
 
-- `.envrc` present (direnv integration for Nix devenv)
+- devenv environment auto-activated via `devenv hook zsh`
 - No `.env` files detected - no runtime environment variables needed
 - `NEXT_PUBLIC_BASE_URL` or `VERCEL_PROJECT_PRODUCTION_URL` used for site URL (see `src/utils/siteUrl.ts`)
 
@@ -127,7 +127,7 @@ npm run fmt:check  # oxfmt --check src/ (CI)
 
 **Development:**
 
-- Nix + devenv + direnv (provides Node.js 22, actionlint, yamllint, docker, colima)
+- Nix + devenv (provides Node.js 22, actionlint, yamllint, docker, colima)
 - Alternatively: Node.js 22 + npm
 
 **CI:**
