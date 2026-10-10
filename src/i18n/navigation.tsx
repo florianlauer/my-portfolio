@@ -64,6 +64,6 @@ function toPublicPath(locale: Locale, path: string): string | undefined {
   return isSourcePath(path) ? getPathname({ locale, href: path }) : undefined;
 }
 
-function isSourcePath(path: string): path is SourcePath {
+export function isSourcePath(path: string): path is SourcePath {
   return path in ROUTE_BY_SOURCE_PATH;
 }

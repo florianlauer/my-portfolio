@@ -1,11 +1,27 @@
 import { useEffect } from "react";
-import { createFileRoute, notFound, type ErrorComponentProps } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  notFound,
+  redirect,
+  type ErrorComponentProps,
+} from "@tanstack/react-router";
 import { useTranslations } from "use-intl";
-import { hasLocale } from "@/i18n/routing";
+import { hasLocale, routing } from "@/i18n/routing";
+import { ROUTE_BY_SOURCE_PATH, isSourcePath } from "@/i18n/navigation";
 
 export const Route = createFileRoute("/$locale")({
   beforeLoad: ({ params }) => {
-    if (!hasLocale(params.locale)) throw notFound();
+    if (hasLocale(params.locale)) return;
+    // Pre-i18n URLs (/a-propos, /galerie, /stack) had no locale prefix and only French content.
+    const legacyPath = `/${params.locale}`;
+    if (isSourcePath(legacyPath)) {
+      throw redirect({
+        to: ROUTE_BY_SOURCE_PATH[legacyPath],
+        params: { locale: routing.defaultLocale },
+        statusCode: 308,
+      });
+    }
+    throw notFound();
   },
   errorComponent: LocaleError,
 });

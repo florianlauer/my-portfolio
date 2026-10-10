@@ -30,6 +30,14 @@ describe("negotiateLocale", () => {
     expect(negotiateLocale("es-ES,en;q=0.5,fr;q=0.7")).toBe("fr");
   });
 
+  it("skips languages refused with q=0 or a malformed q", () => {
+    expect(negotiateLocale("en;q=0,de;q=0.5")).toBe("de");
+    expect(negotiateLocale("de;q=0,en;q=0")).toBe("fr");
+    expect(negotiateLocale("en;q=abc")).toBe("fr");
+    expect(negotiateLocale("en;q=,de;q=0.5")).toBe("de");
+    expect(negotiateLocale("en;q=2,de;q=0.5")).toBe("de");
+  });
+
   it("falls back to the default locale", () => {
     expect(negotiateLocale(null)).toBe("fr");
     expect(negotiateLocale("es,it")).toBe("fr");

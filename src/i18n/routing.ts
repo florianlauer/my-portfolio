@@ -49,8 +49,10 @@ export function negotiateLocale(acceptLanguage: string | null): Locale {
     .split(",")
     .map((part) => {
       const [tag = "", q] = part.trim().split(";q=");
-      return { language: tag.split("-")[0]?.toLowerCase(), q: q ? Number(q) : 1 };
+      return { language: tag.split("-")[0]?.toLowerCase(), q: q === undefined ? 1 : Number(q) };
     })
+    // q=0 means "not acceptable"; empty, malformed (NaN) or out-of-range weights are dropped too.
+    .filter(({ q }) => q > 0 && q <= 1)
     .sort((a, b) => b.q - a.q);
   return (
     (ranked.find(({ language }) => hasLocale(language))?.language as Locale | undefined) ??

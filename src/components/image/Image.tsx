@@ -2,7 +2,11 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 import { IMAGE_WIDTHS } from "./widths";
 
-type ImageProps = Omit<ComponentProps<"img">, "src" | "alt"> & {
+// srcSet/loading/fetchPriority/decoding are derived here, so callers cannot pass them.
+type ImageProps = Omit<
+  ComponentProps<"img">,
+  "src" | "alt" | "srcSet" | "loading" | "fetchPriority" | "decoding"
+> & {
   src: string;
   alt: string;
   /** Cover the positioned parent, like next/image's `fill`. */
