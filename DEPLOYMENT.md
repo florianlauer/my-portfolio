@@ -19,14 +19,11 @@ Ce projet TanStack Start se déploie sur **Vercel** (recommandé) ou sur toute p
    - Aller sur [vercel.com](https://vercel.com) → **Add New** → **Project**
    - Importer le dépôt Git (ex. `my-portfolio` depuis GitHub)
 2. **Paramètres de build**
-   - **Framework Preset :** TanStack Start (ou Other)
-   - **Build Command :** `pnpm build`
-   - **Output Directory :** laissé vide (Nitro écrit `.vercel/output`)
-   - **Install Command :** `pnpm install`
+   - Rien à régler dans le dashboard : `vercel.json` fixe le preset (TanStack Start) et la commande de build (`pnpm build`). Nitro écrit `.vercel/output`, que Vercel utilise à la place de l'Output Directory.
+   - Vercel lit la version de pnpm dans `package.json#packageManager`.
 
 3. **Variables d’environnement**
    - **Recommandé en production :** `SITE_URL` = l'URL publique du site (ex. `https://ton-domaine.vercel.app`) pour les URLs canoniques, hreflang, meta OG, sitemap et robots. Elle est lue au build. Sans elle, le build utilise `VERCEL_PROJECT_PRODUCTION_URL`. L'ancienne variable `NEXT_PUBLIC_SITE_URL` n'est plus lue.
-   - `ENABLE_EXPERIMENTAL_COREPACK=1` pour que Vercel installe la version de pnpm fixée dans `package.json#packageManager`.
    - En cas d’évolution (ex. API, analytics), les ajouter dans **Settings → Environment Variables**.
 
 4. **Déployer**
