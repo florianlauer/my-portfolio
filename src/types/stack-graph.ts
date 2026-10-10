@@ -1,4 +1,8 @@
+import type { Messages } from "use-intl";
 import type { StackFamilyKey } from "@/types/stack";
+
+/** Graph node ids: each has a label and a description in src/messages/*.json. */
+export type StackNodeId = keyof Messages["stack"]["nodeDescriptions"];
 
 // Locale-neutral keys — labels live in src/messages/*.json (stack.levels.*).
 export const experienceLevels = ["basics", "intermediate", "advanced", "expert"] as const;
@@ -10,14 +14,14 @@ export type FamilyColor = {
 };
 
 export type GraphNode = {
-  id: string;
+  id: StackNodeId;
   family: StackFamilyKey;
   level: ExperienceLevel;
 };
 
 export type GraphEdge = {
-  source: string;
-  target: string;
+  source: StackNodeId;
+  target: StackNodeId;
 };
 
 export type StackGraph = {

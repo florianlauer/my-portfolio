@@ -1,6 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import type { GraphNode, GraphEdge } from "@/types/stack-graph";
 
 type StackGraphSRListProps = {

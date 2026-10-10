@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "use-intl";
 import { cn } from "@/lib/utils";
 import { GlobalBackground } from "@/components/global-background/GlobalBackground";
 import { HomeNav } from "@/components/home-nav/HomeNav";
@@ -11,13 +11,9 @@ type PageShellProps = {
 
 /**
  * Coquille partagée pour les pages secondaires (à propos, galerie, stack).
- * Server Component — relies on the request locale set by the page (setRequestLocale).
  */
-export async function PageShell({
-  children,
-  containerClassName,
-}: PageShellProps): Promise<React.JSX.Element> {
-  const tA11y = await getTranslations("a11y");
+export function PageShell({ children, containerClassName }: PageShellProps): React.JSX.Element {
+  const tA11y = useTranslations("a11y");
 
   return (
     <main

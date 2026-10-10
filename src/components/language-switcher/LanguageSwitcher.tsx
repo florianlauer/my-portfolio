@@ -1,9 +1,7 @@
-"use client";
-
 import { useEffect, useRef, useTransition } from "react";
-import { useParams } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
-import { useRouter, usePathname, localeHref } from "@/i18n/navigation";
+import { useNavigate } from "@tanstack/react-router";
+import { useLocale, useTranslations } from "use-intl";
+import { usePathname, ROUTE_BY_SOURCE_PATH } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { LOCALE_META } from "@/i18n/localeMeta";
 import { cn } from "@/lib/utils";
@@ -14,10 +12,9 @@ type LanguageSwitcherProps = {
 
 export function LanguageSwitcher({ className }: LanguageSwitcherProps): React.JSX.Element {
   const t = useTranslations("languageSwitcher");
-  const router = useRouter();
+  const navigate = useNavigate();
   const pathname = usePathname();
-  const params = useParams();
-  const currentLocale = useLocale() as Locale;
+  const currentLocale = useLocale();
   const [isPending, startTransition] = useTransition();
   const buttonRefs = useRef<Record<Locale, HTMLButtonElement | null>>({
     fr: null,
@@ -40,9 +37,13 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps): React.JS
     if (nextLocale === currentLocale) return;
     pendingTargetRef.current = nextLocale;
     const hash = typeof window !== "undefined" ? window.location.hash.slice(1) : "";
-    startTransition(() => {
-      const href = localeHref(pathname, params as Record<string, string | string[]>);
-      router.replace({ ...href, ...(hash ? { hash } : {}) }, { locale: nextLocale });
+    startTransition(async () => {
+      await navigate({
+        to: ROUTE_BY_SOURCE_PATH[pathname ?? "/"],
+        params: { locale: nextLocale },
+        hash: hash || undefined,
+        replace: true,
+      });
     });
   }
 

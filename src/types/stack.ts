@@ -1,3 +1,8 @@
+import type { Messages } from "use-intl";
+
+/** Ids with a translated label in src/messages/*.json (stack.itemLabels.*). */
+export type StackItemId = keyof Messages["stack"]["itemLabels"];
+
 export type StackFamilyKey =
   | "frontend"
   | "mobile"
@@ -19,5 +24,5 @@ export const stackFamilyOrder: readonly StackFamilyKey[] = [
 
 export type StackGroupStructure = {
   family: StackFamilyKey;
-  itemIds: string[];
+  itemIds: StackItemId[];
 };

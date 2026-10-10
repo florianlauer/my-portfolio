@@ -1,9 +1,7 @@
-"use client";
-
-import Image from "next/image";
+import { Image } from "@/components/image/Image";
 import { useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { useSwipe } from "@/hooks/useSwipe";
 import type { GalleryItem } from "@/types/gallery";
 

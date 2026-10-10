@@ -1,7 +1,5 @@
-"use client";
-
 import { memo, useCallback, useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import type { GraphNode as GraphNodeType } from "@/types/stack-graph";
 import { iconMap } from "@/components/stack-graph/icon-map";
 import {

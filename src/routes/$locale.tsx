@@ -1,19 +1,21 @@
-"use client";
-
 import { useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { createFileRoute, notFound, type ErrorComponentProps } from "@tanstack/react-router";
+import { useTranslations } from "use-intl";
+import { hasLocale } from "@/i18n/routing";
 
-type ErrorProps = {
-  error: Error & { digest?: string };
-  reset: () => void;
-};
+export const Route = createFileRoute("/$locale")({
+  beforeLoad: ({ params }) => {
+    if (!hasLocale(params.locale)) throw notFound();
+  },
+  errorComponent: LocaleError,
+});
 
-export default function LocaleError({ error, reset }: ErrorProps): React.JSX.Element {
+function LocaleError({ error, reset }: ErrorComponentProps): React.JSX.Element {
   const t = useTranslations("error");
 
   useEffect(() => {
-    if (process.env.NODE_ENV !== "production") {
-      console.error("[error.tsx]", error);
+    if (import.meta.env.DEV) {
+      console.error("[errorComponent]", error);
     }
   }, [error]);
 

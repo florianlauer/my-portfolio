@@ -1,29 +1,21 @@
-"use client";
+import { useSyncExternalStore } from "react";
 
-import { useEffect, useState } from "react";
+const QUERY = "(prefers-reduced-motion: no-preference)";
+
+function subscribe(onChange: () => void): () => void {
+  const mq = window.matchMedia(QUERY);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
 
 /**
- * Returns true if the user prefers reduced motion.
- * SSR-safe: defaults to true (safe/reduced) on the server.
- * Listens for live changes to the media query.
+ * Returns true if the user prefers reduced motion, and follows live changes.
+ * SSR-safe: reduced on the server and during hydration, so server and client markup match.
  */
 export function usePrefersReducedMotion(): boolean {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(() => {
-    if (typeof window === "undefined") return true;
-    return !window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
-  });
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(prefers-reduced-motion: no-preference)");
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(!e.matches);
-    };
-
-    mq.addEventListener("change", handleChange);
-    return () => mq.removeEventListener("change", handleChange);
-  }, []);
-
-  return prefersReducedMotion;
+  return useSyncExternalStore(
+    subscribe,
+    () => !window.matchMedia(QUERY).matches,
+    () => true,
+  );
 }
