@@ -1,5 +1,6 @@
 {
   "oxc.lint.enable": true,
-  "oxc.lint.configPath": ".oxlintrc.json",
-  "oxc.format.enable": true
+  "oxc.format.enable": true,
+  "oxc.disableNestedConfig": true,
+  "oxc.fmt.disableNestedConfig": true
 }

@@ -1,6 +1,4 @@
-"use client";
-
-import Image from "next/image";
+import { Image } from "@/components/image/Image";
 import { useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 

@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { stackGroupStructure } from "@/content/stack";

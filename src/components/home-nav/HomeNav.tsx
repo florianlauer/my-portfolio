@@ -1,9 +1,6 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "use-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import type { Locale } from "@/i18n/routing";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { cn } from "@/lib/utils";
 
@@ -46,7 +43,7 @@ export function HomeNav(): React.JSX.Element {
   const [bounceType, setBounceType] = useState<"min" | "max" | null>(null);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const pathname = usePathname();
-  const locale = useLocale() as Locale;
+  const locale = useLocale();
 
   // Indicateur de scroll gauche sur la nav
   useEffect(() => {

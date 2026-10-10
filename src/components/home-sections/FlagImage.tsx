@@ -1,6 +1,3 @@
-"use client";
-
-import Image from "next/image";
 import { useState } from "react";
 
 type FlagImageProps = {
@@ -25,7 +22,7 @@ export function FlagImage({ src, ariaLabel }: FlagImageProps): React.JSX.Element
   }
 
   return (
-    <Image
+    <img
       src={src}
       alt={ariaLabel}
       width={30}

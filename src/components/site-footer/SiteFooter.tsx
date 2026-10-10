@@ -1,9 +1,6 @@
-"use client";
-
-import { useParams } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
-import { Link, usePathname, localeHref } from "@/i18n/navigation";
-import { routing, type Locale } from "@/i18n/routing";
+import { useLocale, useTranslations } from "use-intl";
+import { Link, usePathname } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
 import { LOCALE_META } from "@/i18n/localeMeta";
 import { socialLinks } from "@/content/socialLinks";
 
@@ -15,10 +12,7 @@ type SiteFooterProps = {
 export function SiteFooter({ year }: SiteFooterProps): React.JSX.Element {
   const t = useTranslations("footer");
   const pathname = usePathname();
-  const params = useParams();
-  const currentLocale = useLocale() as Locale;
-
-  const href = localeHref(pathname, params as Record<string, string | string[]>);
+  const currentLocale = useLocale();
 
   return (
     <footer className="relative z-10 mt-12 border-t border-border/40 bg-background/40 py-10">
@@ -42,7 +36,7 @@ export function SiteFooter({ year }: SiteFooterProps): React.JSX.Element {
                   </span>
                 )}
                 <Link
-                  href={href}
+                  href={pathname ?? "/"}
                   locale={locale}
                   aria-current={active ? "page" : undefined}
                   className={

@@ -1,14 +1,12 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { cn } from "@/lib/utils";
 import type { GraphNode } from "@/types/stack-graph";
 import type { StackFamilyKey } from "@/types/stack";
 import { TOOLTIP_EDGE_PADDING_PX, TOOLTIP_MAX_WIDTH_PX } from "@/components/stack-graph/constants";
 
 type TooltipNeighbor = {
-  id: string;
+  id: GraphNode["id"];
   family: StackFamilyKey;
 };
 

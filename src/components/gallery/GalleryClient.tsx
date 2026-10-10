@@ -1,7 +1,5 @@
-"use client";
-
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { shuffle } from "@/utils/shuffle";
 import type { GalleryItem } from "@/types/gallery";
 import { GalleryGrid } from "./GalleryGrid";

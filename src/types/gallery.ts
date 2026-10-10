@@ -1,5 +1,8 @@
+import type { Messages } from "use-intl";
+
 export type GalleryItemStructure = {
-  id: string;
+  /** Caption key in src/messages/*.json (gallery.captions.*). */
+  id: keyof Messages["gallery"]["captions"];
   src: string;
 };
 

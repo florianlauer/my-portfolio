@@ -1,7 +1,5 @@
-"use client";
-
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import type { GalleryItem } from "@/types/gallery";
 
@@ -110,7 +108,6 @@ export function GalleryGrid({
                     className="relative block w-full cursor-pointer overflow-hidden rounded-xl border border-border bg-muted transition-transform pointer-hover:scale-[1.02] focus-visible:outline-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     aria-label={t("viewLargerLabel", { caption: item.caption })}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element -- masonry needs native img for layout */}
                     <img
                       src={item.src}
                       alt={item.alt}

@@ -1,33 +1,26 @@
-import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
+import { createFileRoute } from "@tanstack/react-router";
+import { createTranslator, useTranslations } from "use-intl";
 import { PageShell } from "@/components/page-shell/PageShell";
 import { Link } from "@/i18n/navigation";
-import { buildAlternates } from "@/i18n/metadata";
-import { resolveLocaleOr404, resolveLocaleOrDefault } from "@/i18n/params";
+import { pageHead } from "@/i18n/metadata";
 import { aboutSectionIds } from "@/types/passions";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const locale = await resolveLocaleOrDefault(params);
-  const tMeta = await getTranslations({ locale, namespace: "metadata" });
-  const tAbout = await getTranslations({ locale, namespace: "about" });
-  return {
-    title: tMeta("aboutPageTitle"),
-    description: tAbout("pageSubtitle"),
-    alternates: buildAlternates("/a-propos", locale),
-  };
-}
+export const Route = createFileRoute("/$locale/a-propos")({
+  head: ({ match }) => {
+    const { locale, messages } = match.context;
+    const t = createTranslator({ locale, messages });
+    return pageHead({
+      locale,
+      sourcePath: "/a-propos",
+      title: t("metadata.aboutPageTitle"),
+      description: t("about.pageSubtitle"),
+    });
+  },
+  component: AProposPage,
+});
 
-export default async function AProposPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<React.JSX.Element> {
-  const locale = await resolveLocaleOr404(params);
-  const t = await getTranslations({ locale, namespace: "about" });
+function AProposPage(): React.JSX.Element {
+  const t = useTranslations("about");
 
   return (
     <PageShell>

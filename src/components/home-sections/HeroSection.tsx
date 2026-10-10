@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { Image } from "@/components/image/Image";
+import { useTranslations } from "use-intl";
 import { Button } from "@/components/ui/button";
 import { HeroImageParallax } from "@/components/hero/HeroImageParallax";
 import { siteIdentity } from "@/content/site";

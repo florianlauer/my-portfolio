@@ -1,4 +1,5 @@
-import { getTranslations } from "next-intl/server";
+import { createFileRoute } from "@tanstack/react-router";
+import { createTranslator, useTranslations } from "use-intl";
 import { GlobalBackground } from "@/components/global-background/GlobalBackground";
 import { HomeNav } from "@/components/home-nav/HomeNav";
 import { ScrollProgressBar } from "@/components/scroll-progress/ScrollProgressBar";
@@ -10,15 +11,25 @@ import { JourneySection } from "@/components/home-sections/JourneySection";
 import { PassionsSection } from "@/components/home-sections/PassionsSection";
 import { heroStack, siteIdentity } from "@/content/site";
 import { primaryContactLink, socialLinks } from "@/content/socialLinks";
-import { resolveLocaleOr404 } from "@/i18n/params";
+import { pageHead } from "@/i18n/metadata";
 
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<React.JSX.Element> {
-  const locale = await resolveLocaleOr404(params);
-  const tA11y = await getTranslations({ locale, namespace: "a11y" });
+export const Route = createFileRoute("/$locale/")({
+  head: ({ match }) => {
+    const { locale, messages } = match.context;
+    const t = createTranslator({ locale, messages, namespace: "metadata" });
+    return pageHead({
+      locale,
+      sourcePath: "/",
+      title: t("siteTitle"),
+      description: t("siteDescription"),
+      titleTemplate: false,
+    });
+  },
+  component: HomePage,
+});
+
+function HomePage(): React.JSX.Element {
+  const tA11y = useTranslations("a11y");
 
   return (
     <main

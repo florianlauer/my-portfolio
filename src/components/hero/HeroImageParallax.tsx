@@ -1,5 +1,3 @@
-"use client";
-
 import { useScroll, useTransform, motion } from "motion/react";
 import type { ReactNode } from "react";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";

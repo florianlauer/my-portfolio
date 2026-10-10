@@ -8,8 +8,10 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-.next
-out
+.output
+.nitro
+.tanstack
+.vercel
 dist
 dist-ssr
 *.local

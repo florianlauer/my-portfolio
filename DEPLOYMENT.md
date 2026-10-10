@@ -1,6 +1,6 @@
 # Déploiement – my-portfolio
 
-Ce projet Next.js est prêt pour un déploiement sur **Vercel** (recommandé) ou une autre plateforme compatible (Netlify, etc.).
+Ce projet TanStack Start se déploie sur **Vercel** (recommandé) ou sur toute plateforme supportée par [Nitro](https://nitro.build/deploy). Nitro détecte Vercel pendant le build et écrit la sortie au format Build Output API (`.vercel/output`), config d'optimisation d'images comprise.
 
 ---
 
@@ -18,16 +18,12 @@ Ce projet Next.js est prêt pour un déploiement sur **Vercel** (recommandé) ou
 1. **Connecter le dépôt**
    - Aller sur [vercel.com](https://vercel.com) → **Add New** → **Project**
    - Importer le dépôt Git (ex. `my-portfolio` depuis GitHub)
-   - Vercel détecte automatiquement Next.js
-
-2. **Paramètres de build** (généralement par défaut)
-   - **Framework Preset :** Next.js
-   - **Build Command :** `next build` (ou vide, laissé par défaut)
-   - **Output Directory :** laissé vide (défaut Next.js)
-   - **Install Command :** `npm install` (défaut)
+2. **Paramètres de build**
+   - Rien à régler dans le dashboard : `vercel.json` fixe le preset (TanStack Start) et la commande de build (`pnpm build`). Nitro écrit `.vercel/output`, que Vercel utilise à la place de l'Output Directory.
+   - Vercel lit la version de pnpm dans `package.json#packageManager`.
 
 3. **Variables d’environnement**
-   - **Recommandé en production :** `NEXT_PUBLIC_SITE_URL` = l'URL publique du site (ex. `https://ton-domaine.vercel.app`) pour les meta OG, Twitter, sitemap et robots. Sans cette variable, Vercel utilise `https://<projet>.vercel.app`.
+   - **Recommandé en production :** `SITE_URL` = l'URL publique du site (ex. `https://ton-domaine.vercel.app`) pour les URLs canoniques, hreflang, meta OG, sitemap et robots. Elle est lue au build. Sans elle, le build utilise `VERCEL_PROJECT_PRODUCTION_URL`. L'ancienne variable `NEXT_PUBLIC_SITE_URL` n'est plus lue.
    - En cas d’évolution (ex. API, analytics), les ajouter dans **Settings → Environment Variables**.
 
 4. **Déployer**
@@ -38,7 +34,7 @@ Ce projet Next.js est prêt pour un déploiement sur **Vercel** (recommandé) ou
 
 ```bash
 # Installer le CLI une fois
-npm i -g vercel
+pnpm add -g vercel
 
 # Depuis la racine du projet
 vercel
@@ -51,7 +47,8 @@ Suivre les questions (lien au projet existant ou nouveau, etc.). Les builds suiv
 ## Vérifications après déploiement
 
 - La page d’accueil s’affiche (Hero, Parcours, Arsenal, Contact).
-- Les images externes (drapeaux Wikimedia) s’affichent (domaine autorisé dans `next.config.ts`).
+- Les images externes (drapeaux Wikimedia) s’affichent.
+- Les images locales passent par `/_vercel/image` (onglet Réseau : réponses AVIF/WebP redimensionnées).
 - Les liens LinkedIn et réseaux sociaux ouvrent bien en nouvel onglet.
 - Navigation au clavier et skip link « Aller au contenu » fonctionnent.
 
@@ -65,5 +62,5 @@ Dans le dashboard Vercel : **Project → Settings → Domains** → ajouter un d
 
 ## Références
 
-- [Deploying Next.js (docs Next.js)](https://nextjs.org/docs/app/building-your-application/deploying)
-- [Vercel – Deploy Next.js](https://vercel.com/docs/frameworks/nextjs)
+- [Hosting (docs TanStack Start)](https://tanstack.com/start/latest/docs/framework/react/guide/hosting)
+- [Nitro – Vercel](https://nitro.build/deploy/providers/vercel)

@@ -152,7 +152,7 @@ export const stackGraph = {
 } as const satisfies StackGraph;
 
 // Dev-only validation — catches orphan references at build time
-if (process.env.NODE_ENV === "development") {
+if (import.meta.env.DEV) {
   const nodeIds = new Set(stackGraph.nodes.map((n) => n.id));
   for (const edge of stackGraph.edges) {
     if (!nodeIds.has(edge.source))

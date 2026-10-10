@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { journeyChapterIds, journeyChapterStructure } from "@/content/journey";
 import { FlagImage } from "./FlagImage";
 

@@ -1,7 +1,5 @@
-"use client";
-
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "use-intl";
 import { select } from "d3-selection";
 import { zoom, zoomIdentity } from "d3-zoom";
 import type { ZoomBehavior } from "d3-zoom";
@@ -188,8 +186,10 @@ export function StackGraph({ data }: StackGraphProps): React.JSX.Element {
     const zoomBehavior = zoomRef.current;
     if (!svgEl || !zoomBehavior) return;
     if (reducedMotion) {
+      // oxlint-disable-next-line typescript/unbound-method -- d3 passes zoom.transform to .call() by design
       select(svgEl).call(zoomBehavior.transform, zoomIdentity);
     } else {
+      // oxlint-disable-next-line typescript/unbound-method -- d3 passes zoom.transform to .call() by design
       select(svgEl).transition().duration(300).call(zoomBehavior.transform, zoomIdentity);
     }
   };
