@@ -44,6 +44,8 @@ export default defineConfig({
               warn(warning);
             },
           },
+          // Umami, served first-party: Nitro emits this as a Vercel CDN rewrite.
+          routeRules: { "/u/**": { proxy: "https://stats.flauercase.dev/**" } },
           vercel: {
             config: {
               version: 3,
