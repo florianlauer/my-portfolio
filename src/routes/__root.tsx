@@ -88,6 +88,13 @@ function RootDocument({ children }: { children: ReactNode }): React.JSX.Element 
     <html lang={locale}>
       <head>
         <HeadContent />
+        {/* Umami, proxied through the /u route rule in vite.config.ts so ad blockers see a first-party script. */}
+        <script
+          defer
+          src="/u/p.js"
+          data-website-id="f4083c5f-e53f-4ec6-84db-b1a4467b3c53"
+          data-domains="www.flauercase.dev"
+        />
       </head>
       <body className="antialiased">
         <IntlProvider locale={locale} messages={messages} {...intlFallbacks}>
